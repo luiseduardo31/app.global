@@ -10,7 +10,7 @@ class InventarioController extends Controller
 
     public function __construct()
     {
-        
+        $this->middleware('auth');
     }
 
 
@@ -21,7 +21,8 @@ class InventarioController extends Controller
      */
     public function index()
     {
-
+        $texto = 'Ola Mundo!';
+        return view('admin.pages.inventario.index',compact('texto'));
     }
 
     /**
