@@ -18,21 +18,28 @@
         <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
+        <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="js/plugins/datatables/datatables.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="js/plugins/datatables/dataTables.bootstrap4.css">
+        <link rel="stylesheet" href="js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css">
+
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
         <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
-
-        <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
+        
         <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
+        <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
         @yield('css_after')
 
         <!-- Scripts -->
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
+       
     </head>
     <body>
-        <!-- Page Container -->
-        <!--
+    <!-- Page Container -->
+    <!--
             Available classes for #page-container:
 
         GENERIC
@@ -119,7 +126,7 @@
                 Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
             -->
             <nav id="sidebar" aria-label="Main Navigation">
-                <!-- Side Header -->
+            <!-- Side Header -->
                 <div class="content-header bg-white-5">
                     <!-- Logo -->
                     <a class="font-w600 text-dual" href="/">
@@ -216,20 +223,21 @@
                             </a>
                         </li>
                         <li class="nav-main-heading">Various</li>
+                        
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                <i class="nav-main-link-icon si si-bulb"></i>
-                                <span class="nav-main-link-name">Examples</span>
+                                <i class="nav-main-link-icon far fa-address-book"></i>
+                                <span class="nav-main-link-name">Inventário Móvel</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin') ? ' active' : '' }}" href="/examples/plugin">
-                                        <span class="nav-main-link-name">Plugin</span>
+                                    <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="/inventario/create">
+                                        <span class="nav-main-link-name">Cadastrar</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/blank') ? ' active' : '' }}" href="/examples/blank">
-                                        <span class="nav-main-link-name">Blank</span>
+                                    <a class="nav-main-link{{ request()->is('inventario/index') ? ' active' : '' }}" href="/inventario/">
+                                        <span class="nav-main-link-name">Linhas Cadastradas</span>
                                     </a>
                                 </li>
                             </ul>
@@ -444,12 +452,12 @@
                         </div>
                         END Notifications Dropdown -->
 
-                        <!-- Toggle Side Overlay -->
-                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <!-- Toggle Side Overlay 
+                        Layout API, functionality initialized in Template._uiApiLayout()
                         <button type="button" class="btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="side_overlay_toggle">
                             <i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i>
                         </button>
-                        <!-- END Toggle Side Overlay -->
+                        END Toggle Side Overlay -->
                     </div>
                     <!-- END Right Section -->
                 </div>
@@ -589,7 +597,38 @@
 
         <!-- Laravel Scaffolding JS -->
         <script src="{{ mix('js/laravel.app.js') }}"></script>
-
+        
+        
         @yield('js_after')
+        
+        <!-- Page JS Plugins -->
+        <script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="js/plugins/datatables/buttons/dataTables.buttons.min.js"></script>
+        <script src="js/plugins/datatables/buttons/buttons.print.min.js"></script>
+        <script src="js/plugins/datatables/buttons/buttons.html5.min.js"></script>
+        <script src="js/plugins/datatables/buttons/buttons.flash.min.js"></script>
+        <script src="js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
+
+        <!-- Page JS Code -->
+        <script src="js/pages/be_tables_datatables.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#list-table').dataTable({
+                    "responsive": true,
+                    "columnDefs": [{
+                            responsivePriority: 1,
+                            targets: 0
+                        },
+                        {
+                            responsivePriority: 2,
+                            targets: 1
+                        }
+                    ]
+                });
+            });
+	    </script>
+  
+
     </body>
 </html>

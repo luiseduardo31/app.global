@@ -5,6 +5,13 @@
           box-sizing: border-box;
 }
 
+/* Estilos Personalizados */
+.far {
+  font-size: 18px !important;
+}
+
+/* Fim dos Estilos Personalizados */
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
