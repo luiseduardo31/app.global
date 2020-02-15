@@ -20,7 +20,6 @@
 
         <!-- Page JS Plugins CSS -->
         <link rel="stylesheet" href="js/plugins/datatables/datatables.min.css">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="js/plugins/datatables/dataTables.bootstrap4.css">
         <link rel="stylesheet" href="js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css">
 
@@ -602,7 +601,7 @@
         @yield('js_after')
         
         <!-- Page JS Plugins -->
-        <script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="js/plugins/datatables/datatables.min.js"></script>
         <script src="js/plugins/datatables/buttons/dataTables.buttons.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.print.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.html5.min.js"></script>
@@ -614,20 +613,15 @@
 
         <script>
             $(document).ready(function() {
-                $('#list-table').dataTable({
+                $('#contact-detail').dataTable({
                     "responsive": true,
-                    "columnDefs": [{
-                            responsivePriority: 1,
-                            targets: 0
-                        },
-                        {
-                            responsivePriority: 2,
-                            targets: 1
-                        }
-                    ]
-                });
-            });
-	    </script>
+                    "columnDefs": [
+                                { responsivePriority: 1, targets: 0 },
+                                { responsivePriority: 2, targets: 4 }
+                            ]
+                } );
+            } );
+        </script>
   
 
     </body>
