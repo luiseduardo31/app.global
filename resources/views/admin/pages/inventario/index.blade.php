@@ -40,35 +40,46 @@
                     <div class="block">
                         <div class="block-content block-content-full">
                             <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
-                            <table id="contact-detail" class="responsive display nowrap" cellspacing="0" width="100%">
+                            <table id="contact-detail" class="responsive display nowrap table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Address</th>
-                                        <th data-priority="1">Phone</th>
-                                        <th data-priority="2">DOB</th>
+                                        <th>Linha</th>
+                                        <th>Responsável</th>
+                                        <th>Plano</th>
+                                        <th>Conta</th>
+                                        <th>Codex</th>
+                                        <th>Gestor</th>
+                                        <th>Setor</th>
+                                        <th>Centro de Custo</th>
+                                        <th>Função</th>
+                                        <th>Status</th>
+                                        <th>Data Inicio</th>
+                                        <th>Chip</th>
+                                        <th>Observação</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
-                                
                                 <tbody>
+                                    @forelse ($linhas as $linha)
                                     <tr>
-                                        <td>Barry</td>
-                                        <td>Allen</td>
-                                        <td>Florida</td>
-                                        <td>2211335566</td>
-                                        <td>02-02-1983</td>
-                                    </tr>
-                                    ...
-                                    ...
-                                    ...
-                                    <tr>
-                                        <td>Tony</td>
-                                        <td>Stark</td>
-                                        <td>Texas</td>
-                                        <td>8899886655</td>
-                                        <td>05-10-1984</td>
-                                    </tr>
+                                        <td>{{$linha->linha}}</td>
+                                        <td>{{$linha->nomeUsuario}}</td>
+                                        <td>{{$linha->plano}}</td>
+                                        <td>{{$linha->conta}}</td>
+                                        <td>Codex</td>
+                                        <td>{{$linha->gestorDepartamento}}</td>
+                                        <td>{{$linha->setor}}</td>
+                                        <td>{{$linha->subsetor}}</td>
+                                        <td>{{$linha->funcaoUsuario}}</td>
+                                        <td>{{$linha->statusLinha}}</td>
+                                        <td>{{$linha->dataInicio}}</td>
+                                        <td>Chip</td>
+                                        <td>{{$linha->obsInventario}}</td>
+                                        <td>Ações</td>
+                                    </tr>                                                                       
+                                    @empty
+                                        
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

@@ -21,6 +21,7 @@
         <!-- Page JS Plugins CSS -->
         <link rel="stylesheet" href="js/plugins/datatables/datatables.min.css">
         <link rel="stylesheet" href="js/plugins/datatables/dataTables.bootstrap4.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css">
 
         <!-- Fonts and Styles -->
@@ -617,7 +618,8 @@
                     "responsive": true,
                     "columnDefs": [
                                 { responsivePriority: 1, targets: 0 },
-                                { responsivePriority: 2, targets: 4 }
+                                { responsivePriority: 2, targets: 1 },
+                                { responsivePriority: 3, targets: 2 }
                             ]
                 } );
             } );
