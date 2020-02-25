@@ -26,12 +26,13 @@ class InventarioController extends Controller
     public function index(Inventario $inventario)
     {
         $linhas = DB::table('inventarios')
-        ->join('contas','contas.idConta','=','inventarios.FK_idConta')
-        ->join('planos', 'planos.idPlano', '=', 'inventarios.FK_idPlano')
-        ->join('gestores_departamento', 'gestores_departamento.idGestorDepartamento', '=', 'inventarios.FK_idGestorDepartamento')
-        ->join('setores', 'setores.idSetor', '=', 'inventarios.FK_idSetor')
-        ->join('subsetores', 'subsetores.idSubsetor', '=', 'inventarios.FK_idSubSetor')
-        ->join('status_linhas', 'status_linhas.idStatusLinha', '=', 'inventarios.FK_idStatusLinha')
+        ->select(array('inventarios.observacao as obsInventario','inventarios.*','contas.*','planos.*','gestores.*','setores.*','subsetores.*','status.*'))
+        ->join('contas','contas.id','=','inventarios.conta_id')
+        ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
+        ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
+        ->join('setores', 'setores.id', '=', 'inventarios.setor_id')
+        ->join('subsetores', 'subsetores.id', '=', 'inventarios.subsetor_id')
+        ->join('status', 'status.id', '=', 'inventarios.status_id')
         ->get();
         return view('admin.pages.inventario.index',compact('linhas'));
     }

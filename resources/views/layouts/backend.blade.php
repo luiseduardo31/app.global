@@ -242,6 +242,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <!-- Menu
                         <li class="nav-main-heading">More</li>
                         <li class="nav-main-item open">
                             <a class="nav-main-link" href="/">
@@ -249,6 +250,7 @@
                                 <span class="nav-main-link-name">Landing</span>
                             </a>
                         </li>
+                        -->
                     </ul>
                 </div>
                 <!-- END Side Navigation -->
@@ -608,6 +610,8 @@
         <script src="js/plugins/datatables/buttons/buttons.html5.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.flash.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
+   
+
 
         <!-- Page JS Code -->
         <script src="js/pages/be_tables_datatables.min.js"></script>
@@ -615,6 +619,8 @@
         <script>
             $(document).ready(function() {
                 $('#contact-detail').dataTable({
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                     "responsive": true,
                     "columnDefs": [
                                 { responsivePriority: 1, targets: 0 },

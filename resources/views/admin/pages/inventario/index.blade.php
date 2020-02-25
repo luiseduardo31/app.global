@@ -44,18 +44,18 @@
                                 <thead>
                                     <tr>
                                         <th>Linha</th>
-                                        <th>Responsável</th>
+                                        <th>Usuário</th>
                                         <th>Plano</th>
                                         <th>Conta</th>
                                         <th>Codex</th>
                                         <th>Gestor</th>
                                         <th>Setor</th>
-                                        <th>Centro de Custo</th>
+                                        <th>Subsetor</th>
                                         <th>Função</th>
                                         <th>Status</th>
-                                        <th>Data Inicio</th>
+                                        <th>Dt Inicio</th>
                                         <th>Chip</th>
-                                        <th>Observação</th>
+                                        <th>Obs.</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -63,17 +63,17 @@
                                     @forelse ($linhas as $linha)
                                     <tr>
                                         <td>{{$linha->linha}}</td>
-                                        <td>{{$linha->nomeUsuario}}</td>
+                                        <td>{{$linha->nome_usuario}}</td>
                                         <td>{{$linha->plano}}</td>
                                         <td>{{$linha->conta}}</td>
-                                        <td>Codex</td>
-                                        <td>{{$linha->gestorDepartamento}}</td>
+                                        <td>{{$linha->matricula}}</td>
+                                        <td>{{$linha->gestor}}</td>
                                         <td>{{$linha->setor}}</td>
                                         <td>{{$linha->subsetor}}</td>
-                                        <td>{{$linha->funcaoUsuario}}</td>
-                                        <td>{{$linha->statusLinha}}</td>
-                                        <td>{{$linha->dataInicio}}</td>
-                                        <td>Chip</td>
+                                        <td>{{$linha->funcao}}</td>
+                                        <td>{{$linha->status}}</td>
+                                        <td>{{strftime("%d-%m-%Y", strtotime($linha->data_registro))}}</td>
+                                        <td>{{$linha->chip}}</td>
                                         <td>{{$linha->obsInventario}}</td>
                                         <td>Ações</td>
                                     </tr>                                                                       
