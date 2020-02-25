@@ -53,9 +53,9 @@
                                         <th>Subsetor</th>
                                         <th>Função</th>
                                         <th>Status</th>
-                                        <th>Dt Inicio</th>
+                                        <th>Inicio</th>
                                         <th>Chip</th>
-                                        <th>Obs.</th>
+                                        <th>R. Desp.</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -75,7 +75,16 @@
                                         <td>{{strftime("%d-%m-%Y", strtotime($linha->data_registro))}}</td>
                                         <td>{{$linha->chip}}</td>
                                         <td>{{$linha->obsInventario}}</td>
-                                        <td>Ações</td>
+                                        <td> 
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
+                                                    <i class="fa fa-fw fa-pencil-alt"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir">
+                                                    <i class="fa fa-fw fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>                                                                       
                                     @empty
                                         

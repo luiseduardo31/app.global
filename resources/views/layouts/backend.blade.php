@@ -27,7 +27,8 @@
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-        <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
+        <link rel="stylesheet" id="css-main" href="css/oneui.css">
+        <script src="js/oneui.core.min.js"></script>
         
         <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
@@ -604,6 +605,8 @@
         @yield('js_after')
         
         <!-- Page JS Plugins -->
+        <script src="js/oneui.core.min.js"></script>
+        <script src="js/oneui.app.min.js"></script>
         <script src="js/plugins/datatables/datatables.min.js"></script>
         <script src="js/plugins/datatables/buttons/dataTables.buttons.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.print.min.js"></script>
@@ -611,7 +614,6 @@
         <script src="js/plugins/datatables/buttons/buttons.flash.min.js"></script>
         <script src="js/plugins/datatables/buttons/buttons.colVis.min.js"></script>
    
-
 
         <!-- Page JS Code -->
         <script src="js/pages/be_tables_datatables.min.js"></script>
