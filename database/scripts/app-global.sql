@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   CONSTRAINT `fk_inventarios_tipos_linhas1` FOREIGN KEY (`tipos_linhas_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~1 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matricula`, `funcao`, `chip`, `observacao`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipos_linhas_id`) VALUES
