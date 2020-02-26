@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('admin.layout.backend')
 
 @section('content')
     <!-- Hero -->
@@ -42,11 +42,11 @@
                             <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
                             <table id="contact-detail" class="responsive display nowrap table-vcenter" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>Linha</th>
                                         <th>Usuário</th>
                                         <th>Plano</th>
-                                        <th>Conta</th>
+                                        <th>Tipo</th>
                                         <th>Codex</th>
                                         <th>Gestor</th>
                                         <th>Setor</th>
@@ -65,7 +65,7 @@
                                         <td>{{$linha->linha}}</td>
                                         <td>{{$linha->nome_usuario}}</td>
                                         <td>{{$linha->plano}}</td>
-                                        <td>{{$linha->conta}}</td>
+                                        <td>{{$linha->tipo}}</td>
                                         <td>{{$linha->matricula}}</td>
                                         <td>{{$linha->gestor}}</td>
                                         <td>{{$linha->setor}}</td>

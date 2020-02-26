@@ -26,13 +26,15 @@ class InventarioController extends Controller
     public function index(Inventario $inventario)
     {
         $linhas = DB::table('inventarios')
-        ->select(array('inventarios.observacao as obsInventario','inventarios.*','contas.*','planos.*','gestores.*','setores.*','subsetores.*','status.*'))
+        ->select(array('inventarios.observacao as obsInventario','inventarios.*','contas.*','planos.*','gestores.*',
+                       'setores.*','subsetores.*','status.*','tipos_linhas.*'))
         ->join('contas','contas.id','=','inventarios.conta_id')
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
         ->join('setores', 'setores.id', '=', 'inventarios.setor_id')
         ->join('subsetores', 'subsetores.id', '=', 'inventarios.subsetor_id')
         ->join('status', 'status.id', '=', 'inventarios.status_id')
+        ->join('tipos_linhas', 'tipos_linhas.id', '=', 'inventarios.tipo_linha_id')
         ->get();
         return view('admin.pages.inventario.index',compact('linhas'));
     }
@@ -42,10 +44,10 @@ class InventarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Inventario $inventario)
     {
-        
-        
+
+        return view('admin.pages.inventario.create'); 
         
     }
 
