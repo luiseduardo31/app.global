@@ -47,7 +47,7 @@
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
-                               <option>{{$conta->conta}}</option>
+                               <option value="{{$conta->id}}">{{$conta->conta}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -55,24 +55,27 @@
                      <div class="col-3">
                         <label for="Plano">Plano</label>
                         <select class="form-control" name="plano_id">
-                              <option></option>
-                              <option value="html">HTML</option>
+                           @foreach ($planos as $plano)
+                               <option value="{{$plano->id}}">{{$plano->plano}}</option>
+                           @endforeach
                         </select>
                      </div>
 
                      <div class="col-2">
                         <label for="Tipo">Tipo</label>
                         <select class="form-control" name="tipo_linha_id">
-                              <option></option>
-                              <option value="html">HTML</option>
+                           @foreach ($tipos_linha as $tipos)
+                               <option value="{{$tipos->id}}">{{$tipos->tipo}}</option>
+                           @endforeach
                         </select>
                      </div>
 
                      <div class="col-2">
                         <label for="Status">Status</label>
                         <select class="form-control" name="status_id">
-                              <option></option>
-                              <option value="html">HTML</option>
+                           @foreach ($status as $iStatus)
+                               <option value="{{$iStatus->id}}">{{$iStatus->status}}</option>
+                           @endforeach
                         </select>
                      </div>
                   </div>
@@ -91,7 +94,7 @@
 
                      <div class="col-3">
                         <label for="matricula">Codex</label>
-                        <input type="text" name="matricula" class="form-control" placeholder="Codex" maxlength="15">
+                        <input type="text" name="matricula" class="form-control" placeholder="Codex" maxlength="20">
                      </div>
 
                      <div class="col-4">
@@ -107,7 +110,7 @@
                         <label for="Gestor">Gestor</label>
                         <select class="form-control" name="gestor_id">
                            @foreach ($contas as $conta)
-                               <option>{{$conta->conta}}</option>
+                               <option value="{{$conta->id}}">{{$conta->conta}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -115,16 +118,18 @@
                      <div class="col-3">
                         <label for="Setor">Setor</label>
                         <select class="form-control" name="setor_id">
-                              <option></option>
-                              <option value="html">HTML</option>
+                           @foreach ($setores as $setor)
+                               <option value="{{$setor->id}}">{{$setor->setor}}</option>
+                           @endforeach
                         </select>
                      </div>
 
                      <div class="col-3">
                         <label for="SubSetor">SubSetor</label>
                         <select class="form-control" name="subsetor_id">
-                              <option></option>
-                              <option value="html">HTML</option>
+                           @foreach ($subsetores as $subsetor)
+                              <option value="{{$subsetor->id}}">{{$subsetor->subsetor}}</option>
+                           @endforeach
                         </select>
                      </div>
 
@@ -141,14 +146,11 @@
                   </div>
 
                   <div class="form-group form-row">
-
-                     
+                     <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Salvar Dados</button>  
+                     </div>                   
                   </div>
-                  
-                  
-                     <input type="text" name="nome" placeholder="Nome:">
-                     <input type="text" name="descricao" placeholder="Descrição:">
-                     <button type="submit" class="btn btn-primary">Enviar</button>
+                     
                </form>
             </div>
         </div>

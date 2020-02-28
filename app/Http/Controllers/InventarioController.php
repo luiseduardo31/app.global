@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Inventario;
 use App\Models\Contas;
+use App\Models\Planos;
+use App\Models\TiposLinha;
+use App\Models\Status;
+use App\Models\Setores;
+use App\Models\Subsetores;
 use Illuminate\Support\Facades\DB;
 
 class InventarioController extends Controller
@@ -47,8 +52,15 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        $contas = Contas::all(['id', 'conta'])->sortBy('conta');;
-        return view('admin.pages.inventario.create',compact('contas')); 
+
+        $contas = Contas::all(['id', 'conta'])->sortBy('conta');
+        $planos = Planos::all(['id', 'plano'])->sortBy('plano');
+        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+        $status = Status::all(['id', 'status'])->sortBy('status');
+        $setores = Setores::all(['id', 'setor'])->sortBy('setor');
+        $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
+        return view('admin.pages.inventario.create',
+               compact('contas','planos','tipos_linha','status','setores','subsetores')); 
         
     }
 
