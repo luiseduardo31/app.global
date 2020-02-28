@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventario;
+use App\Models\Contas;
 use Illuminate\Support\Facades\DB;
 
 class InventarioController extends Controller
@@ -44,10 +45,10 @@ class InventarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Inventario $inventario)
+    public function create()
     {
-
-        return view('admin.pages.inventario.create'); 
+        $contas = Contas::all(['id', 'conta'])->sortBy('conta');;
+        return view('admin.pages.inventario.create',compact('contas')); 
         
     }
 

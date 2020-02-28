@@ -1,5 +1,158 @@
 @extends('admin.layout.backend')
 
 @section('content')
-   Ola Mundo!
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    Inventário Móvel 
+                    <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
+                        <!-- subtitulo caso necessário-->
+                    </small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">Inventário</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Cadastrar Nova Linha</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+       </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Your Block -->
+        <div class="block">
+            <!-- Titulo do block
+            <div class="block-header">
+                <h3 class="block-title">Linhas Cadastradas no Inventário Móvel</h3>
+            </div>
+            -->
+            <div class="block-content">
+               <form action="{{route('inventario.store')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group form-row">
+                     
+                     <div class="col-2">
+                        <label for="Linha">Linha</label>
+                        <input type="text" name="linha" class="form-control" placeholder="Linha" maxlength="11">
+                     </div>
+
+                     <div class="col-3">
+                        <label for="Conta">Conta</label>
+                        <select class="form-control" name="conta_id">
+                           @foreach ($contas as $conta)
+                               <option>{{$conta->conta}}</option>
+                           @endforeach
+                        </select>
+                     </div>
+
+                     <div class="col-3">
+                        <label for="Plano">Plano</label>
+                        <select class="form-control" name="plano_id">
+                              <option></option>
+                              <option value="html">HTML</option>
+                        </select>
+                     </div>
+
+                     <div class="col-2">
+                        <label for="Tipo">Tipo</label>
+                        <select class="form-control" name="tipo_linha_id">
+                              <option></option>
+                              <option value="html">HTML</option>
+                        </select>
+                     </div>
+
+                     <div class="col-2">
+                        <label for="Status">Status</label>
+                        <select class="form-control" name="status_id">
+                              <option></option>
+                              <option value="html">HTML</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <div class="form-group form-row">
+
+                     <div class="col-3">
+                        <label for="Nome">Nome</label>
+                        <input type="text" name="nome_usuario" class="form-control" placeholder="Nome" maxlength="25">
+                     </div>
+
+                     <div class="col-2">
+                        <label for="Inicio">Inicio</label>
+                        <input type="text" name="inicio" class="form-control" placeholder="">
+                     </div>
+
+                     <div class="col-3">
+                        <label for="matricula">Codex</label>
+                        <input type="text" name="matricula" class="form-control" placeholder="Codex" maxlength="15">
+                     </div>
+
+                     <div class="col-4">
+                        <label for="Funcao">Função</label>
+                        <input type="text" name="funcao" class="form-control" placeholder="Função" maxlength="25">
+                     </div>
+                     
+                  </div>
+
+                  <div class="form-group form-row">
+
+                     <div class="col-3">
+                        <label for="Gestor">Gestor</label>
+                        <select class="form-control" name="gestor_id">
+                           @foreach ($contas as $conta)
+                               <option>{{$conta->conta}}</option>
+                           @endforeach
+                        </select>
+                     </div>
+
+                     <div class="col-3">
+                        <label for="Setor">Setor</label>
+                        <select class="form-control" name="setor_id">
+                              <option></option>
+                              <option value="html">HTML</option>
+                        </select>
+                     </div>
+
+                     <div class="col-3">
+                        <label for="SubSetor">SubSetor</label>
+                        <select class="form-control" name="subsetor_id">
+                              <option></option>
+                              <option value="html">HTML</option>
+                        </select>
+                     </div>
+
+                     <div class="col-3">
+                        <label for="Chip">Chip (simcard)</label>
+                        <input type="text" name="chip" class="form-control" placeholder="Chip" maxlength="20">
+                     </div>
+                     
+                     <div class="col-12">
+                        <label for="Observacao">Observação</label> <br>
+                        <textarea name="observacao" class="form-control" cols="30" rows="2"></textarea>
+                     </div>
+
+                  </div>
+
+                  <div class="form-group form-row">
+
+                     
+                  </div>
+                  
+                  
+                     <input type="text" name="nome" placeholder="Nome:">
+                     <input type="text" name="descricao" placeholder="Descrição:">
+                     <button type="submit" class="btn btn-primary">Enviar</button>
+               </form>
+            </div>
+        </div>
+        <!-- END Your Block -->
+    </div>
+    <!-- END Page Content -->
 @endsection
