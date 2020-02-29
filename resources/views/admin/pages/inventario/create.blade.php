@@ -89,7 +89,7 @@
 
                      <div class="col-2">
                         <label for="Inicio">Inicio</label>
-                        <input type="text" name="inicio" class="form-control" placeholder="">
+                        <input type="date" name="data_registro" class="form-control" placeholder="" style="font-size:15px">
                      </div>
 
                      <div class="col-3">
@@ -109,8 +109,8 @@
                      <div class="col-3">
                         <label for="Gestor">Gestor</label>
                         <select class="form-control" name="gestor_id">
-                           @foreach ($contas as $conta)
-                               <option value="{{$conta->id}}">{{$conta->conta}}</option>
+                           @foreach ($gestores as $gestor)
+                               <option value="{{$gestor->id}}">{{$gestor->gestor}}</option>
                            @endforeach
                         </select>
                      </div>

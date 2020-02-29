@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Inventario;
 use App\Models\Contas;
 use App\Models\Planos;
+use App\Models\Gestores;
 use App\Models\TiposLinha;
 use App\Models\Status;
 use App\Models\Setores;
@@ -56,11 +57,13 @@ class InventarioController extends Controller
         $contas = Contas::all(['id', 'conta'])->sortBy('conta');
         $planos = Planos::all(['id', 'plano'])->sortBy('plano');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+        $gestores = Gestores::all(['id', 'gestor'])->sortBy('gestor');
+        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
         $setores = Setores::all(['id', 'setor'])->sortBy('setor');
         $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
         return view('admin.pages.inventario.create',
-               compact('contas','planos','tipos_linha','status','setores','subsetores')); 
+               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores',)); 
         
     }
 
@@ -72,7 +75,14 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        $insert = $this->inventario->insert($dataForm);
+
+        if ($insert) {
+            return redirect()->route('inventario.index')->with('success', 'Item cadastrado com sucesso');
+        } else {
+            return 'Erro ao cadastrar...';
+        }
     }
 
     /**

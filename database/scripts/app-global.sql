@@ -98,14 +98,16 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   CONSTRAINT `fk_inventarios_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventarios_subsetores` FOREIGN KEY (`subsetor_id`) REFERENCES `subsetores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventarios_tipos_linhas1` FOREIGN KEY (`tipo_linha_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.inventarios: ~2 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matricula`, `funcao`, `chip`, `observacao`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`) VALUES
 	(3, '27988554488', 'Luis Eduardo Monteiro', '2020-02-25', 'ES 548032020', 'Gerencia', '88889999111155553333', 'Teste Observação', 1, 1, 1, 1, 1, 1, 1),
-	(6, '31992556644', 'Ronaldo Silva', '2020-02-22', 'MG 47855512', 'Coordenador', '89554444777711114444', 'Teste OK!', 1, 2, 2, 2, 2, 1, 3);
+	(6, '31992556644', 'Ronaldo Silva', '2020-02-22', 'MG 47855512', 'Coordenador', '89554444777711114444', 'Teste OK!', 1, 2, 2, 2, 2, 1, 3),
+	(7, '1155552222', 'Carlinho Paraiba', '2020-02-28', 'SP 002', 'funcao', '88995544775522111111', 'ola', 1, 1, 1, 1, 2, 2, 4),
+	(8, '4155554488', 'Bruno', '2020-02-12', 'PR 5514', 'Funcao B', '87895414', 'obs sei la!', 3, 3, 2, 2, 1, 1, 1);
 /*!40000 ALTER TABLE `inventarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.migrations
@@ -177,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `setores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.setores: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.setores: ~2 rows (aproximadamente)
 DELETE FROM `setores`;
 /*!40000 ALTER TABLE `setores` DISABLE KEYS */;
 INSERT INTO `setores` (`id`, `setor`, `observacao`) VALUES
@@ -244,14 +246,16 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   `data_termino` date DEFAULT NULL,
   `data_alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.ultimos_usuarios: ~2 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES
 	(3, 'Luis Eduardo', '27988554488', '2020-02-20', '2020-02-25', '2020-02-25 21:57:01'),
-	(6, 'Ronaldo Silva', '31992556644', '2020-02-22', NULL, '2020-02-26 08:58:19');
+	(6, 'Ronaldo Silva', '31992556644', '2020-02-22', NULL, '2020-02-26 08:58:19'),
+	(7, 'asasasaaaa aa', '1155552222', '2020-02-20', '2020-02-28', '2020-02-29 09:22:09'),
+	(8, 'Bruno', '4155554488', '2020-02-12', NULL, '2020-02-29 09:21:23');
 /*!40000 ALTER TABLE `ultimos_usuarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.users
