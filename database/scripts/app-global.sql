@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   CONSTRAINT `fk_inventarios_tipos_linhas1` FOREIGN KEY (`tipo_linha_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~11 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matricula`, `funcao`, `chip`, `observacao`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `updated_at`) VALUES
@@ -112,7 +112,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matr
 	(9, '5599884423', 'Teste Alerta', '2020-02-15', 'USA 55889', 'Teste funcao', '99887777555544446666', 'aaaaa 1', 3, 2, 2, 1, 1, 1, 4, NULL),
 	(10, '12554165878', 'aksjaksjkj', '2020-02-20', 'hgas 54544', 'asas', NULL, 'asasas', 3, 2, 2, 2, 1, 1, 4, NULL),
 	(11, '878787', '878787', '2020-02-20', '4a545a4s54', 'a54sa54s', 'as54as54', 'as4as', 3, 2, 2, 2, 1, 1, 4, NULL),
-	(12, '545454', '545454', '2020-02-05', 'a3sa3s', '3a2sa32s', 'a3s2a3s2', 'aaa', 3, 2, 2, 2, 1, 1, 4, NULL),
+	(12, '545454', 'Alberto Lopes', '2020-02-29', 'a3sa3s', '3a2sa32s', 'a3s2a3s2', 'aaa', 3, 2, 2, 2, 1, 1, 4, '2020-02-29 19:14:50'),
 	(13, '2755552222', 'Thalles Magno', '2020-02-29', 'Mat 0138885', '5as4a54s', 'a5s4a5s4a5s4', 'obs 13', 1, 2, 2, 1, 2, 1, 4, '2020-02-29 13:30:57'),
 	(14, '9999999', 'asasasas', '2020-02-15', 'asas1a21s', 'a2s1a21s', 'sasasa', 'asasa', 3, 2, 2, 2, 1, 1, 4, NULL),
 	(15, '12454554545', 'asasas', '2020-01-10', 'asas a', 'asasas', NULL, 'asasas', 3, 2, 2, 2, 2, 1, 3, NULL);
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `operadoras` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.operadoras: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.operadoras: ~1 rows (aproximadamente)
 DELETE FROM `operadoras`;
 /*!40000 ALTER TABLE `operadoras` DISABLE KEYS */;
 INSERT INTO `operadoras` (`id`, `operadora`, `observacao`) VALUES
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `setores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.setores: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.setores: ~3 rows (aproximadamente)
 DELETE FROM `setores`;
 /*!40000 ALTER TABLE `setores` DISABLE KEYS */;
 INSERT INTO `setores` (`id`, `setor`, `observacao`) VALUES
@@ -267,7 +267,7 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(9, 'Teste Alerta', '5599884423', '2020-02-15', NULL, '2020-02-29 09:30:51'),
 	(10, 'aksjaksjkj', '12554165878', '2020-02-20', NULL, '2020-02-29 09:32:02'),
 	(11, '878787', '878787', '2020-02-20', NULL, '2020-02-29 09:33:05'),
-	(12, '545454', '545454', '2020-02-05', NULL, '2020-02-29 09:35:01'),
+	(12, 'Sandro Silva', '545454', '2020-02-27', '2020-02-29', '2020-02-29 16:14:50'),
 	(13, 'as8a7s87', '878', '2020-02-20', '2020-02-29', '2020-02-29 10:21:29'),
 	(14, 'asasasas', '9999999', '2020-02-15', NULL, '2020-02-29 09:36:23'),
 	(15, 'asasas', '12454554545', '2020-01-10', NULL, '2020-02-29 09:38:03');
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.users: ~1 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES

@@ -41,7 +41,7 @@
                      
                      <div class="col-2">
                         <label for="Linha">Linha</label>
-                     <input type="text" name="linha" class="form-control" placeholder="Linha" value="{{$inventario->linha}}" maxlength="11">
+                     <input type="text" name="linha" disabled class="form-control" placeholder="Linha" value="{{$inventario->linha}}" maxlength="11">
                      </div>
 
                      <div class="col-3">
