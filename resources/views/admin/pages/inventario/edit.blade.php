@@ -6,7 +6,9 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Inventário Móvel 
+                  <a href="{{route('inventario.index')}}">
+                     Inventário Móvel 
+                  </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         <!-- subtitulo caso necessário-->
                     </small>
@@ -15,7 +17,10 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Inventário</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Editando Linha</a>
+                           <a class="link-fx" href="">Editando Linha</a>
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                           <a class="link-fx" href="">{{$inventario->linha}} </a>
                         </li>
                     </ol>
                 </nav>

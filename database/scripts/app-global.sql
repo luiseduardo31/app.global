@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   `plano_id` int(10) NOT NULL,
   `status_id` int(10) NOT NULL,
   `tipo_linha_id` int(11) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `inventarios_contas_idx` (`conta_id`),
   KEY `inventarios_setores_idx` (`setor_id`),
@@ -98,16 +99,23 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   CONSTRAINT `fk_inventarios_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventarios_subsetores` FOREIGN KEY (`subsetor_id`) REFERENCES `subsetores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_inventarios_tipos_linhas1` FOREIGN KEY (`tipo_linha_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~4 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
-INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matricula`, `funcao`, `chip`, `observacao`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`) VALUES
-	(3, '27988554488', 'Luis Eduardo Monteiro', '2020-02-25', 'ES 548032020', 'Gerencia', '88889999111155553333', 'Teste Observação', 1, 1, 1, 1, 1, 1, 1),
-	(6, '31992556644', 'Ronaldo Silva', '2020-02-22', 'MG 47855512', 'Coordenador', '89554444777711114444', 'Teste OK!', 1, 2, 2, 2, 2, 1, 3),
-	(7, '1155552222', 'Carlinho Paraiba', '2020-02-28', 'SP 002', 'funcao', '88995544775522111111', 'ola', 1, 1, 1, 1, 2, 2, 4),
-	(8, '4155554488', 'Bruno', '2020-02-12', 'PR 5514', 'Funcao B', '87895414', 'obs sei la!', 3, 3, 2, 2, 1, 1, 1);
+INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `matricula`, `funcao`, `chip`, `observacao`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `updated_at`) VALUES
+	(3, '27988554488', 'Luis Eduardo Monteiro', '2020-02-25', 'ES 548032020', 'Gerencia', '88889999111155553333', 'Teste Observação', 1, 1, 1, 1, 1, 1, 1, NULL),
+	(6, '31992556644', 'Ronaldo Silva', '2020-02-22', 'MG 47855512', 'Coordenador', '89554444777711114444', 'Teste OK!', 1, 2, 2, 2, 2, 1, 3, NULL),
+	(7, '1155552222', 'Carlinho Paraiba', '2020-02-28', 'SP 002', 'funcao', '88995544775522111111', 'ola', 1, 1, 1, 1, 2, 2, 4, NULL),
+	(8, '4155554488', 'Bruno', '2020-02-12', 'PR 5514', 'Funcao B', '87895414', 'obs sei la!', 3, 3, 2, 2, 1, 1, 1, NULL),
+	(9, '5599884423', 'Teste Alerta', '2020-02-15', 'USA 55889', 'Teste funcao', '99887777555544446666', 'aaaaa 1', 3, 2, 2, 1, 1, 1, 4, NULL),
+	(10, '12554165878', 'aksjaksjkj', '2020-02-20', 'hgas 54544', 'asas', NULL, 'asasas', 3, 2, 2, 2, 1, 1, 4, NULL),
+	(11, '878787', '878787', '2020-02-20', '4a545a4s54', 'a54sa54s', 'as54as54', 'as4as', 3, 2, 2, 2, 1, 1, 4, NULL),
+	(12, '545454', '545454', '2020-02-05', 'a3sa3s', '3a2sa32s', 'a3s2a3s2', 'aaa', 3, 2, 2, 2, 1, 1, 4, NULL),
+	(13, '2755552222', 'Thalles Magno', '2020-02-29', 'Mat 0138885', '5as4a54s', 'a5s4a5s4a5s4', 'obs 13', 1, 2, 2, 1, 2, 1, 4, '2020-02-29 13:30:57'),
+	(14, '9999999', 'asasasas', '2020-02-15', 'asas1a21s', 'a2s1a21s', 'sasasa', 'asasa', 3, 2, 2, 2, 1, 1, 4, NULL),
+	(15, '12454554545', 'asasas', '2020-01-10', 'asas a', 'asasas', NULL, 'asasas', 3, 2, 2, 2, 2, 1, 3, NULL);
 /*!40000 ALTER TABLE `inventarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.migrations
@@ -167,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `planos` (
 DELETE FROM `planos`;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
 INSERT INTO `planos` (`id`, `plano`, `observacao`) VALUES
-	(1, 'Smart Vivo 05', NULL),
+	(1, 'Smart Vivo 0,5GB', NULL),
 	(2, 'Smart Vivo 2GB', NULL);
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 
@@ -246,16 +254,23 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   `data_termino` date DEFAULT NULL,
   `data_alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.ultimos_usuarios: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.ultimos_usuarios: ~11 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES
 	(3, 'Luis Eduardo', '27988554488', '2020-02-20', '2020-02-25', '2020-02-25 21:57:01'),
 	(6, 'Ronaldo Silva', '31992556644', '2020-02-22', NULL, '2020-02-26 08:58:19'),
 	(7, 'asasasaaaa aa', '1155552222', '2020-02-20', '2020-02-28', '2020-02-29 09:22:09'),
-	(8, 'Bruno', '4155554488', '2020-02-12', NULL, '2020-02-29 09:21:23');
+	(8, 'Bruno', '4155554488', '2020-02-12', NULL, '2020-02-29 09:21:23'),
+	(9, 'Teste Alerta', '5599884423', '2020-02-15', NULL, '2020-02-29 09:30:51'),
+	(10, 'aksjaksjkj', '12554165878', '2020-02-20', NULL, '2020-02-29 09:32:02'),
+	(11, '878787', '878787', '2020-02-20', NULL, '2020-02-29 09:33:05'),
+	(12, '545454', '545454', '2020-02-05', NULL, '2020-02-29 09:35:01'),
+	(13, 'as8a7s87', '878', '2020-02-20', '2020-02-29', '2020-02-29 10:21:29'),
+	(14, 'asasasas', '9999999', '2020-02-15', NULL, '2020-02-29 09:36:23'),
+	(15, 'asasas', '12454554545', '2020-01-10', NULL, '2020-02-29 09:38:03');
 /*!40000 ALTER TABLE `ultimos_usuarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.users

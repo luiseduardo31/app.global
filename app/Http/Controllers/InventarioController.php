@@ -78,11 +78,10 @@ class InventarioController extends Controller
         $dataForm = $request->except('_token');
         $insert = $this->inventario->insert($dataForm);
 
-        if ($insert) {
-            return redirect()->route('inventario.index')->with('success', "Cadastro realizado com sucesso");
-        } else {
+        if ($insert)
+            return redirect()->route('inventario.index')->with('success', "Cadastro realizado com sucesso!");
+        else 
             return 'Erro ao cadastrar...';
-        }
     }
 
     /**
@@ -128,7 +127,14 @@ class InventarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $inventario  = $this->inventario->find($id);
+        $update   = $inventario->update($dataForm);
+
+        if ($update)
+            return redirect()->route('inventario.index')->with('success', "A linha {$inventario->linha} foi atualizada com sucesso!");
+        else
+            return redirect()->route('inventario.edit',  $id);
     }
 
     /**
