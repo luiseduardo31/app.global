@@ -33,7 +33,7 @@ class InventarioController extends Controller
     public function index(Inventario $inventario)
     {
         $linhas = DB::table('inventarios')
-        ->select(array('inventarios.observacao as obsInventario','inventarios.*','contas.*','planos.*','gestores.*',
+        ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
                        'setores.*','subsetores.*','status.*','tipos_linhas.*'))
         ->join('contas','contas.id','=','inventarios.conta_id')
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
@@ -63,7 +63,7 @@ class InventarioController extends Controller
         $setores = Setores::all(['id', 'setor'])->sortBy('setor');
         $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
         return view('admin.pages.inventario.create',
-               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores',)); 
+               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores')); 
         
     }
 
@@ -79,7 +79,7 @@ class InventarioController extends Controller
         $insert = $this->inventario->insert($dataForm);
 
         if ($insert) {
-            return redirect()->route('inventario.index')->with('success', 'Item cadastrado com sucesso');
+            return redirect()->route('inventario.index')->with('success', "Cadastro realizado com sucesso");
         } else {
             return 'Erro ao cadastrar...';
         }
@@ -104,7 +104,19 @@ class InventarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contas = Contas::all(['id', 'conta'])->sortBy('conta');
+        $planos = Planos::all(['id', 'plano'])->sortBy('plano');
+        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+        $gestores = Gestores::all(['id', 'gestor'])->sortBy('gestor');
+        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+        $status = Status::all(['id', 'status'])->sortBy('status');
+        $setores = Setores::all(['id', 'setor'])->sortBy('setor');
+        $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
+
+        $inventario = $this->inventario->find($id);
+        return view('admin.pages.inventario.edit',
+               compact('contas', 'planos', 'gestores', 'tipos_linha', 
+                       'status', 'setores', 'subsetores','inventario'));
     }
 
     /**

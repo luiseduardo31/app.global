@@ -28,11 +28,9 @@
     <div class="content">
         <!-- Your Block -->
         <div class="block">
-            <!-- Titulo do block
-            <div class="block-header">
-                <h3 class="block-title">Linhas Cadastradas no Inventário Móvel</h3>
-            </div>
-            -->
+        
+            @include('admin.includes.alerts')
+            
             <div class="block-content">
                 <p class="font-size-sm text-muted">
                     
@@ -78,7 +76,9 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <i class="fa fa-fw fa-pencil-alt"></i>
+                                                    <a href="{{route('inventario.edit', $linha->idInventario)}}">
+                                                        <i class="fa fa-fw fa-pencil-alt"></i>
+                                                    </a>
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir">
                                                     <i class="fa fa-fw fa-times"></i>
