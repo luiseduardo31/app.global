@@ -80,9 +80,14 @@
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir">
-                                                    <i class="fa fa-fw fa-times"></i>
-                                                </button>
+                                                <form action="{{route('inventario.destroy',$linha->idInventario)}}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"
+                                                onclick="return confirm('Deseja realmente excluir a linha {{$linha->linha}}?');">
+                                                        <i class="fa fa-fw fa-times"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>                                                                       

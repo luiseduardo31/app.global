@@ -234,7 +234,7 @@
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="/inventario/create">
-                                        <span class="nav-main-link-name">Cadastrar</span>
+                                        <span class="nav-main-link-name">Cadastrar Linha</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">

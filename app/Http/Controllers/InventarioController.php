@@ -79,7 +79,7 @@ class InventarioController extends Controller
         $insert = $this->inventario->insert($dataForm);
 
         if ($insert)
-            return redirect()->route('inventario.index')->with('success', "Cadastro realizado com sucesso!");
+            return redirect()->route('inventario.index')->with('success', "A linha {$request->linha} foi cadastrada com sucesso!");
         else 
             return 'Erro ao cadastrar...';
     }
@@ -145,6 +145,12 @@ class InventarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $inventario = $this->inventario->find($id);
+        $delete = $inventario->delete();
+
+        if ($delete) {
+            return redirect()->route('inventario.index')->with('success', "A linha {$inventario->linha} foi excluida com sucesso!");
+        } else
+            return redirect()->route('inventario.show', $id);
     }
 }

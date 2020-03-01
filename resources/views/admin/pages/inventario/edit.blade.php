@@ -155,7 +155,7 @@
                      
                      <div class="col-12">
                         <label for="Observacao">Observação</label> <br>
-                        <textarea name="observacao" class="form-control" cols="30" rows="2">{{$inventario->observacao}}</textarea>
+                        <input type="text"  name="observacao" class="form-control" value="{{$inventario->observacao}}" maxlength="100">
                      </div>
 
                   </div>
