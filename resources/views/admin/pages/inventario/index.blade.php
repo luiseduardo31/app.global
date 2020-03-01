@@ -38,7 +38,7 @@
                     <div class="block">
                         <div class="block-content block-content-full">
                             <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
-                            <table id="contact-detail" class="responsive display nowrap table-vcenter" cellspacing="0" width="100%">
+                            <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter js-dataTable-buttons" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Linha</th>
@@ -59,18 +59,16 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($linhas as $linha)
-                                    
-                                        
                                     <tr>
                                         <td>{{$linha->linha}}</td>
                                         <td>
                                             <span style="cursor:pointer" data-toggle="tooltip" data-animation="true" data-placement="top" 
                                             title="
-                                            @if($linha->data_termino === NULL )
-                                            Sem Historico!
-                                            @else
-                                            {{$linha->ultimo_usuario}}, {{strftime("%d-%m-%Y", strtotime($linha->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($linha->data_termino))}}
-                                            @endif
+                                                @if($linha->data_termino === NULL )
+                                                    Sem Historico!
+                                                @else
+                                                    {{$linha->ultimo_usuario}}, {{strftime("%d-%m-%Y", strtotime($linha->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($linha->data_termino))}}
+                                                @endif
                                             ">
                                             {{$linha->nome_usuario}}</td>
                                         <td>{{$linha->plano}}</td>

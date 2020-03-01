@@ -33,7 +33,7 @@ class InventarioController extends Controller
     public function index(Inventario $inventario)
     {
         
-        $linhas = DB::table('inventarios')
+        $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
                        'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*'))
         ->join('contas','contas.id','=','inventarios.conta_id')
