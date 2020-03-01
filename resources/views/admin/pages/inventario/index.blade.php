@@ -59,9 +59,20 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($linhas as $linha)
+                                    
+                                        
                                     <tr>
                                         <td>{{$linha->linha}}</td>
-                                        <td>{{$linha->nome_usuario}}</td>
+                                        <td>
+                                            <span style="cursor:pointer" data-toggle="tooltip" data-animation="true" data-placement="top" 
+                                            title="
+                                            @if($linha->data_termino === NULL )
+                                            Sem Historico!
+                                            @else
+                                            {{$linha->ultimo_usuario}}, {{strftime("%d-%m-%Y", strtotime($linha->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($linha->data_termino))}}
+                                            @endif
+                                            ">
+                                            {{$linha->nome_usuario}}</td>
                                         <td>{{$linha->plano}}</td>
                                         <td>{{$linha->tipo}}</td>
                                         <td>{{$linha->matricula}}</td>

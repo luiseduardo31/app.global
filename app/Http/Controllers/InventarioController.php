@@ -32,9 +32,10 @@ class InventarioController extends Controller
      */
     public function index(Inventario $inventario)
     {
+        
         $linhas = DB::table('inventarios')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
-                       'setores.*','subsetores.*','status.*','tipos_linhas.*'))
+                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*'))
         ->join('contas','contas.id','=','inventarios.conta_id')
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
@@ -42,7 +43,10 @@ class InventarioController extends Controller
         ->join('subsetores', 'subsetores.id', '=', 'inventarios.subsetor_id')
         ->join('status', 'status.id', '=', 'inventarios.status_id')
         ->join('tipos_linhas', 'tipos_linhas.id', '=', 'inventarios.tipo_linha_id')
+        ->join('ultimos_usuarios', 'ultimos_usuarios.linha', '=', 'inventarios.linha')
         ->get();
+
+
         return view('admin.pages.inventario.index',compact('linhas'));
     }
 
