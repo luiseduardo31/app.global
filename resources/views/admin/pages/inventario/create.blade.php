@@ -149,7 +149,7 @@
                      </div>
                      
                      <div class="col-12">
-                        <label for="Observacao">Observação</label> <br>
+                        <label for="Observacao">Responsabilidade da Despesa</label> <br>
                         <input type="text" name="observacao" class="form-control" maxlength="100">
                      </div>
 
