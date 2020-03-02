@@ -38,7 +38,7 @@
                     <div class="block">
                         <div class="block-content block-content-full">
                             <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
-                            <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter js-dataTable-buttons" cellspacing="0" width="100%">
+                            <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Linha</th>

@@ -23,7 +23,9 @@
         <link href="{{URL::asset('/js/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('/js/plugins/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('/css/style.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset('/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{URL::asset('asset/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
 
         <!-- Fonts and Styles -->
         @yield('css_before')
@@ -610,28 +612,24 @@
 
         <script src="{{URL::asset('asset/js/oneui.core.min.js')}}"></script>
         <script src="{{URL::asset('asset/js/oneui.app.min.js')}}"></script>
-        <script src="{{URL::asset('assets/js/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-        <script src="{{URL::asset('assets/js/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
-  
-        <script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="{{URL::asset('asset/js/plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
-        <script src="{{URL::asset('asset/js/plugins/datatables/buttons/buttons.print.min.js')}}"></script>
-        <script src="{{URL::asset('asset/js/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
-        <script src="{{URL::asset('asset/js/plugins/datatables/buttons/buttons.flash.min.js')}}"></script>
-        <script src="{{URL::asset('assets/js/plugins/datatables/buttons/buttons.colVis.min.js')}}"></script>
-         
-         <script src="{{URL::asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
+        <script src="{{URL::asset('asset/js/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="{{URL::asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
+        <script src="{{URL::asset('/js/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
+
+        <!-- Ativar datatable original 
+        <script src="{{URL::asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
+        -->
         <script>
-            $(document).ready(function() {
-                $('#contact-detail').dataTable({
+            $(document).ready( function() {
+                $('#contact-detail').DataTable( {
                     dom: 'Bfrtip',
-                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                    "responsive": true,
-                    "columnDefs": [
-                                { responsivePriority: 1, targets: 0 },
-                                { responsivePriority: 2, targets: 1 },
-                                { responsivePriority: 3, targets: 2 }
-                            ]
+                    buttons: [ {
+                        text: 'Exportar Excel',
+                        extend: 'excelHtml5',
+                        autoFilter: true,
+                        sheetName: 'Inventario Movel'
+                    } ]
                 } );
             } );
         </script>
