@@ -11,6 +11,8 @@ use App\Models\TiposLinha;
 use App\Models\Status;
 use App\Models\Setores;
 use App\Models\Subsetores;
+use App\Models\Matriculas;
+use App\Models\Funcoes;
 use Illuminate\Support\Facades\DB;
 
 class InventarioController extends Controller
@@ -35,7 +37,7 @@ class InventarioController extends Controller
         
         $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
-                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*'))
+                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','matriculas.*'))
         ->join('contas','contas.id','=','inventarios.conta_id')
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
@@ -44,6 +46,8 @@ class InventarioController extends Controller
         ->join('status', 'status.id', '=', 'inventarios.status_id')
         ->join('tipos_linhas', 'tipos_linhas.id', '=', 'inventarios.tipo_linha_id')
         ->join('ultimos_usuarios', 'ultimos_usuarios.linha', '=', 'inventarios.linha')
+        ->join('funcoes', 'funcoes.id', '=', 'inventarios.funcao_id')
+        ->join('matriculas', 'matriculas.id', '=', 'inventarios.matricula_id')
         ->get();
 
 
@@ -66,8 +70,10 @@ class InventarioController extends Controller
         $status = Status::all(['id', 'status'])->sortBy('status');
         $setores = Setores::all(['id', 'setor'])->sortBy('setor');
         $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
+        $matriculas = Matriculas::all(['id', 'matricula'])->sortBy('matricula');
+        $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
         return view('admin.pages.inventario.create',
-               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores')); 
+               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes')); 
         
     }
 
@@ -115,11 +121,13 @@ class InventarioController extends Controller
         $status = Status::all(['id', 'status'])->sortBy('status');
         $setores = Setores::all(['id', 'setor'])->sortBy('setor');
         $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
+        $matriculas = Matriculas::all(['id', 'matricula'])->sortBy('matricula');
+        $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
 
         $inventario = $this->inventario->find($id);
         return view('admin.pages.inventario.edit',
                compact('contas', 'planos', 'gestores', 'tipos_linha', 
-                       'status', 'setores', 'subsetores','inventario'));
+                       'status', 'setores', 'subsetores','inventario','matriculas','funcoes'));
     }
 
     /**

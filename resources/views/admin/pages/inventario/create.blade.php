@@ -96,12 +96,20 @@
 
                      <div class="col-3">
                         <label for="matricula">Codex</label>
-                        <input type="text" name="matricula" class="form-control" placeholder="Codex" maxlength="20">
+                        <select class="form-control" name="matricula_id">
+                           @foreach ($matriculas as $matricula)
+                              <option value="{{$matricula->id}}">{{$matricula->matricula}}</option>
+                           @endforeach
+                        </select>
                      </div>
 
                      <div class="col-4">
                         <label for="Funcao">Função</label>
-                        <input type="text" name="funcao" class="form-control" placeholder="Função" maxlength="25">
+                        <select class="form-control" name="funcao_id">
+                           @foreach ($funcoes as $funcao)
+                              <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
+                           @endforeach
+                        </select>
                      </div>
                      
                   </div>
