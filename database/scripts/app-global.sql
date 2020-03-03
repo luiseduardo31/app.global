@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `funcoes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.funcoes: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.funcoes: ~0 rows (aproximadamente)
 DELETE FROM `funcoes`;
 /*!40000 ALTER TABLE `funcoes` DISABLE KEYS */;
 INSERT INTO `funcoes` (`id`, `funcao`) VALUES
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   CONSTRAINT `FK_inventarios_tipos_linhas` FOREIGN KEY (`tipo_linha_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~7 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip`, `observacao`, `funcao_id`, `matricula_id`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `updated_at`) VALUES
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `matriculas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.matriculas: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.matriculas: ~0 rows (aproximadamente)
 DELETE FROM `matriculas`;
 /*!40000 ALTER TABLE `matriculas` DISABLE KEYS */;
 INSERT INTO `matriculas` (`id`, `matricula`) VALUES
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `planos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.planos: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.planos: ~2 rows (aproximadamente)
 DELETE FROM `planos`;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
 INSERT INTO `planos` (`id`, `plano`, `observacao`) VALUES
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.ultimos_usuarios: ~18 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.ultimos_usuarios: ~17 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES

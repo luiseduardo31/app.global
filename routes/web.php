@@ -15,7 +15,7 @@ Route::resource('inventario','InventarioController');
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();

@@ -164,12 +164,13 @@
                         <label for="Chip">Chip (simcard)</label>
                         <input type="text" name="chip" class="form-control" placeholder="Chip" value="{{$inventario->chip}}" maxlength="20">
                      </div>
-                     
+                   
+                  </div>
+                  <div class="form-group form-row"> 
                      <div class="col-12">
                         <label for="Observacao">Responsabilidade da Despesa</label> <br>
                         <input type="text"  name="observacao" class="form-control" value="{{$inventario->observacao}}" maxlength="100">
                      </div>
-
                   </div>
 
                   <div class="form-group form-row">

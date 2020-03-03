@@ -147,12 +147,12 @@
                         <label for="Chip">Chip (simcard)</label>
                         <input type="text" name="chip" class="form-control" placeholder="Chip" maxlength="20">
                      </div>
-                     
+                  </div>
+                  <div class="form-group form-row">  
                      <div class="col-12">
                         <label for="Observacao">Responsabilidade da Despesa</label> <br>
                         <input type="text" name="observacao" class="form-control" maxlength="100">
                      </div>
-
                   </div>
 
                   <div class="form-group form-row">
