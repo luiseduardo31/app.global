@@ -12,10 +12,12 @@
 */
 
 Route::resource('inventario','InventarioController');
+Route::resource('grupos','GruposController');
+Route::resource('empresas', 'EmpresasController');
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('landing');
 });
 
 Auth::routes();
