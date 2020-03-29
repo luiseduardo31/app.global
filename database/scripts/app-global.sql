@@ -2,7 +2,7 @@
 -- Servidor:                     127.0.0.1
 -- Versão do servidor:           10.4.11-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              10.3.0.5771
+-- HeidiSQL Versão:              11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -49,24 +49,6 @@ INSERT INTO `contas` (`id`, `conta`, `operadora_id`) VALUES
 	(17, 'Claro', 2);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.empresas
-CREATE TABLE IF NOT EXISTS `empresas` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `empresa` varchar(100) NOT NULL DEFAULT '0',
-  `grupo_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `grupo_id` (`grupo_id`),
-  CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
--- Copiando dados para a tabela app-global.empresas: ~2 rows (aproximadamente)
-DELETE FROM `empresas`;
-/*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
-INSERT INTO `empresas` (`id`, `empresa`, `grupo_id`) VALUES
-	(4, 'Realmar', 2),
-	(5, 'Atacadão', 2);
-/*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
-
 -- Copiando estrutura para tabela app-global.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -87,116 +69,117 @@ DELETE FROM `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `funcoes` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `funcao` varchar(25) NOT NULL DEFAULT '0',
-  `observacao` text DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.funcoes: ~102 rows (aproximadamente)
 DELETE FROM `funcoes`;
 /*!40000 ALTER TABLE `funcoes` DISABLE KEYS */;
-INSERT INTO `funcoes` (`id`, `funcao`, `observacao`) VALUES
-	(1, 'AGÊNCIA', NULL),
-	(2, 'ENCOMENDAS', NULL),
-	(3, 'COOPERÁGUIA', NULL),
-	(4, 'PARTICULAR - COOPERÁGUIA', NULL),
-	(5, 'CENTRAL TELEFÔNICA', NULL),
-	(6, 'CHIP SERVIDOR', NULL),
-	(7, 'Empresa - Achados e Perdi', NULL),
-	(8, 'Empresa - Agente de venda', NULL),
-	(9, 'Empresa - Agente de venda', NULL),
-	(10, 'PARTICULAR', NULL),
-	(11, 'Empresa - Agente de venda', NULL),
-	(12, 'Empresa - Almoxarifado It', NULL),
-	(13, 'Empresa - CCI', NULL),
-	(14, 'Empresa - CCO', NULL),
-	(15, 'Empresa - Comercial', NULL),
-	(16, 'Empresa - Comunicação', NULL),
-	(17, 'Empresa - Departamento Pe', NULL),
-	(18, 'Empresa - Diretoria Secre', NULL),
-	(19, 'Empresa - Disk Águia', NULL),
-	(20, 'Empresa - Dormitório C. G', NULL),
-	(21, 'Empresa - Equipe de linha', NULL),
-	(22, 'Empresa - Escolta ES', NULL),
-	(23, 'Empresa - Escritório Itab', NULL),
-	(24, 'Empresa - Escritório SP', NULL),
-	(25, 'Empresa - Ficalização ES', NULL),
-	(26, 'Empresa - Fiscalização', NULL),
-	(27, 'Empresa - Fiscalização BA', NULL),
-	(28, 'Empresa - Garagem Linhare', NULL),
-	(29, 'Empresa - Garagem Nanuque', NULL),
-	(30, 'Empresa - Interface SP', NULL),
-	(31, 'Empresa - Manutenção BAG', NULL),
-	(32, 'Empresa - Manutenção Camp', NULL),
-	(33, 'Empresa - Manutenção Itab', NULL),
-	(34, 'Empresa - Manutenção RIO', NULL),
-	(35, 'Empresa - Manutenção S. M', NULL),
-	(36, 'Empresa - Manutenção SP', NULL),
-	(37, 'Empresa - Mesa análise', NULL),
-	(38, 'Empresa - PABX VDC', NULL),
-	(39, 'Empresa - Ponto de Apoio ', NULL),
-	(40, 'Empresa - Recursos Humano', NULL),
-	(41, 'Empresa - RH', NULL),
-	(42, 'Empresa - SAC', NULL),
-	(43, 'Empresa - SCR', NULL),
-	(44, 'Empresa - SESMT SALVADOR', NULL),
-	(45, 'Empresa - Shopping Jardin', NULL),
-	(46, 'Empresa - Shopping Rio Ma', NULL),
-	(47, 'Empresa - Tráfego Aracaju', NULL),
-	(48, 'Empresa - Tráfego Aracruz', NULL),
-	(49, 'Empresa - Tráfego Barão', NULL),
-	(50, 'Empresa - Tráfego Campo G', NULL),
-	(51, 'Empresa - Tráfego Colatin', NULL),
-	(52, 'Empresa - Tráfego Feira', NULL),
-	(53, 'Empresa - Tráfego Goval', NULL),
-	(54, 'Empresa - Tráfego Itabuna', NULL),
-	(55, 'Empresa - Tráfego P. Segu', NULL),
-	(56, 'Empresa - Tráfego Ponte N', NULL),
-	(57, 'Empresa - Tráfego Rio', NULL),
-	(58, 'Empresa - Tráfego S. Mate', NULL),
-	(59, 'Empresa - Tráfego São Pau', NULL),
-	(60, 'Empresa - Tráfego Teixeir', NULL),
-	(61, 'Empresa - Tráfego VDC', NULL),
-	(62, 'Empresa - Turismo', NULL),
-	(63, 'Empresa - Turismo Itabuna', NULL),
-	(64, 'Empresa - WhatsApp Intern', NULL),
-	(65, 'Empresa- Setor Apoio', NULL),
-	(66, 'ENCOMENDAS RJ', NULL),
-	(67, 'Escritório Itabuna', NULL),
-	(68, 'Garagem Rio', NULL),
-	(69, 'INTERFACE', NULL),
-	(70, 'Rodoviária', NULL),
-	(71, 'Tráfego RIO', NULL),
-	(72, 'RH BAHIA', NULL),
-	(73, 'Empresa - Garagem SLT Rio', NULL),
-	(74, 'Empresa - Instrutores BA', NULL),
-	(75, 'Empresa - Instrutores ES', NULL),
-	(76, 'Empresa - Sala de Estimul', NULL),
-	(77, 'Empresa - Supervisão Salv', NULL),
-	(78, 'Empresa - Turismo SSA', NULL),
-	(79, 'TABLET ATENTO', NULL),
-	(80, 'TABLET COMMERCE', NULL),
-	(81, 'TESTE VELTEC ', NULL),
-	(82, 'MONITRIP', NULL),
-	(83, 'PARTICULAR - FAMILIAR', NULL),
-	(84, 'WI FI', NULL),
-	(85, 'MODEM INSTRUTORES', NULL),
-	(86, 'MODEM    ', NULL),
-	(87, 'SECRETARIA VAB', NULL),
-	(88, 'CANAL DE VENDAS SAC', NULL),
-	(89, 'Rodrigo ', NULL),
-	(90, 'QUALIDADE', NULL),
-	(91, 'WI-FI FROTA BA', NULL),
-	(92, 'ESPECIALISTA DE MERCADO', NULL),
-	(93, 'EMPRESA', NULL),
-	(94, 'TURISMO', NULL),
-	(95, 'PABX - VDC', NULL),
-	(96, 'RH- SUP ES', NULL),
-	(97, 'TRÁFEGO CAMPO GRANDE', NULL),
-	(98, 'NÃO ENCONTRADA', NULL),
-	(99, 'ONIBUS NOVOS', NULL),
-	(100, 'SUBSTITUIÇÃO', NULL),
-	(101, 'PROJETO', NULL),
-	(102, 'NOVOS ONIBUS 2019', NULL);
+INSERT INTO `funcoes` (`id`, `funcao`, `observacao`, `updated_at`) VALUES
+	(1, 'AGÊNCIA', NULL, NULL),
+	(2, 'ENCOMENDAS', NULL, NULL),
+	(3, 'COOPERÁGUIA', NULL, NULL),
+	(4, 'PARTICULAR - COOPERÁGUIA', NULL, NULL),
+	(5, 'CENTRAL TELEFÔNICA', NULL, NULL),
+	(6, 'CHIP SERVIDOR', NULL, NULL),
+	(7, 'Empresa - Achados e Perdi', NULL, NULL),
+	(8, 'Empresa - Agente de venda', NULL, NULL),
+	(9, 'Empresa - Agente de venda', NULL, NULL),
+	(10, 'PARTICULAR', NULL, NULL),
+	(11, 'Empresa - Agente de venda', NULL, NULL),
+	(12, 'Empresa - Almoxarifado It', NULL, NULL),
+	(13, 'Empresa - CCI', NULL, NULL),
+	(14, 'Empresa - CCO', NULL, NULL),
+	(15, 'Empresa - Comercial', NULL, NULL),
+	(16, 'Empresa - Comunicação', NULL, NULL),
+	(17, 'Empresa - Departamento Pe', NULL, NULL),
+	(18, 'Empresa - Diretoria Secre', NULL, NULL),
+	(19, 'Empresa - Disk Águia', NULL, NULL),
+	(20, 'Empresa - Dormitório C. G', NULL, NULL),
+	(21, 'Empresa - Equipe de linha', NULL, NULL),
+	(22, 'Empresa - Escolta ES', NULL, NULL),
+	(23, 'Empresa - Escritório Itab', NULL, NULL),
+	(24, 'Empresa - Escritório SP', NULL, NULL),
+	(25, 'Empresa - Ficalização ES', NULL, NULL),
+	(26, 'Empresa - Fiscalização', NULL, NULL),
+	(27, 'Empresa - Fiscalização BA', NULL, NULL),
+	(28, 'Empresa - Garagem Linhare', NULL, NULL),
+	(29, 'Empresa - Garagem Nanuque', NULL, NULL),
+	(30, 'Empresa - Interface SP', NULL, NULL),
+	(31, 'Empresa - Manutenção BAG', NULL, NULL),
+	(32, 'Empresa - Manutenção Camp', NULL, NULL),
+	(33, 'Empresa - Manutenção Itab', NULL, NULL),
+	(34, 'Empresa - Manutenção RIO', NULL, NULL),
+	(35, 'Empresa - Manutenção S. M', NULL, NULL),
+	(36, 'Empresa - Manutenção SP', NULL, NULL),
+	(37, 'Empresa - Mesa análise', NULL, NULL),
+	(38, 'Empresa - PABX VDC', NULL, NULL),
+	(39, 'Empresa - Ponto de Apoio ', NULL, NULL),
+	(40, 'Empresa - Recursos Humano', NULL, NULL),
+	(41, 'Empresa - RH', NULL, NULL),
+	(42, 'Empresa - SAC', NULL, NULL),
+	(43, 'Empresa - SCR', NULL, NULL),
+	(44, 'Empresa - SESMT SALVADOR', NULL, NULL),
+	(45, 'Empresa - Shopping Jardin', NULL, NULL),
+	(46, 'Empresa - Shopping Rio Ma', NULL, NULL),
+	(47, 'Empresa - Tráfego Aracaju', NULL, NULL),
+	(48, 'Empresa - Tráfego Aracruz', NULL, NULL),
+	(49, 'Empresa - Tráfego Barão', NULL, NULL),
+	(50, 'Empresa - Tráfego Campo G', NULL, NULL),
+	(51, 'Empresa - Tráfego Colatin', NULL, NULL),
+	(52, 'Empresa - Tráfego Feira', NULL, NULL),
+	(53, 'Empresa - Tráfego Goval', NULL, NULL),
+	(54, 'Empresa - Tráfego Itabuna', NULL, NULL),
+	(55, 'Empresa - Tráfego P. Segu', NULL, NULL),
+	(56, 'Empresa - Tráfego Ponte N', NULL, NULL),
+	(57, 'Empresa - Tráfego Rio', NULL, NULL),
+	(58, 'Empresa - Tráfego S. Mate', NULL, NULL),
+	(59, 'Empresa - Tráfego São Pau', NULL, NULL),
+	(60, 'Empresa - Tráfego Teixeir', NULL, NULL),
+	(61, 'Empresa - Tráfego VDC', NULL, NULL),
+	(62, 'Empresa - Turismo', NULL, NULL),
+	(63, 'Empresa - Turismo Itabuna', NULL, NULL),
+	(64, 'Empresa - WhatsApp Intern', NULL, NULL),
+	(65, 'Empresa- Setor Apoio', NULL, NULL),
+	(66, 'ENCOMENDAS RJ', NULL, NULL),
+	(67, 'Escritório Itabuna', NULL, NULL),
+	(68, 'Garagem Rio', NULL, NULL),
+	(69, 'INTERFACE', NULL, NULL),
+	(70, 'Rodoviária', NULL, NULL),
+	(71, 'Tráfego RIO', NULL, NULL),
+	(72, 'RH BAHIA', NULL, NULL),
+	(73, 'Empresa - Garagem SLT Rio', NULL, NULL),
+	(74, 'Empresa - Instrutores BA', NULL, NULL),
+	(75, 'Empresa - Instrutores ES', NULL, NULL),
+	(76, 'Empresa - Sala de Estimul', NULL, NULL),
+	(77, 'Empresa - Supervisão Salv', NULL, NULL),
+	(78, 'Empresa - Turismo SSA', NULL, NULL),
+	(79, 'TABLET ATENTO', NULL, NULL),
+	(80, 'TABLET COMMERCE', NULL, NULL),
+	(81, 'TESTE VELTEC ', NULL, NULL),
+	(82, 'MONITRIP', NULL, NULL),
+	(83, 'PARTICULAR - FAMILIAR', NULL, NULL),
+	(84, 'WI FI', NULL, NULL),
+	(85, 'MODEM INSTRUTORES', NULL, NULL),
+	(86, 'MODEM    ', NULL, NULL),
+	(87, 'SECRETARIA VAB', NULL, NULL),
+	(88, 'CANAL DE VENDAS SAC', NULL, NULL),
+	(89, 'Rodrigo ', NULL, NULL),
+	(90, 'QUALIDADE', NULL, NULL),
+	(91, 'WI-FI FROTA BA', NULL, NULL),
+	(92, 'ESPECIALISTA DE MERCADO', NULL, NULL),
+	(93, 'EMPRESA', NULL, NULL),
+	(94, 'TURISMO', NULL, NULL),
+	(95, 'PABX - VDC', NULL, NULL),
+	(96, 'RH- SUP ES', NULL, NULL),
+	(97, 'TRÁFEGO CAMPO GRANDE', NULL, NULL),
+	(98, 'NÃO ENCONTRADA', NULL, NULL),
+	(99, 'ONIBUS NOVOS', NULL, NULL),
+	(100, 'SUBSTITUIÇÃO', NULL, NULL),
+	(101, 'PROJETO', NULL, NULL),
+	(102, 'NOVOS ONIBUS 2019', NULL, NULL);
 /*!40000 ALTER TABLE `funcoes` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.gestores
@@ -220,26 +203,6 @@ INSERT INTO `gestores` (`id`, `gestor`, `observacao`) VALUES
 	(7, 'Rally', NULL);
 /*!40000 ALTER TABLE `gestores` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.grupos
-CREATE TABLE IF NOT EXISTS `grupos` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `grupo` varchar(50) DEFAULT NULL,
-  `observacao` text DEFAULT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_grupos_users` (`user_id`),
-  CONSTRAINT `FK_grupos_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
--- Copiando dados para a tabela app-global.grupos: ~3 rows (aproximadamente)
-DELETE FROM `grupos`;
-/*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
-INSERT INTO `grupos` (`id`, `grupo`, `observacao`, `user_id`) VALUES
-	(2, 'Extrabom', 'Observação Teste Extrabom', 1),
-	(3, 'Adcos', 'Observação ADCOS', 1),
-	(4, 'EPTV', 'Obs EPTV', 2);
-/*!40000 ALTER TABLE `grupos` ENABLE KEYS */;
-
 -- Copiando estrutura para tabela app-global.inventarios
 CREATE TABLE IF NOT EXISTS `inventarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -259,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   `tipo_linha_id` int(11) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `linha` (`linha`),
   KEY `inventarios_contas_idx` (`conta_id`),
   KEY `inventarios_setores_idx` (`setor_id`),
   KEY `inventarios_subsetores_idx` (`subsetor_id`),
@@ -268,7 +232,6 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `inventarios_tipos_linhas_idx` (`tipo_linha_id`),
   KEY `FK_inventarios_matriculas` (`matricula_id`),
   KEY `FK_inventarios_funcoes` (`funcao_id`),
-  KEY `linha` (`linha`),
   KEY `nome_usuario` (`nome_usuario`),
   KEY `data_registro` (`data_registro`),
   KEY `chip` (`chip`),
@@ -2877,7 +2840,7 @@ CREATE TABLE IF NOT EXISTS `setores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=378 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.setores: ~376 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.setores: ~375 rows (aproximadamente)
 DELETE FROM `setores`;
 /*!40000 ALTER TABLE `setores` DISABLE KEYS */;
 INSERT INTO `setores` (`id`, `setor`, `observacao`) VALUES
@@ -5935,7 +5898,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis Eduardo', 'admin@admin.com', NULL, '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'XXayrlRvvSirVoiuqkizIZXiSKmXnoNdGdIP5XIYjfFbAjGw5ZAh1KkX3XFq', '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
+	(1, 'Luis Eduardo', 'admin@admin.com', NULL, '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'SQGrnnkGSeeZLfBLrTF3IvIfEKaHMy9IGIrcrSl6ug1Phh38PYCkQcwxFXGt', '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
 	(2, 'Vitor Pignaton', 'vitor@globalsolutions.net.br', NULL, '$2y$10$OwCasaqyVPyUZpscWibpXuNUVOAxJwpIsnFlHE7c1HFfKQDron2Dm', 'vTovdf2dQUm2oF82OYca8Doc90wN5fpgJ1EJZkqhGKL1aU6Vi3qBY6ExJFgx', '2020-03-02 13:52:45', '2020-03-02 13:52:45');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

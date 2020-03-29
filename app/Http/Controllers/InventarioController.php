@@ -51,7 +51,7 @@ class InventarioController extends Controller
         ->get();
 
 
-        return view('admin.pages.inventario.index',compact('linhas'));
+        return view('inventario.index',compact('linhas'));
     }
 
     /**
@@ -72,7 +72,7 @@ class InventarioController extends Controller
         $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
         $matriculas = Matriculas::all(['id', 'matricula'])->sortBy('matricula');
         $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
-        return view('admin.pages.inventario.create',
+        return view('inventario.create',
                compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes')); 
         
     }
@@ -125,7 +125,7 @@ class InventarioController extends Controller
         $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
 
         $inventario = $this->inventario->find($id);
-        return view('admin.pages.inventario.edit',
+        return view('inventario.edit',
                compact('contas', 'planos', 'gestores', 'tipos_linha', 
                        'status', 'setores', 'subsetores','inventario','matriculas','funcoes'));
     }

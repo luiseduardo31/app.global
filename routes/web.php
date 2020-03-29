@@ -12,8 +12,7 @@
 */
 
 Route::resource('inventario','InventarioController');
-Route::resource('grupos','GruposController');
-Route::resource('empresas', 'EmpresasController');
+Route::resource('funcoes','FuncoesController');
 
 
 Route::get('/', function () {

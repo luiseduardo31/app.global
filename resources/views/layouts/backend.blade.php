@@ -631,7 +631,7 @@
                         extend: 'excelHtml5',
                         autoFilter: true,
                         sheetName: 'Inventario Movel'
-                    } ]
+                    } ],
                 } );
             } );
         </script>

@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\User;
-use App\Models\Grupos;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,12 +22,10 @@ class AuthServiceProvider extends ServiceProvider
      * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
+    public function boot()
     {
-        $this->registerPolicies($gate);
+        $this->registerPolicies();
 
-        $gate->define('acl-grupos', function (User $user, Grupos $grupo) {
-            return $user->id == $grupo->user_id;
-        });
+
     }
 }
