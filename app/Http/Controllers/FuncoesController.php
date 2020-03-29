@@ -26,7 +26,7 @@ class FuncoesController extends Controller
     {
         $funcoes = DB::table('funcoes')->orderBy('funcao','asc')
         ->get();
-        return view('funcoes.index', compact('funcoes'));
+        return view('inventario.funcoes.index', compact('funcoes'));
     
     }
 
@@ -37,7 +37,7 @@ class FuncoesController extends Controller
      */
     public function create()
     {
-        return view('funcoes.create');
+        return view('inventario.funcoes.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class FuncoesController extends Controller
     {
         $funcoes = Funcoes::all(['id', 'funcao','observacao'])->sortBy('funcao');
         $funcoes = $this->funcoes->find($id);
-        return view('funcoes.edit', compact('funcoes'));
+        return view('inventario.funcoes.edit', compact('funcoes'));
     }
 
     /**
