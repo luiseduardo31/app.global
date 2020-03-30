@@ -242,12 +242,74 @@
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('inventario/index') ? ' active' : '' }}" href="/inventario/">
+                                    <a class="nav-main-link{{ request()->is('inventario') ? ' active' : '' }}" href="/inventario/">
                                         <span class="nav-main-link-name">Linhas Cadastradas</span>
                                     </a>
                                 </li>
+                                <!-- Submenu Funções -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Gerenciar Funções</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('funcoes/create') ? ' active' : '' }}" href="/funcoes/create">
+                                                <span class="nav-main-link-name">Cadastrar Função</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('funcoes') ? ' active' : '' }}" href="/funcoes/">
+                                                <span class="nav-main-link-name">Funções Cadastradas</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Funções -->
+                                <!-- Submenu Gestores -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Gerenciar Gestores</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="/gestores/create">
+                                                <span class="nav-main-link-name">Cadastrar Gestor</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('gestores') ? ' active' : '' }}" href="/gestores/">
+                                                <span class="nav-main-link-name">Gestores Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Gestores -->
+                                <!-- Submenu Matriculas -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Gerenciar Matrículas</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('matriculas/create') ? ' active' : '' }}" href="/matriculas/create">
+                                                <span class="nav-main-link-name">Cadastrar Matrícula</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('matriculas') ? ' active' : '' }}" href="/matriculas/">
+                                                <span class="nav-main-link-name">Matrícula Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Matriculas -->
+       
                             </ul>
                         </li>
+
                         <!-- Menu
                         <li class="nav-main-heading">More</li>
                         <li class="nav-main-item open">

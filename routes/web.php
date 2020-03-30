@@ -13,6 +13,8 @@
 
 Route::resource('inventario','InventarioController');
 Route::resource('funcoes','FuncoesController');
+Route::resource('gestores','GestoresController');
+Route::resource('matriculas', 'MatriculasController');
 
 
 Route::get('/', function () {
