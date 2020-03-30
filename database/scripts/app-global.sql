@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `funcoes` (
   `observacao` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.funcoes: ~102 rows (aproximadamente)
 DELETE FROM `funcoes`;
@@ -187,20 +187,21 @@ CREATE TABLE IF NOT EXISTS `gestores` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '\n\n',
   `gestor` varchar(50) DEFAULT NULL,
   `observacao` text DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.gestores: ~7 rows (aproximadamente)
 DELETE FROM `gestores`;
 /*!40000 ALTER TABLE `gestores` DISABLE KEYS */;
-INSERT INTO `gestores` (`id`, `gestor`, `observacao`) VALUES
-	(1, 'Empresa', NULL),
-	(2, 'Empresa - Dados', NULL),
-	(3, 'Monitrip', NULL),
-	(4, 'Particular', NULL),
-	(5, 'Wi Fi', NULL),
-	(6, 'Não Encontrada', NULL),
-	(7, 'Rally', NULL);
+INSERT INTO `gestores` (`id`, `gestor`, `observacao`, `updated_at`) VALUES
+	(1, 'Empresa', NULL, NULL),
+	(2, 'Empresa - Dados', NULL, NULL),
+	(3, 'Monitrip', NULL, NULL),
+	(4, 'Particular', NULL, NULL),
+	(5, 'Wi Fi', NULL, NULL),
+	(6, 'Não Encontrada', NULL, NULL),
+	(7, 'Rally', NULL, NULL);
 /*!40000 ALTER TABLE `gestores` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.inventarios
@@ -2739,25 +2740,26 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 -- Copiando estrutura para tabela app-global.matriculas
 CREATE TABLE IF NOT EXISTS `matriculas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `matricula` varchar(20) NOT NULL DEFAULT '0',
+  `matricula` varchar(25) NOT NULL DEFAULT '0',
   `observacao` text DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.matriculas: ~10 rows (aproximadamente)
 DELETE FROM `matriculas`;
 /*!40000 ALTER TABLE `matriculas` DISABLE KEYS */;
-INSERT INTO `matriculas` (`id`, `matricula`, `observacao`) VALUES
-	(1, 'BA 27486182008860', NULL),
-	(2, 'SE 27486182000109', NULL),
-	(3, 'ES 27486182000109', NULL),
-	(4, 'BA 27486182000109', NULL),
-	(5, 'RJ 27486182000109', NULL),
-	(6, 'SP 27486182008860', NULL),
-	(7, 'RJ 27486182023664', NULL),
-	(8, 'SP 27486182000109', NULL),
-	(9, 'ES 27486182008860', NULL),
-	(10, 'MG 27486182000109', NULL);
+INSERT INTO `matriculas` (`id`, `matricula`, `observacao`, `updated_at`) VALUES
+	(1, 'BA 27486182008860', NULL, NULL),
+	(2, 'SE 27486182000109', NULL, NULL),
+	(3, 'ES 27486182000109', NULL, NULL),
+	(4, 'BA 27486182000109', NULL, NULL),
+	(5, 'RJ 27486182000109', NULL, NULL),
+	(6, 'SP 27486182008860', NULL, NULL),
+	(7, 'rj 27486182023664', NULL, '2020-03-30 19:34:16'),
+	(8, 'SP 27486182000109', NULL, NULL),
+	(9, 'ES 27486182008860', NULL, NULL),
+	(10, 'MG 27486182000109', NULL, NULL);
 /*!40000 ALTER TABLE `matriculas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.migrations
