@@ -3,30 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Funcoes;
+use App\Models\Setores;
 use Illuminate\Support\Facades\DB;
 
-class FuncoesController extends Controller
+class SetoresController extends Controller
 {
-
-    public function __construct(Funcoes $funcoes)
+    public function __construct(Setores $setores)
     {
-        $this->funcoes = $funcoes;
+        $this->setores = $setores;
         $this->middleware('auth');
     }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Funcoes $funcoes)
+    public function index()
     {
-        $funcoes = DB::table('funcoes')->orderBy('funcao','asc')
+        $setores = DB::table('setores')->orderBy('setor','asc')
         ->get();
-        return view('inventario.funcoes.index', compact('funcoes'));
-    
+        return view('inventario.setores.index',compact('setores'));
     }
 
     /**
@@ -36,7 +33,7 @@ class FuncoesController extends Controller
      */
     public function create()
     {
-        return view('inventario.funcoes.create');
+        return view('inventario.setores.create');
     }
 
     /**
@@ -48,12 +45,12 @@ class FuncoesController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->except('_token');
-        $insert = $this->funcoes->insert($dataForm);
+        $insert = $this->setores->insert($dataForm);
 
         if ($insert)
-            return redirect()->route('funcoes.index')->with('success', "A Função {$request->funcao} foi cadastrada com sucesso!");
+            return redirect()->route('setores.index')->with('success', "O setor {$request->setor} foi cadastrado com sucesso!");
         else
-            return redirect()->route('funcoes.create')->with('error', "Houve um erro ao cadastrar a função {$request->funcao}.");
+            return redirect()->route('setores.create')->with('error', "Houve um erro ao cadastrar o setor {$request->setor}.");
     }
 
     /**
@@ -75,9 +72,9 @@ class FuncoesController extends Controller
      */
     public function edit($id)
     {
-        $funcoes = Funcoes::all(['id', 'funcao','observacao'])->sortBy('funcao');
-        $funcoes = $this->funcoes->find($id);
-        return view('inventario.funcoes.edit', compact('funcoes'));
+        $setores = Setores::all(['id', 'setor', 'observacao'])->sortBy('setor');
+        $setores = $this->setores->find($id);
+        return view('inventario.setores.edit', compact('setores'));
     }
 
     /**
@@ -90,13 +87,13 @@ class FuncoesController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $funcoes  = $this->funcoes->find($id);
-        $update   = $funcoes->update($dataForm);
+        $setores  = $this->setores->find($id);
+        $update   = $setores->update($dataForm);
 
         if ($update)
-            return redirect()->route('funcoes.index')->with('success', "A Função {$funcoes->funcao} foi atualizada com sucesso!");
+            return redirect()->route('setores.index')->with('success', "O setor {$setores->setor} foi atualizado com sucesso!");
         else
-            return redirect()->route('funcoes.edit')->with('error', "Houve um erro ao editar a função {$funcoes->funcao}.");
+            return redirect()->route('setores.edit')->with('error', "Houve um erro ao editar o setor {$setores->setor}.");
     }
 
     /**
@@ -107,12 +104,12 @@ class FuncoesController extends Controller
      */
     public function destroy($id)
     {
-        $funcoes = $this->funcoes->find($id);
-        $delete = $funcoes->delete();
+        $setores = $this->setores->find($id);
+        $delete = $setores->delete();
 
         if ($delete) {
-            return redirect()->route('funcoes.index')->with('success', "A Função {$funcoes->funcao} foi excluida com sucesso!");
+            return redirect()->route('setores.index')->with('success', "O setor {$setores->setor} foi excluido com sucesso!");
         } else
-            return redirect()->route('funcoes.index')->with('error', "Houve um erro ao excluir a função {$funcoes->funcao}.");
+            return redirect()->route('setores.index')->with('error', "Houve um erro ao excluir o setor {$setores->setor}.");
     }
 }

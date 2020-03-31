@@ -306,6 +306,26 @@
                                     </ul>
                                 </li>
                                 <!-- Fim Submenu Matriculas -->
+                                <!-- Submenu Matriculas -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Gerenciar Setores</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('setores/create') ? ' active' : '' }}" href="/setores/create">
+                                                <span class="nav-main-link-name">Cadastrar Setores</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('setores') ? ' active' : '' }}" href="/setores/">
+                                                <span class="nav-main-link-name">Setores Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Matriculas -->
        
                             </ul>
                         </li>
