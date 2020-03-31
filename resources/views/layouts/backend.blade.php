@@ -250,7 +250,7 @@
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Gerenciar Funções</span>
+                                        <span class="nav-main-link-name">Funções</span>
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
@@ -270,7 +270,7 @@
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Gerenciar Gestores</span>
+                                        <span class="nav-main-link-name">Gestores</span>
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
@@ -290,7 +290,7 @@
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Gerenciar Matrículas</span>
+                                        <span class="nav-main-link-name">Matrículas</span>
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
@@ -306,11 +306,11 @@
                                     </ul>
                                 </li>
                                 <!-- Fim Submenu Matriculas -->
-                                <!-- Submenu Matriculas -->
+                                <!-- Submenu Setores -->
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Gerenciar Setores</span>
+                                        <span class="nav-main-link-name">Setores</span>
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
@@ -325,7 +325,27 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- Fim Submenu Matriculas -->
+                                <!-- Fim Submenu Setores -->
+                                <!-- Submenu Setores -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Subsetores</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('subsetores/create') ? ' active' : '' }}" href="/subsetores/create">
+                                                <span class="nav-main-link-name">Cadastrar Subsetores</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('subsetores') ? ' active' : '' }}" href="/subsetores/">
+                                                <span class="nav-main-link-name">Subsetores Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Setores -->
        
                             </ul>
                         </li>
