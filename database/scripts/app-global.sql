@@ -20,7 +20,9 @@ USE `app-global`;
 CREATE TABLE IF NOT EXISTS `contas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `conta` varchar(50) DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
   `operadora_id` int(10) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_contas_operadoras_idx` (`operadora_id`),
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -29,24 +31,24 @@ CREATE TABLE IF NOT EXISTS `contas` (
 -- Copiando dados para a tabela app-global.contas: ~17 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
-INSERT INTO `contas` (`id`, `conta`, `operadora_id`) VALUES
-	(1, '385666524', 1),
-	(2, '373560270', 1),
-	(3, '385653944', 1),
-	(4, '2129542912', 1),
-	(5, '292839041', 1),
-	(6, '373567649', 1),
-	(7, '375161330', 1),
-	(8, '381476816', 1),
-	(9, '377252358', 1),
-	(10, '377252325', 1),
-	(11, '377252432', 1),
-	(12, '377252483', 1),
-	(13, '377252382', 1),
-	(14, '2069100158', 1),
-	(15, '382931234', 1),
-	(16, '376995273', 1),
-	(17, 'Claro', 2);
+INSERT INTO `contas` (`id`, `conta`, `observacao`, `operadora_id`, `updated_at`) VALUES
+	(1, '385666524', NULL, 1, NULL),
+	(2, '373560270', NULL, 1, NULL),
+	(3, '385653944', NULL, 1, NULL),
+	(4, '2129542912', NULL, 1, NULL),
+	(5, '292839041', NULL, 1, NULL),
+	(6, '373567649', NULL, 1, NULL),
+	(7, '375161330', NULL, 1, NULL),
+	(8, '381476816', NULL, 1, NULL),
+	(9, '377252358', NULL, 1, NULL),
+	(10, '377252325', NULL, 1, NULL),
+	(11, '377252432', NULL, 1, NULL),
+	(12, '377252483', NULL, 1, NULL),
+	(13, '377252382', NULL, 1, NULL),
+	(14, '2069100158', NULL, 1, NULL),
+	(15, '382931234', NULL, 1, NULL),
+	(16, '376995273', NULL, 1, NULL),
+	(17, 'Claro', NULL, 2, NULL);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.failed_jobs
@@ -2816,23 +2818,24 @@ CREATE TABLE IF NOT EXISTS `planos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plano` varchar(50) DEFAULT NULL,
   `observacao` text DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.planos: ~10 rows (aproximadamente)
 DELETE FROM `planos`;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
-INSERT INTO `planos` (`id`, `plano`, `observacao`) VALUES
-	(1, 'SMART EMPRESAS 0.5GB', NULL),
-	(2, 'SMART EMPRESAS 5GB', NULL),
-	(3, 'SMART EMPRESAS 2GB', NULL),
-	(4, 'INTERNET MOVEL 3GB', NULL),
-	(5, 'SMART EMPRESAS 10GB', NULL),
-	(6, 'SMART EMPRESAS 25GB', NULL),
-	(7, 'INTERNET MOVEL 20GB', NULL),
-	(8, 'INTERNET MOVEL 10GB', NULL),
-	(9, 'SMART EMPRESAS NACIONAL VOZ', NULL),
-	(10, 'LOCAL SMART 80 MINUTOS', NULL);
+INSERT INTO `planos` (`id`, `plano`, `observacao`, `updated_at`) VALUES
+	(1, 'SMART EMPRESAS 0.5GB', NULL, NULL),
+	(2, 'SMART EMPRESAS 5GB', NULL, NULL),
+	(3, 'SMART EMPRESAS 2GB', NULL, NULL),
+	(4, 'INTERNET MOVEL 3GB', NULL, NULL),
+	(5, 'SMART EMPRESAS 10GB', NULL, NULL),
+	(6, 'SMART EMPRESAS 25GB', NULL, NULL),
+	(7, 'INTERNET MOVEL 20GB', NULL, NULL),
+	(8, 'INTERNET MOVEL 10GB', NULL, '2020-04-05 01:23:20'),
+	(9, 'SMART EMPRESAS NACIONAL VOZ', NULL, NULL),
+	(10, 'LOCAL SMART 80 MINUTOS', NULL, NULL);
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.setores
@@ -5903,7 +5906,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis Eduardo', 'admin@admin.com', NULL, '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'SQGrnnkGSeeZLfBLrTF3IvIfEKaHMy9IGIrcrSl6ug1Phh38PYCkQcwxFXGt', '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
+	(1, 'Luis Eduardo', 'admin@admin.com', NULL, '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'EuBS8imBOonyhnSJFbP79gTMdXED25PJlGTc2d12NCU5GxGmUDZeDfPegAIA', '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
 	(2, 'Vitor Pignaton', 'vitor@globalsolutions.net.br', NULL, '$2y$10$OwCasaqyVPyUZpscWibpXuNUVOAxJwpIsnFlHE7c1HFfKQDron2Dm', 'vTovdf2dQUm2oF82OYca8Doc90wN5fpgJ1EJZkqhGKL1aU6Vi3qBY6ExJFgx', '2020-03-02 13:52:45', '2020-03-02 13:52:45');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

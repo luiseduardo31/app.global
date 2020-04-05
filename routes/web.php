@@ -17,6 +17,8 @@ Route::resource('gestores','GestoresController');
 Route::resource('matriculas', 'MatriculasController');
 Route::resource('setores', 'SetoresController');
 Route::resource('subsetores', 'SubsetoresController');
+Route::resource('planos', 'PlanosController');
+Route::resource('contas', 'ContasController');
 
 
 Route::get('/', function () {

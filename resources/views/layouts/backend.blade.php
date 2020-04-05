@@ -326,7 +326,7 @@
                                     </ul>
                                 </li>
                                 <!-- Fim Submenu Setores -->
-                                <!-- Submenu Setores -->
+                                <!-- Submenu SubSetores -->
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
@@ -345,7 +345,47 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- Fim Submenu Setores -->
+                                <!-- Fim Submenu SubSetores -->
+                                <!-- Submenu Planos -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Planos</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('planos/create') ? ' active' : '' }}" href="/planos/create">
+                                                <span class="nav-main-link-name">Cadastrar Plano</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('planos') ? ' active' : '' }}" href="/planos/">
+                                                <span class="nav-main-link-name">Planos Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Planos -->
+                                <!-- Submenu Contas -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Contas</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contas/create') ? ' active' : '' }}" href="/contas/create">
+                                                <span class="nav-main-link-name">Cadastrar Conta</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contas') ? ' active' : '' }}" href="/contas/">
+                                                <span class="nav-main-link-name">Contas Cadastradas</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Contas -->
        
                             </ul>
                         </li>

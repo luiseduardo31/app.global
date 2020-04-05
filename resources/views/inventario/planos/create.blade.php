@@ -6,8 +6,8 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                  <a href="{{route('subsetores.index')}}">
-                     Subsetores
+                  <a href="{{route('planos.index')}}">
+                     Planos
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Inventario Móvel]
@@ -15,9 +15,9 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Funções</li>
+                        <li class="breadcrumb-item">Planos</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Cadastrar Novo Subsetor</a>
+                            <a class="link-fx" href="">Cadastrar Novo Plano</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,12 +36,12 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('subsetores.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('planos.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
                         <div class="col-5">
-                            <label for="Subsetor">Subsetor</label>
-                            <input type="text" name="subsetor" class="form-control" placeholder="Subsetor" maxlength="50">
+                            <label for="plano">Plano</label>
+                            <input type="text" name="plano" class="form-control" placeholder="plano" maxlength="50">
                         </div>
                     </div>
                     <div class="form-group form-row">
@@ -57,7 +57,7 @@
                         </div>  
                         
                         <div class="col-2">
-                            <a href="{{route('subsetores.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
+                            <a href="{{route('planos.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
                                 Cancelar
                             </a>
                         </div>
