@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Contas;
 use App\Models\Operadoras;
+use App\Models\Grupos;
+use App\Models\Empresas;
+use Illuminate\Support\Facades\Auth;
 
 class ContasController extends Controller
 {
@@ -22,10 +25,19 @@ class ContasController extends Controller
      */
     public function index()
     {
+        //usei para obter os dados do user e listar somente as contas do user logado.
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $contas = DB::table('contas')->orderBy('conta', 'asc')
             ->select(array(
-            'contas.*','contas.id as idConta','contas.observacao as obsConta','operadoras.*','operadoras.id as idOperadora'))
+            'contas.*','contas.id as idConta','contas.observacao as obsConta',
+            'operadoras.*','operadoras.id as idOperadora',
+            'empresas.*','grupos.*'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
+            ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+            ->where('user_id', $user_id)
             ->get();
         return view('inventario.contas.index', compact('contas'));
     }
