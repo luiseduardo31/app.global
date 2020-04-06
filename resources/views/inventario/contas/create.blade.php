@@ -7,7 +7,7 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
                   <a href="{{route('subsetores.index')}}">
-                     Subsetores
+                     Contas
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Inventario Móvel]
@@ -15,9 +15,9 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Funções</li>
+                        <li class="breadcrumb-item">Contas</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Cadastrar Novo Subsetor</a>
+                            <a class="link-fx" href="">Cadastrar Nova Conta</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,13 +36,23 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('subsetores.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('contas.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
                         <div class="col-5">
-                            <label for="Subsetor">Subsetor</label>
-                            <input type="text" name="subsetor" class="form-control" placeholder="Subsetor" maxlength="50">
+                            <label for="conta">Conta</label>
+                            <input type="text" name="conta" class="form-control" placeholder="Conta" maxlength="50">
                         </div>
+
+                        <div class="col-3">
+                            <label for="operadora">Operadora</label>
+                            <select class="form-control" name="operadora_id">
+                            @foreach ($operadoras as $operadora)
+                                <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+
                     </div>
                     <div class="form-group form-row">
                         <div class="col-12">
@@ -57,7 +67,7 @@
                         </div>  
                         
                         <div class="col-2">
-                            <a href="{{route('subsetores.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
+                            <a href="{{route('contas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
                                 Cancelar
                             </a>
                         </div>

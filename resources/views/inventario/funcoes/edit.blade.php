@@ -47,7 +47,7 @@
                     <div class="form-group form-row"> 
                         <div class="col-12">
                             <label for="Observacao">Observação</label> <br>
-                            <input type="text"  name="observacao" class="form-control" value="{{$funcoes->observacao}}" maxlength="100">
+                            <input type="text"  name="observacao" class="form-control" value="{{$funcoes->observacao}}" maxlength="145">
                         </div>
                     </div>
 

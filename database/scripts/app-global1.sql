@@ -20,22 +20,21 @@ USE `app-global`;
 CREATE TABLE IF NOT EXISTS `contas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `conta` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
   `operadora_id` int(10) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_contas_operadoras_idx` (`operadora_id`),
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~17 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~20 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `observacao`, `operadora_id`, `updated_at`) VALUES
 	(1, '385666524', NULL, 1, NULL),
 	(2, '373560270', NULL, 1, NULL),
 	(3, '385653944', NULL, 1, NULL),
-	(4, '2129542912', NULL, 1, NULL),
 	(5, '292839041', NULL, 1, NULL),
 	(6, '373567649', NULL, 1, NULL),
 	(7, '375161330', NULL, 1, NULL),
@@ -48,7 +47,8 @@ INSERT INTO `contas` (`id`, `conta`, `observacao`, `operadora_id`, `updated_at`)
 	(14, '2069100158', NULL, 1, NULL),
 	(15, '382931234', NULL, 1, NULL),
 	(16, '376995273', NULL, 1, NULL),
-	(17, 'Claro', NULL, 2, NULL);
+	(17, 'Claro', NULL, 2, NULL),
+	(19, 'asasasasa', 'asasaaa', 4, NULL);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.failed_jobs
@@ -71,7 +71,7 @@ DELETE FROM `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `funcoes` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `funcao` varchar(25) NOT NULL DEFAULT '0',
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4;
@@ -188,12 +188,12 @@ INSERT INTO `funcoes` (`id`, `funcao`, `observacao`, `updated_at`) VALUES
 CREATE TABLE IF NOT EXISTS `gestores` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '\n\n',
   `gestor` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.gestores: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.gestores: ~7 rows (aproximadamente)
 DELETE FROM `gestores`;
 /*!40000 ALTER TABLE `gestores` DISABLE KEYS */;
 INSERT INTO `gestores` (`id`, `gestor`, `observacao`, `updated_at`) VALUES
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   `nome_usuario` varchar(25) DEFAULT NULL,
   `data_registro` date DEFAULT NULL,
   `chip` varchar(20) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
   `funcao_id` int(10) NOT NULL,
   `matricula_id` int(10) NOT NULL,
   `conta_id` int(10) NOT NULL,
@@ -2743,7 +2743,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 CREATE TABLE IF NOT EXISTS `matriculas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` varchar(25) NOT NULL DEFAULT '0',
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
@@ -2785,7 +2785,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE IF NOT EXISTS `operadoras` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `operadora` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
@@ -2816,7 +2816,7 @@ DELETE FROM `password_resets`;
 CREATE TABLE IF NOT EXISTS `planos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plano` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
@@ -2841,12 +2841,12 @@ INSERT INTO `planos` (`id`, `plano`, `observacao`, `updated_at`) VALUES
 CREATE TABLE IF NOT EXISTS `setores` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `setor` varchar(50) NOT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=381 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.setores: ~376 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.setores: ~375 rows (aproximadamente)
 DELETE FROM `setores`;
 /*!40000 ALTER TABLE `setores` DISABLE KEYS */;
 INSERT INTO `setores` (`id`, `setor`, `observacao`, `updated_at`) VALUES
@@ -3232,7 +3232,7 @@ INSERT INTO `setores` (`id`, `setor`, `observacao`, `updated_at`) VALUES
 CREATE TABLE IF NOT EXISTS `status` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
@@ -3248,7 +3248,7 @@ INSERT INTO `status` (`id`, `status`, `observacao`) VALUES
 CREATE TABLE IF NOT EXISTS `subsetores` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `subsetor` varchar(50) DEFAULT NULL,
-  `observacao` varchar(145) DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4;

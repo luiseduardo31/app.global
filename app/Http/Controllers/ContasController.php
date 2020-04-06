@@ -24,9 +24,9 @@ class ContasController extends Controller
     {
         $contas = DB::table('contas')->orderBy('conta', 'asc')
             ->select(array(
-                'contas.observacao as obsConta', 'operadoras.id as idOperadora', 'contas.*', 'operadoras.*'))
+            'contas.*','contas.id as idConta','contas.observacao as obsConta','operadoras.*','operadoras.id as idOperadora'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
-        ->get();
+            ->get();
         return view('inventario.contas.index', compact('contas'));
     }
 
@@ -37,7 +37,8 @@ class ContasController extends Controller
      */
     public function create()
     {
-        //
+        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+        return view('inventario.contas.create',compact('operadoras'));
     }
 
     /**
@@ -48,7 +49,13 @@ class ContasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        $insert = $this->contas->insert($dataForm);
+
+        if ($insert)
+            return redirect()->route('contas.index')->with('success', "A conta {$request->conta} foi cadastrada com sucesso!");
+        else
+            return redirect()->route('contas.create')->with('error', "Houve um erro ao cadastrar a conta {$request->conta}.");
     }
 
     /**
@@ -70,7 +77,11 @@ class ContasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contas = Contas::all(['id', 'conta','operadora_id','observacao'])->sortBy('conta');
+        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+
+        $contas = $this->contas->find($id);
+        return view('inventario.contas.edit', compact('contas','operadoras'));
     }
 
     /**
@@ -82,7 +93,14 @@ class ContasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $contas  = $this->contas->find($id);
+        $update   = $contas->update($dataForm);
+
+        if ($update)
+            return redirect()->route('contas.index')->with('success', "A conta {$contas->conta} foi atualizada com sucesso!");
+        else
+            return redirect()->route('contas.edit')->with('error', "Houve um erro ao editar a conta {$contas->conta}.");
     }
 
     /**
@@ -93,6 +111,12 @@ class ContasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contas = $this->contas->find($id);
+        $delete = $contas->delete();
+
+        if ($delete) {
+            return redirect()->route('contas.index')->with('success', "A conta {$contas->conta} foi excluida com sucesso!");
+        } else
+            return redirect()->route('contas.index')->with('error', "Houve um erro ao excluir a conta {$contas->conta}.");
     }
 }

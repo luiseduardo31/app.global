@@ -6,8 +6,8 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                  <a href="{{route('subsetores.index')}}">
-                     Subsetores 
+                  <a href="{{route('contas.index')}}">
+                     Contas 
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Inventário Móvel]
@@ -17,10 +17,10 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Inventário</li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">Editando Subsetor</a>
+                           <a class="link-fx" href="">Editando Conta</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">{{$subsetores->subsetor}} </a>
+                           <a class="link-fx" href="">{{$contas->conta}} </a>
                         </li>
                     </ol>
                 </nav>
@@ -34,20 +34,31 @@
         <!-- Your Block -->
         <div class="block">
             <div class="block-content">
-               <form action="{{route('subsetores.update',$subsetores->id)}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('contas.update',$contas->id)}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                     <div class="form-group form-row"> 
                         <div class="col-3">
-                            <label for="Subsetor">Subsetor</label>
-                            <input type="text" name="subsetor" class="form-control" value="{{$subsetores->subsetor}}" maxlength="50">
+                            <label for="conta">Conta</label>
+                            <input type="text" name="conta" class="form-control" value="{{$contas->conta}}" maxlength="50">
+                        </div>
+
+                        <div class="col-3">
+                            <label for="operadoras">Operadoras</label>
+                            <select class="form-control" name="operadora_id">
+                            @foreach ($operadoras as $operadora)
+                                <option value="{{$operadora->id}}" {{ ( $operadora->id == $contas->conta_id) ? 'selected' : '' }}>
+                                    {{$operadora->operadora}}
+                                </option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group form-row"> 
                         <div class="col-12">
                             <label for="Observacao">Observação</label> <br>
-                            <input type="text"  name="observacao" class="form-control" value="{{$subsetores->observacao}}" maxlength="100">
+                            <input type="text"  name="observacao" class="form-control" value="{{$contas->observacao}}" maxlength="100">
                         </div>
                     </div>
 
@@ -57,7 +68,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('subsetores.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da função {{$subsetores->subsetor}}?');">
+                            <a href="{{route('contas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da conta {{$contas->conta}}?');">
                                 Cancelar
                             </a>
                         </div>

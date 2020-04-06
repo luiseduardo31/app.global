@@ -52,15 +52,15 @@
                                     <tr>
                                         <td>{{$conta->conta}}</td>
                                         <td>{{$conta->operadora}}</td>
-                                        <td>{{$conta->observacao}}</td>
+                                        <td>{{$conta->obsConta}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contas.edit', $conta->id)}}">
+                                                    <a href="{{route('contas.edit', $conta->idConta)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contas.destroy',$conta->id)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contas.destroy',$conta->idConta)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

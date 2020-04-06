@@ -151,7 +151,7 @@
                   <div class="form-group form-row">  
                      <div class="col-12">
                         <label for="Observacao">Responsabilidade da Despesa</label> <br>
-                        <input type="text" name="observacao" class="form-control" maxlength="100">
+                        <input type="text" name="observacao" class="form-control" maxlength="145">
                      </div>
                   </div>
 
