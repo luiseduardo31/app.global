@@ -33,11 +33,11 @@ class ContasController extends Controller
             ->select(array(
             'contas.*','contas.id as idConta','contas.observacao as obsConta',
             'operadoras.*','operadoras.id as idOperadora',
-            'empresas.*','grupos.*'))
+            'empresas.*','grupos_users.*'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
             ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
-            ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
-            ->where('user_id', $user_id)
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
             ->get();
         return view('inventario.contas.index', compact('contas'));
     }
