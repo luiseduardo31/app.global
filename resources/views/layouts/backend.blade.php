@@ -390,6 +390,20 @@
                             </ul>
                         </li>
 
+                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                                <i class="nav-main-link-icon si si-layers"></i>
+                                <span class="nav-main-link-name">Controle de Contratos</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('contrato-fixo/create') ? ' active' : '' }}" href="/contrato-fixo/create">
+                                        <span class="nav-main-link-name">Contratos Fixos</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <!-- Menu
                         <li class="nav-main-heading">More</li>
                         <li class="nav-main-item open">

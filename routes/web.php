@@ -20,6 +20,9 @@ Route::resource('subsetores', 'SubsetoresController');
 Route::resource('planos', 'PlanosController');
 Route::resource('contas', 'ContasController');
 
+// admin
+Route::resource('contratos', 'ContratosController');
+
 
 Route::get('/', function () {
     return view('landing');
