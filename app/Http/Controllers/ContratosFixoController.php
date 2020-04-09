@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Contratos;
+use App\Models\ContratosFixo;
 use Illuminate\Http\Request;
 
-class ContratosController extends Controller
+class ContratosFixoController extends Controller
 {
+    public function __construct(ContratosFixo $contratosFixo)
+    {
+        $this->ContratosFixo = $contratosFixo;
+        $this->middleware('auth'); 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class ContratosController extends Controller
      */
     public function index()
     {
-        //
+        return 'Index';
     }
 
     /**
@@ -24,7 +29,7 @@ class ContratosController extends Controller
      */
     public function create()
     {
-        //
+        return 'Create';
     }
 
     /**
@@ -41,10 +46,10 @@ class ContratosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\models\Contratos  $contratos
+     * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function show(Contratos $contratos)
+    public function show(ContratosFixo $contratosFixo)
     {
         //
     }
@@ -52,10 +57,10 @@ class ContratosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\models\Contratos  $contratos
+     * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contratos $contratos)
+    public function edit(ContratosFixo $contratosFixo)
     {
         //
     }
@@ -64,10 +69,10 @@ class ContratosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\models\Contratos  $contratos
+     * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contratos $contratos)
+    public function update(Request $request, ContratosFixo $contratosFixo)
     {
         //
     }
@@ -75,10 +80,10 @@ class ContratosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\models\Contratos  $contratos
+     * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contratos $contratos)
+    public function destroy(ContratosFixo $contratosFixo)
     {
         //
     }

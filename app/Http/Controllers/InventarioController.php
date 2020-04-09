@@ -13,7 +13,10 @@ use App\Models\Setores;
 use App\Models\Subsetores;
 use App\Models\Matriculas;
 use App\Models\Funcoes;
+use App\Models\Grupos;
+use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class InventarioController extends Controller
 {
@@ -34,11 +37,13 @@ class InventarioController extends Controller
      */
     public function index(Inventario $inventario)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
         
         $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
-                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','matriculas.*'))
-        ->join('contas','contas.id','=','inventarios.conta_id')
+                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','matriculas.*',
+                        'grupos_users.*'))
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
         ->join('setores', 'setores.id', '=', 'inventarios.setor_id')
@@ -48,6 +53,10 @@ class InventarioController extends Controller
         ->join('ultimos_usuarios', 'ultimos_usuarios.linha', '=', 'inventarios.linha')
         ->join('funcoes', 'funcoes.id', '=', 'inventarios.funcao_id')
         ->join('matriculas', 'matriculas.id', '=', 'inventarios.matricula_id')
+        ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
+        ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+        ->where('users_id', $user_id)
         ->get();
 
 
@@ -61,17 +70,51 @@ class InventarioController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
 
-        $contas = Contas::all(['id', 'conta'])->sortBy('conta');
+         $contas = DB::table('contas')->orderBy('conta', 'ASC')
+            ->select(array('contas.*','empresas.*', 'grupos_users.*'))
+            ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $funcoes = DB::table('funcoes')->orderBy('funcao', 'ASC')
+            ->select(array('funcoes.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $gestores = DB::table('gestores')->orderBy('gestor', 'ASC')
+            ->select(array('gestores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'gestores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $matriculas = DB::table('matriculas')->orderBy('matricula', 'ASC')
+            ->select(array('matriculas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'matriculas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $setores = DB::table('setores')->orderBy('setor', 'ASC')
+            ->select(array('setores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'setores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $subsetores = DB::table('subsetores')->orderBy('subsetor', 'ASC')
+            ->select(array('subsetores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'subsetores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+
         $planos = Planos::all(['id', 'plano'])->sortBy('plano');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
-        $gestores = Gestores::all(['id', 'gestor'])->sortBy('gestor');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
-        $setores = Setores::all(['id', 'setor'])->sortBy('setor');
-        $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
-        $matriculas = Matriculas::all(['id', 'matricula'])->sortBy('matricula');
-        $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
         return view('inventario.create',
                compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes')); 
         
@@ -113,16 +156,51 @@ class InventarioController extends Controller
      */
     public function edit($id)
     {
-        $contas = Contas::all(['id', 'conta'])->sortBy('conta');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $contas = DB::table('contas')->orderBy('conta', 'ASC')
+            ->select(array('contas.*', 'empresas.*', 'grupos_users.*'))
+            ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $funcoes = DB::table('funcoes')->orderBy('funcao', 'ASC')
+            ->select(array('funcoes.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $gestores = DB::table('gestores')->orderBy('gestor', 'ASC')
+            ->select(array('gestores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'gestores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $matriculas = DB::table('matriculas')->orderBy('matricula', 'ASC')
+            ->select(array('matriculas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'matriculas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $setores = DB::table('setores')->orderBy('setor', 'ASC')
+            ->select(array('setores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'setores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        $subsetores = DB::table('subsetores')->orderBy('subsetor', 'ASC')
+            ->select(array('subsetores.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'subsetores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+
         $planos = Planos::all(['id', 'plano'])->sortBy('plano');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
-        $gestores = Gestores::all(['id', 'gestor'])->sortBy('gestor');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
-        $setores = Setores::all(['id', 'setor'])->sortBy('setor');
-        $subsetores = Subsetores::all(['id', 'subsetor'])->sortBy('subsetor');
-        $matriculas = Matriculas::all(['id', 'matricula'])->sortBy('matricula');
-        $funcoes = Funcoes::all(['id', 'funcao'])->sortBy('funcao');
 
         $inventario = $this->inventario->find($id);
         return view('inventario.edit',

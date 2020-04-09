@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\models\Contratos;
+use App\models\Contratos\ContratosFixo;
 use Faker\Generator as Faker;
 
-$factory->define(Contratos::class, function (Faker $faker) {
+$factory->define(ContratosFixo::class, function (Faker $faker) {
     return [
         //
     ];

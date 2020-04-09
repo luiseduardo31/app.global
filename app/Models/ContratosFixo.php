@@ -1,10 +1,10 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contratos extends Model
+class ContratosFixo extends Model
 {
     //
 }

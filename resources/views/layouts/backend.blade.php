@@ -397,7 +397,7 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('contrato-fixo/create') ? ' active' : '' }}" href="/contrato-fixo/create">
+                                    <a class="nav-main-link{{ request()->is('contratos-fixos/create') ? ' active' : '' }}" href="/contratos-fixos/create">
                                         <span class="nav-main-link-name">Contratos Fixos</span>
                                     </a>
                                 </li>
