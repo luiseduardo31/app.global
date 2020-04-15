@@ -133,8 +133,8 @@ class InventarioController extends Controller
 
         if ($insert)
             return redirect()->route('inventario.index')->with('success', "A linha {$request->linha} foi cadastrada com sucesso!");
-        else 
-            return 'Erro ao cadastrar...';
+        else
+            return redirect()->route('inventario.create')->with('error', "Houve um erro ao cadastrar a linha {$request->linha}.");
     }
 
     /**

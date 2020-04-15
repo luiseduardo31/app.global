@@ -24,7 +24,6 @@
         <link href="{{URL::asset('/js/plugins/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('/css/style.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('asset/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
-
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
 
         <!-- Fonts and Styles -->
@@ -397,7 +396,7 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('contratos-fixos/create') ? ' active' : '' }}" href="/contratos-fixos/create">
+                                    <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
                                         <span class="nav-main-link-name">Contratos Fixos</span>
                                     </a>
                                 </li>
@@ -774,6 +773,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="{{URL::asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
         <script src="{{URL::asset('/js/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
+        <script src="{{URL::asset('/js/plugins/jquery-mask-plugin/jquery.mask.js')}}"></script>
+
+        
 
         <!-- Ativar datatable original 
         <script src="{{URL::asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>

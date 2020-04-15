@@ -54,20 +54,22 @@ INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`,
 -- Copiando estrutura para tabela app-global.empresas
 CREATE TABLE IF NOT EXISTS `empresas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `razao_social` varchar(50) NOT NULL DEFAULT '0',
-  `cnpj` varchar(50) NOT NULL DEFAULT '0',
+  `razao_social` varchar(50) NOT NULL,
+  `cnpj` varchar(14) NOT NULL,
   `grupo_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `cnpj` (`cnpj`),
   KEY `FK_empresas_grupos` (`grupo_id`),
   CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.empresas: ~2 rows (aproximadamente)
 DELETE FROM `empresas`;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
 INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`) VALUES
 	(1, 'Aguia Branca SA', '1234567890', 1),
-	(4, 'Extrabom', '0120910291', 5);
+	(4, 'Extrabom', '0120910291', 5),
+	(7, 'Viação Teste AB', '0789925154', 1);
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.failed_jobs
@@ -259,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   CONSTRAINT `FK_grupos_users_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~2 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`) VALUES
@@ -3321,7 +3323,7 @@ CREATE TABLE IF NOT EXISTS `subsetores` (
   CONSTRAINT `FK_subsetores_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.subsetores: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.subsetores: ~110 rows (aproximadamente)
 DELETE FROM `subsetores`;
 /*!40000 ALTER TABLE `subsetores` DISABLE KEYS */;
 INSERT INTO `subsetores` (`id`, `subsetor`, `grupo_id`, `observacao`, `updated_at`) VALUES

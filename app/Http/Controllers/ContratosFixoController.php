@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ContratosFixo;
 use Illuminate\Http\Request;
+use App\Models\Operadoras;
+use App\Models\Empresas;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ContratosFixoController extends Controller
 {
@@ -11,6 +15,7 @@ class ContratosFixoController extends Controller
     {
         $this->ContratosFixo = $contratosFixo;
         $this->middleware('auth'); 
+        
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +24,7 @@ class ContratosFixoController extends Controller
      */
     public function index()
     {
-        return 'Index';
+        
     }
 
     /**
@@ -29,7 +34,16 @@ class ContratosFixoController extends Controller
      */
     public function create()
     {
-        return 'Create';
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+        $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array('empresas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+        return view('contratos.fixo.create',compact('operadoras', 'empresas'));
     }
 
     /**
