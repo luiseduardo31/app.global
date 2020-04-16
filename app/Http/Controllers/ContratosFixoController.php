@@ -9,6 +9,7 @@ use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
 class ContratosFixoController extends Controller
 {
     public function __construct(ContratosFixo $contratosFixo)
@@ -22,8 +23,24 @@ class ContratosFixoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ContratosFixo $contratosFixo)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $contratos = DB::table('contratos_fixos')->orderBy('numero_contrato', 'ASC')
+            ->select(array(
+                'contratos_fixos.observacao as obsContrato', 'contratos_fixos.id as idContrato', 'contratos_fixos.*', 
+                'operadoras.*', 'empresas.*','grupos_users.*'
+            ))
+            ->join('empresas', 'empresas.id', '=', 'contratos_fixos.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contratos_fixos.operadora_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+
+        return view('contratos.fixo.index', compact('contratos'));
         
     }
 
@@ -54,7 +71,13 @@ class ContratosFixoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        $insert = $this->ContratosFixo->insert($dataForm);
+
+        if ($insert)
+            return redirect()->route('contratos-fixo.index')->with('success', "O contrato {$request->numero_contrato} foi cadastrado com sucesso!");
+        else
+            return redirect()->route('contratos-fixo.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->numero_contrato}.");
     }
 
     /**

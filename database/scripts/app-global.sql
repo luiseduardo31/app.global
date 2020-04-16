@@ -18,7 +18,7 @@ USE `app-global`;
 
 -- Copiando estrutura para tabela app-global.contas
 CREATE TABLE IF NOT EXISTS `contas` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `conta` varchar(50) DEFAULT NULL,
   `empresa_id` int(10) NOT NULL,
   `observacao` varchar(145) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `contas` (
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~17 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~16 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`, `updated_at`) VALUES
@@ -51,9 +51,45 @@ INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`,
 	(16, '376995273', 1, NULL, 1, NULL);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
+-- Copiando estrutura para tabela app-global.contratos_fixos
+CREATE TABLE IF NOT EXISTS `contratos_fixos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `operadora_id` int(10) NOT NULL,
+  `numero_contrato` varchar(40) DEFAULT NULL,
+  `assinatura` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `franquia` varchar(20) NOT NULL,
+  `comprometimento_minimo` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `empresa_id` int(10) unsigned NOT NULL,
+  `periodo_inicio` date NOT NULL,
+  `periodo_fim` date NOT NULL,
+  `vigencia` varchar(3) NOT NULL,
+  `canais` varchar(3) DEFAULT NULL,
+  `range` varchar(9) DEFAULT NULL,
+  `sinalizacao` varchar(4) DEFAULT NULL,
+  `tarifa_local_fixo` varchar(7) DEFAULT NULL,
+  `tarifa_local_movel` varchar(7) DEFAULT NULL,
+  `tarifa_ld_fixo` varchar(7) DEFAULT NULL,
+  `tarifa_ld_movel` varchar(7) DEFAULT NULL,
+  `observacao` varchar(145) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_contratos_fixos_operadoras` (`operadora_id`),
+  KEY `FK_contratos_fixos_empresas` (`empresa_id`),
+  CONSTRAINT `FK_contratos_fixos_empresas` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`),
+  CONSTRAINT `FK_contratos_fixos_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Copiando dados para a tabela app-global.contratos_fixos: ~0 rows (aproximadamente)
+DELETE FROM `contratos_fixos`;
+/*!40000 ALTER TABLE `contratos_fixos` DISABLE KEYS */;
+INSERT INTO `contratos_fixos` (`id`, `operadora_id`, `numero_contrato`, `assinatura`, `franquia`, `comprometimento_minimo`, `empresa_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `canais`, `range`, `sinalizacao`, `tarifa_local_fixo`, `tarifa_local_movel`, `tarifa_ld_fixo`, `tarifa_ld_movel`, `observacao`, `updated_at`) VALUES
+	(2, 3, 'Contrato ABC 01018', 3500.00, '2000 minutos', 1500.00, 1, '2020-04-01', '2021-04-01', '12', '15', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', '1', 'R$ 0,10', 'R$ 0,5', 'R$ 0,8', 'R$ 0,75', NULL, NULL);
+/*!40000 ALTER TABLE `contratos_fixos` ENABLE KEYS */;
+
 -- Copiando estrutura para tabela app-global.empresas
 CREATE TABLE IF NOT EXISTS `empresas` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `razao_social` varchar(50) NOT NULL,
   `cnpj` varchar(14) NOT NULL,
   `grupo_id` int(10) unsigned NOT NULL,
@@ -63,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.empresas: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.empresas: ~3 rows (aproximadamente)
 DELETE FROM `empresas`;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
 INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`) VALUES

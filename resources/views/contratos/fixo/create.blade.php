@@ -40,8 +40,8 @@
                   @csrf
                     <div class="form-group form-row">
                         <div class="col-4">
-                            <label for="conta">Nº do Contrato</label>
-                            <input type="text" name="numero_contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
+                            <label for="contrato">Nº do Contrato</label>
+                            <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
                         
                         <div class="col-2">
@@ -115,6 +115,31 @@
                         </div>
 
                     </div>
+
+                    <div class="form-group form-row">
+                        
+                        <div class="col-2">
+                            <label for="tarifa_local_fixo">Local Fixo</label>
+                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_local_movel">Local Móvel</label>
+                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_fixo">Longa Distancia Fixo</label>
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_movel">Longa Distancia Móvel</label>
+                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                    </div>
+
                     <div class="form-group form-row">
                         <div class="col-12">
                             <label for="Observacao">Observação</label> <br>
