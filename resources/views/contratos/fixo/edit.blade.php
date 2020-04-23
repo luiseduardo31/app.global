@@ -15,12 +15,12 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Inventário</li>
+                        <li class="breadcrumb-item">Contrato Fixo</li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">Editando Conta</a>
+                           <a class="link-fx" href="">Editando Contrato</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">{{$contas->conta}} </a>
+                           <a class="link-fx" href="">{{$contratos->numero_contrato}} </a>
                         </li>
                     </ol>
                 </nav>
@@ -34,41 +34,129 @@
         <!-- Your Block -->
         <div class="block">
             <div class="block-content">
-               <form action="{{route('contas.update',$contas->id)}}" method="POST" enctype="multipart/form-data">
-                  @csrf
-                  @method('PUT')
-                    <div class="form-group form-row"> 
-                        <div class="col-3">
-                            <label for="conta">Conta</label>
-                            <input type="text" name="conta" class="form-control" value="{{$contas->conta}}" maxlength="50">
+               <form action="{{route('contratos-fixo.update',$contratos->id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group form-row">
+                        <div class="col-4">
+                            <label for="contrato">Nº do Contrato</label>
+                            <input type="text" name="numero_contrato" class="form-control" value="{{$contratos->numero_contrato}}" maxlength="40">
                         </div>
-
-                        <div class="col-3">
-                            <label for="operadoras">Operadoras</label>
+                        
+                        <div class="col-2">
+                            <label for="operadora">Operadora</label>
                             <select class="form-control" name="operadora_id">
                             @foreach ($operadoras as $operadora)
-                                <option value="{{$operadora->id}}" {{ ( $operadora->id == $contas->conta_id) ? 'selected' : '' }}>
+                                <option value="{{$operadora->id}}" {{ ( $operadora->id == $contratos->operadora_id) ? 'selected' : '' }}>
                                     {{$operadora->operadora}}
                                 </option>
                             @endforeach
                             </select>
                         </div>
+                        
+                        <div class="col-2">
+                            <label for="assinatura">Assinatura</label>
+                            <input type="text" name="assinatura" class="form-control" value="{{$contratos->assinatura}}" maxlength="40">
+                        </div>
+                        
+                        <div class="col-2">
+                            <label for="franquia">Franquia</label>
+                            <input type="text" name="franquia" class="form-control" value="{{$contratos->franquia}}" maxlength="40">
+                        </div>
+                        
+                        <div class="col-2">
+                            <label for="comprometimento_minimo">Comp. Minimo</label>
+                            <input type="text" name="comprometimento_minimo" class="form-control" value="{{$contratos->comprometimento_minimo}}" maxlength="40">
+                        </div>
+
+                    </div>
+                    <div class="form-group form-row">
+                        <div class="col-2">
+                            <label for="empresa">CNPJ</label>
+                            <select class="form-control" name="empresa_id">
+                            @foreach ($empresas as $empresa)
+                                <option value="{{$empresa->id}}" {{ ( $empresa->id == $contratos->empresa_id) ? 'selected' : '' }}>
+                                    {{$empresa->cnpj}}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="periodo_inicio">Período (Inicio)</label>
+                            <input type="date" name="periodo_inicio" class="form-control" value="{{$contratos->periodo_inicio}}" maxlength="40">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="periodo_fim">Período (Fim)</label>
+                            <input type="date" name="periodo_fim" class="form-control" value="{{$contratos->periodo_fim}}" maxlength="40">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="vigencia">Vigência</label>
+                            <input type="number" name="vigencia" class="form-control"value="{{$contratos->vigencia}}" maxlength="2" min="1" max="48">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="canais">Canais</label>
+                            <input type="number" name="canais" class="form-control" value="{{$contratos->canais}}" maxlength="3" min="1" max="120">
+                        </div>
+
+                        
+                        <div class="col-2">
+                            <label for="range">Range</label>
+                            <input type="text" name="range" class="form-control" value="{{$contratos->range}}" maxlength="9" data-mask="0000-0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="sinalizacao">Sinalização</label>
+                            <select class="form-control" name="sinalizacao">
+                                <option value="ISDN" {{ ( $contratos->sinalizacao == "ISDN") ? 'selected' : '' }}>ISDN</option>
+                                <option value="R2" {{ ( $contratos->sinalizacao == "R2") ? 'selected' : '' }}>R2</option>
+                                <option value="SIP" {{ ( $contratos->sinalizacao == "SIP") ? 'selected' : '' }}>SIP</option>
+                            </select>
+                        </div>
+
                     </div>
 
-                    <div class="form-group form-row"> 
+                    <div class="form-group form-row">
+                        
+                        <div class="col-2">
+                            <label for="tarifa_local_fixo">Local Fixo</label>
+                            <input type="text" name="tarifa_local_fixo" class="form-control" value="{{$contratos->tarifa_local_fixo}}" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_local_movel">Local Móvel</label>
+                            <input type="text" name="tarifa_local_movel" class="form-control" value="{{$contratos->tarifa_local_movel}}" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_fixo">Longa Distancia Fixo</label>
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" value="{{$contratos->tarifa_ld_fixo}}" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_movel">Longa Distancia Móvel</label>
+                            <input type="text" name="tarifa_ld_movel" class="form-control" value="{{$contratos->tarifa_ld_movel}}"maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group form-row">
                         <div class="col-12">
                             <label for="Observacao">Observação</label> <br>
-                            <input type="text"  name="observacao" class="form-control" value="{{$contas->observacao}}" maxlength="100">
+                            <input type="text" name="observacao" class="form-control" maxlength="100">
                         </div>
                     </div>
 
                     <div class="form-group form-row">
                         <div class="col-2">
-                        <button type="submit" class="btn btn-primary form-control">Salvar</button>  
-                        </div> 
-                     
+                            <button type="submit" class="btn btn-primary form-control">Salvar</button>  
+                        </div>  
+                        
                         <div class="col-2">
-                            <a href="{{route('contas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da conta {{$contas->conta}}?');">
+                            <a href="{{route('contratos-fixo.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
                                 Cancelar
                             </a>
                         </div>

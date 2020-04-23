@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ContratosFixo extends Model
 {
     protected $table = 'contratos_fixos';
+    protected $fillable = [];
+    protected $guarded  = ['_token'];
 }

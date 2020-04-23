@@ -41,7 +41,7 @@
                     <div class="form-group form-row">
                         <div class="col-4">
                             <label for="contrato">Nº do Contrato</label>
-                            <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
+                            <input type="text" name="numero_contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
                         
                         <div class="col-2">
@@ -108,9 +108,9 @@
                         <div class="col-2">
                             <label for="sinalizacao">Sinalização</label>
                             <select class="form-control" name="sinalizacao">
-                                <option value="1">ISDN</option>
-                                <option value="2">R2</option>
-                                <option value="3">SIP</option>
+                                <option value="ISDN">ISDN</option>
+                                <option value="R2">R2</option>
+                                <option value="SIP">SIP</option>
                             </select>
                         </div>
 

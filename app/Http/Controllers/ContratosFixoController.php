@@ -97,9 +97,20 @@ class ContratosFixoController extends Controller
      * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContratosFixo $contratosFixo)
+    public function edit($id)
     {
-        //
+        $user = Auth::user();
+        $user_id = Auth::id();
+        
+        $contratos = ContratosFixo::all();
+        $contratos = $this->ContratosFixo->find($id);
+        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+        $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array('empresas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+        return view('contratos.fixo.edit', compact('contratos','operadoras','empresas'));
     }
 
     /**
@@ -109,9 +120,16 @@ class ContratosFixoController extends Controller
      * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContratosFixo $contratosFixo)
+    public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $contratos  = $this->ContratosFixo->find($id);
+        $update   = $contratos->update($dataForm);
+
+        if ($update)
+            return redirect()->route('cadastros-fixo.index')->with('success', "O  contrato {$contratos->numero_contrato} foi atualizado com sucesso!");
+        else
+            return redirect()->route('cadastros-fixo.edit')->with('error', "Houve um erro ao editar o contrato {$contratos->numero_contrato}.");
     }
 
     /**
@@ -120,8 +138,14 @@ class ContratosFixoController extends Controller
      * @param  \App\models\Contratos\ContratosFixo  $contratosFixo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContratosFixo $contratosFixo)
+    public function destroy($id)
     {
-        //
+        $contratos = $this->ContratosFixo->find($id);
+        $delete = $contratos->delete();
+
+        if ($delete) {
+            return redirect()->route('contratos-fixo.index')->with('success', "O contrato {$contratos->numero_contrato} foi excluido com sucesso!");
+        } else
+            return redirect()->route('contratos-fixo.index')->with('error', "Houve um erro ao excluir o contrato {$contratos->numero_contrato}.");
     }
 }

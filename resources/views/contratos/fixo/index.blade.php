@@ -41,12 +41,22 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th style="width:30%">Contrato</th>
-                                        <th style="width:30%">Razão Social</th>
-                                        <th style="width:30%">CNPJ</th>
-                                        <th style="width:30%">Periodo</th>
-                                        <th style="width:30%">Operadora</th>
-                                        <th style="width:30%">Vigencia</th>
+                                        <th style="width:25%">Contrato</th>
+                                        <th>Operadora</th>
+                                        <th>Razão Social</th>
+                                        <th>CNPJ</th>
+                                        <th>Periodo</th>
+                                        <th>Vigencia</th>
+                                        <th>Assinatura</th>
+                                        <th>Comp. Min.</th>
+                                        <th>Franquia</th>
+                                        <th>Range</th>
+                                        <th>Canais</th>
+                                        <th>Sinalização</th>
+                                        <th>Tarifa Local - Fixo</th>
+                                        <th>Tarifa Local - Móvel</th>
+                                        <th>Tarifa LD - Fixo</th>
+                                        <th>Tarifa LD - Móvel</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -54,12 +64,22 @@
                                 <tbody>
                                     @forelse ($contratos as $contrato)
                                     <tr>
-                                        <td>{{$contrato->numero_contrato}}</td>
+                                        <td>{{$contrato->numero_contrato}} teste</td>
+                                        <td>{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
-                                        <td>{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
-                                        <td>{{$contrato->operadora}}</td>
-                                        <td>{{$contrato->vigencia}} Meses</td>
+                                        <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
+                                        <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
+                                        <td>R$ {{$contrato->assinatura}}</td>
+                                        <td>R$ {{$contrato->comprometimento_minimo}}</td>
+                                        <td>{{$contrato->franquia}}</td>
+                                        <td style="text-align: center">{{$contrato->range}}</td>
+                                        <td style="text-align: center">{{$contrato->canais}}</td>
+                                        <td style="text-align: center">{{$contrato->sinalizacao}}</td>
+                                        <td style="text-align: center">{{$contrato->tarifa_local_fixo}}</td>
+                                        <td style="text-align: center">{{$contrato->tarifa_local_movel}}</td>
+                                        <td style="text-align: center">{{$contrato->tarifa_ld_fixo}}</td>
+                                        <td style="text-align: center">{{$contrato->tarifa_ld_movel}}</td>
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">
