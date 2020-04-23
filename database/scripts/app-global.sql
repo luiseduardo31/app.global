@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS `contratos_fixos` (
   KEY `FK_contratos_fixos_empresas` (`empresa_id`),
   CONSTRAINT `FK_contratos_fixos_empresas` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`),
   CONSTRAINT `FK_contratos_fixos_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contratos_fixos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contratos_fixos: ~2 rows (aproximadamente)
 DELETE FROM `contratos_fixos`;
 /*!40000 ALTER TABLE `contratos_fixos` DISABLE KEYS */;
 INSERT INTO `contratos_fixos` (`id`, `operadora_id`, `numero_contrato`, `assinatura`, `franquia`, `comprometimento_minimo`, `empresa_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `canais`, `range`, `sinalizacao`, `tarifa_local_fixo`, `tarifa_local_movel`, `tarifa_ld_fixo`, `tarifa_ld_movel`, `observacao`, `updated_at`) VALUES
-	(2, 3, 'Contrato ABC 01018', 3500.00, '2000 minutos', 1500.00, 1, '2020-04-01', '2021-04-01', '12', '15', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', '1', 'R$ 0,10', 'R$ 0,5', 'R$ 0,8', 'R$ 0,75', NULL, NULL);
+	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', 'SIP', 'R$ 0,10', 'R$ 0,5', 'R$ 0,8', 'R$ 0,75', NULL, NULL),
+	(4, 2, 'CT 04/2020', 20201.40, '10000 minutos', 2000.60, 1, '2019-04-22', '2020-04-22', '12', '30', '1000-1049', 'SIP', 'R$ 0,25', 'R$ 0,50', 'R$ 0,75', 'R$ 0,85', 'aaaaaaaa 2', NULL);
 /*!40000 ALTER TABLE `contratos_fixos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.empresas
