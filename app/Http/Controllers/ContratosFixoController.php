@@ -127,9 +127,9 @@ class ContratosFixoController extends Controller
         $update   = $contratos->update($dataForm);
 
         if ($update)
-            return redirect()->route('cadastros-fixo.index')->with('success', "O  contrato {$contratos->numero_contrato} foi atualizado com sucesso!");
+            return redirect()->route('contratos-fixo.index')->with('success', "O  contrato {$contratos->numero_contrato} foi atualizado com sucesso!");
         else
-            return redirect()->route('cadastros-fixo.edit')->with('error', "Houve um erro ao editar o contrato {$contratos->numero_contrato}.");
+            return redirect()->route('contratos-fixo.edit')->with('error', "Houve um erro ao editar o contrato {$contratos->numero_contrato}.");
     }
 
     /**

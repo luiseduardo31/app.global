@@ -387,21 +387,63 @@
                                 <!-- Fim Submenu Contas -->
        
                             </ul>
-                        </li>
-
+                        </li>     
+                         
+                        <!-- Menu Contratos -->
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                <i class="nav-main-link-icon si si-layers"></i>
-                                <span class="nav-main-link-name">Controle de Contratos</span>
+                                <i class="nav-main-link-icon far fa-address-book"></i>
+                                <span class="nav-main-link-name">Contratos Telecom</span>
                             </a>
                             <ul class="nav-main-submenu">
+ 
+                                <!-- Submenu Contratos Fixos -->
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
                                         <span class="nav-main-link-name">Contratos Fixos</span>
                                     </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
+                                                <span class="nav-main-link-name">Cadastrar Contrato</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="/contratos-fixo/">
+                                                <span class="nav-main-link-name">Contratos Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul> 
                                 </li>
+                                 <!-- Fim Submenu Contratos Fixos -->
+
+                                <!-- Submenu Contratos Móveis -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Contratos Móveis</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contratos-movel/create') ? ' active' : '' }}" href="/contratos-movel/create">
+                                                <span class="nav-main-link-name">Cadastrar Contrato</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="/contratos-movel/">
+                                                <span class="nav-main-link-name">Contratos Cadastrados</span>
+                                            </a>
+                                        </li>
+                                    </ul> 
+                                </li>
+                                <!-- Fim Submenu Contratos Móveis -->
+                                
                             </ul>
                         </li>
+                        <!-- Fim Menu Contratos -->
+
+ 
 
                         <!-- Menu
                         <li class="nav-main-heading">More</li>
