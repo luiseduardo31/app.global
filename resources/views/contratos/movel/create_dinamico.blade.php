@@ -25,6 +25,41 @@
        </div>
     </div>
     <!-- END Hero -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<script>
+$(document).ready(function(){
+    var count = 1;
+    dynamic_field(count);
+
+    function dynamic_field(number)
+    {
+        html = '<div class="form-group form-row" id="dinamico">';
+            html += '<div class="col-3"><label for="empresa">Plano</label><input type="text" name="nome_plano[]"  class="form-control" /></div>';
+            html += '<div class="col-1"><label for="empresa">Custo</label><input type="text" name="custo_plano[]" class="form-control"/></div>';
+            if(number > 1)
+            {
+                html += '<div class="col-1"><label for="empresa">&nbsp;</label><button type="button" name="remove" id="" class="btn btn-danger remove form-control">--</button></span>';
+                $('#dinamico').append(html);
+            }
+            else
+            {   
+                html += '<div class="col-1"><label for="empresa">&nbsp;</label><button type="button" name="add" id="add" class="btn btn-success form-control">+</button></div></div>';
+                $('#dinamico').html(html);
+            }
+    }
+
+    $(document).on('click', '#add', function(){
+        count++;
+        dynamic_field(count);
+    });
+
+    $(document).on('click', '.remove', function(){
+        count--;
+        $(this).closest("#dinamico").remove();
+    });
+
+});
+</script>
 
     <!-- Page Content -->
     <div class="content">
@@ -36,10 +71,10 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('contratos-movel.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('contratos-fixo.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
-                        <div class="col-3">
+                        <div class="col-4">
                             <label for="contrato">Nº do Contrato</label>
                             <input type="text" name="numero_contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
@@ -63,6 +98,18 @@
                         </div>
                         
                         <div class="col-2">
+                            <label for="assinatura">Assinatura</label>
+                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
+                        </div>
+                        
+                        <div class="col-2">
+                            <label for="franquia">Franquia</label>
+                            <input type="text" name="franquia" class="form-control" placeholder="Franquia" maxlength="40">
+                        </div>
+
+                    </div>
+                    <div class="form-group form-row">
+                        <div class="col-2">
                             <label for="periodo_inicio">Período (Inicio)</label>
                             <input type="date" name="periodo_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
                         </div>
@@ -77,39 +124,44 @@
                             <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="48">
                         </div>
 
-                    </div>
-                    <div class="form-group form-row">
                         <div class="col-2">
-                            <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
+                            <label for="sinalizacao">Sinalização</label>
+                            <select class="form-control" name="sinalizacao">
+                                <option value="ISDN">ISDN</option>
+                                <option value="R2">R2</option>
+                                <option value="SIP">SIP</option>
+                            </select>
                         </div>
 
-
-                                                
-                        <div class="col-1">
-                            <label for="sms_unitario">SMS</label>
-                            <input type="text" name="sms_unitario" class="form-control" placeholder="Custo" maxlength="4" data-mask="0.00">
-                        </div>
-
-                        <div class="col-2">
-                            <label for="sms_pacote">Pacote SMS</label>
-                            <input type="text" name="sms_pacote" class="form-control" placeholder="Custo" maxlength="6">
-                        </div>
-
-                        <div class="col-2">
-                            <label for="gestor_online">Gestor Online</label>
-                            <input type="text" name="gestor_online" class="form-control" placeholder="Custo" maxlength="6">
-                        </div>
                     </div>
 
                     <div class="form-group form-row">
-                        <div class="col-12">
-                            <label for="planos_contrato">Planos e Condições Comerciais</label>
-                            <textarea name="planos_contrato" class="form-control" placeholder="Exemplo: Smart Vivo 0,5GB (R$ 34,99) / Smart Vivo 2GB (R$ 49,99)" rows="3"></textarea>
+                        
+                        <div class="col-2">
+                            <label for="tarifa_local_fixo">Local Fixo</label>
+                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
                         </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_local_movel">Local Móvel</label>
+                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_fixo">Longa Distancia Fixo</label>
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
+                        <div class="col-2">
+                            <label for="tarifa_ld_movel">Longa Distancia Móvel</label>
+                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        </div>
+
                     </div>
+
                     
-                  
+                    <div id="dinamico"></div>
+                    
 
                     <div class="form-group form-row">
                         <div class="col-12">

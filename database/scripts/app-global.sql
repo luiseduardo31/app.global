@@ -83,9 +83,42 @@ CREATE TABLE IF NOT EXISTS `contratos_fixos` (
 DELETE FROM `contratos_fixos`;
 /*!40000 ALTER TABLE `contratos_fixos` DISABLE KEYS */;
 INSERT INTO `contratos_fixos` (`id`, `operadora_id`, `numero_contrato`, `assinatura`, `franquia`, `comprometimento_minimo`, `empresa_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `canais`, `range`, `sinalizacao`, `tarifa_local_fixo`, `tarifa_local_movel`, `tarifa_ld_fixo`, `tarifa_ld_movel`, `observacao`, `updated_at`) VALUES
-	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', 'SIP', 'R$ 0,10', 'R$ 0,5', 'R$ 0,8', 'R$ 0,75', NULL, NULL),
-	(4, 2, 'CT 04/2020', 20201.40, '10000 minutos', 2000.60, 1, '2019-04-22', '2020-04-22', '12', '30', '1000-1049', 'SIP', 'R$ 0,25', 'R$ 0,50', 'R$ 0,75', 'R$ 0,85', 'aaaaaaaa 2', NULL);
+	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', 'SIP', 'R$ 0,10', 'R$ 0,50', 'R$ 0,80', 'R$ 0,75', NULL, '2020-04-23 14:16:37'),
+	(4, 3, 'MMB 29812', 1558.82, '2000 minutos', 2500.22, 1, '2019-03-01', '2020-04-22', '12', '15', '2000-2049', 'R2', 'R$ 0,33', 'R$ 0,57', 'R$ 0,98', 'R$ 1,23', NULL, '2020-04-23 12:36:49');
 /*!40000 ALTER TABLE `contratos_fixos` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela app-global.contratos_moveis
+CREATE TABLE IF NOT EXISTS `contratos_moveis` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `numero_contrato` varchar(40) DEFAULT NULL,
+  `empresa_id` int(10) unsigned NOT NULL,
+  `operadora_id` int(10) NOT NULL,
+  `periodo_inicio` date NOT NULL,
+  `periodo_fim` date NOT NULL,
+  `vigencia` varchar(3) NOT NULL,
+  `assinatura` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `sms_unitario` decimal(10,2) DEFAULT NULL,
+  `sms_pacote` decimal(10,2) DEFAULT NULL,
+  `gestor_online` decimal(10,2) DEFAULT NULL,
+  `planos_contrato` varchar(145) DEFAULT NULL,
+  `observacao` varchar(145) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `FK_contratos_fixos_operadoras` (`operadora_id`) USING BTREE,
+  KEY `FK_contratos_fixos_empresas` (`empresa_id`) USING BTREE,
+  CONSTRAINT `contratos_moveis_ibfk_1` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`),
+  CONSTRAINT `contratos_moveis_ibfk_2` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- Copiando dados para a tabela app-global.contratos_moveis: ~3 rows (aproximadamente)
+DELETE FROM `contratos_moveis`;
+/*!40000 ALTER TABLE `contratos_moveis` DISABLE KEYS */;
+INSERT INTO `contratos_moveis` (`id`, `numero_contrato`, `empresa_id`, `operadora_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `assinatura`, `sms_unitario`, `sms_pacote`, `gestor_online`, `planos_contrato`, `observacao`, `updated_at`) VALUES
+	(7, 'CT Movel 2020', 1, 2, '2020-04-01', '2020-04-30', '18', 1400.60, NULL, 119.90, 2.00, 'Smart 0.5GB (R$ 34,99) / Smart 5GB (R$ 54,99)', 'teste obs!', NULL),
+	(8, 'CT Movel 20201 A', 1, 2, '2020-04-01', '2020-04-30', '18', 1400.60, 0.00, 119.90, 2.00, 'Smart 0.5GB (R$ 34,99) / Smart 5GB (R$ 54,99)', 'teste obs!', NULL),
+	(9, 'CT Movel 20201 A', 1, 2, '2020-04-01', '2020-04-30', '18', 1400.60, 0.00, 119.90, 2.00, 'Smart 0.5GB (R$ 34,99) / Smart 5GB (R$ 54,99)', 'teste obs!', NULL),
+	(10, 'CT Movel 20201 A', 1, 2, '2020-04-01', '2020-04-30', '18', 1400.60, NULL, 119.90, 2.00, 'Smart 0.5GB (R$ 34,99) / Smart 5GB (R$ 54,99)', 'teste obs!', NULL);
+/*!40000 ALTER TABLE `contratos_moveis` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.empresas
 CREATE TABLE IF NOT EXISTS `empresas` (

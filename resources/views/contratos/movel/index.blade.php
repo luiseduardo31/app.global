@@ -48,15 +48,10 @@
                                         <th>Periodo</th>
                                         <th>Vigencia</th>
                                         <th>Assinatura</th>
-                                        <th>Comp. Min.</th>
-                                        <th>Franquia</th>
-                                        <th>Range</th>
-                                        <th>Canais</th>
-                                        <th>Sinalização</th>
-                                        <th>Tarifa Local - Fixo</th>
-                                        <th>Tarifa Local - Móvel</th>
-                                        <th>Tarifa LD - Fixo</th>
-                                        <th>Tarifa LD - Móvel</th>
+                                        <th>SMS Unitário</th>
+                                        <th>SMS Pacote</th>
+                                        <th>Gestor Online</th>
+                                        <th>Planos/Condição Comercial</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -71,15 +66,10 @@
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
                                         <td>R$ {{$contrato->assinatura}}</td>
-                                        <td>R$ {{$contrato->comprometimento_minimo}}</td>
-                                        <td>{{$contrato->franquia}}</td>
-                                        <td style="text-align: center">{{$contrato->range}}</td>
-                                        <td style="text-align: center">{{$contrato->canais}}</td>
-                                        <td style="text-align: center">{{$contrato->sinalizacao}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_local_fixo}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_local_movel}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_ld_fixo}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_ld_movel}}</td>
+                                        <td>R$ {{$contrato->sms_unitario}}</td>
+                                        <td>R$ {{$contrato->sms_pacote}}</td>
+                                        <td>R$ {{$contrato->gestor_online}}</td>
+                                        <td>R$ {{$contrato->planos_contrato}}</td>                                        
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">

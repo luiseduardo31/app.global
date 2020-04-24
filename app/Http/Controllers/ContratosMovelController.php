@@ -25,7 +25,22 @@ class ContratosMovelController extends Controller
      */
     public function index(ContratosMovel $contratosMovel)
     {
-        return 'index...';
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $contratos = DB::table('contratos_moveis')
+            ->select(array(
+                'contratos_moveis.observacao as obsContrato', 'contratos_moveis.id as idContrato', 'contratos_moveis.*',
+                'operadoras.*', 'empresas.*', 'grupos_users.*'
+            ))
+            ->join('empresas', 'empresas.id', '=', 'contratos_moveis.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contratos_moveis.operadora_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+
+        return view('contratos.movel.index', compact('contratos'));
     }
 
     /**
@@ -55,7 +70,13 @@ class ContratosMovelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        $insert = $this->ContratosMovel->insert($dataForm);
+
+        if ($insert)
+            return redirect()->route('contratos-movel.index')->with('success', "O contrato {$request->numero_contrato} foi cadastrado com sucesso!");
+        else
+            return redirect()->route('contratos-movel.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->numero_contrato}.");
     }
 
     /**
