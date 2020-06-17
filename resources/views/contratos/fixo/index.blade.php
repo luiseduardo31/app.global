@@ -41,9 +41,9 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th style="width:25%">Contrato</th>
-                                        <th>Operadora</th>
-                                        <th>Razão Social</th>
+                                        <th style="width:300px">Contrato</th>
+                                        <th style="width:300px !important">Operadora</th>
+                                        <th wid>Razão Social</th>
                                         <th>CNPJ</th>
                                         <th>Periodo</th>
                                         <th>Vigencia</th>
@@ -65,7 +65,7 @@
                                     @forelse ($contratos as $contrato)
                                     <tr>
                                         <td>{{$contrato->numero_contrato}}</td>
-                                        <td>{{$contrato->operadora}}</td>
+                                        <td style="width:300px !important">{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
