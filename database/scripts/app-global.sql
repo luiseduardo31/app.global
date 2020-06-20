@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `contratos_fixos` (
 DELETE FROM `contratos_fixos`;
 /*!40000 ALTER TABLE `contratos_fixos` DISABLE KEYS */;
 INSERT INTO `contratos_fixos` (`id`, `operadora_id`, `numero_contrato`, `assinatura`, `franquia`, `comprometimento_minimo`, `empresa_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `canais`, `range`, `sinalizacao`, `tarifa_local_fixo`, `tarifa_local_movel`, `tarifa_ld_fixo`, `tarifa_ld_movel`, `observacao`, `updated_at`) VALUES
-	(3, 3, 'Contrato ABC 01018', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', 'SIP', 'R$ 0,10', 'R$ 0,50', 'R$ 0,80', 'R$ 0,75', NULL, '2020-04-23 14:16:37'),
+	(3, 3, 'Contrato ABC 01018 AAAA', 3500.12, '2000 minutos', 1541.23, 1, '2020-04-01', '2021-04-01', '12', '15', '1000-1049', 'SIP', 'R$ 0,10', 'R$ 0,50', 'R$ 0,80', 'R$ 0,75', NULL, '2020-05-25 17:44:07'),
 	(4, 3, 'MMB 29812', 1558.82, '2000 minutos', 2500.22, 1, '2019-03-01', '2020-04-22', '12', '15', '2000-2049', 'R2', 'R$ 0,33', 'R$ 0,57', 'R$ 0,98', 'R$ 1,23', NULL, '2020-04-23 12:36:49');
 /*!40000 ALTER TABLE `contratos_fixos` ENABLE KEYS */;
 
@@ -165,15 +165,14 @@ CREATE TABLE IF NOT EXISTS `funcoes` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_funcoes_grupos` (`grupo_id`),
-  CONSTRAINT `FK_funcoes_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
+  KEY `FK_funcoes_grupos` (`grupo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.funcoes: ~102 rows (aproximadamente)
 DELETE FROM `funcoes`;
 /*!40000 ALTER TABLE `funcoes` DISABLE KEYS */;
 INSERT INTO `funcoes` (`id`, `funcao`, `grupo_id`, `observacao`, `updated_at`) VALUES
-	(1, 'AGÊNCIA', 1, NULL, NULL),
+	(1, 'AGÊNCIA', 1, 'sasasassas 1', '2020-06-20 23:54:49'),
 	(2, 'ENCOMENDAS', 1, NULL, NULL),
 	(3, 'COOPERÁGUIA', 1, NULL, NULL),
 	(4, 'PARTICULAR - COOPERÁGUIA', 1, NULL, NULL),
@@ -328,13 +327,14 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_grupos_users_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~3 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`) VALUES
-	(1, 1, 1);
+	(1, 1, 1),
+	(9, 5, 1);
 /*!40000 ALTER TABLE `grupos_users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.inventarios
@@ -368,15 +368,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `FK_inventarios_funcoes` (`funcao_id`),
   KEY `nome_usuario` (`nome_usuario`),
   KEY `data_registro` (`data_registro`),
-  KEY `chip` (`chip`),
-  CONSTRAINT `FK_inventarios_funcoes` FOREIGN KEY (`funcao_id`) REFERENCES `funcoes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_gestores` FOREIGN KEY (`gestor_id`) REFERENCES `gestores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_matriculas` FOREIGN KEY (`matricula_id`) REFERENCES `matriculas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_planos` FOREIGN KEY (`plano_id`) REFERENCES `planos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_setores` FOREIGN KEY (`setor_id`) REFERENCES `setores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_subsetores` FOREIGN KEY (`subsetor_id`) REFERENCES `subsetores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_inventarios_tipos_linhas` FOREIGN KEY (`tipo_linha_id`) REFERENCES `tipos_linhas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `chip` (`chip`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2488 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.inventarios: ~2.484 rows (aproximadamente)

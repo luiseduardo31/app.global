@@ -43,6 +43,15 @@
                             <label for="Funcao">Função</label>
                             <input type="text" name="funcao" class="form-control" placeholder="Função" maxlength="25">
                         </div>
+
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
+                            @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group form-row">
                         <div class="col-12">

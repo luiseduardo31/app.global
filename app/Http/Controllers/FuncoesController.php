@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Funcoes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FuncoesController extends Controller
 {
@@ -24,7 +25,10 @@ class FuncoesController extends Controller
     public function index(Funcoes $funcoes)
     {
         $funcoes = DB::table('funcoes')->orderBy('funcao','asc')
-        ->get();
+            ->select(array('funcoes.id as funcoesID', 'funcoes.*', 'grupos.*'))
+            ->join('grupos', 'grupos.id', '=', 'funcoes.grupo_id')
+            ->get();
+
         return view('inventario.funcoes.index', compact('funcoes'));
     
     }
@@ -36,7 +40,16 @@ class FuncoesController extends Controller
      */
     public function create()
     {
-        return view('inventario.funcoes.create');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+        ->select(array('grupos.*', 'grupos_users.*'))
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+        ->where('users_id', $user_id)
+        ->get();
+
+        return view('inventario.funcoes.create', compact('grupos'));
     }
 
     /**
@@ -75,9 +88,19 @@ class FuncoesController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $funcoes = Funcoes::all(['id', 'funcao','observacao'])->sortBy('funcao');
         $funcoes = $this->funcoes->find($id);
-        return view('inventario.funcoes.edit', compact('funcoes'));
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+        ->select(array('grupos.id as GrupoID','grupos.*', 'grupos_users.*'))
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+        ->where('users_id', $user_id)
+        ->get();
+
+        return view('inventario.funcoes.edit', compact('funcoes', 'grupos'));
     }
 
     /**
