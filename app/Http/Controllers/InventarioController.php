@@ -55,7 +55,7 @@ class InventarioController extends Controller
         ->join('matriculas', 'matriculas.id', '=', 'inventarios.matricula_id')
         ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
         ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
-        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'inventarios.grupo_id')
         ->where('users_id', $user_id)
         ->get();
 
@@ -80,8 +80,8 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
-        $funcoes = DB::table('funcoes')->orderBy('funcao', 'ASC')
-            ->select(array('funcoes.*', 'grupos_users.*'))
+        $funcoes = DB::table('funcoes')
+            ->select(array('grupos_users.id as GrupoUserID', 'funcoes.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
             ->where('users_id', $user_id)
             ->get();
@@ -110,13 +110,19 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+        ->select(array('grupos.*', 'grupos_users.*'))
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+        ->where('users_id', $user_id)
+        ->get();
+
 
         $planos = Planos::all(['id', 'plano'])->sortBy('plano');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
         return view('inventario.create',
-               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes')); 
+               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes','grupos')); 
         
     }
 
@@ -166,9 +172,10 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
-        $funcoes = DB::table('funcoes')->orderBy('funcao', 'ASC')
-            ->select(array('funcoes.*', 'grupos_users.*'))
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
+        $funcoes = DB::table('funcoes')
+            ->select(array('funcoes.id as funcaoID','funcoes.*', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos', 'grupos.id', '=', 'funcoes.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
             ->where('users_id', $user_id)
             ->get();
 

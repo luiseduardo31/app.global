@@ -46,6 +46,14 @@
                      </div>
 
                      <div class="col-3">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                     <div class="col-2">
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
@@ -72,14 +80,6 @@
                         </select>
                      </div>
 
-                     <div class="col-2">
-                        <label for="Status">Status</label>
-                        <select class="form-control" name="status_id">
-                           @foreach ($status as $iStatus)
-                               <option value="{{$iStatus->id}}">{{$iStatus->status}}</option>
-                           @endforeach
-                        </select>
-                     </div>
                   </div>
 
                   <div class="form-group form-row">
@@ -149,9 +149,18 @@
                      </div>
                   </div>
                   <div class="form-group form-row">  
-                     <div class="col-12">
+                     <div class="col-10">
                         <label for="Observacao">Responsabilidade da Despesa</label> <br>
                         <input type="text" name="observacao" class="form-control" maxlength="145">
+                     </div>
+
+                     <div class="col-2">
+                        <label for="Status">Status</label>
+                        <select class="form-control" name="status_id">
+                           @foreach ($status as $iStatus)
+                               <option value="{{$iStatus->id}}">{{$iStatus->status}}</option>
+                           @endforeach
+                        </select>
                      </div>
                   </div>
 

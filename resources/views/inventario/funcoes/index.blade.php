@@ -51,7 +51,7 @@
                                     @forelse ($funcoes as $funcao)
                                     <tr>
                                         <td>{{$funcao->funcao}}</td>
-                                        <td></td>
+                                        <td>{{$funcao->grupo}}</td>
                                         <td>{{$funcao->observacao}}</td>
                                         <td> 
                                             <div class="btn-group">

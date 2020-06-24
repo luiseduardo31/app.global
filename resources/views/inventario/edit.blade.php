@@ -113,10 +113,10 @@
                      </div>
 
                      <div class="col-4">
-                        <label for="Funcao">Função</label>
+                        <label for="Funcao">Função1</label>
                         <select class="form-control" name="funcao_id">
                            @foreach ($funcoes as $funcao)
-                              <option value="{{$funcao->id}}" {{ ( $funcao->id == $inventario->funcao_id) ? 'selected' : '' }}>
+                              <option value="{{$funcao->funcaoID}}" {{ ( $funcao->funcaoID == $inventario->funcao_id) ? 'selected=selected' : '' }}>
                                  {{$funcao->funcao}}
                               </option>
                            @endforeach
