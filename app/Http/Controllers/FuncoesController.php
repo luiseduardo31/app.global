@@ -24,9 +24,14 @@ class FuncoesController extends Controller
      */
     public function index(Funcoes $funcoes)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $funcoes = DB::table('funcoes')->orderBy('funcao','asc')
-            ->select(array('funcoes.id as funcoesID', 'funcoes.*', 'grupos.*'))
+            ->select(array('funcoes.id as funcoesID', 'funcoes.*', 'grupos_users.*'))
             ->join('grupos', 'grupos.id', '=', 'funcoes.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
+            ->where('users_id', $user_id)
             ->get();
 
         return view('inventario.funcoes.index', compact('funcoes'));
@@ -44,7 +49,7 @@ class FuncoesController extends Controller
         $user_id = Auth::id();
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
-        ->select(array('grupos.*', 'grupos_users.*'))
+        ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
         ->where('users_id', $user_id)
         ->get();
