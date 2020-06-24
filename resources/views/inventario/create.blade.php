@@ -52,7 +52,8 @@
                                 <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
                             @endforeach
                             </select>
-                        </div>
+                     </div>
+                     
                      <div class="col-2">
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">

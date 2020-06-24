@@ -45,10 +45,19 @@
                      </div>
 
                      <div class="col-3">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
+                            @endforeach
+                            </select>
+                     </div>
+
+                     <div class="col-2">
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
-                              <option value="{{$conta->id}}" {{ ( $conta->id == $inventario->conta_id) ? 'selected' : '' }}>
+                              <option value="{{$conta->contaID}}" {{ ( $conta->contaID == $inventario->conta_id) ? 'selected' : '' }}>
                                  {{$conta->conta}}
                               </option>
                            @endforeach
@@ -76,17 +85,6 @@
                            @endforeach
                         </select>
                      </div>
-
-                     <div class="col-2">
-                        <label for="Status">Status</label>
-                        <select class="form-control" name="status_id">
-                           @foreach ($status as $iStatus)
-                              <option value="{{$iStatus->id}}" {{ ( $iStatus->id == $inventario->status_id) ? 'selected' : '' }}>
-                                 {{$iStatus->status}}
-                              </option>
-                           @endforeach
-                        </select>
-                     </div>
                   </div>
 
                   <div class="form-group form-row">
@@ -102,10 +100,10 @@
                      </div>
 
                      <div class="col-3">
-                        <label for="matricula">Codex</label>
+                        <label for="matricula">Filial</label>
                            <select class="form-control" name="matricula_id">
                            @foreach ($matriculas as $matricula)
-                              <option value="{{$matricula->id}}" {{ ( $matricula->id == $inventario->matricula_id) ? 'selected' : '' }}>
+                              <option value="{{$matricula->matriculaID}}" {{ ( $matricula->matriculaID == $inventario->matricula_id) ? 'selected' : '' }}>
                                  {{$matricula->matricula}}
                               </option>
                            @endforeach
@@ -113,10 +111,10 @@
                      </div>
 
                      <div class="col-4">
-                        <label for="Funcao">Função1</label>
+                        <label for="Funcao">Função</label>
                         <select class="form-control" name="funcao_id">
                            @foreach ($funcoes as $funcao)
-                              <option value="{{$funcao->funcaoID}}" {{ ( $funcao->funcaoID == $inventario->funcao_id) ? 'selected=selected' : '' }}>
+                              <option value="{{$funcao->funcaoID}}" {{ ($funcao->funcaoID == $inventario->funcao_id) ? 'selected=selected' : '' }}>
                                  {{$funcao->funcao}}
                               </option>
                            @endforeach
@@ -131,7 +129,7 @@
                         <label for="Gestor">Gestor</label>
                         <select class="form-control" name="gestor_id">
                            @foreach ($gestores as $gestor)
-                              <option value="{{$gestor->id}}" {{ ( $gestor->id == $inventario->gestor_id) ? 'selected' : '' }}>
+                              <option value="{{$gestor->gestorID}}" {{ ( $gestor->gestorID == $inventario->gestor_id) ? 'selected' : '' }}>
                                  {{$gestor->gestor}}
                               </option>
                            @endforeach
@@ -142,7 +140,7 @@
                         <label for="Setor">Setor</label>
                         <select class="form-control" name="setor_id">
                            @foreach ($setores as $setor)
-                              <option value="{{$setor->id}}" {{ ( $setor->id == $inventario->setor_id) ? 'selected' : '' }}>
+                              <option value="{{$setor->setorID}}" {{ ( $setor->setorID == $inventario->setor_id) ? 'selected' : '' }}>
                                  {{$setor->setor}}
                               </option>
                            @endforeach
@@ -153,7 +151,7 @@
                         <label for="SubSetor">SubSetor</label>
                         <select class="form-control" name="subsetor_id">
                            @foreach ($subsetores as $subsetor)
-                              <option value="{{$subsetor->id}}" {{ ( $subsetor->id == $inventario->subsetor_id) ? 'selected' : '' }}>
+                              <option value="{{$subsetor->subsetorID}}" {{ ( $subsetor->subsetorID == $inventario->subsetor_id) ? 'selected' : '' }}>
                                  {{$subsetor->subsetor}}
                               </option>
                            @endforeach
@@ -167,9 +165,20 @@
                    
                   </div>
                   <div class="form-group form-row"> 
-                     <div class="col-12">
+                     <div class="col-10">
                         <label for="Observacao">Responsabilidade da Despesa</label> <br>
                         <input type="text"  name="observacao" class="form-control" value="{{$inventario->observacao}}" maxlength="145">
+                     </div>
+
+                     <div class="col-2">
+                        <label for="Status">Status</label>
+                        <select class="form-control" name="status_id">
+                           @foreach ($status as $iStatus)
+                              <option value="{{$iStatus->id}}" {{ ( $iStatus->id == $inventario->status_id) ? 'selected' : '' }}>
+                                 {{$iStatus->status}}
+                              </option>
+                           @endforeach
+                        </select>
                      </div>
                   </div>
 
