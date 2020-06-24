@@ -42,11 +42,13 @@
                                 <thead>
                                     <tr class="text-center">
                                         <th>Linha</th>
+                                        <th>Grupo</th>
                                         <th>Usuário</th>
                                         <th>Plano</th>
                                         <th>Tipo</th>
-                                        <th>Codex</th>
+                                        <th>Filial</th>
                                         <th>Gestor</th>
+                                        <th>Conta</th>
                                         <th>Setor</th>
                                         <th>Subsetor</th>
                                         <th>Função</th>
@@ -61,6 +63,7 @@
                                     @forelse ($linhas as $linha)
                                     <tr>
                                         <td>{{$linha->linha}}</td>
+                                        <td class="text-center">{{$linha->grupo}}</td>
                                         <td>
                                             <span style="cursor:pointer" data-toggle="tooltip" data-animation="true" data-placement="top" 
                                             title="
@@ -71,10 +74,12 @@
                                                 @endif
                                             ">
                                             {{$linha->nome_usuario}}</td>
+                                       
                                         <td>{{$linha->plano}}</td>
                                         <td>{{$linha->tipo}}</td>
                                         <td>{{$linha->matricula}}</td>
                                         <td>{{$linha->gestor}}</td>
+                                        <td>{{$linha->operadora}} - {{$linha->conta}}</td>
                                         <td>{{$linha->setor}}</td>
                                         <td>{{$linha->subsetor}}</td>
                                         <td>{{$linha->funcao}}</td>

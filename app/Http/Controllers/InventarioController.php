@@ -43,7 +43,7 @@ class InventarioController extends Controller
         $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
                        'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','matriculas.*',
-                        'grupos_users.*'))
+                        'grupos_users.*','grupos.*','operadoras.*'))
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
         ->join('setores', 'setores.id', '=', 'inventarios.setor_id')
@@ -54,7 +54,9 @@ class InventarioController extends Controller
         ->join('funcoes', 'funcoes.id', '=', 'inventarios.funcao_id')
         ->join('matriculas', 'matriculas.id', '=', 'inventarios.matricula_id')
         ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
+        ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
         ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+        ->join('grupos', 'grupos.id', '=', 'inventarios.grupo_id')
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'inventarios.grupo_id')
         ->where('users_id', $user_id)
         ->get();
@@ -74,8 +76,9 @@ class InventarioController extends Controller
         $user_id = Auth::id();
 
          $contas = DB::table('contas')->orderBy('conta', 'ASC')
-            ->select(array('contas.*','empresas.*', 'grupos_users.*'))
+            ->select(array('contas.*','empresas.*', 'grupos_users.*','operadoras.*'))
             ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
@@ -209,7 +212,7 @@ class InventarioController extends Controller
             ->get();
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
-            ->select(array('grupos.*', 'grupos_users.*'))
+            ->select(array('grupos.id AS grupoID','grupos.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
             ->where('users_id', $user_id)
             ->get();

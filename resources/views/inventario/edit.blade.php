@@ -48,7 +48,8 @@
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control" name="grupo_id">
                             @foreach ($grupos as $grupo)
-                                <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
+                                <option value="{{$grupo->grupoID}}" {{ ( $grupo->grupoID == $inventario->grupo_id) ? 'selected' : '' }}>
+                                 {{$grupo->grupo}}
                             @endforeach
                             </select>
                      </div>
@@ -58,7 +59,7 @@
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
                               <option value="{{$conta->contaID}}" {{ ( $conta->contaID == $inventario->conta_id) ? 'selected' : '' }}>
-                                 {{$conta->conta}}
+                                 {{$conta->operadora}} -  {{$conta->conta}}
                               </option>
                            @endforeach
                         </select>
