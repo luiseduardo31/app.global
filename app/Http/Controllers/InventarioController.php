@@ -11,7 +11,7 @@ use App\Models\TiposLinha;
 use App\Models\Status;
 use App\Models\Setores;
 use App\Models\Subsetores;
-use App\Models\Matriculas;
+use App\Models\Filiais;
 use App\Models\Funcoes;
 use App\Models\Grupos;
 use App\Models\Empresas;
@@ -42,7 +42,7 @@ class InventarioController extends Controller
         
         $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
-                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','matriculas.*',
+                       'setores.*','subsetores.*','status.*','tipos_linhas.*','ultimos_usuarios.*','funcoes.*','filiais.*',
                         'grupos_users.*','grupos.*','operadoras.*'))
         ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
         ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
@@ -52,7 +52,7 @@ class InventarioController extends Controller
         ->join('tipos_linhas', 'tipos_linhas.id', '=', 'inventarios.tipo_linha_id')
         ->join('ultimos_usuarios', 'ultimos_usuarios.linha', '=', 'inventarios.linha')
         ->join('funcoes', 'funcoes.id', '=', 'inventarios.funcao_id')
-        ->join('matriculas', 'matriculas.id', '=', 'inventarios.matricula_id')
+        ->join('filiais', 'filiais.id', '=', 'inventarios.filial_id')
         ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
         ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
         ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
@@ -75,11 +75,11 @@ class InventarioController extends Controller
         $user = Auth::user();
         $user_id = Auth::id();
 
-         $contas = DB::table('contas')->orderBy('conta', 'ASC')
-            ->select(array('contas.*','empresas.*', 'grupos_users.*','operadoras.*'))
-            ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+        $contas = DB::table('contas')->orderBy('conta', 'ASC')
+            ->select(array('contas.id AS contaID', 'contas.*', 'grupos.*', 'grupos_users.*', 'operadoras.*'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->join('grupos', 'grupos.id', '=', 'contas.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'contas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
@@ -95,9 +95,9 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
-        $matriculas = DB::table('matriculas')->orderBy('matricula', 'ASC')
-            ->select(array('matriculas.*', 'grupos_users.*'))
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'matriculas.grupo_id')
+        $filiais = DB::table('filiais')->orderBy('filial', 'ASC')
+            ->select(array('filiais.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'filiais.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
@@ -125,7 +125,7 @@ class InventarioController extends Controller
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
         return view('inventario.create',
-               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','matriculas','funcoes','grupos')); 
+               compact('contas','planos','gestores','tipos_linha','status','setores','subsetores','filiais','funcoes','grupos')); 
         
     }
 
@@ -169,11 +169,10 @@ class InventarioController extends Controller
         $user_id = Auth::id();
 
         $contas = DB::table('contas')->orderBy('conta', 'ASC')
-            ->select(array('contas.id AS contaID','contas.*', 'empresas.*', 'grupos.*','grupos_users.*','operadoras.*'))
-            ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->select(array('contas.id AS contaID','contas.*', 'grupos.*','grupos_users.*','operadoras.*'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
             ->join('grupos', 'grupos.id', '=', 'contas.grupo_id')
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'contas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
@@ -191,10 +190,10 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
-        $matriculas = DB::table('matriculas')->orderBy('matricula', 'ASC')
-            ->select(array('matriculas.id AS matriculaID','matriculas.*', 'grupos.*','grupos_users.*'))
-            ->join('grupos', 'grupos.id', '=', 'matriculas.grupo_id')
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'matriculas.grupo_id')
+        $filiais = DB::table('filiais')->orderBy('filial', 'ASC')
+            ->select(array('filiais.id AS filialID','filiais.*', 'grupos.*','grupos_users.*'))
+            ->join('grupos', 'grupos.id', '=', 'filiais.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'filiais.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
@@ -227,7 +226,7 @@ class InventarioController extends Controller
         $inventario = $this->inventario->find($id);
         return view('inventario.edit',
                compact('contas', 'planos', 'gestores', 'tipos_linha', 
-                       'status', 'setores', 'subsetores','inventario','matriculas','funcoes','grupos'));
+                       'status', 'setores', 'subsetores','inventario','filiais','funcoes','grupos'));
     }
 
     /**

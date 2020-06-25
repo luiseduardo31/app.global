@@ -101,11 +101,11 @@
                      </div>
 
                      <div class="col-3">
-                        <label for="matricula">Filial</label>
-                           <select class="form-control" name="matricula_id">
-                           @foreach ($matriculas as $matricula)
-                              <option value="{{$matricula->matriculaID}}" {{ ( $matricula->matriculaID == $inventario->matricula_id) ? 'selected' : '' }}>
-                                 {{$matricula->matricula}}
+                        <label for="filial">Filial</label>
+                           <select class="form-control" name="filial_id">
+                           @foreach ($filiais as $filial)
+                              <option value="{{$filial->filialID}}" {{ ( $filial->filialID == $inventario->matricula_id) ? 'selected' : '' }}>
+                                 {{$filial->filial}}
                               </option>
                            @endforeach
                         </select>

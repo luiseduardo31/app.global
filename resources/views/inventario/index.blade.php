@@ -77,7 +77,7 @@
                                        
                                         <td>{{$linha->plano}}</td>
                                         <td>{{$linha->tipo}}</td>
-                                        <td>{{$linha->matricula}}</td>
+                                        <td>{{$linha->filial}}</td>
                                         <td>{{$linha->gestor}}</td>
                                         <td>{{$linha->operadora}} - {{$linha->conta}}</td>
                                         <td>{{$linha->setor}}</td>

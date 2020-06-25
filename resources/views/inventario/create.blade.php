@@ -58,7 +58,7 @@
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
-                               <option value="{{$conta->id}}">{{$conta->operadora}} - {{$conta->conta}}</option>
+                               <option value="{{$conta->contaID}}">{{$conta->operadora}} - {{$conta->conta}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -96,10 +96,10 @@
                      </div>
 
                      <div class="col-3">
-                        <label for="matricula">Codex</label>
-                        <select class="form-control" name="matricula_id">
-                           @foreach ($matriculas as $matricula)
-                              <option value="{{$matricula->id}}">{{$matricula->matricula}}</option>
+                        <label for="filial">Filial</label>
+                        <select class="form-control" name="filial_id">
+                           @foreach ($filiais as $filial)
+                              <option value="{{$filial->id}}">{{$filial->filial}}</option>
                            @endforeach
                         </select>
                      </div>
