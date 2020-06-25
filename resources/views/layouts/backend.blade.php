@@ -289,17 +289,17 @@
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Matrículas</span>
+                                        <span class="nav-main-link-name">Filiais</span>
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('matriculas/create') ? ' active' : '' }}" href="/matriculas/create">
-                                                <span class="nav-main-link-name">Cadastrar Matrícula</span>
+                                            <a class="nav-main-link{{ request()->is('filiais/create') ? ' active' : '' }}" href="/filiais/create">
+                                                <span class="nav-main-link-name">Cadastrar Filial</span>
                                             </a>
                                         </li>
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('matriculas') ? ' active' : '' }}" href="/matriculas/">
-                                                <span class="nav-main-link-name">Matrícula Cadastrados</span>
+                                            <a class="nav-main-link{{ request()->is('filiais') ? ' active' : '' }}" href="/filiais/">
+                                                <span class="nav-main-link-name">Filiais Cadastradas</span>
                                             </a>
                                         </li>
                                     </ul>

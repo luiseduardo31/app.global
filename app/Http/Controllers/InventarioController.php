@@ -169,8 +169,9 @@ class InventarioController extends Controller
         $user_id = Auth::id();
 
         $contas = DB::table('contas')->orderBy('conta', 'ASC')
-            ->select(array('contas.id AS contaID','contas.*', 'empresas.*', 'grupos.*','grupos_users.*'))
+            ->select(array('contas.id AS contaID','contas.*', 'empresas.*', 'grupos.*','grupos_users.*','operadoras.*'))
             ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
             ->join('grupos', 'grupos.id', '=', 'contas.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)

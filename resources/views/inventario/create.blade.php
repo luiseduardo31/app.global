@@ -53,12 +53,12 @@
                             @endforeach
                             </select>
                      </div>
-                     
+
                      <div class="col-2">
                         <label for="Conta">Conta</label>
                         <select class="form-control" name="conta_id">
                            @foreach ($contas as $conta)
-                               <option value="{{$conta->id}}">{{$conta->conta}}</option>
+                               <option value="{{$conta->id}}">{{$conta->operadora}} - {{$conta->conta}}</option>
                            @endforeach
                         </select>
                      </div>

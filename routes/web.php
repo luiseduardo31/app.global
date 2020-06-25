@@ -19,6 +19,7 @@ Route::resource('setores', 'SetoresController');
 Route::resource('subsetores', 'SubsetoresController');
 Route::resource('planos', 'PlanosController');
 Route::resource('contas', 'ContasController');
+Route::resource('filiais', 'FiliaisController');
 
 // admin
 Route::resource('contratos-fixo', 'ContratosFixoController');
