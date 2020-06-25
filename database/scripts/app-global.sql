@@ -166,24 +166,14 @@ CREATE TABLE IF NOT EXISTS `filiais` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `FK_matriculas_grupos` (`grupo_id`) USING BTREE,
-  CONSTRAINT `filiais_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+  KEY `FK_matriculas_grupos` (`grupo_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.filiais: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.filiais: ~0 rows (aproximadamente)
 DELETE FROM `filiais`;
 /*!40000 ALTER TABLE `filiais` DISABLE KEYS */;
 INSERT INTO `filiais` (`id`, `filial`, `grupo_id`, `observacao`, `updated_at`) VALUES
-	(1, 'BA 27486182008860', 1, NULL, NULL),
-	(2, 'SE 27486182000109', 1, NULL, NULL),
-	(3, 'ES 27486182000109', 1, NULL, NULL),
-	(4, 'BA 27486182000109', 1, NULL, NULL),
-	(5, 'RJ 27486182000109', 1, NULL, NULL),
-	(6, 'SP 27486182008860', 5, NULL, NULL),
-	(7, 'RJ 27486182023664', 1, NULL, '2020-03-30 19:34:16'),
-	(8, 'SP 27486182000109', 1, NULL, NULL),
-	(9, 'ES 27486182008860', 1, NULL, NULL),
-	(10, 'MG 27486182000109', 1, NULL, NULL);
+	(17, 'Laranjeiras', 5, 'Nova Filial', NULL);
 /*!40000 ALTER TABLE `filiais` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.funcoes
@@ -195,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `funcoes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_funcoes_grupos` (`grupo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.funcoes: ~104 rows (aproximadamente)
 DELETE FROM `funcoes`;
@@ -304,7 +294,8 @@ INSERT INTO `funcoes` (`id`, `funcao`, `grupo_id`, `observacao`, `updated_at`) V
 	(101, 'PROJETO', 1, NULL, NULL),
 	(102, 'NOVOS ONIBUS 2019', 1, NULL, NULL),
 	(110, '001', 1, '11', NULL),
-	(111, '0_TESTE', 5, 'AAAA', '2020-06-24 13:41:13');
+	(111, '0_TESTE', 5, 'AAAA', '2020-06-24 13:41:13'),
+	(112, '1111111', 5, 'aaaaa', NULL);
 /*!40000 ALTER TABLE `funcoes` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.gestores
@@ -404,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `chip` (`chip`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2489 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~2.485 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~2.484 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip`, `observacao`, `funcao_id`, `matricula_id`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `grupo_id`, `updated_at`) VALUES
@@ -3562,7 +3553,7 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2488 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.ultimos_usuarios: ~2.483 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.ultimos_usuarios: ~2.484 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES
@@ -6072,7 +6063,7 @@ DELETE FROM `users`;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(1, 'Administrador', 'admin@admin.com', '2020-06-24 16:12:20', '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'AM0qAsvypmIrk0LGIVkfh13uDZutjCjWHzf68RO5Heqfql145vOwzx1iOyor', '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
 	(2, 'Vitor Pignaton', 'vitor@globalsolutions.net.br', '2020-04-07 16:23:56', '$2y$10$OwCasaqyVPyUZpscWibpXuNUVOAxJwpIsnFlHE7c1HFfKQDron2Dm', 'vTovdf2dQUm2oF82OYca8Doc90wN5fpgJ1EJZkqhGKL1aU6Vi3qBY6ExJFgx', '2020-03-02 13:52:45', '2020-03-02 13:52:45'),
-	(4, 'Extrabom', 'extrabom@extrabom.com', '2020-06-24 10:42:30', '$2y$10$wS6CN94ruvwwQOSSowd5Se5V3QAFLGICVJfqfjnex9Nv98Ji7Uebu', NULL, '2020-06-24 12:55:34', '2020-06-24 12:55:34'),
+	(4, 'Extrabom', 'extrabom@extrabom.com', '2020-06-25 08:55:45', '$2y$10$wS6CN94ruvwwQOSSowd5Se5V3QAFLGICVJfqfjnex9Nv98Ji7Uebu', '6USgXBsIlHH7H1x8TclO473AVbZ9yePCKZ0LFBRg5yYUdHbHLA2l8FSlFtZX', '2020-06-24 12:55:34', '2020-06-24 12:55:34'),
 	(5, 'Águia Branca', 'aguia@aguia.com', '2020-06-24 11:14:01', '$2y$10$JZuemToeylA7ey7sdNtM3.C8fcViESbVyhLDi00H3mm8p30RV2TPG', NULL, '2020-06-24 14:14:01', '2020-06-24 14:14:01');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 

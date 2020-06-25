@@ -49,7 +49,7 @@ class FuncoesController extends Controller
         $user_id = Auth::id();
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
-        ->select(array('grupos.*', 'grupos_users.*'))
+        ->select(array('grupos.id AS GrupoID','grupos.*', 'grupos_users.*'))
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
         ->where('users_id', $user_id)
         ->get();

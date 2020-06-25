@@ -6,8 +6,8 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                  <a href="{{route('matriculas.index')}}">
-                     Matrículas 
+                  <a href="{{route('filiais.index')}}">
+                     Filiais 
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Inventário Móvel]
@@ -17,10 +17,10 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Inventário</li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">Editando Matrícula</a>
+                           <a class="link-fx" href="">Editando Filial</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                           <a class="link-fx" href="">{{$matriculas->matricula}} </a>
+                           <a class="link-fx" href="">{{$filiais->filial}} </a>
                         </li>
                     </ol>
                 </nav>
@@ -34,20 +34,30 @@
         <!-- Your Block -->
         <div class="block">
             <div class="block-content">
-               <form action="{{route('matriculas.update',$matriculas->id)}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('filiais.update',$filiais->id)}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                     <div class="form-group form-row"> 
                         <div class="col-3">
-                            <label for="matricula">Matrícula</label>
-                            <input type="text" name="matricula" class="form-control" value="{{$matriculas->matricula}}" maxlength="25">
+                            <label for="filial">Filial</label>
+                            <input type="text" name="filial" class="form-control" value="{{$filiais->filial}}" maxlength="25">
+                        </div>
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                                @foreach ($grupos as $grupo)
+                                    <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $filiais->grupo_id) ? 'selected' : '' }}>
+                                        {{$grupo->grupo}}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group form-row"> 
                         <div class="col-12">
                             <label for="Observacao">Observação</label> <br>
-                            <input type="text"  name="observacao" class="form-control" value="{{$matriculas->observacao}}" maxlength="145">
+                            <input type="text"  name="observacao" class="form-control" value="{{$filiais->observacao}}" maxlength="145">
                         </div>
                     </div>
 
@@ -57,7 +67,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('matriculas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da Matrícula {{$matriculas->matricula}}?');">
+                            <a href="{{route('filiais.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da Matrícula {{$filiais->filial}}?');">
                                 Cancelar Edição
                             </a>
                         </div>

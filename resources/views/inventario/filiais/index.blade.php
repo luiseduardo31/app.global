@@ -56,11 +56,11 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('filiais.edit', $filial->id)}}">
+                                                    <a href="{{route('filiais.edit', $filial->filialID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('filiais.destroy',$filial->id)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('filiais.destroy',$filial->filialID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

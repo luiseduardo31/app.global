@@ -26,7 +26,7 @@ class FiliaisController extends Controller
         $user_id = Auth::id();
 
         $filiais = DB::table('filiais')->orderBy('filial', 'asc')
-            ->select(array('filiais.id as filialID', 'filiais.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('filiais.id AS filialID','filiais.*', 'grupos_users.*', 'grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'filiais.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'filiais.grupo_id')
             ->where('users_id', $user_id)
@@ -43,7 +43,16 @@ class FiliaisController extends Controller
      */
     public function create()
     {
-        return view('inventario.filiais.create');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+        ->select(array('grupos.id AS GrupoID','grupos.*', 'grupos_users.*'))
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+        ->where('users_id', $user_id)
+        ->get();
+
+        return view('inventario.filiais.create', compact('grupos'));
     }
 
     /**
@@ -58,9 +67,9 @@ class FiliaisController extends Controller
         $insert = $this->filiais->insert($dataForm);
 
         if ($insert)
-            return redirect()->route('filiais.index')->with('success', "A Matrícula {$request->matricula} foi cadastrada com sucesso!");
+            return redirect()->route('filiais.index')->with('success', "A filial {$request->filial} foi cadastrada com sucesso!");
         else
-            return redirect()->route('filiais.create')->with('error', "Houve um erro ao cadastrar a Matrícula {$request->matricula}.");
+            return redirect()->route('filiais.create')->with('error', "Houve um erro ao cadastrar a filial {$request->filial}.");
     }
 
     /**
@@ -82,9 +91,19 @@ class FiliaisController extends Controller
      */
     public function edit($id)
     {
-        $filiais = Filiais::all(['id', 'matricula', 'observacao'])->sortBy('matricula');
+        $user = Auth::user();
+        $user_id = Auth::id();
+        
+        $filiais = Filiais::all(['id', 'filial', 'observacao'])->sortBy('matricula');
         $filiais = $this->filiais->find($id);
-        return view('inventario.filiais.edit', compact('filiais'));
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+        ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
+        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+        ->where('users_id', $user_id)
+        ->get();
+
+        return view('inventario.filiais.edit', compact('filiais','grupos'));
     }
 
     /**
@@ -101,9 +120,9 @@ class FiliaisController extends Controller
         $update = $filiais->update($dataForm);
 
         if ($update)
-            return redirect()->route('filiais.index')->with('success', "A Matrícula {$filiais->matricula} foi atualizada com sucesso!");
+            return redirect()->route('filiais.index')->with('success', "A filial {$filiais->filial} foi atualizada com sucesso!");
         else
-            return redirect()->route('filiais.edit')->with('error', "Houve um erro ao editar a Matrícula {$filiais->matricula}.");
+            return redirect()->route('filiais.edit')->with('error', "Houve um erro ao editar a filial {$filiais->filial}.");
     }
 
     /**
@@ -118,8 +137,8 @@ class FiliaisController extends Controller
         $delete = $filiais->delete();
 
         if ($delete) {
-            return redirect()->route('filiais.index')->with('success', "A Matrículas {$filiais->matricula} foi excluida com sucesso!");
+            return redirect()->route('filiais.index')->with('success', "A filial {$filiais->filial} foi excluida com sucesso!");
         } else
-            return redirect()->route('filiais.index')->with('error', "Houve um erro ao excluir a Matrícula {$filiais->matricula}.");
+            return redirect()->route('filiais.index')->with('error', "Houve um erro ao excluir a filial {$filiais->filial}.");
     }
 }
