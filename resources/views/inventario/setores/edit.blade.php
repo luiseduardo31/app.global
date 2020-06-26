@@ -42,6 +42,17 @@
                             <label for="setor">Setor</label>
                             <input type="text" name="setor" class="form-control" value="{{$setores->setor}}" maxlength="25">
                         </div>
+
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                                @foreach ($grupos as $grupo)
+                                    <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $setores->grupo_id) ? 'selected' : '' }}>
+                                        {{$grupo->grupo}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group form-row"> 

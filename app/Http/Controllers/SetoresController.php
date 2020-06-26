@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setores;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SetoresController extends Controller
 {
@@ -21,8 +22,16 @@ class SetoresController extends Controller
      */
     public function index()
     {
-        $setores = DB::table('setores')->orderBy('setor','asc')
-        ->get();
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $setores = DB::table('setores')->orderBy('setor', 'asc')
+            ->select(array('setores.id AS SetorID', 'setores.*', 'grupos_users.*', 'grupos.*'))
+            ->join('grupos', 'grupos.id', '=', 'setores.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'setores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
         return view('inventario.setores.index',compact('setores'));
     }
 
@@ -33,7 +42,16 @@ class SetoresController extends Controller
      */
     public function create()
     {
-        return view('inventario.setores.create');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id AS GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('inventario.setores.create',compact('grupos'));
     }
 
     /**
@@ -72,9 +90,18 @@ class SetoresController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $setores = Setores::all(['id', 'setor', 'observacao'])->sortBy('setor');
         $setores = $this->setores->find($id);
-        return view('inventario.setores.edit', compact('setores'));
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+        return view('inventario.setores.edit', compact('setores','grupos'));
     }
 
     /**

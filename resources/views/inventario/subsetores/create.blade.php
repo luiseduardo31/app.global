@@ -39,10 +39,20 @@
                <form action="{{route('subsetores.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
-                        <div class="col-5">
+                        <div class="col-3">
                             <label for="Subsetor">Subsetor</label>
                             <input type="text" name="subsetor" class="form-control" placeholder="Subsetor" maxlength="50">
                         </div>
+
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->GrupoID}}">{{$grupo->grupo}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        
                     </div>
                     <div class="form-group form-row">
                         <div class="col-12">
