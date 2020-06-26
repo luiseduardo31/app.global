@@ -42,6 +42,17 @@
                             <label for="Gestor">Gestor</label>
                             <input type="text" name="gestor" class="form-control" value="{{$gestores->gestor}}" maxlength="25">
                         </div>
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                                @foreach ($grupos as $grupo)
+                                    <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $gestores->grupo_id) ? 'selected' : '' }}>
+                                        {{$grupo->grupo}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </div>
 
                     <div class="form-group form-row"> 
@@ -57,7 +68,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('matriculas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do Gestor {{$gestores->gestor}}?');">
+                            <a href="{{route('gestores.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do gestor {{$gestores->gestor}}?');">
                                 Cancelar Edição
                             </a>
                         </div>

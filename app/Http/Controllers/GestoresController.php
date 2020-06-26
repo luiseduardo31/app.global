@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Gestores;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GestoresController extends Controller
 {
@@ -21,8 +22,16 @@ class GestoresController extends Controller
      */
     public function index()
     {
-        $gestores = DB::table('gestores')->orderBy('gestor','asc')
-        ->get();
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $gestores = DB::table('gestores')->orderBy('gestor', 'asc')
+            ->select(array('gestores.id AS GestorID', 'gestores.*', 'grupos_users.*', 'grupos.*'))
+            ->join('grupos', 'grupos.id', '=', 'gestores.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'gestores.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+     
         return view('inventario.gestores.index', compact('gestores'));
     }
 
@@ -33,7 +42,16 @@ class GestoresController extends Controller
      */
     public function create()
     {
-        return view('inventario.gestores.create');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id AS GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('inventario.gestores.create',compact('grupos'));
     }
 
     /**
@@ -72,9 +90,19 @@ class GestoresController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $gestores = Gestores::all(['id', 'gestor', 'observacao'])->sortBy('gestor');
         $gestores = $this->gestores->find($id);
-        return view('inventario.gestores.edit', compact('gestores'));
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('inventario.gestores.edit', compact('gestores','grupos'));
     }
 
     /**
@@ -91,9 +119,9 @@ class GestoresController extends Controller
         $update   = $gestores->update($dataForm);
 
         if ($update)
-            return redirect()->route('gestores.index')->with('success', "O Gestor {$gestores->gestor} foi atualizado com sucesso!");
+            return redirect()->route('gestores.index')->with('success', "O gestor {$gestores->gestor} foi atualizado com sucesso!");
         else
-            return redirect()->route('gestores.edit')->with('error', "Houve um erro ao editar o Gestor {$gestores->gestor}.");
+            return redirect()->route('gestores.edit')->with('error', "Houve um erro ao editar o gestor {$gestores->gestor}.");
     }
 
     /**
@@ -108,7 +136,7 @@ class GestoresController extends Controller
         $delete = $gestores->delete();
 
         if ($delete) {
-            return redirect()->route('gestores.index')->with('success', "O Gestor {$gestores->gestor} foi excluido com sucesso!");
+            return redirect()->route('gestores.index')->with('success', "O gestor {$gestores->gestor} foi excluido com sucesso!");
         } else
             return redirect()->route('gestores.index')->with('error', "Houve um erro ao excluir o gestor {$gestores->gestor}.");
     }

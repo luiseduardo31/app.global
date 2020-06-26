@@ -42,6 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:30%">Gestores</th>
+                                        <th style="width:30%">Grupo</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -50,15 +51,16 @@
                                     @forelse ($gestores as $gestor)
                                     <tr>
                                         <td>{{$gestor->gestor}}</td>
+                                        <td class="text-center">{{$gestor->grupo}}</td>
                                         <td>{{$gestor->observacao}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('gestores.edit', $gestor->id)}}">
+                                                    <a href="{{route('gestores.edit', $gestor->GestorID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('gestores.destroy',$gestor->id)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('gestores.destroy',$gestor->GestorID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

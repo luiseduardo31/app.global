@@ -43,6 +43,16 @@
                             <label for="Funao">Gestor</label>
                             <input type="text" name="gestor" class="form-control" placeholder="Gestor" maxlength="25">
                         </div>
+                        
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->GrupoID}}">{{$grupo->grupo}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+
                     </div>
                     <div class="form-group form-row">
                         <div class="col-12">

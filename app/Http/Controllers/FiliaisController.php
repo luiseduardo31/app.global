@@ -98,10 +98,10 @@ class FiliaisController extends Controller
         $filiais = $this->filiais->find($id);
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
-        ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
-        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
-        ->where('users_id', $user_id)
-        ->get();
+            ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
 
         return view('inventario.filiais.edit', compact('filiais','grupos'));
     }
