@@ -49,7 +49,7 @@
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control" name="grupo_id">
                             @foreach ($grupos as $grupo)
-                                <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
+                                <option value="{{$grupo->grupoID}}">{{$grupo->grupo}}</option>
                             @endforeach
                             </select>
                      </div>
@@ -99,7 +99,7 @@
                         <label for="filial">Filial</label>
                         <select class="form-control" name="filial_id">
                            @foreach ($filiais as $filial)
-                              <option value="{{$filial->id}}">{{$filial->filial}}</option>
+                              <option value="{{$filial->filialID}}">{{$filial->filial}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -108,7 +108,7 @@
                         <label for="Funcao">Função</label>
                         <select class="form-control" name="funcao_id">
                            @foreach ($funcoes as $funcao)
-                              <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
+                              <option value="{{$funcao->funcaoID}}">{{$funcao->funcao}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -121,7 +121,7 @@
                         <label for="Gestor">Gestor</label>
                         <select class="form-control" name="gestor_id">
                            @foreach ($gestores as $gestor)
-                               <option value="{{$gestor->id}}">{{$gestor->gestor}}</option>
+                               <option value="{{$gestor->gestorID}}">{{$gestor->gestor}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -130,7 +130,7 @@
                         <label for="Setor">Setor</label>
                         <select class="form-control" name="setor_id">
                            @foreach ($setores as $setor)
-                               <option value="{{$setor->id}}">{{$setor->setor}}</option>
+                               <option value="{{$setor->setorID}}">{{$setor->setor}}</option>
                            @endforeach
                         </select>
                      </div>
@@ -139,7 +139,7 @@
                         <label for="SubSetor">SubSetor</label>
                         <select class="form-control" name="subsetor_id">
                            @foreach ($subsetores as $subsetor)
-                              <option value="{{$subsetor->id}}">{{$subsetor->subsetor}}</option>
+                              <option value="{{$subsetor->subsetorID}}">{{$subsetor->subsetor}}</option>
                            @endforeach
                         </select>
                      </div>

@@ -55,7 +55,6 @@ class InventarioController extends Controller
         ->join('filiais', 'filiais.id', '=', 'inventarios.filial_id')
         ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
         ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
-        ->join('empresas', 'empresas.id', '=', 'contas.empresa_id')
         ->join('grupos', 'grupos.id', '=', 'inventarios.grupo_id')
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'inventarios.grupo_id')
         ->where('users_id', $user_id)
@@ -76,7 +75,7 @@ class InventarioController extends Controller
         $user_id = Auth::id();
 
         $contas = DB::table('contas')->orderBy('conta', 'ASC')
-            ->select(array('contas.id AS contaID', 'contas.*', 'grupos.*', 'grupos_users.*', 'operadoras.*'))
+            ->select(array('contas.id AS contaID','contas.*', 'grupos.*', 'grupos_users.*', 'operadoras.*'))
             ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
             ->join('grupos', 'grupos.id', '=', 'contas.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'contas.grupo_id')
@@ -84,37 +83,37 @@ class InventarioController extends Controller
             ->get();
 
         $funcoes = DB::table('funcoes')
-            ->select(array('grupos_users.id as GrupoUserID', 'funcoes.*', 'grupos_users.*'))
+            ->select(array('funcoes.id as funcaoID', 'funcoes.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
         $gestores = DB::table('gestores')->orderBy('gestor', 'ASC')
-            ->select(array('gestores.*', 'grupos_users.*'))
+            ->select(array('gestores.id AS gestorID','gestores.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'gestores.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
         $filiais = DB::table('filiais')->orderBy('filial', 'ASC')
-            ->select(array('filiais.*', 'grupos_users.*'))
+            ->select(array('filiais.id AS filialID','filiais.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'filiais.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
         $setores = DB::table('setores')->orderBy('setor', 'ASC')
-            ->select(array('setores.*', 'grupos_users.*'))
+            ->select(array('setores.id AS setorID','setores.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'setores.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
         $subsetores = DB::table('subsetores')->orderBy('subsetor', 'ASC')
-            ->select(array('subsetores.*', 'grupos_users.*'))
+            ->select(array('subsetores.id AS subsetorID','subsetores.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'subsetores.grupo_id')
             ->where('users_id', $user_id)
             ->get();
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
-            ->select(array('grupos.*', 'grupos_users.*'))
+            ->select(array('grupos.id AS grupoID','grupos.*', 'grupos_users.*'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
             ->where('users_id', $user_id)
             ->get();
