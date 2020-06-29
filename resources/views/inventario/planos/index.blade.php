@@ -42,6 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:40%">Planos</th>
+                                        <th style="width:40%">Grupo</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -50,15 +51,16 @@
                                     @forelse ($planos as $plano)
                                     <tr>
                                         <td>{{$plano->plano}}</td>
+                                        <td>{{$plano->grupo}}</td>
                                         <td>{{$plano->observacao}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('planos.edit', $plano->id)}}">
+                                                    <a href="{{route('planos.edit', $plano->planoID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('planos.destroy',$plano->id)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('planos.destroy',$plano->planoID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

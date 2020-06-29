@@ -42,6 +42,16 @@
                             <label for="plano">Plano</label>
                             <input type="text" name="plano" class="form-control" value="{{$planos->plano}}" maxlength="50">
                         </div>
+                        <div class="col-9">
+                            <label for="grupo">Grupo Empresarial</label>
+                            <select class="form-control" name="grupo_id">
+                            @foreach ($grupos as $grupo)
+                                <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $planos->grupo_id) ? 'selected' : '' }}>
+                                    {{$grupo->grupo}}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group form-row"> 
