@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Planos;
+use Illuminate\Support\Facades\Auth;
 
 class PlanosController extends Controller
 {
@@ -20,10 +21,21 @@ class PlanosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Planos $planos)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $planos = DB::table('planos')->orderBy('plano', 'asc')
-        ->get();
+            ->select(array('planos.id as planoID', 'planos.*', 'grupos_users.*', 'grupos.*'))
+            ->join('grupos', 'grupos.id', '=', 'planos.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
         return view('inventario.planos.index', compact('planos'));
     }
 
@@ -34,7 +46,16 @@ class PlanosController extends Controller
      */
     public function create()
     {
-        return view('inventario.planos.create');
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id AS GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('inventario.planos.create',compact('grupos'));
     }
 
     /**
@@ -73,9 +94,19 @@ class PlanosController extends Controller
      */
     public function edit($id)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+        
         $planos = Planos::all(['id', 'plano', 'observacao'])->sortBy('plano');
         $planos = $this->planos->find($id);
-        return view('inventario.planos.edit', compact('planos'));
+
+        $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
+            ->select(array('grupos.id as GrupoID', 'grupos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('inventario.planos.edit', compact('planos','grupos'));
     }
 
     /**
