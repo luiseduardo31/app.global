@@ -22,8 +22,10 @@ Route::resource('contas', 'ContasController');
 Route::resource('filiais', 'FiliaisController');
 
 // admin
+Route::resource('acessos', 'AcessosController');
 Route::resource('contratos-fixo', 'ContratosFixoController');
 Route::resource('contratos-movel', 'ContratosMovelController');
+
 
 
 Route::get('/', function () {

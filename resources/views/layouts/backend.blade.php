@@ -26,6 +26,8 @@
         <link href="{{URL::asset('asset/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
 
+        <!-- Latest compiled and minified CSS -->
+        
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
@@ -817,6 +819,15 @@
         <script src="{{URL::asset('/js/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
         <script src="{{URL::asset('/js/plugins/jquery-mask-plugin/jquery.mask.js')}}"></script>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+
+        
+
+        
+
         
 
         <!-- Ativar datatable original 
@@ -824,6 +835,10 @@
         -->
         <script>
             $(document).ready( function() {
+                $('.selectpicker').selectpicker({
+                    showSubtext:true
+                });
+                
                 $('#contact-detail').DataTable( {
                     dom: 'Bfrtip',
                     buttons: [ {
@@ -833,7 +848,10 @@
                         sheetName: 'Inventario Movel'
                     } ],
                 } );
+
             } );
+
+            
         </script>
   
 
