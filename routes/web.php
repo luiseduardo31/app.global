@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::resource('inventario','InventarioController');
 Route::resource('funcoes','FuncoesController');
 Route::resource('gestores','GestoresController');

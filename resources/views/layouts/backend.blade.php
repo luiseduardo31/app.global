@@ -229,26 +229,15 @@
                             </a>
                         -->
                         </li>
-                        <li class="nav-main-heading">App's</li>
+                        <li class="nav-main-heading">MENU</li>
                         
-                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                <i class="nav-main-link-icon far fa-address-book"></i>
-                                <span class="nav-main-link-name">Inventário Móvel</span>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-lock"></i>
+                                <span class="nav-main-link-name">Painel de Controle</span>
                             </a>
                             <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="/inventario/create">
-                                        <span class="nav-main-link-name">Cadastrar Linha</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('inventario') ? ' active' : '' }}" href="/inventario/">
-                                        <span class="nav-main-link-name">Linhas Cadastradas</span>
-                                    </a>
-                                </li>
-                                <!-- Submenu Funções -->
-                                <li class="nav-main-item">
+                            <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                         <i class="nav-main-link-icon si si-note"></i>
                                         <span class="nav-main-link-name">Funções</span>
@@ -387,7 +376,63 @@
                                     </ul>
                                 </li>
                                 <!-- Fim Submenu Contas -->
-       
+                                <!-- Submenu Inventario ADM -->
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <span class="nav-main-link-name">Inventario Móvel</span>
+                                    </a>
+                                    <ul class="nav-main-submenu">
+                                        <li class="nav-main-item">
+                                            <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="/inventario/create">
+                                                <span class="nav-main-link-name">Cadastrar Linha</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Fim Submenu Contas -->
+                            </ul>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="be_pages_auth_all.html">
+                                        <span class="nav-main-link-name">All</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="op_auth_signin.html">
+                                        <span class="nav-main-link-name">Sign In</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="op_auth_signup.html">
+                                        <span class="nav-main-link-name">Sign Up</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="op_auth_lock.html">
+                                        <span class="nav-main-link-name">Lock Screen</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="op_auth_reminder.html">
+                                        <span class="nav-main-link-name">Pass Reminder</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                                <i class="nav-main-link-icon far fa-address-book"></i>
+                                <span class="nav-main-link-name">Inventário Móvel</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('inventario') ? ' active' : '' }}" href="/inventario/">
+                                        <span class="nav-main-link-name">Linhas Cadastradas</span>
+                                    </a>
+                                </li>
+                                <!-- Submenu Funções -->
                             </ul>
                         </li>     
                          
