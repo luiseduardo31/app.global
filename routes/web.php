@@ -24,6 +24,7 @@ Route::resource('filiais', 'FiliaisController');
 
 // admin
 Route::resource('acessos', 'AcessosController');
+Route::resource('usuarios', 'UsuariosController');
 Route::resource('contratos-fixo', 'ContratosFixoController');
 Route::resource('contratos-movel', 'ContratosMovelController');
 
