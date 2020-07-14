@@ -42,6 +42,9 @@
                                 <thead>
                                     <tr>
                                         <th style="width:30%">Conta</th>
+                                         <th style="width:30%">Grupo</th>
+                                         <th style="width:30%">Razão Social</th>
+                                         <th style="width:30%">CNPJ</th>
                                          <th style="width:30%">Operadora</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
@@ -51,16 +54,19 @@
                                     @forelse ($contas as $conta)
                                     <tr>
                                         <td>{{$conta->conta}}</td>
+                                        <td class="text-center">{{$conta->grupo}}</td>
+                                        <td class="text-center">{{$conta->razao_social}}</td>
+                                        <td class="text-center">{{$conta->cnpj}}</td>
                                         <td>{{$conta->operadora}}</td>
                                         <td>{{$conta->obsConta}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contas.edit', $conta->idConta)}}">
+                                                    <a href="{{route('contas.edit', $conta->ContaID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contas.destroy',$conta->idConta)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contas.destroy',$conta->ContaID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

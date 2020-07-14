@@ -85,9 +85,16 @@ class UsuariosController extends Controller
      * @param  \App\Models\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuarios $usuarios)
+    public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $usuarios  = $this->usuarios->find($id);
+        $update   = $usuarios->update($dataForm);
+
+        if ($update)
+            return redirect()->route('usuarios.index')->with('success', "O usuário {$usuarios->email} foi atualizado com sucesso!");
+        else
+            return redirect()->route('usuarios.edit')->with('error', "Houve um erro ao editar o usuário {$usuarios->email}.");
     }
 
     /**

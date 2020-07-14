@@ -43,11 +43,33 @@
                             <input type="text" name="conta" class="form-control" value="{{$contas->conta}}" maxlength="50">
                         </div>
 
+                        <div class="col-2">
+                            <label for="grupo">Grupo</label>
+                            <select class="form-control selectpicker" name="grupo_id">
+                                @foreach ($grupos as $grupo)
+                                    <option value="{{$grupo->id}}" {{ ( $grupo->id == $contas->grupos_id) ? 'selected' : '' }}>
+                                        {{$grupo->grupo}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="grupo">Razão Social | CNPJ</label>
+                            <select class="form-control selectpicker" name="empresa_id">
+                                @foreach ($empresas as $empresa)
+                                    <option value="{{$empresa->EmpresasID}}" {{ ( $empresa->EmpresasID == $contas->empresa_id) ? 'selected' : '' }}>
+                                        {{$empresa->razao_social}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="col-3">
                             <label for="operadoras">Operadoras</label>
                             <select class="form-control" name="operadora_id">
                             @foreach ($operadoras as $operadora)
-                                <option value="{{$operadora->id}}" {{ ( $operadora->id == $contas->conta_id) ? 'selected' : '' }}>
+                                <option value="{{$operadora->id}}" {{ ( $operadora->id == $contas->operadora_id) ? 'selected' : '' }}>
                                     {{$operadora->operadora}}
                                 </option>
                             @endforeach

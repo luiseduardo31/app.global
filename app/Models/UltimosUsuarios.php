@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class UltimosUsuarios extends Model
 {
     protected $table = 'ultimos_usuarios';
+    protected $guarded  = ['_token'];
 }

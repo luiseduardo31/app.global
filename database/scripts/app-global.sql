@@ -28,14 +28,16 @@ CREATE TABLE IF NOT EXISTS `contas` (
   PRIMARY KEY (`id`),
   KEY `fk_contas_operadoras_idx` (`operadora_id`),
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.contas: ~2 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`, `grupo_id`, `updated_at`) VALUES
 	(2, 'Conta Aguia 01', 1, NULL, 1, 1, NULL),
-	(4, 'Conta  Extrabom', 4, NULL, 4, 5, NULL);
+	(4, 'Conta  Extrabom', 4, NULL, 4, 5, NULL),
+	(5, '0000001A', 17, 'asas', 3, 17, '2020-07-14 19:53:59'),
+	(6, '34343434', 7, 'rrrr', 3, 5, NULL);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.contratos_fixos
@@ -114,7 +116,6 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   `cnpj` varchar(14) NOT NULL,
   `grupo_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `cnpj` (`cnpj`),
   KEY `FK_empresas_grupos` (`grupo_id`),
   CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
@@ -125,7 +126,7 @@ DELETE FROM `empresas`;
 INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`) VALUES
 	(1, 'Aguia Branca SA', '1234567890', 1),
 	(4, 'Extrabom', '0120910291', 5),
-	(7, 'Viação Teste AB', '0789925154', 1);
+	(7, 'Viação Teste AB', '0789925154', 5);
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.failed_jobs
@@ -230,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_grupos_users_users` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.grupos_users: ~4 rows (aproximadamente)
 DELETE FROM `grupos_users`;
@@ -501,20 +502,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tipo_usuario_id` int(2) DEFAULT NULL,
+  `observacao` varchar(145) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrador', 'admin@admin.com', '2020-07-12 16:25:13', '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'hZib8ysrYVdvy6PxI6FlYtOGi0uoIBbHC88DGlR4JpcYTz2bHfU2JT2IC5q2', 1, '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
-	(4, 'Extrabom', 'extrabom@extrabom.com', '2020-07-12 16:25:16', '$2y$10$wS6CN94ruvwwQOSSowd5Se5V3QAFLGICVJfqfjnex9Nv98Ji7Uebu', 'buOjhJCvoxQbcfPxXXRPyaeL2nhzWOmIsQEpa56eiOc8voS9QCmGNZf9wvdf', 1, '2020-06-24 12:55:34', '2020-06-24 12:55:34'),
-	(5, 'Águia Branca', 'aguia@aguia.com', '2020-07-12 16:25:18', '$2y$10$JZuemToeylA7ey7sdNtM3.C8fcViESbVyhLDi00H3mm8p30RV2TPG', NULL, 1, '2020-06-24 14:14:01', '2020-06-24 14:14:01'),
-	(9, 'teste', 'teste@teste.com', '2020-07-12 17:56:42', '$2y$10$S.0WwM.gCYfm/kew1nKwj.rk9VUuv/f7yuE7LMc/EKEM40MVNxRXy', NULL, 2, '2020-07-01 18:26:30', '2020-07-01 18:26:30');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
+	(1, 'Administrador', 'admin@admin.com', '2020-07-12 16:25:13', '$2y$10$GOstnfWut.bEtsq7ICSnM.tASelr81aYn6X4Ep7WTlCsghr6l/r3C', 'hZib8ysrYVdvy6PxI6FlYtOGi0uoIBbHC88DGlR4JpcYTz2bHfU2JT2IC5q2', 1, NULL, '2020-02-14 19:18:31', '2020-02-14 19:18:31'),
+	(4, 'Extrabom', 'extrabom@extrabom.com', '2020-07-13 12:54:41', '$2y$10$wS6CN94ruvwwQOSSowd5Se5V3QAFLGICVJfqfjnex9Nv98Ji7Uebu', 'buOjhJCvoxQbcfPxXXRPyaeL2nhzWOmIsQEpa56eiOc8voS9QCmGNZf9wvdf', 1, 'oooooooooooo', '2020-06-24 12:55:34', '2020-07-13 15:54:41'),
+	(5, 'Águia Branca', 'aguia@aguia.com', '2020-07-12 16:25:18', '$2y$10$JZuemToeylA7ey7sdNtM3.C8fcViESbVyhLDi00H3mm8p30RV2TPG', NULL, 1, NULL, '2020-06-24 14:14:01', '2020-06-24 14:14:01'),
+	(9, 'teste', 'teste@teste.com', '2020-07-13 12:54:28', '$2y$10$S.0WwM.gCYfm/kew1nKwj.rk9VUuv/f7yuE7LMc/EKEM40MVNxRXy', NULL, 2, 'po', '2020-07-01 18:26:30', '2020-07-13 15:54:28');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario

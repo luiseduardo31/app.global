@@ -425,33 +425,7 @@
                                 </li>
                                 <!-- Fim Submenu Contas -->
                             </ul>
-                            <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="be_pages_auth_all.html">
-                                        <span class="nav-main-link-name">All</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_auth_signin.html">
-                                        <span class="nav-main-link-name">Sign In</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_auth_signup.html">
-                                        <span class="nav-main-link-name">Sign Up</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_auth_lock.html">
-                                        <span class="nav-main-link-name">Lock Screen</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="op_auth_reminder.html">
-                                        <span class="nav-main-link-name">Pass Reminder</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            
                         </li>
                         
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
