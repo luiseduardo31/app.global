@@ -47,7 +47,7 @@
                             <label for="grupo">Grupo</label>
                             <select class="form-control selectpicker" name="grupo_id">
                                 @foreach ($grupos as $grupo)
-                                    <option value="{{$grupo->id}}" {{ ( $grupo->id == $contas->grupos_id) ? 'selected' : '' }}>
+                                    <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $contas->grupos_id) ? 'selected' : '' }}>
                                         {{$grupo->grupo}}
                                     </option>
                                 @endforeach
@@ -58,7 +58,7 @@
                             <label for="grupo">Razão Social | CNPJ</label>
                             <select class="form-control selectpicker" name="empresa_id">
                                 @foreach ($empresas as $empresa)
-                                    <option value="{{$empresa->EmpresasID}}" {{ ( $empresa->EmpresasID == $contas->empresa_id) ? 'selected' : '' }}>
+                                    <option value="{{$empresa->EmpresasID}}" {{ ( $empresa->EmpresasID == $contas->empresa_id) ? 'selected' : '' }} data-subtext=" | {{$empresa->cnpj}}">
                                         {{$empresa->razao_social}}
                                     </option>
                                 @endforeach

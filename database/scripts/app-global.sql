@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `contas` (
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~4 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`, `grupo_id`, `updated_at`) VALUES
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `contratos_moveis` (
   CONSTRAINT `contratos_moveis_ibfk_2` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.contratos_moveis: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contratos_moveis: ~4 rows (aproximadamente)
 DELETE FROM `contratos_moveis`;
 /*!40000 ALTER TABLE `contratos_moveis` DISABLE KEYS */;
 INSERT INTO `contratos_moveis` (`id`, `numero_contrato`, `empresa_id`, `operadora_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `assinatura`, `sms_unitario`, `sms_pacote`, `gestor_online`, `planos_contrato`, `observacao`, `updated_at`) VALUES
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `FK_inventarios_matriculas` (`filial_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~5 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip`, `observacao`, `funcao_id`, `filial_id`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `grupo_id`, `updated_at`) VALUES
