@@ -17,7 +17,7 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Usuários</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Cadastrar Novo Usuário</a>
+                            <a class="link-fx" href="">Cadastrar Novo Usuário 1</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,31 +36,67 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('usuarios.store')}}" method="POST" enctype="multipart/form-data">
-                  @csrf
-                    <div class="form-group form-row">
-                        <div class="col-3">
-                            <label for="Usuario">Usuário</label>
-                            <input type="text" name="senha" class="form-control" placeholder="Usuario" maxlength="25">
+               <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome do Usuário') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
-                    </div>
- 
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                    <div class="form-group form-row">
-                        <div class="col-2">
-                            <button type="submit" class="btn btn-primary form-control">Salvar Dados</button>  
-                        </div>  
-                        
-                        <div class="col-2">
-                            <a href="{{route('usuarios.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
-                                Cancelar Cadastro
-                            </a>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                     
-               </form>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirme sua Senha') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Registrar Usuário') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
         <!-- END Your Block -->

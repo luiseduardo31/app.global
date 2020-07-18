@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-2">
                             <label for="grupo">Grupo Empresarial</label>
-                            <select class="form-control" name="grupo_id">
+                            <select class="form-control selectpicker dynamic" name="grupo_id" id="grupos">
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->GrupoID}}">{{$grupo->grupo}}</option>
                             @endforeach
@@ -54,7 +54,7 @@
 
                         <div class="col-4">
                             <label for="user">Razão Social | CNPJ</label>
-                            <select class="form-control selectpicker" data-size="5" name="empresa_id">
+                            <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
                                 <option readonly>Escolha uma opção</option>
                             @foreach ($empresas as $empresa)
                                 <option data-subtext=" | {{$empresa->cnpj}}" value="{{$empresa->EmpresasID}}">{{$empresa->razao_social}}</option>
@@ -97,4 +97,5 @@
         <!-- END Your Block -->
     </div>
     <!-- END Page Content -->
+
 @endsection

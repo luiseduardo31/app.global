@@ -6,6 +6,8 @@ use App\Models\Usuarios;
 use App\Models\TiposUsuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsuariosController extends Controller
 {
@@ -37,7 +39,7 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -48,7 +50,9 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+        $data['password'] = Hash::make($data['password']);
+        $insert = $this->usuarios->insert($data);
     }
 
     /**

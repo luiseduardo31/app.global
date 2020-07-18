@@ -45,7 +45,7 @@
 
                         <div class="col-2">
                             <label for="grupo">Grupo</label>
-                            <select class="form-control selectpicker" name="grupo_id">
+                            <select class="form-control selectpicker dynamic" name="grupo_id" id="grupos" data-dependent="empresa_id">
                                 @foreach ($grupos as $grupo)
                                     <option value="{{$grupo->GrupoID}}" {{ ( $grupo->GrupoID == $contas->grupos_id) ? 'selected' : '' }}>
                                         {{$grupo->grupo}}
