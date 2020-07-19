@@ -491,27 +491,27 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 -- Copiando estrutura para tabela app-global.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tipo_usuario_id` int(2) DEFAULT NULL,
-  `observacao` varchar(145) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `observacao` varchar(85) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.users: ~3 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis', 'luis@luis.com', '2020-07-17 12:29:55', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', NULL, NULL, NULL, '2020-07-17 15:29:55', '2020-07-17 15:29:55'),
-	(2, 'vinicius', 'vini@global.com', '2020-07-17 12:34:13', '$2y$10$.6udcyiAmuB0rPWTYESL..EbsfbKfeZKn517UUlJtz.OQ3QsMXKqy', NULL, NULL, NULL, '2020-07-17 15:34:13', '2020-07-17 15:34:13'),
-	(3, 'TESTE', 'teste@teste.com', '2020-07-17 12:39:41', '$2y$10$Me34Ztj2Dyhcg7tOckg2f.M4K3QD2de56jQ3h70Ww3l57JdY8LOAO', NULL, NULL, NULL, '2020-07-17 15:39:41', '2020-07-17 15:39:41'),
-	(4, 'extrabom', 'extrabom@teste.com', '2020-07-17 16:19:21', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, NULL, NULL, '2020-07-17 19:19:21', '2020-07-17 19:19:21');
+	(1, 'Luis', 'luis@luis.com', '2020-07-19 12:16:07', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', NULL, 1, NULL, '2020-07-17 15:29:55', '2020-07-17 15:29:55'),
+	(3, 'TESTE', 'teste@teste.com', '2020-07-19 12:16:11', '$2y$10$Me34Ztj2Dyhcg7tOckg2f.M4K3QD2de56jQ3h70Ww3l57JdY8LOAO', NULL, 2, NULL, '2020-07-17 15:39:41', '2020-07-17 15:39:41'),
+	(4, 'extrabom', 'extrabom@teste.com', '2020-07-19 12:16:12', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-17 19:19:21'),
+	(5, 'teste', 'teste@hotmail.com', '2020-07-19 18:38:28', '$2y$10$4SiDqFi.tRqbMaHLxvA9euRYHrPQuE5Zzdwou/Bt7/Pkern1jjRQi', NULL, NULL, NULL, '2020-07-19 21:38:28', '2020-07-19 21:38:28');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario

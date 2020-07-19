@@ -39,7 +39,7 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return redirect()->route('register');
     }
 
     /**

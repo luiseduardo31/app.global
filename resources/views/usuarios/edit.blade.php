@@ -67,7 +67,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('usuarios.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do usuário {{$usuarios->name}} | {{$usuarios->email}}?');">
+                            <a href="{{route('register')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do usuário {{$usuarios->name}} | {{$usuarios->email}}?');">
                                 Cancelar Edição
                             </a>
                         </div>
