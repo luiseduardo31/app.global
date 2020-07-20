@@ -42,7 +42,7 @@
                         <div class="col-6">
                             <label for="user">Usuário</label>
                             <select class="form-control selectpicker" data-size="5" name="users_id">
-                                <option readonly>Escolha uma opção</option>
+                                <option readonly>Escolha um Usuário</option>
                             @foreach ($usuarios as $usuario)
                                 <option data-subtext=" | {{$usuario->email}}" value="{{$usuario->id}}">{{$usuario->name}}</option>
                             @endforeach
@@ -52,7 +52,7 @@
                         <div class="col-6">
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control selectpicker" data-size="5" name="grupos_id">
-                                <option readonly>Escolha uma opção</option>
+                                <option readonly>Escolha um Grupo</option>
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->id}}">{{$grupo->grupo}}</option>
                             @endforeach

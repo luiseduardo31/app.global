@@ -38,11 +38,17 @@
                   @csrf
                   @method('PUT')
                     <div class="form-group form-row"> 
-                        <div class="col-3">
-                            <label for="usuario">Usuário</label>
+                        <div class="col-4">
+                            <label for="usuario">Nome</label>
                             <input type="text" name="name" class="form-control" value="{{$usuarios->name}}" maxlength="25">
                         </div>
-                        <div class="col-9">
+
+                        <div class="col-4">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control" value="{{$usuarios->email}}" maxlength="25">
+                        </div>
+                        
+                        <div class="col-2">
                             <label for="grupo">Tipo de Usuário</label>
                             <select class="form-control" name="tipo_usuario_id">
                                 @foreach ($tipos_usuarios as $tipo)
@@ -51,6 +57,11 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" class="form-control" minlength="8" maxlength="12">
                         </div>
                     </div>
 
@@ -67,7 +78,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('register')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do usuário {{$usuarios->name}} | {{$usuarios->email}}?');">
+                            <a href="{{route('usuarios.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do usuário {{$usuarios->name}} | {{$usuarios->email}}?');">
                                 Cancelar Edição
                             </a>
                         </div>

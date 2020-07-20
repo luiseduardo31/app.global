@@ -61,10 +61,11 @@ class UsuariosController extends Controller
      * @param  \App\Models\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuarios $usuarios)
+    public function show()
     {
-        //
+        return 'ola';
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -91,9 +92,29 @@ class UsuariosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataForm = $request->all();
+        $data = $request->all();
+        
         $usuarios  = $this->usuarios->find($id);
-        $update   = $usuarios->update($dataForm);
+        if ($data['password'] != '') 
+        {
+            $update   = $usuarios->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'tipo_usuario_id' => $data['tipo_usuario_id'],
+                'observacao' => $data['observacao'],
+            ]);
+        }
+        else 
+        {
+            $update   = $usuarios->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'tipo_usuario_id' => $data['tipo_usuario_id'],
+                'observacao' => $data['observacao'],
+            ]);  
+        }
+
 
         if ($update)
             return redirect()->route('usuarios.index')->with('success', "O usuário {$usuarios->email} foi atualizado com sucesso!");

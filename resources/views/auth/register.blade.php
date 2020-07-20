@@ -65,7 +65,7 @@
     
                         <div class="col-2">
                             <label for="senha">Senha</label>    
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" minlength="8" maxlength="12" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-2">
                             <label for="senha">Confirmar Senha</label> 
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" minlength="8" maxlength="12" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
                     </div>
 

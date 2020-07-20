@@ -43,8 +43,8 @@
                                     <tr>
                                         <th style="width:20%">Usuário</th>
                                         <th style="width:20%">E-mail</th>
-                                        <th style="width:20%">Tipo Usuário</th>
-                                        <th style="width:20%">Data criação</th>
+                                        <th style="width:20%" class="text-center">Tipo Usuário</th>
+                                        <th style="width:20%" class="text-center">Data criação</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
