@@ -61,7 +61,11 @@ class ContasController extends Controller
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
-        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+            ->select(array('operadoras.*'))
+            ->where('tipo_operadora', '1')
+            ->get();
         
         return view('inventario.contas.create',compact('operadoras','grupos', 'empresas'));
     }
@@ -107,7 +111,10 @@ class ContasController extends Controller
         $user_id = Auth::id();
 
         $contas = Contas::all(['id', 'conta','operadora_id','observacao'])->sortBy('conta');
-        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+            ->select(array('operadoras.*'))
+            ->where('tipo_operadora', '1')
+            ->get();
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
             ->select(array('grupos.id AS GrupoID', 'grupos.*', 'grupos_users.*'))

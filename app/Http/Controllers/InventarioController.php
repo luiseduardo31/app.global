@@ -119,7 +119,8 @@ class InventarioController extends Controller
             ->get();
 
         $planos = DB::table('planos')->orderBy('plano', 'ASC')
-            ->select(array('planos.id AS PlanoID', 'planos.*', 'grupos_users.*'))
+            ->select(array('planos.id AS PlanoID', 'operadoras.id AS OperadoraID', 'operadoras.*', 'planos.*', 'grupos_users.*'))
+            ->join('operadoras', 'operadoras.id', '=', 'planos.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
             ->where('users_id', $user_id)
             ->get();
@@ -222,7 +223,8 @@ class InventarioController extends Controller
 
 
         $planos = DB::table('planos')->orderBy('plano', 'ASC')
-            ->select(array('planos.id AS PlanoID', 'planos.*', 'grupos_users.*'))
+            ->select(array('planos.id AS PlanoID', 'operadoras.id AS OperadoraID', 'operadoras.*', 'planos.*', 'grupos_users.*'))
+            ->join('operadoras', 'operadoras.id', '=', 'planos.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
             ->where('users_id', $user_id)
             ->get();

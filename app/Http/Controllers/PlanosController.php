@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Planos;
+use App\Models\Operadoras;
 use Illuminate\Support\Facades\Auth;
 
 class PlanosController extends Controller
@@ -30,8 +31,9 @@ class PlanosController extends Controller
         $user_id = Auth::id();
 
         $planos = DB::table('planos')->orderBy('plano', 'asc')
-            ->select(array('planos.id as planoID', 'planos.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('planos.id as planoID', 'operadoras.id AS OperadoraID', 'planos.*', 'grupos_users.*', 'grupos.*','operadoras.*'))
             ->join('grupos', 'grupos.id', '=', 'planos.grupo_id')
+            ->join('operadoras', 'operadoras.id', '=', 'planos.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
             ->where('users_id', $user_id)
             ->get();
@@ -54,8 +56,13 @@ class PlanosController extends Controller
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'grupos.id')
             ->where('users_id', $user_id)
             ->get();
+        
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+            ->select(array('operadoras.*'))
+            ->where('tipo_operadora', '1')
+            ->get();
 
-        return view('inventario.planos.create',compact('grupos'));
+        return view('inventario.planos.create',compact('grupos','operadoras'));
     }
 
     /**
@@ -98,6 +105,11 @@ class PlanosController extends Controller
         $user_id = Auth::id();
         
         $planos = Planos::all(['id', 'plano', 'observacao'])->sortBy('plano');
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+            ->select(array('operadoras.*'))
+            ->where('tipo_operadora', '1')
+            ->get();
+
         $planos = $this->planos->find($id);
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')
@@ -106,7 +118,7 @@ class PlanosController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
-        return view('inventario.planos.edit', compact('planos','grupos'));
+        return view('inventario.planos.edit', compact('planos','grupos','operadoras'));
     }
 
     /**

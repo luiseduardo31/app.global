@@ -45,7 +45,7 @@
                         <input type="text" name="linha" class="form-control" placeholder="Linha" maxlength="11">
                      </div>
 
-                     <div class="col-3">
+                     <div class="col-2">
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control" name="grupo_id">
                             @foreach ($grupos as $grupo)
@@ -54,20 +54,22 @@
                             </select>
                      </div>
 
-                     <div class="col-2">
+                     <div class="col-3">
                         <label for="Conta">Conta</label>
-                        <select class="form-control" name="conta_id">
+                        <select class="form-control selectpicker" name="conta_id" data-size="5">
+                           <option readonly>Escolha uma Conta</option>
                            @foreach ($contas as $conta)
-                               <option value="{{$conta->contaID}}">{{$conta->operadora}} - {{$conta->conta}}</option>
+                               <option data-subtext=" | {{$conta->operadora}}" value="{{$conta->contaID}}">{{$conta->conta}}</option>
                            @endforeach
                         </select>
                      </div>
 
                      <div class="col-3">
                         <label for="Plano">Plano</label>
-                        <select class="form-control" name="plano_id">
+                        <select class="form-control selectpicker" name="plano_id" data-size="5">
+                           <option readonly>Escolha um Plano</option>
                            @foreach ($planos as $plano)
-                               <option value="{{$plano->PlanoID}}">{{$plano->plano}}</option>
+                               <option data-subtext=" | {{$plano->operadora}}" value="{{$plano->PlanoID}}">{{$plano->plano}}</option>
                            @endforeach
                         </select>
                      </div>

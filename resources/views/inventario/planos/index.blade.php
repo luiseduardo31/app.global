@@ -42,6 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:40%">Planos</th>
+                                        <th style="width:40%">Operadora</th>
                                         <th style="width:40%">Grupo</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
@@ -51,6 +52,7 @@
                                     @forelse ($planos as $plano)
                                     <tr>
                                         <td>{{$plano->plano}}</td>
+                                        <td>{{$plano->operadora}}</td>
                                         <td>{{$plano->grupo}}</td>
                                         <td>{{$plano->observacao}}</td>
                                         <td> 

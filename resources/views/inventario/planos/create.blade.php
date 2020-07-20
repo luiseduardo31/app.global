@@ -43,8 +43,16 @@
                             <label for="plano">Plano</label>
                             <input type="text" name="plano" class="form-control" placeholder="plano" maxlength="50">
                         </div>
+                        <div class="col-3">
+                            <label for="operadora">Operadora</label>
+                            <select class="form-control" name="operadora_id">
+                            @foreach ($operadoras as $operadora)
+                                <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
+                            @endforeach
+                            </select>
+                        </div>
 
-                        <div class="col-9">
+                        <div class="col-6">
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control" name="grupo_id">
                             @foreach ($grupos as $grupo)
