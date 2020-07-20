@@ -67,7 +67,7 @@
                         <label for="Plano">Plano</label>
                         <select class="form-control" name="plano_id">
                            @foreach ($planos as $plano)
-                               <option value="{{$plano->id}}">{{$plano->plano}}</option>
+                               <option value="{{$plano->PlanoID}}">{{$plano->plano}}</option>
                            @endforeach
                         </select>
                      </div>

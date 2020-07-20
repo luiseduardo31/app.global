@@ -69,7 +69,7 @@
                         <label for="Plano">Plano</label>
                         <select class="form-control" name="plano_id">
                            @foreach ($planos as $plano)
-                              <option value="{{$plano->id}}" {{ ( $plano->id == $inventario->plano_id) ? 'selected' : '' }}>
+                              <option value="{{$plano->PlanoID}}" {{ ( $plano->PlanoID == $inventario->plano_id) ? 'selected' : '' }}>
                                  {{$plano->plano}}
                               </option>
                            @endforeach

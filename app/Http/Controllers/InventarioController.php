@@ -118,9 +118,13 @@ class InventarioController extends Controller
             ->where('users_id', $user_id)
             ->get();
 
+        $planos = DB::table('planos')->orderBy('plano', 'ASC')
+            ->select(array('planos.id AS PlanoID', 'planos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
 
-        $planos = Planos::all(['id', 'plano'])->sortBy('plano');
-        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
         return view('inventario.create',
@@ -217,8 +221,12 @@ class InventarioController extends Controller
             ->get();
 
 
-        $planos = Planos::all(['id', 'plano'])->sortBy('plano');
-        $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
+        $planos = DB::table('planos')->orderBy('plano', 'ASC')
+            ->select(array('planos.id AS PlanoID', 'planos.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
         $tipos_linha = TiposLinha::all(['id', 'tipo'])->sortBy('tipo');
         $status = Status::all(['id', 'status'])->sortBy('status');
 

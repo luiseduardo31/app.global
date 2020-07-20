@@ -227,15 +227,15 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_grupos` (`grupos_id`) USING BTREE,
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.grupos_users: ~6 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
-	(16, 5, 1, NULL, NULL),
-	(17, 5, 4, NULL, NULL),
-	(24, 1, 9, NULL, NULL);
+	(24, 1, 9, NULL, NULL),
+	(26, 5, 1, NULL, NULL),
+	(28, 5, 13, NULL, NULL);
 /*!40000 ALTER TABLE `grupos_users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.inventarios
@@ -347,6 +347,8 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Copiando dados para a tabela app-global.password_resets: ~0 rows (aproximadamente)
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+	('luis@luis.com', '$2y$10$NnQpqzyJJ8RegJs5Y2EpdeA6BzesIaZ1j18boWo8ZDp18UDu2zS0q', '2020-07-19 22:04:06');
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.planos
@@ -372,7 +374,7 @@ INSERT INTO `planos` (`id`, `plano`, `grupo_id`, `observacao`, `updated_at`) VAL
 	(7, 'INTERNET MOVEL 20GB', 1, NULL, '2020-06-29 16:42:00'),
 	(8, 'INTERNET MOVEL 10GB', 1, NULL, '2020-06-29 16:42:01'),
 	(9, 'SMART EMPRESAS NACIONAL VOZ', 1, NULL, '2020-06-29 16:42:02'),
-	(10, 'LOCAL SMART 80 MINUTOS', 1, NULL, '2020-06-29 16:42:03'),
+	(10, 'LOCAL SMART 80 MINUTOS', 5, NULL, '2020-07-20 12:49:33'),
 	(14, 'Plano A', 5, 'aaa', NULL);
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 
@@ -502,16 +504,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis', 'luis@luis.com', '2020-07-19 12:16:07', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', NULL, 1, NULL, '2020-07-17 15:29:55', '2020-07-17 15:29:55'),
-	(3, 'TESTE', 'teste@teste.com', '2020-07-19 12:16:11', '$2y$10$Me34Ztj2Dyhcg7tOckg2f.M4K3QD2de56jQ3h70Ww3l57JdY8LOAO', NULL, 2, NULL, '2020-07-17 15:39:41', '2020-07-17 15:39:41'),
+	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-20 11:18:08', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', NULL, 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
 	(4, 'extrabom', 'extrabom@teste.com', '2020-07-19 12:16:12', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-17 19:19:21'),
-	(5, 'teste', 'teste@hotmail.com', '2020-07-19 18:38:28', '$2y$10$4SiDqFi.tRqbMaHLxvA9euRYHrPQuE5Zzdwou/Bt7/Pkern1jjRQi', NULL, NULL, NULL, '2020-07-19 21:38:28', '2020-07-19 21:38:28');
+	(13, 'romario 11', 'romario@romario.com', '2020-07-20 12:33:39', '$2y$10$ipn8Ej4RuAin371ZmxRgY.v11hZTnbRol85Yllf0vszaDGp.ndxk2', NULL, 2, 'testeee kkh', '2020-07-20 14:56:44', '2020-07-20 15:33:39'),
+	(14, 'pele', 'pele@pele.com', '2020-07-20 11:57:11', '$2y$10$MMMBl84VE2/K9qyw5ArwEuUq.d3dut0hoLEJCvsNQhRnyD6vh.xHa', NULL, 1, 'testeee', '2020-07-20 14:57:11', '2020-07-20 14:57:11'),
+	(15, 'aaasa', 'luis@luis.comaa', '2020-07-20 12:22:21', '$2y$10$byNGwUDlHzJRHSN01tn3NOOhuS1BVLLYC5rwKSYOaw8lmvBo5Zbdy', NULL, 1, NULL, '2020-07-20 15:22:21', '2020-07-20 15:22:21');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario
