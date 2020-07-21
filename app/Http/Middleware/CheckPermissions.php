@@ -16,11 +16,11 @@ class CheckPermissions
      */
     public function handle($request, Closure $next)
     {
-        $isAdmin = Auth::user()->tipo_usuario_id;
+        $is_admin = Auth::user()->tipo_usuario_id;
 
-        if ($isAdmin == 1) {
+        if ($is_admin == 1) {
             return $next($request);
         }
-        return redirect()->route('home');
+        return abort(404);
     }
 }

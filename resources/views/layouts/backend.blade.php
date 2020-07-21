@@ -232,17 +232,17 @@
                         <li class="nav-main-heading">MENU</li>
                         
                         <!-- PAINEL DE CONTROLE -->
-
+                        @if(Auth::user()->tipo_usuario_id == 1)
+                              
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon si si-lock"></i>
                                 <span class="nav-main-link-name">Painel de Controle</span>
                             </a>
                             <ul class="nav-main-submenu">
-                                <!-- Submenu Matriculas -->
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                        <i class="nav-main-link-icon si si-note"></i>
+                                        <i class="nav-main-link-icon fa fa-user"></i>
                                         <span class="nav-main-link-name">Usuários / Acessos</span>
                                     </a>
                                     <ul class="nav-main-submenu">
@@ -270,147 +270,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- Fim Submenu Matriculas -->
-                                <!-- Submenu Funções -->
-                                <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Funções</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('funcoes/create') ? ' active' : '' }}" href="/funcoes/create">
-                                                    <span class="nav-main-link-name">Cadastrar Função</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('funcoes') ? ' active' : '' }}" href="/funcoes/">
-                                                    <span class="nav-main-link-name">Funções Cadastradas</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Funções -->
-                                    <!-- Submenu Gestores -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Gestores</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="/gestores/create">
-                                                    <span class="nav-main-link-name">Cadastrar Gestor</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('gestores') ? ' active' : '' }}" href="/gestores/">
-                                                    <span class="nav-main-link-name">Gestores Cadastrados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Gestores -->
-                                    <!-- Submenu Matriculas -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Filiais</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('filiais/create') ? ' active' : '' }}" href="/filiais/create">
-                                                    <span class="nav-main-link-name">Cadastrar Filial</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('filiais') ? ' active' : '' }}" href="/filiais/">
-                                                    <span class="nav-main-link-name">Filiais Cadastradas</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Matriculas -->
-                                    <!-- Submenu Setores -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Setores</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('setores/create') ? ' active' : '' }}" href="/setores/create">
-                                                    <span class="nav-main-link-name">Cadastrar Setores</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('setores') ? ' active' : '' }}" href="/setores/">
-                                                    <span class="nav-main-link-name">Setores Cadastrados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Setores -->
-                                    <!-- Submenu SubSetores -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Subsetores</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('subsetores/create') ? ' active' : '' }}" href="/subsetores/create">
-                                                    <span class="nav-main-link-name">Cadastrar Subsetores</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('subsetores') ? ' active' : '' }}" href="/subsetores/">
-                                                    <span class="nav-main-link-name">Subsetores Cadastrados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu SubSetores -->
-                                    <!-- Submenu Planos -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Planos</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('planos/create') ? ' active' : '' }}" href="/planos/create">
-                                                    <span class="nav-main-link-name">Cadastrar Plano</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('planos') ? ' active' : '' }}" href="/planos/">
-                                                    <span class="nav-main-link-name">Planos Cadastrados</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Planos -->
-                                    <!-- Submenu Contas -->
-                                    <li class="nav-main-item">
-                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                            <i class="nav-main-link-icon si si-note"></i>
-                                            <span class="nav-main-link-name">Contas</span>
-                                        </a>
-                                        <ul class="nav-main-submenu">
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('contas/create') ? ' active' : '' }}" href="/contas/create">
-                                                    <span class="nav-main-link-name">Cadastrar Conta</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-main-item">
-                                                <a class="nav-main-link{{ request()->is('contas') ? ' active' : '' }}" href="/contas/">
-                                                    <span class="nav-main-link-name">Contas Cadastradas</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!-- Fim Submenu Contas -->
+                            </ul>
+                            
+                            <ul class="nav-main-submenu">
                                 <!-- Submenu Inventario ADM -->
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -423,12 +285,204 @@
                                                 <span class="nav-main-link-name">Cadastrar Linha</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                </li>
-                                <!-- Fim Submenu Contas -->
+                                        <!-- Submenu Funções -->
+                                        <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Funções</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('funcoes/create') ? ' active' : '' }}" href="/funcoes/create">
+                                                            <span class="nav-main-link-name">Cadastrar Função</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('funcoes') ? ' active' : '' }}" href="/funcoes/">
+                                                            <span class="nav-main-link-name">Funções Cadastradas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Funções -->
+                                            <!-- Submenu Gestores -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Gestores</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="/gestores/create">
+                                                            <span class="nav-main-link-name">Cadastrar Gestor</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('gestores') ? ' active' : '' }}" href="/gestores/">
+                                                            <span class="nav-main-link-name">Gestores Cadastrados</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Gestores -->
+                                            <!-- Submenu Matriculas -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Filiais</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('filiais/create') ? ' active' : '' }}" href="/filiais/create">
+                                                            <span class="nav-main-link-name">Cadastrar Filial</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('filiais') ? ' active' : '' }}" href="/filiais/">
+                                                            <span class="nav-main-link-name">Filiais Cadastradas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Matriculas -->
+                                            <!-- Submenu Setores -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Setores</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('setores/create') ? ' active' : '' }}" href="/setores/create">
+                                                            <span class="nav-main-link-name">Cadastrar Setores</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('setores') ? ' active' : '' }}" href="/setores/">
+                                                            <span class="nav-main-link-name">Setores Cadastrados</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Setores -->
+                                            <!-- Submenu SubSetores -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Subsetores</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('subsetores/create') ? ' active' : '' }}" href="/subsetores/create">
+                                                            <span class="nav-main-link-name">Cadastrar Subsetores</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('subsetores') ? ' active' : '' }}" href="/subsetores/">
+                                                            <span class="nav-main-link-name">Subsetores Cadastrados</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu SubSetores -->
+                                            <!-- Submenu Planos -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Planos</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('planos/create') ? ' active' : '' }}" href="/planos/create">
+                                                            <span class="nav-main-link-name">Cadastrar Plano</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('planos') ? ' active' : '' }}" href="/planos/">
+                                                            <span class="nav-main-link-name">Planos Cadastrados</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Planos -->
+                                            <!-- Submenu Contas -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Contas</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('contas/create') ? ' active' : '' }}" href="/contas/create">
+                                                            <span class="nav-main-link-name">Cadastrar Conta</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('contas') ? ' active' : '' }}" href="/contas/">
+                                                            <span class="nav-main-link-name">Contas Cadastradas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            </ul>
+                                        </li>
+                                
+                                        <!-- Menu Contratos -->
+                                            <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                                                    <i class="nav-main-link-icon far fa-address-book"></i>
+                                                    <span class="nav-main-link-name">Contratos Telecom</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                    
+                                                    <!-- Submenu Contratos Fixos -->
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                            <i class="nav-main-link-icon si si-note"></i>
+                                                            <span class="nav-main-link-name">Contratos Fixos</span>
+                                                        </a>
+                                                        <ul class="nav-main-submenu">
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
+                                                                    <span class="nav-main-link-name">Cadastrar Contrato</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="/contratos-fixo/">
+                                                                    <span class="nav-main-link-name">Contratos Cadastrados</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul> 
+                                                    </li>
+                                                    <!-- Fim Submenu Contratos Fixos -->
+
+                                                    <!-- Submenu Contratos Móveis -->
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                            <i class="nav-main-link-icon si si-note"></i>
+                                                            <span class="nav-main-link-name">Contratos Móveis</span>
+                                                        </a>
+                                                        <ul class="nav-main-submenu">
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-movel/create') ? ' active' : '' }}" href="/contratos-movel/create">
+                                                                    <span class="nav-main-link-name">Cadastrar Contrato</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="/contratos-movel/">
+                                                                    <span class="nav-main-link-name">Contratos Cadastrados</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul> 
+                                                    </li>
+                                                    <!-- Fim Submenu Contratos Móveis -->
+                                                    
+                                                </ul>
+                                            </li>
+                                        <!-- Fim Menu Contratos -->
                             </ul>
-                            
                         </li>
+                        @endif
                         
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
@@ -441,63 +495,10 @@
                                         <span class="nav-main-link-name">Linhas Cadastradas</span>
                                     </a>
                                 </li>
-                                <!-- Submenu Funções -->
                             </ul>
                         </li>     
                          
-                        <!-- Menu Contratos -->
-                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                <i class="nav-main-link-icon far fa-address-book"></i>
-                                <span class="nav-main-link-name">Contratos Telecom</span>
-                            </a>
-                            <ul class="nav-main-submenu">
- 
-                                <!-- Submenu Contratos Fixos -->
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                        <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Contratos Fixos</span>
-                                    </a>
-                                    <ul class="nav-main-submenu">
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
-                                                <span class="nav-main-link-name">Cadastrar Contrato</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="/contratos-fixo/">
-                                                <span class="nav-main-link-name">Contratos Cadastrados</span>
-                                            </a>
-                                        </li>
-                                    </ul> 
-                                </li>
-                                 <!-- Fim Submenu Contratos Fixos -->
-
-                                <!-- Submenu Contratos Móveis -->
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                        <i class="nav-main-link-icon si si-note"></i>
-                                        <span class="nav-main-link-name">Contratos Móveis</span>
-                                    </a>
-                                    <ul class="nav-main-submenu">
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('contratos-movel/create') ? ' active' : '' }}" href="/contratos-movel/create">
-                                                <span class="nav-main-link-name">Cadastrar Contrato</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="/contratos-movel/">
-                                                <span class="nav-main-link-name">Contratos Cadastrados</span>
-                                            </a>
-                                        </li>
-                                    </ul> 
-                                </li>
-                                <!-- Fim Submenu Contratos Móveis -->
-                                
-                            </ul>
-                        </li>
-                        <!-- Fim Menu Contratos -->
+                        
 
  
 

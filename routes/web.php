@@ -13,25 +13,24 @@
 
 
 Route::resource('inventario','InventarioController');
-Route::resource('funcoes','FuncoesController');
-Route::resource('gestores','GestoresController');
-Route::resource('matriculas', 'MatriculasController');
-Route::resource('setores', 'SetoresController');
-Route::resource('subsetores', 'SubsetoresController');
-Route::resource('planos', 'PlanosController');
-Route::resource('contas', 'ContasController');
 
 
-// admin
-Route::resource('usuarios', 'UsuariosController');
-Route::get('/usuarios/create','UsuariosController@create');
-Route::resource('acessos', 'AcessosController');
-Route::resource('contratos-fixo', 'ContratosFixoController');
-Route::resource('contratos-movel', 'ContratosMovelController');
-
-
+// ROTAS ADMIN
 Route::group(['middleware' => ['auth','check.permissions']], function () {
     Route::resource('filiais', 'FiliaisController');
+    Route::resource('funcoes', 'FuncoesController');
+    Route::resource('gestores', 'GestoresController');
+    Route::resource('matriculas', 'MatriculasController');
+    Route::resource('setores', 'SetoresController');
+    Route::resource('subsetores', 'SubsetoresController');
+    Route::resource('planos', 'PlanosController');
+    Route::resource('contas', 'ContasController');
+
+    Route::resource('usuarios', 'UsuariosController');
+    Route::resource('acessos', 'AcessosController');
+   
+    Route::resource('contratos-fixo', 'ContratosFixoController');
+    Route::resource('contratos-movel', 'ContratosMovelController');
 });
 
 Route::get('/', function () {
