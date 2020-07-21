@@ -31,7 +31,7 @@ class PlanosController extends Controller
         $user_id = Auth::id();
 
         $planos = DB::table('planos')->orderBy('plano', 'asc')
-            ->select(array('planos.id as planoID', 'operadoras.id AS OperadoraID', 'planos.*', 'grupos_users.*', 'grupos.*','operadoras.*'))
+            ->select(array('planos.id as planoID', 'planos.observacao AS obsPlano','operadoras.id AS OperadoraID', 'planos.*', 'grupos_users.*', 'grupos.*','operadoras.*'))
             ->join('grupos', 'grupos.id', '=', 'planos.grupo_id')
             ->join('operadoras', 'operadoras.id', '=', 'planos.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'planos.grupo_id')

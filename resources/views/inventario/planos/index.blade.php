@@ -54,7 +54,7 @@
                                         <td>{{$plano->plano}}</td>
                                         <td>{{$plano->operadora}}</td>
                                         <td>{{$plano->grupo}}</td>
-                                        <td>{{$plano->observacao}}</td>
+                                        <td>{{$plano->obsPlano}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">

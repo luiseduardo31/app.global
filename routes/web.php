@@ -20,7 +20,7 @@ Route::resource('setores', 'SetoresController');
 Route::resource('subsetores', 'SubsetoresController');
 Route::resource('planos', 'PlanosController');
 Route::resource('contas', 'ContasController');
-Route::resource('filiais', 'FiliaisController');
+
 
 // admin
 Route::resource('usuarios', 'UsuariosController');
@@ -30,6 +30,9 @@ Route::resource('contratos-fixo', 'ContratosFixoController');
 Route::resource('contratos-movel', 'ContratosMovelController');
 
 
+Route::group(['middleware' => ['auth','check.permissions']], function () {
+    Route::resource('filiais', 'FiliaisController');
+});
 
 Route::get('/', function () {
     return view('landing');
