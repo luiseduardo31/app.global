@@ -27,6 +27,10 @@ class InventarioController extends Controller
     {
         $this->inventario = $inventario;
         $this->middleware('auth');
+        $this->middleware('check.permissions')->except([
+                          'index',
+                          'edit',
+        ]);
     }
 
 
