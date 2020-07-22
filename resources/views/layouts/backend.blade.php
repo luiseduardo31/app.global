@@ -23,7 +23,7 @@
         <link href="{{URL::asset('/js/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('/js/plugins/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css">
         <link href="{{URL::asset('/css/style.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{URL::asset('asset/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{URL::asset('/js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
 
         <!-- Latest compiled and minified CSS -->

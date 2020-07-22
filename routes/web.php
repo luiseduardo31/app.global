@@ -34,9 +34,7 @@ Route::group(['middleware' => ['auth','check.permissions']], function () {
 });
 
 Route::get('/', function () {
-    return view('landing');
+    return redirect('login');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
