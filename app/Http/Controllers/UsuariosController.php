@@ -27,6 +27,7 @@ class UsuariosController extends Controller
         $usuarios = DB::table('users')->orderBy('name', 'asc')
             ->select(array('tipos_usuarios.id AS TipoUsuarioID', 'tipos_usuarios.*', 'users.*'))
             ->join('tipos_usuarios', 'tipos_usuarios.id', '=', 'users.tipo_usuario_id')
+            ->where('users.id','>',1)
             ->get();
 
         return view('usuarios.index', compact('usuarios'));
@@ -77,7 +78,7 @@ class UsuariosController extends Controller
     {
         $tipos_usuarios = TiposUsuarios::all(['id', 'tipo_usuario'])->sortBy('tipo_usuario');
 
-        $usuarios = Usuarios::all(['id', 'name','email','tipo_usuario_id']);
+        $usuarios = Usuarios::all(['id', 'name','email','tipo_usuario_id'])->where('users.id', '>', 1);
         $usuarios = $this->usuarios->find($id);
 
         return view('usuarios.edit', compact('usuarios', 'tipos_usuarios'));
@@ -95,26 +96,28 @@ class UsuariosController extends Controller
         $data = $request->all();
         
         $usuarios  = $this->usuarios->find($id);
-        if ($data['password'] != '') 
+        if($id > 1)
         {
-            $update   = $usuarios->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'tipo_usuario_id' => $data['tipo_usuario_id'],
-                'observacao' => $data['observacao'],
-            ]);
+            if ($data['password'] != '') 
+            {
+                $update   = $usuarios->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => Hash::make($data['password']),
+                    'tipo_usuario_id' => $data['tipo_usuario_id'],
+                    'observacao' => $data['observacao'],
+                ]);
+            }
+            else 
+            {
+                $update   = $usuarios->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'tipo_usuario_id' => $data['tipo_usuario_id'],
+                    'observacao' => $data['observacao'],
+                ]);  
+            }
         }
-        else 
-        {
-            $update   = $usuarios->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'tipo_usuario_id' => $data['tipo_usuario_id'],
-                'observacao' => $data['observacao'],
-            ]);  
-        }
-
 
         if ($update)
             return redirect()->route('usuarios.index')->with('success', "O usuário {$usuarios->email} foi atualizado com sucesso!");

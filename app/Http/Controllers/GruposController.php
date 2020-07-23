@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Grupos;
 use Illuminate\Http\Request;
 
+
 class GruposController extends Controller
 {
+
+    public function __construct(Grupos $grupos)
+    {
+        $this->grupos = $grupos;
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class GruposController extends Controller
      */
     public function index()
     {
-        //
+        $grupos = Grupos::all(['id', 'grupo'])->sortBy('grupo');
+
+        return view('inventario.grupos.index',compact('grupos'));
     }
 
     /**
@@ -24,7 +34,7 @@ class GruposController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventario.grupos.create');
     }
 
     /**
@@ -35,7 +45,13 @@ class GruposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        $insert = $this->grupos->insert($dataForm);
+
+        if ($insert)
+            return redirect()->route('grupos.index')->with('success', "O grupo {$request->grupo} foi cadastrado com sucesso!");
+        else
+            return redirect()->route('grupos.create')->with('error', "Houve um erro ao cadastrar o grupo {$request->gestor}.");
     }
 
     /**
@@ -55,9 +71,12 @@ class GruposController extends Controller
      * @param  \App\Models\Grupos  $grupos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grupos $grupos)
+    public function edit($id)
     {
-        //
+        $grupos = Grupos::all(['id', 'grupo', 'observacao']);
+        $grupos = $this->grupos->find($id);
+
+        return view('inventario.grupos.edit', compact('grupos'));
     }
 
     /**
@@ -67,9 +86,16 @@ class GruposController extends Controller
      * @param  \App\Models\Grupos  $grupos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupos $grupos)
+    public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $grupos  = $this->grupos->find($id);
+        $update   = $grupos->update($dataForm);
+
+        if ($update)
+            return redirect()->route('grupos.index')->with('success', "O grupo {$grupos->grupo} foi atualizado com sucesso!");
+        else
+            return redirect()->route('grupos.edit')->with('error', "Houve um erro ao editar o grupo {$grupos->grupo}.");
     }
 
     /**
@@ -78,8 +104,14 @@ class GruposController extends Controller
      * @param  \App\Models\Grupos  $grupos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grupos $grupos)
+    public function destroy($id)
     {
-        //
+        $grupos = $this->grupos->find($id);
+        $delete = $grupos->delete();
+
+        if ($delete) {
+            return redirect()->route('grupos.index')->with('success', "O grupo {$grupos->grupo} foi excluido com sucesso!");
+        } else
+            return redirect()->route('grupos.index')->with('error', "Houve um erro ao excluir o grupo {$grupos->grupo}.");
     }
 }

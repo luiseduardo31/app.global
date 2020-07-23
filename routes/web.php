@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth','check.permissions']], function () {
     Route::resource('planos', 'PlanosController');
     Route::resource('contas', 'ContasController');
     Route::resource('empresas', 'EmpresasController');
+    Route::resource('grupos', 'GruposController');
 
     Route::resource('usuarios', 'UsuariosController');
     Route::resource('acessos', 'AcessosController');

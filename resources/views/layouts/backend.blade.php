@@ -325,6 +325,26 @@
                                                 </ul>
                                             </li>
                                             <!-- Fim Submenu Empresas -->
+                                            <!-- Submenu Grupos -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Grupos</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('grupos/create') ? ' active' : '' }}" href="/grupos/create">
+                                                            <span class="nav-main-link-name">Cadastrar Grupos</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('grupos') ? ' active' : '' }}" href="/grupos/">
+                                                            <span class="nav-main-link-name">Grupos Cadastrados</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Grupos -->
                                             <!-- Submenu Gestores -->
                                             <li class="nav-main-item">
                                                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">

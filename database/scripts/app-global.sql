@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.empresas: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.empresas: ~4 rows (aproximadamente)
 DELETE FROM `empresas`;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
 INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -209,15 +209,18 @@ INSERT INTO `gestores` (`id`, `gestor`, `grupo_id`, `observacao`, `updated_at`) 
 CREATE TABLE IF NOT EXISTS `grupos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `grupo` varchar(50) NOT NULL,
+  `observacao` varchar(145) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.grupos: ~2 rows (aproximadamente)
 DELETE FROM `grupos`;
 /*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
-INSERT INTO `grupos` (`id`, `grupo`) VALUES
-	(1, 'Águia Branca'),
-	(5, 'Realmar');
+INSERT INTO `grupos` (`id`, `grupo`, `observacao`, `updated_at`) VALUES
+	(1, 'Águia Branca', NULL, NULL),
+	(5, 'Realmar', 'çlçk', NULL),
+	(7, 'Grupo Teste 1', 'asashajshas', '2020-07-23 19:47:07');
 /*!40000 ALTER TABLE `grupos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.grupos_users
@@ -231,16 +234,17 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_grupos` (`grupos_id`) USING BTREE,
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~6 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
 	(24, 1, 9, NULL, NULL),
 	(26, 5, 1, NULL, NULL),
 	(28, 5, 13, NULL, NULL),
-	(31, 5, 16, NULL, NULL);
+	(31, 5, 16, NULL, NULL),
+	(33, 5, 18, NULL, NULL);
 /*!40000 ALTER TABLE `grupos_users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.inventarios
@@ -508,16 +512,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.users: ~6 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-22 17:00:03', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', 'awNbCSbuB0ettqgKcj5EGztrdYwuGgAauFDsMkj8lSxnqVbZ3YO3UjbxZrcb', 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
+	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-23 15:09:58', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', 'uNYxCNoaspsJRT34e2IJ5sBxRoR7sFPnVq4jc5qguxw6Ug2iG5hFykpVQ8pS', 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
 	(4, 'Extrabom', 'extrabom@teste.com', '2020-07-20 17:06:30', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-20 20:06:30'),
 	(13, 'Romário', 'romario@romario.com', '2020-07-20 17:06:43', '$2y$10$ipn8Ej4RuAin371ZmxRgY.v11hZTnbRol85Yllf0vszaDGp.ndxk2', NULL, 2, 'testeee kkh', '2020-07-20 14:56:44', '2020-07-20 20:06:43'),
-	(16, 'Vinicius', 'vinicius@vinicius.com', '2020-07-21 11:44:38', '$2y$10$fL5hdnZ793TDA3KF/3JIl.nn2sWqCbZo8zt/mtunOig.9vQxfN2EW', NULL, 2, 'Teste', '2020-07-21 14:44:21', '2020-07-21 14:44:38');
+	(16, 'Vinicius', 'vinicius@vinicius.com', '2020-07-21 11:44:38', '$2y$10$fL5hdnZ793TDA3KF/3JIl.nn2sWqCbZo8zt/mtunOig.9vQxfN2EW', NULL, 2, 'Teste', '2020-07-21 14:44:21', '2020-07-21 14:44:38'),
+	(17, 'Zé Lopes', 'ze@ze.com', '2020-07-23 15:08:21', '$2y$10$5tLcqhOSNmaza0PcbJGKHeW3oKwbI/xY2.4U.dj/X0ctY8qZHD5um', 'Cr6HkIQQuRLlgCZ1W6hVzF6Uv4cmT0enPOAgJroJppffCqkan9K3uoKiRmbn', 2, 'gazeta', '2020-07-23 18:07:48', '2020-07-23 18:07:48'),
+	(18, 'Lucas', 'lucas@lucas.com', '2020-07-23 15:09:48', '$2y$10$DK7a374ubTN0kKAlqu6EkefoEcM3ScRdSqq2StJ/wRjI.ZHE7Ba0m', NULL, 1, NULL, '2020-07-23 18:09:48', '2020-07-23 18:09:48');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario
