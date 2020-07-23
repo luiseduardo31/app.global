@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `contratos_moveis` (
   CONSTRAINT `contratos_moveis_ibfk_2` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.contratos_moveis: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contratos_moveis: ~4 rows (aproximadamente)
 DELETE FROM `contratos_moveis`;
 /*!40000 ALTER TABLE `contratos_moveis` DISABLE KEYS */;
 INSERT INTO `contratos_moveis` (`id`, `numero_contrato`, `empresa_id`, `operadora_id`, `periodo_inicio`, `periodo_fim`, `vigencia`, `assinatura`, `sms_unitario`, `sms_pacote`, `gestor_online`, `planos_contrato`, `observacao`, `updated_at`) VALUES
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos: ~3 rows (aproximadamente)
 DELETE FROM `grupos`;
 /*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
 INSERT INTO `grupos` (`id`, `grupo`, `observacao`, `updated_at`) VALUES
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~5 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.password_resets: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.password_resets: ~1 rows (aproximadamente)
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -518,7 +518,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-23 15:09:58', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', 'uNYxCNoaspsJRT34e2IJ5sBxRoR7sFPnVq4jc5qguxw6Ug2iG5hFykpVQ8pS', 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
+	(1, 'Luis Eduardo', 'luis@luis.admin', '2020-07-23 17:03:41', '$2y$10$w1S/LpBzlqUqw7K8RRJF5Oltj4Q9uAf0QwMyGd03xF6Av9yo8CpRO', 'NOs95epQW5wDOY8hLuOGfsBburSsfbJz6CiL0WgkXimjmH84KqB0YQ21eSsK', 1, NULL, '2020-07-17 15:29:55', '2020-07-23 20:03:41'),
 	(4, 'Extrabom', 'extrabom@teste.com', '2020-07-20 17:06:30', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-20 20:06:30'),
 	(13, 'Romário', 'romario@romario.com', '2020-07-20 17:06:43', '$2y$10$ipn8Ej4RuAin371ZmxRgY.v11hZTnbRol85Yllf0vszaDGp.ndxk2', NULL, 2, 'testeee kkh', '2020-07-20 14:56:44', '2020-07-20 20:06:43'),
 	(16, 'Vinicius', 'vinicius@vinicius.com', '2020-07-21 11:44:38', '$2y$10$fL5hdnZ793TDA3KF/3JIl.nn2sWqCbZo8zt/mtunOig.9vQxfN2EW', NULL, 2, 'Teste', '2020-07-21 14:44:21', '2020-07-21 14:44:38'),
