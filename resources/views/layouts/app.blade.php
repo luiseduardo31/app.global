@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Inventario') }}</title>
+    <title>{{ config('app.name', 'Gestão Telecom 2.0') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,7 @@
             <div class="container">
                 <!--
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Inventario') }}
+                    {{ config('app.name', 'Gestão Telecom 2.0') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon">a</span>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Inventario</title>
+        <title>Gestão Telecom 2.0</title>
 
         <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -305,6 +305,26 @@
                                                 </ul>
                                             </li>
                                             <!-- Fim Submenu Funções -->
+                                            <!-- Submenu Empresas -->
+                                            <li class="nav-main-item">
+                                                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                    <i class="nav-main-link-icon si si-note"></i>
+                                                    <span class="nav-main-link-name">Empresas</span>
+                                                </a>
+                                                <ul class="nav-main-submenu">
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('empresas/create') ? ' active' : '' }}" href="/empresas/create">
+                                                            <span class="nav-main-link-name">Cadastrar Empresas</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link{{ request()->is('empresas') ? ' active' : '' }}" href="/empresas/">
+                                                            <span class="nav-main-link-name">Empresas Cadastradas</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <!-- Fim Submenu Empresas -->
                                             <!-- Submenu Gestores -->
                                             <li class="nav-main-item">
                                                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">

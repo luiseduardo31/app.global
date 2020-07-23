@@ -28,13 +28,14 @@ CREATE TABLE IF NOT EXISTS `contas` (
   PRIMARY KEY (`id`),
   KEY `fk_contas_operadoras_idx` (`operadora_id`),
   CONSTRAINT `fk_contas_operadoras` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~2 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `observacao`, `operadora_id`, `grupo_id`, `updated_at`) VALUES
-	(7, 'Conta Realmar 001', 7, 'Conta TIM!', 4, 5, '2020-07-16 13:44:59');
+	(7, 'Conta Realmar 001', 7, 'Conta TIM!', 4, 5, '2020-07-16 13:44:59'),
+	(8, '88882211', 4, NULL, 3, 5, '2020-07-20 18:19:40');
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.contratos_fixos
@@ -112,18 +113,21 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   `razao_social` varchar(50) NOT NULL,
   `cnpj` varchar(14) NOT NULL,
   `grupo_id` int(10) unsigned NOT NULL,
+  `observacao` varchar(145) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_empresas_grupos` (`grupo_id`),
   CONSTRAINT `FK_empresas_grupos` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.empresas: ~3 rows (aproximadamente)
 DELETE FROM `empresas`;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
-INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`) VALUES
-	(1, 'Aguia Branca SA', '1234567890', 1),
-	(4, 'Extrabom', '0120910291', 5),
-	(7, 'Viação Teste AB', '0789925154', 5);
+INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`, `observacao`, `updated_at`) VALUES
+	(1, 'Aguia Branca SA', '1234567890', 1, 'kkhk', NULL),
+	(4, 'Extrabom', '0120910291', 5, NULL, NULL),
+	(7, 'Viação Teste AB', '0789925154', 5, NULL, NULL),
+	(8, 'Extrabaum 9', '10254214000149', 5, 'aaaaaa', '2020-07-23 17:45:37');
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.failed_jobs
@@ -227,15 +231,16 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_grupos` (`grupos_id`) USING BTREE,
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
   CONSTRAINT `FK_grupos_users_grupos` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~4 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
 	(24, 1, 9, NULL, NULL),
 	(26, 5, 1, NULL, NULL),
-	(28, 5, 13, NULL, NULL);
+	(28, 5, 13, NULL, NULL),
+	(31, 5, 16, NULL, NULL);
 /*!40000 ALTER TABLE `grupos_users` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.inventarios
@@ -271,9 +276,9 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `data_registro` (`data_registro`),
   KEY `chip` (`chip`),
   KEY `FK_inventarios_matriculas` (`filial_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.inventarios: ~7 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip`, `observacao`, `funcao_id`, `filial_id`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `grupo_id`, `updated_at`) VALUES
@@ -281,7 +286,9 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(4, '27988888888', 'aaaaa', '2020-06-01', NULL, NULL, 12, 12, 2, 12, 12, 12, 8, 1, 1, 1, NULL),
 	(5, '12121212', 'asas', '2020-06-03', NULL, NULL, 1, 12, 2, 12, 12, 12, 8, 1, 1, 1, NULL),
 	(6, '31999995555', 'Teste DDD 31 A', '2020-06-20', '88881111', 'asasasaaaa a', 1, 19, 2, 1, 1, 1, 8, 1, 1, 1, '2020-06-29 18:30:51'),
-	(7, '27888787777', 'User Extrabom', '2020-06-01', NULL, 'aaaaa', 2, 20, 4, 2, 2, 2, 8, 1, 1, 5, NULL);
+	(7, '27888787777', 'User Extrabom', '2020-06-01', NULL, 'aaaaa', 2, 20, 4, 2, 2, 2, 8, 1, 1, 5, NULL),
+	(9, '27996397521', 'Luis Monteiro', '2020-07-20', '8855', 'sei la', 2, 20, 7, 2, 2, 2, 10, 1, 2, 5, '2020-07-20 15:56:21'),
+	(10, '27888888888', 'Vitor', '2020-07-20', '88559999', NULL, 2, 20, 8, 2, 2, 2, 16, 1, 3, 5, '2020-07-20 18:22:33');
 /*!40000 ALTER TABLE `inventarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.matriculas
@@ -322,18 +329,20 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE IF NOT EXISTS `operadoras` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `operadora` varchar(50) DEFAULT NULL,
+  `tipo_operadora` int(1) DEFAULT NULL,
   `observacao` varchar(145) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.operadoras: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.operadoras: ~5 rows (aproximadamente)
 DELETE FROM `operadoras`;
 /*!40000 ALTER TABLE `operadoras` DISABLE KEYS */;
-INSERT INTO `operadoras` (`id`, `operadora`, `observacao`) VALUES
-	(1, 'Vivo', NULL),
-	(2, 'Claro', NULL),
-	(3, 'Tim', NULL),
-	(4, 'Oi', NULL);
+INSERT INTO `operadoras` (`id`, `operadora`, `tipo_operadora`, `observacao`) VALUES
+	(1, 'Vivo', 1, NULL),
+	(2, 'Claro', 1, NULL),
+	(3, 'Tim', 1, NULL),
+	(4, 'Oi', 1, NULL),
+	(5, 'Algar Telecom', 2, NULL);
 /*!40000 ALTER TABLE `operadoras` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.password_resets
@@ -356,26 +365,19 @@ CREATE TABLE IF NOT EXISTS `planos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plano` varchar(50) DEFAULT NULL,
   `grupo_id` int(11) DEFAULT NULL,
+  `operadora_id` int(11) DEFAULT NULL,
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.planos: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.planos: ~3 rows (aproximadamente)
 DELETE FROM `planos`;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
-INSERT INTO `planos` (`id`, `plano`, `grupo_id`, `observacao`, `updated_at`) VALUES
-	(1, 'SMART EMPRESAS 0.5GB', 1, NULL, '2020-06-29 16:41:54'),
-	(2, 'SMART EMPRESAS 5GB', 1, NULL, '2020-06-29 16:41:55'),
-	(3, 'SMART EMPRESAS 2GB', 1, NULL, '2020-06-29 16:41:56'),
-	(4, 'INTERNET MOVEL 3GB', 1, NULL, '2020-06-29 16:41:57'),
-	(5, 'SMART EMPRESAS 10GB', 1, NULL, '2020-06-29 16:41:58'),
-	(6, 'SMART EMPRESAS 25GB', 1, NULL, '2020-06-29 16:41:59'),
-	(7, 'INTERNET MOVEL 20GB', 1, NULL, '2020-06-29 16:42:00'),
-	(8, 'INTERNET MOVEL 10GB', 1, NULL, '2020-06-29 16:42:01'),
-	(9, 'SMART EMPRESAS NACIONAL VOZ', 1, NULL, '2020-06-29 16:42:02'),
-	(10, 'LOCAL SMART 80 MINUTOS', 5, NULL, '2020-07-20 12:49:33'),
-	(14, 'Plano A', 5, 'aaa', NULL);
+INSERT INTO `planos` (`id`, `plano`, `grupo_id`, `operadora_id`, `observacao`, `updated_at`) VALUES
+	(10, 'Local 80 Minutos', 1, 1, NULL, '2020-07-21 18:56:38'),
+	(14, 'Ilimitado 0,5GB', 5, 3, 'aaa', '2020-07-20 18:12:02'),
+	(16, 'Ilimitado 300MB + 300MB', 5, 2, 'Plano Claro56455454555555', '2020-07-21 11:42:47');
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.setores
@@ -477,9 +479,9 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   `data_termino` date DEFAULT NULL,
   `data_alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.ultimos_usuarios: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.ultimos_usuarios: ~7 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES
@@ -487,7 +489,9 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(3, 'aaaaa', '27988888888', '2020-06-01', NULL, '2020-06-29 15:23:02'),
 	(4, 'asas', '12121212', '2020-06-03', NULL, '2020-06-29 15:26:40'),
 	(5, 'Teste DDD 31', '31999995555', '2020-02-01', '2020-06-20', '2020-06-29 15:30:51'),
-	(6, 'User Extrabom', '27888787777', '2020-06-01', NULL, '2020-06-29 15:42:59');
+	(6, 'User Extrabom', '27888787777', '2020-06-01', NULL, '2020-06-29 15:42:59'),
+	(8, 'Luis Eduardo', '27996397521', '2020-02-10', '2020-07-20', '2020-07-20 12:56:21'),
+	(9, 'Gustavo', '27888888888', '2020-06-15', '2020-07-20', '2020-07-20 15:22:33');
 /*!40000 ALTER TABLE `ultimos_usuarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.users
@@ -504,17 +508,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Copiando dados para a tabela app-global.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
-	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-20 11:18:08', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', NULL, 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
-	(4, 'extrabom', 'extrabom@teste.com', '2020-07-19 12:16:12', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-17 19:19:21'),
-	(13, 'romario 11', 'romario@romario.com', '2020-07-20 12:33:39', '$2y$10$ipn8Ej4RuAin371ZmxRgY.v11hZTnbRol85Yllf0vszaDGp.ndxk2', NULL, 2, 'testeee kkh', '2020-07-20 14:56:44', '2020-07-20 15:33:39'),
-	(14, 'pele', 'pele@pele.com', '2020-07-20 11:57:11', '$2y$10$MMMBl84VE2/K9qyw5ArwEuUq.d3dut0hoLEJCvsNQhRnyD6vh.xHa', NULL, 1, 'testeee', '2020-07-20 14:57:11', '2020-07-20 14:57:11'),
-	(15, 'aaasa', 'luis@luis.comaa', '2020-07-20 12:22:21', '$2y$10$byNGwUDlHzJRHSN01tn3NOOhuS1BVLLYC5rwKSYOaw8lmvBo5Zbdy', NULL, 1, NULL, '2020-07-20 15:22:21', '2020-07-20 15:22:21');
+	(1, 'Luis Eduardo', 'luis@luis.com', '2020-07-22 17:00:03', '$2y$10$o3RAU5.JtMGEaJ6kYqBlZOkX0JXwwjIgHHXrVWCOd2lhYiVfWcrly', 'awNbCSbuB0ettqgKcj5EGztrdYwuGgAauFDsMkj8lSxnqVbZ3YO3UjbxZrcb', 1, NULL, '2020-07-17 15:29:55', '2020-07-20 14:18:08'),
+	(4, 'Extrabom', 'extrabom@teste.com', '2020-07-20 17:06:30', '$2y$10$6JzLim/yf35LnnrKmfgZ5.1u2Ee5L964hy53bf2/M9WeLE/2WCOAa', NULL, 2, NULL, '2020-07-17 19:19:21', '2020-07-20 20:06:30'),
+	(13, 'Romário', 'romario@romario.com', '2020-07-20 17:06:43', '$2y$10$ipn8Ej4RuAin371ZmxRgY.v11hZTnbRol85Yllf0vszaDGp.ndxk2', NULL, 2, 'testeee kkh', '2020-07-20 14:56:44', '2020-07-20 20:06:43'),
+	(16, 'Vinicius', 'vinicius@vinicius.com', '2020-07-21 11:44:38', '$2y$10$fL5hdnZ793TDA3KF/3JIl.nn2sWqCbZo8zt/mtunOig.9vQxfN2EW', NULL, 2, 'Teste', '2020-07-21 14:44:21', '2020-07-21 14:44:38');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario

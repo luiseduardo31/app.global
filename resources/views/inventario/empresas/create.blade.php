@@ -6,8 +6,8 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                  <a href="{{route('contas.index')}}">
-                     Contas
+                  <a href="{{route('empresas.index')}}">
+                     Empresas
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Inventario Móvel]
@@ -15,9 +15,9 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contas</li>
+                        <li class="breadcrumb-item">Empresas</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Cadastrar Nova Conta</a>
+                            <a class="link-fx" href="">Cadastrar Nova Empresa</a>
                         </li>
                     </ol>
                 </nav>
@@ -36,37 +36,22 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('contas.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('empresas.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
-                        <div class="col-3">
-                            <label for="conta">Conta</label>
-                            <input type="text" name="conta" class="form-control" placeholder="Conta" maxlength="50">
+                        <div class="col-4">
+                            <label for="razao_social">Razão Social</label>
+                            <input type="text" name="razao_social" class="form-control" placeholder="Razão Social" maxlength="50">
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" name="cnpj" class="form-control" placeholder="CNPJ" maxlength="50">
+                        </div>
+                        <div class="col-4">
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control selectpicker dynamic" name="grupo_id" id="grupos">
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->GrupoID}}">{{$grupo->grupo}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-4">
-                            <label for="user">Razão Social | CNPJ</label>
-                            <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
-                                <option readonly>Escolha uma opção</option>
-                            @foreach ($empresas as $empresa)
-                                <option data-subtext=" | {{$empresa->cnpj}}" value="{{$empresa->EmpresasID}}">{{$empresa->razao_social}}</option>
-                            @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-3">
-                            <label for="operadora">Operadora</label>
-                            <select class="form-control" name="operadora_id">
-                            @foreach ($operadoras as $operadora)
-                                <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
                             @endforeach
                             </select>
                         </div>
@@ -85,7 +70,7 @@
                         </div>  
                         
                         <div class="col-2">
-                            <a href="{{route('contas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
+                            <a href="{{route('empresas.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar o cadastro?')">
                                 Cancelar
                             </a>
                         </div>
