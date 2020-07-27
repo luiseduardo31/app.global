@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>{{$setor->setor}}</td>
                                         <td class="text-center">{{$setor->grupo}}</td>
-                                        <td>{{$setor->observacao}}</td>
+                                        <td>{{$setor->obsSetor}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">

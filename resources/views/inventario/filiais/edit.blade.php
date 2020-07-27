@@ -67,7 +67,7 @@
                         </div> 
                      
                         <div class="col-2">
-                            <a href="{{route('filiais.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da Matrícula {{$filiais->filial}}?');">
+                            <a href="{{route('filiais.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição da filial {{$filiais->filial}}?');">
                                 Cancelar Edição
                             </a>
                         </div>

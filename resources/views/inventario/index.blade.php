@@ -56,6 +56,7 @@
                                         <th>Inicio</th>
                                         <th>Chip</th>
                                         <th>R. Desp.</th>
+                                        <th>Observacao</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -86,6 +87,7 @@
                                         <td>{{$linha->status}}</td>
                                         <td>{{strftime("%d-%m-%Y", strtotime($linha->data_registro))}}</td>
                                         <td>{{$linha->chip}}</td>
+                                        <td>{{$linha->resp_despesa}}</td>
                                         <td>{{$linha->obsInventario}}</td>
                                         <td> 
                                             <div class="btn-group">

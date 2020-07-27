@@ -78,7 +78,7 @@ class UsuariosController extends Controller
     {
         $tipos_usuarios = TiposUsuarios::all(['id', 'tipo_usuario'])->sortBy('tipo_usuario');
 
-        $usuarios = Usuarios::all(['id', 'name','email','tipo_usuario_id'])->where('users.id', '>', 1);
+        $usuarios = Usuarios::all(['id', 'name','email','tipo_usuario_id']);
         $usuarios = $this->usuarios->find($id);
 
         return view('usuarios.edit', compact('usuarios', 'tipos_usuarios'));

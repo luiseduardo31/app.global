@@ -26,7 +26,7 @@ class GestoresController extends Controller
         $user_id = Auth::id();
 
         $gestores = DB::table('gestores')->orderBy('gestor', 'asc')
-            ->select(array('gestores.id AS GestorID', 'gestores.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('gestores.observacao AS obsGestor','gestores.id AS GestorID', 'gestores.*', 'grupos_users.*', 'grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'gestores.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'gestores.grupo_id')
             ->where('users_id', $user_id)

@@ -26,7 +26,7 @@ class SubsetoresController extends Controller
         $user_id = Auth::id();
 
         $subsetores = DB::table('subsetores')->orderBy('subsetor', 'asc')
-            ->select(array('subsetores.id AS SubsetorID', 'subsetores.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('subsetores.observacao AS obsSubsetores','subsetores.id AS SubsetorID', 'subsetores.*', 'grupos_users.*', 'grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'subsetores.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'subsetores.grupo_id')
             ->where('users_id', $user_id)

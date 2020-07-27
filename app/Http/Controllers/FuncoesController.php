@@ -28,7 +28,7 @@ class FuncoesController extends Controller
         $user_id = Auth::id();
 
         $funcoes = DB::table('funcoes')->orderBy('funcao','asc')
-            ->select(array('funcoes.id as funcoesID', 'funcoes.*', 'grupos_users.*','grupos.*'))
+            ->select(array('funcoes.observacao AS obsFuncao','funcoes.id as funcoesID', 'funcoes.*', 'grupos_users.*','grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'funcoes.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'funcoes.grupo_id')
             ->where('users_id', $user_id)

@@ -167,8 +167,8 @@
                   </div>
                   <div class="form-group form-row"> 
                      <div class="col-10">
-                        <label for="Observacao">Responsabilidade da Despesa</label> <br>
-                        <input type="text"  name="observacao" class="form-control" value="{{$inventario->observacao}}" maxlength="145">
+                        <label for="resp_despesa">Responsabilidade da Despesa</label> <br>
+                        <input type="text"  name="resp_despesa" class="form-control" value="{{$inventario->resp_despesa}}" maxlength="145">
                      </div>
 
                      <div class="col-2">
@@ -182,13 +182,24 @@
                         </select>
                      </div>
                   </div>
+                  <div class="form-group form-row">  
+                     <div class="col-12">
+                        <label for="resp_despesa">Observação</label> <br>
+                        <textarea name="observacao" class="form-control" rows="3">{{$inventario->observacao}}</textarea>
+                     </div>
+                  </div>
 
                   <div class="form-group form-row">
-                     <div class="col-1">
-                        <button type="submit" class="btn btn-primary">Salvar Dados</button>  
+                     <div class="col-2">
+                        <button type="submit" class="btn btn-primary form-control">Salvar Dados</button>  
                      </div>                   
-                  </div>
-                     
+                  
+                     <div class="col-2">
+                        <a href="{{route('inventario.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição?')">
+                           Cancelar
+                        </a>
+                     </div>
+                  </div>  
                </form>
             </div>
         </div>

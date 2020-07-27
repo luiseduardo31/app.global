@@ -26,7 +26,7 @@ class FiliaisController extends Controller
         $user_id = Auth::id();
 
         $filiais = DB::table('filiais')->orderBy('filial', 'asc')
-            ->select(array('filiais.id AS filialID','filiais.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('filiais.observacao AS obsFilial','filiais.id AS filialID','filiais.*', 'grupos_users.*', 'grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'filiais.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'filiais.grupo_id')
             ->where('users_id', $user_id)
@@ -94,7 +94,7 @@ class FiliaisController extends Controller
         $user = Auth::user();
         $user_id = Auth::id();
         
-        $filiais = Filiais::all(['id', 'filial', 'observacao'])->sortBy('matricula');
+        $filiais = Filiais::all(['id', 'filial', 'observacao'])->sortBy('filial');
         $filiais = $this->filiais->find($id);
 
         $grupos = DB::table('grupos')->orderBy('grupo', 'ASC')

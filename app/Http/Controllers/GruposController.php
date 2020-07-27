@@ -22,7 +22,7 @@ class GruposController extends Controller
      */
     public function index()
     {
-        $grupos = Grupos::all(['id', 'grupo'])->sortBy('grupo');
+        $grupos = Grupos::all(['id', 'grupo','observacao'])->sortBy('grupo');
 
         return view('inventario.grupos.index',compact('grupos'));
     }

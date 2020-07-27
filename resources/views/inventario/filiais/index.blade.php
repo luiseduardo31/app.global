@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>{{$filial->filial}}</td>
                                         <td class="text-center">{{$filial->grupo}}</td>
-                                        <td>{{$filial->observacao}}</td>
+                                        <td>{{$filial->obsFilial}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">

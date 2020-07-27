@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>{{$gestor->gestor}}</td>
                                         <td class="text-center">{{$gestor->grupo}}</td>
-                                        <td>{{$gestor->observacao}}</td>
+                                        <td>{{$gestor->obsGestor}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">

@@ -26,7 +26,7 @@ class SetoresController extends Controller
         $user_id = Auth::id();
 
         $setores = DB::table('setores')->orderBy('setor', 'asc')
-            ->select(array('setores.id AS SetorID', 'setores.*', 'grupos_users.*', 'grupos.*'))
+            ->select(array('setores.observacao AS obsSetor','setores.id AS SetorID', 'setores.*', 'grupos_users.*', 'grupos.*'))
             ->join('grupos', 'grupos.id', '=', 'setores.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'setores.grupo_id')
             ->where('users_id', $user_id)
