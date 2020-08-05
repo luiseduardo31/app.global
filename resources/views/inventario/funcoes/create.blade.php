@@ -39,12 +39,12 @@
                <form action="{{route('funcoes.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="form-group form-row">
-                        <div class="col-3">
+                        <div class="col-6">
                             <label for="Funcao">Função</label>
-                            <input type="text" name="funcao" class="form-control" placeholder="Função" maxlength="25">
+                            <input type="text" name="funcao" class="form-control" placeholder="Função" maxlength="50">
                         </div>
 
-                        <div class="col-9">
+                        <div class="col-6">
                             <label for="grupo">Grupo Empresarial</label>
                             <select class="form-control" name="grupo_id">
                             @foreach ($grupos as $grupo)

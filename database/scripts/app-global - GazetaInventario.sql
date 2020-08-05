@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `contas` (
   KEY `fk_contas_operadoras_idx` (`operadora_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~4 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `operadora_id`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -345,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `grupos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos: ~0 rows (aproximadamente)
 DELETE FROM `grupos`;
 /*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
 INSERT INTO `grupos` (`id`, `grupo`, `observacao`, `updated_at`) VALUES
@@ -364,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   KEY `FK_grupos_users_users` (`users_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.grupos_users: ~0 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `operadoras` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.operadoras: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.operadoras: ~3 rows (aproximadamente)
 DELETE FROM `operadoras`;
 /*!40000 ALTER TABLE `operadoras` DISABLE KEYS */;
 INSERT INTO `operadoras` (`id`, `operadora`, `tipo_operadora`, `observacao`) VALUES
@@ -741,7 +741,7 @@ CREATE TABLE IF NOT EXISTS `tipos_linhas` (
   UNIQUE KEY `tipos_UNIQUE` (`tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.tipos_linhas: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.tipos_linhas: ~3 rows (aproximadamente)
 DELETE FROM `tipos_linhas`;
 /*!40000 ALTER TABLE `tipos_linhas` DISABLE KEYS */;
 INSERT INTO `tipos_linhas` (`id`, `tipo`) VALUES

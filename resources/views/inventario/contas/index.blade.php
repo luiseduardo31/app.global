@@ -42,10 +42,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width:30%">Conta</th>
-                                         <th style="width:30%">Grupo</th>
+                                         <th class="text-center">Grupo</th>
                                          <th style="width:30%">Razão Social</th>
-                                         <th style="width:30%">CNPJ</th>
-                                         <th style="width:30%">Operadora</th>
+                                         <th class="text-center">CNPJ</th>
+                                         <th class="text-center">Operadora</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -55,9 +55,9 @@
                                     <tr>
                                         <td>{{$conta->conta}}</td>
                                         <td class="text-center">{{$conta->grupo}}</td>
-                                        <td class="text-center">{{$conta->razao_social}}</td>
+                                        <td>{{$conta->razao_social}}</td>
                                         <td class="text-center">{{$conta->cnpj}}</td>
-                                        <td>{{$conta->operadora}}</td>
+                                        <td class="text-center">{{$conta->operadora}}</td>
                                         <td>{{$conta->obsConta}}</td>
                                         <td> 
                                             <div class="btn-group">
