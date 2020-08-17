@@ -41,6 +41,7 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" style="width:10%">ID</th>
                                         <th style="width:20%">Filial</th>
                                         <th style="width:20%">Grupo</th>
                                         <th>Observação</th>
@@ -50,6 +51,7 @@
                                 <tbody>
                                     @forelse ($filiais as $filial)
                                     <tr>
+                                        <td class="text-center">{{$filial->filialID}}</td>
                                         <td>{{$filial->filial}}</td>
                                         <td class="text-center">{{$filial->grupo}}</td>
                                         <td>{{$filial->obsFilial}}</td>

@@ -41,6 +41,7 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" style="width:10%">ID</th>
                                         <th style="width:30%">Setores</th>
                                         <th style="width:30%">Grupo</th>
                                         <th>Observação</th>
@@ -50,6 +51,7 @@
                                 <tbody>
                                     @forelse ($setores as $setor)
                                     <tr>
+                                        <td class="text-center">{{$setor->SetorID}}</td>
                                         <td>{{$setor->setor}}</td>
                                         <td class="text-center">{{$setor->grupo}}</td>
                                         <td>{{$setor->obsSetor}}</td>

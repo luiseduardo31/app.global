@@ -41,6 +41,7 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th style="width:10%">ID</th>
                                         <th style="width:30%">Conta</th>
                                          <th class="text-center">Grupo</th>
                                          <th style="width:30%">Razão Social</th>
@@ -53,6 +54,7 @@
                                 <tbody>
                                     @forelse ($contas as $conta)
                                     <tr>
+                                        <td class="text-center">{{$conta->ContaID}}</td>
                                         <td>{{$conta->conta}}</td>
                                         <td class="text-center">{{$conta->grupo}}</td>
                                         <td>{{$conta->razao_social}}</td>
