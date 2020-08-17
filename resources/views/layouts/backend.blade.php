@@ -34,7 +34,7 @@
         <link href="{{URL::asset('/css/oneui.css') }}" rel="stylesheet" type="text/css">
 
         
-        <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
+        <link href="{{URL::asset('/css/themes/amethyst.css') }}" rel="stylesheet" type="text/css">
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
         @yield('css_after')
 
@@ -43,6 +43,7 @@
        
     </head>
     <body>
+        <div id="page-loader" class="show"></div>
     <!-- Page Container -->
     <!--
             Available classes for #page-container:
@@ -247,24 +248,24 @@
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('register') ? ' active' : '' }}" href="/register">
+                                            <a class="nav-main-link{{ request()->is('register') ? ' active' : '' }}" href="{{route('register')}}">
                                                 <span class="nav-main-link-name">Cadastrar Usuário</span>
                                             </a>
                                         </li>
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('usuarios') ? ' active' : '' }}" href="/usuarios/">
+                                            <a class="nav-main-link{{ request()->is('usuarios') ? ' active' : '' }}" href="{{url('usuarios')}}">
                                                 <span class="nav-main-link-name">Usuários Cadastrados</span>
                                             </a>
                                         </li>
                                     </ul>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('acessos/create') ? ' active' : '' }}" href="/acessos/create">
+                                            <a class="nav-main-link{{ request()->is('acessos/create') ? ' active' : '' }}" href="{{url('acessos/create')}}">
                                                 <span class="nav-main-link-name">Cadastrar Acesso</span>
                                             </a>
                                         </li>
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('acessos') ? ' active' : '' }}" href="/acessos/">
+                                            <a class="nav-main-link{{ request()->is('acessos') ? ' active' : '' }}" href="{{url('acessos')}}">
                                                 <span class="nav-main-link-name">Acessos Cadastrados</span>
                                             </a>
                                         </li>
@@ -281,7 +282,7 @@
                                     </a>
                                     <ul class="nav-main-submenu">
                                         <li class="nav-main-item">
-                                            <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="/inventario/create">
+                                            <a class="nav-main-link{{ request()->is('inventario/create') ? ' active' : '' }}" href="{{url('inventario/create')}}">
                                                 <span class="nav-main-link-name">Cadastrar Linha</span>
                                             </a>
                                         </li>
@@ -293,12 +294,12 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('contas/create') ? ' active' : '' }}" href="/contas/create">
+                                                    <a class="nav-main-link{{ request()->is('contas/create') ? ' active' : '' }}" href="{{url('contas/create')}}">
                                                         <span class="nav-main-link-name">Cadastrar Conta</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('contas') ? ' active' : '' }}" href="/contas/">
+                                                    <a class="nav-main-link{{ request()->is('contas') ? ' active' : '' }}" href="{{url('contas')}}">
                                                         <span class="nav-main-link-name">Contas Cadastradas</span>
                                                     </a>
                                                 </li>
@@ -312,12 +313,12 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('empresas/create') ? ' active' : '' }}" href="/empresas/create">
+                                                    <a class="nav-main-link{{ request()->is('empresas/create') ? ' active' : '' }}" href="{{url('empresas/create')}}">
                                                         <span class="nav-main-link-name">Cadastrar Empresas</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('empresas') ? ' active' : '' }}" href="/empresas/">
+                                                    <a class="nav-main-link{{ request()->is('empresas') ? ' active' : '' }}" href="{{url('empresas')}}">
                                                         <span class="nav-main-link-name">Empresas Cadastradas</span>
                                                     </a>
                                                 </li>
@@ -331,12 +332,12 @@
                                             </a>
                                             <ul class="nav-main-submenu">
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('filiais/create') ? ' active' : '' }}" href="/filiais/create">
+                                                    <a class="nav-main-link{{ request()->is('filiais/create') ? ' active' : '' }}" href="{{url('filiais/create')}}">
                                                         <span class="nav-main-link-name">Cadastrar Filial</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-main-item">
-                                                    <a class="nav-main-link{{ request()->is('filiais') ? ' active' : '' }}" href="/filiais/">
+                                                    <a class="nav-main-link{{ request()->is('filiais') ? ' active' : '' }}" href="{{url('filiais')}}">
                                                         <span class="nav-main-link-name">Filiais Cadastradas</span>
                                                     </a>
                                                 </li>
@@ -350,12 +351,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('funcoes/create') ? ' active' : '' }}" href="/funcoes/create">
+                                                        <a class="nav-main-link{{ request()->is('funcoes/create') ? ' active' : '' }}" href="{{url('funcoes/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Função</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('funcoes') ? ' active' : '' }}" href="/funcoes/">
+                                                        <a class="nav-main-link{{ request()->is('funcoes') ? ' active' : '' }}" href="{{url('funcoes')}}">
                                                             <span class="nav-main-link-name">Funções Cadastradas</span>
                                                         </a>
                                                     </li>
@@ -369,12 +370,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="/gestores/create">
+                                                        <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="{{url('gestores/create')}}>
                                                             <span class="nav-main-link-name">Cadastrar Gestor</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('gestores') ? ' active' : '' }}" href="/gestores/">
+                                                        <a class="nav-main-link{{ request()->is('gestores') ? ' active' : '' }}" href="{{url('gestores')}}">
                                                             <span class="nav-main-link-name">Gestores Cadastrados</span>
                                                         </a>
                                                     </li>
@@ -388,12 +389,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('grupos/create') ? ' active' : '' }}" href="/grupos/create">
+                                                        <a class="nav-main-link{{ request()->is('grupos/create') ? ' active' : '' }}" href="{{url('grupos/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Grupos</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('grupos') ? ' active' : '' }}" href="/grupos/">
+                                                        <a class="nav-main-link{{ request()->is('grupos') ? ' active' : '' }}" href="{{url('grupos')}}">
                                                             <span class="nav-main-link-name">Grupos Cadastrados</span>
                                                         </a>
                                                     </li>
@@ -407,12 +408,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('planos/create') ? ' active' : '' }}" href="/planos/create">
+                                                        <a class="nav-main-link{{ request()->is('planos/create') ? ' active' : '' }}" href="{{url('planos/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Plano</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('planos') ? ' active' : '' }}" href="/planos/">
+                                                        <a class="nav-main-link{{ request()->is('planos') ? ' active' : '' }}" href="{{url('planos')}}">
                                                             <span class="nav-main-link-name">Planos Cadastrados</span>
                                                         </a>
                                                     </li>
@@ -426,12 +427,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('setores/create') ? ' active' : '' }}" href="/setores/create">
+                                                        <a class="nav-main-link{{ request()->is('setores/create') ? ' active' : '' }}" href="{{url('setores/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Setores</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('setores') ? ' active' : '' }}" href="/setores/">
+                                                        <a class="nav-main-link{{ request()->is('setores') ? ' active' : '' }}" href="{{url('setores')}}">
                                                             <span class="nav-main-link-name">Setores Cadastrados</span>
                                                         </a>
                                                     </li>
@@ -446,12 +447,12 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('subsetores/create') ? ' active' : '' }}" href="/subsetores/create">
+                                                        <a class="nav-main-link{{ request()->is('subsetores/create') ? ' active' : '' }}" href="{{url('subsetores/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Subsetores</span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('subsetores') ? ' active' : '' }}" href="/subsetores/">
+                                                        <a class="nav-main-link{{ request()->is('subsetores') ? ' active' : '' }}" href="{{url('subsetores')}}">
                                                             <span class="nav-main-link-name">Subsetores Cadastrados</span>
                                                         </a>
                                                     </li>
@@ -476,12 +477,12 @@
                                                         </a>
                                                         <ul class="nav-main-submenu">
                                                             <li class="nav-main-item">
-                                                                <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="/contratos-fixo/create">
+                                                                <a class="nav-main-link{{ request()->is('contratos-fixo/create') ? ' active' : '' }}" href="{{url('contratos-fixo/create')}}">
                                                                     <span class="nav-main-link-name">Cadastrar Contrato</span>
                                                                 </a>
                                                             </li>
                                                             <li class="nav-main-item">
-                                                                <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="/contratos-fixo/">
+                                                                <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="{{url('contratos-fixo')}}">
                                                                     <span class="nav-main-link-name">Contratos Cadastrados</span>
                                                                 </a>
                                                             </li>
@@ -497,12 +498,12 @@
                                                         </a>
                                                         <ul class="nav-main-submenu">
                                                             <li class="nav-main-item">
-                                                                <a class="nav-main-link{{ request()->is('contratos-movel/create') ? ' active' : '' }}" href="/contratos-movel/create">
+                                                                <a class="nav-main-link{{ request()->is('contratos-movel/create') ? ' active' : '' }}" href="{{url('contratos-movel/create')}}">
                                                                     <span class="nav-main-link-name">Cadastrar Contrato</span>
                                                                 </a>
                                                             </li>
                                                             <li class="nav-main-item">
-                                                                <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="/contratos-movel/">
+                                                                <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="{{url('contratos-movel')}}">
                                                                     <span class="nav-main-link-name">Contratos Cadastrados</span>
                                                                 </a>
                                                             </li>
@@ -524,7 +525,7 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('inventario') ? ' active' : '' }}" href="/inventario/">
+                                    <a class="nav-main-link{{ request()->is('inventario') ? ' active' : '' }}" href="{{url('inventario')}}">
                                         <span class="nav-main-link-name">Linhas Cadastradas</span>
                                     </a>
                                 </li>
@@ -888,10 +889,10 @@
         <!-- END Page Container -->
 
         <!-- OneUI Core JS -->
-        <script src="{{ mix('js/oneui.app.js') }}"></script>
+        <script src="{{URL::asset('js/oneui.app.js')}}"></script>
 
         <!-- Laravel Scaffolding JS -->
-        <script src="{{ mix('js/laravel.app.js') }}"></script>
+        <script src="{{URL::asset('js/laravel.app.js')}}"></script>
         
         
         @yield('js_after')
