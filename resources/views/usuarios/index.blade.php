@@ -41,6 +41,7 @@
                             <table id="contact-detail" class="responsive display nowrap table table-bordered table-striped table-vcenter" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" style="width:10%">ID</th>
                                         <th style="width:20%">Usuário</th>
                                         <th style="width:20%">E-mail</th>
                                         <th style="width:20%" class="text-center">Tipo Usuário</th>
@@ -52,6 +53,7 @@
                                 <tbody>
                                     @forelse ($usuarios as $usuario)
                                     <tr>
+                                        <td class="text-center">{{$usuario->id}}</td>
                                         <td>{{$usuario->name}}</td>
                                         <td>{{$usuario->email}}</td>
                                         <td class="text-center">{{$usuario->tipo_usuario}}</td>

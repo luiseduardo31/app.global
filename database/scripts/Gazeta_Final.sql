@@ -12,24 +12,26 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Copiando estrutura do banco de dados para app-global
+-- Copiando estrutura do banco de dados para gsinfb41_global
+CREATE DATABASE IF NOT EXISTS `gsinfb41_global` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `gsinfb41_global`;
 
-USE `gsinfb41_app_global`;
-
--- Copiando estrutura para tabela app-global.contas
+-- Copiando estrutura para tabela gsinfb41_global.contas
 CREATE TABLE IF NOT EXISTS `contas` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `conta` varchar(50) DEFAULT NULL,
   `empresa_id` int(10) NOT NULL,
   `operadora_id` int(10) NOT NULL,
-  `grupo_id` int(10) DEFAULT 1,
+  `grupo_id` int(10) unsigned DEFAULT 1,
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_contas_operadoras_idx` (`operadora_id`)
+  KEY `fk_contas_operadoras_idx` (`operadora_id`),
+  KEY `FK_CONTAS_GRUPOS` (`grupo_id`),
+  CONSTRAINT `FK_CONTAS_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.contas: ~5 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `operadora_id`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -40,7 +42,7 @@ INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `operadora_id`, `grupo_id`, `
 	(5, '71544563', 1, 3, 1, NULL, NULL);
 /*!40000 ALTER TABLE `contas` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.contratos_fixos
+-- Copiando estrutura para tabela gsinfb41_global.contratos_fixos
 CREATE TABLE IF NOT EXISTS `contratos_fixos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `operadora_id` int(10) NOT NULL,
@@ -66,12 +68,12 @@ CREATE TABLE IF NOT EXISTS `contratos_fixos` (
   KEY `FK_contratos_fixos_empresas` (`empresa_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contratos_fixos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.contratos_fixos: ~0 rows (aproximadamente)
 DELETE FROM `contratos_fixos`;
 /*!40000 ALTER TABLE `contratos_fixos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contratos_fixos` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.contratos_moveis
+-- Copiando estrutura para tabela gsinfb41_global.contratos_moveis
 CREATE TABLE IF NOT EXISTS `contratos_moveis` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `numero_contrato` varchar(40) DEFAULT NULL,
@@ -92,12 +94,12 @@ CREATE TABLE IF NOT EXISTS `contratos_moveis` (
   KEY `FK_contratos_fixos_empresas` (`empresa_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.contratos_moveis: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.contratos_moveis: ~0 rows (aproximadamente)
 DELETE FROM `contratos_moveis`;
 /*!40000 ALTER TABLE `contratos_moveis` DISABLE KEYS */;
 /*!40000 ALTER TABLE `contratos_moveis` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.empresas
+-- Copiando estrutura para tabela gsinfb41_global.empresas
 CREATE TABLE IF NOT EXISTS `empresas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `razao_social` varchar(50) NOT NULL,
@@ -106,10 +108,11 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_empresas_grupos` (`grupo_id`)
+  KEY `FK_empresas_grupos` (`grupo_id`),
+  CONSTRAINT `FK_EMPRESAS_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.empresas: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.empresas: ~2 rows (aproximadamente)
 DELETE FROM `empresas`;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
 INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -117,7 +120,7 @@ INSERT INTO `empresas` (`id`, `razao_social`, `cnpj`, `grupo_id`, `observacao`, 
 	(2, 'Radio Difusora Princesa do Sul', '27468008000133', 1, NULL, NULL);
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.failed_jobs
+-- Copiando estrutura para tabela gsinfb41_global.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -128,12 +131,12 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.failed_jobs: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.failed_jobs: ~0 rows (aproximadamente)
 DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.filiais
+-- Copiando estrutura para tabela gsinfb41_global.filiais
 CREATE TABLE IF NOT EXISTS `filiais` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `filial` varchar(25) NOT NULL DEFAULT '0',
@@ -141,10 +144,11 @@ CREATE TABLE IF NOT EXISTS `filiais` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `FK_matriculas_grupos` (`grupo_id`) USING BTREE
+  KEY `FK_matriculas_grupos` (`grupo_id`) USING BTREE,
+  CONSTRAINT `FK_FILIAIS_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.filiais: ~12 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.filiais: ~12 rows (aproximadamente)
 DELETE FROM `filiais`;
 /*!40000 ALTER TABLE `filiais` DISABLE KEYS */;
 INSERT INTO `filiais` (`id`, `filial`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -162,7 +166,7 @@ INSERT INTO `filiais` (`id`, `filial`, `grupo_id`, `observacao`, `updated_at`) V
 	(12, 'TV Norte', 1, NULL, NULL);
 /*!40000 ALTER TABLE `filiais` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.funcoes
+-- Copiando estrutura para tabela gsinfb41_global.funcoes
 CREATE TABLE IF NOT EXISTS `funcoes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `funcao` varchar(50) NOT NULL DEFAULT '0',
@@ -170,10 +174,11 @@ CREATE TABLE IF NOT EXISTS `funcoes` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_funcoes_grupos` (`grupo_id`)
+  KEY `FK_funcoes_grupos` (`grupo_id`),
+  CONSTRAINT `FK_FUNCOES_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.funcoes: ~76 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.funcoes: ~76 rows (aproximadamente)
 DELETE FROM `funcoes`;
 /*!40000 ALTER TABLE `funcoes` DISABLE KEYS */;
 INSERT INTO `funcoes` (`id`, `funcao`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -255,7 +260,7 @@ INSERT INTO `funcoes` (`id`, `funcao`, `grupo_id`, `observacao`, `updated_at`) V
 	(76, 'Whatssap', 1, NULL, NULL);
 /*!40000 ALTER TABLE `funcoes` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.gestores
+-- Copiando estrutura para tabela gsinfb41_global.gestores
 CREATE TABLE IF NOT EXISTS `gestores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '\n\n',
   `gestor` varchar(50) DEFAULT NULL,
@@ -263,10 +268,11 @@ CREATE TABLE IF NOT EXISTS `gestores` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_gestores_grupos` (`grupo_id`)
+  KEY `FK_gestores_grupos` (`grupo_id`),
+  CONSTRAINT `FK_GESTORES_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.gestores: ~64 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.gestores: ~64 rows (aproximadamente)
 DELETE FROM `gestores`;
 /*!40000 ALTER TABLE `gestores` DISABLE KEYS */;
 INSERT INTO `gestores` (`id`, `gestor`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -336,7 +342,7 @@ INSERT INTO `gestores` (`id`, `gestor`, `grupo_id`, `observacao`, `updated_at`) 
 	(64, 'Wanderson Luiz Clemente', 1, NULL, NULL);
 /*!40000 ALTER TABLE `gestores` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.grupos
+-- Copiando estrutura para tabela gsinfb41_global.grupos
 CREATE TABLE IF NOT EXISTS `grupos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `grupo` varchar(50) NOT NULL,
@@ -345,14 +351,14 @@ CREATE TABLE IF NOT EXISTS `grupos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.grupos: ~0 rows (aproximadamente)
 DELETE FROM `grupos`;
 /*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
 INSERT INTO `grupos` (`id`, `grupo`, `observacao`, `updated_at`) VALUES
 	(1, 'Gazeta', NULL, NULL);
 /*!40000 ALTER TABLE `grupos` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.grupos_users
+-- Copiando estrutura para tabela gsinfb41_global.grupos_users
 CREATE TABLE IF NOT EXISTS `grupos_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `grupos_id` int(10) unsigned NOT NULL,
@@ -361,17 +367,22 @@ CREATE TABLE IF NOT EXISTS `grupos_users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_grupos_users_grupos` (`grupos_id`) USING BTREE,
-  KEY `FK_grupos_users_users` (`users_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  KEY `FK_grupos_users_users` (`users_id`) USING BTREE,
+  CONSTRAINT `FK_GU_GRUPOS` FOREIGN KEY (`grupos_id`) REFERENCES `grupos` (`id`),
+  CONSTRAINT `FK_GU_USERS` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.grupos_users: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.grupos_users: ~4 rows (aproximadamente)
 DELETE FROM `grupos_users`;
 /*!40000 ALTER TABLE `grupos_users` DISABLE KEYS */;
 INSERT INTO `grupos_users` (`id`, `grupos_id`, `users_id`, `observacao`, `updated_at`) VALUES
-	(1, 1, 1, 'Administrador Gazeta', NULL);
+	(1, 1, 1, 'Dev', '2020-08-17 19:06:57'),
+	(2, 1, 21, NULL, NULL),
+	(3, 1, 22, NULL, NULL),
+	(4, 1, 24, NULL, NULL);
 /*!40000 ALTER TABLE `grupos_users` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.inventarios
+-- Copiando estrutura para tabela gsinfb41_global.inventarios
 CREATE TABLE IF NOT EXISTS `inventarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `linha` varchar(11) NOT NULL,
@@ -408,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `inventarios` (
   KEY `FK_INVENTARIO_GRUPO` (`grupo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=414 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.inventarios: ~412 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.inventarios: ~412 rows (aproximadamente)
 DELETE FROM `inventarios`;
 /*!40000 ALTER TABLE `inventarios` DISABLE KEYS */;
 INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip`, `funcao_id`, `filial_id`, `conta_id`, `setor_id`, `subsetor_id`, `gestor_id`, `plano_id`, `status_id`, `tipo_linha_id`, `grupo_id`, `resp_despesa`, `observacao`, `updated_at`) VALUES
@@ -462,7 +473,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(48, '27997246071', 'Whatsapp Renan', '2020-08-03', '89551127439000293955', 39, 9, 1, 30, 24, 53, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(49, '27992720266', 'Whatsapp Renan', '2020-08-03', '89551127639000398395', 39, 9, 1, 30, 24, 53, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(50, '27997101067', 'Emprestado Para Renan Fae', '2020-08-03', '89551127139000813972', 48, 9, 1, 30, 24, 53, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
-	(51, '27981279854', 'Sayonara da Rocha Brandao', '2020-08-03', 'SEM ID', 55, 9, 1, 64, 15, 8, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
+	(51, '27981279854', 'Sayonara da Rocha Brandao', '2020-08-03', 'SEM ID', 55, 1, 1, 64, 15, 8, 9, 1, 3, 1, 'José Lopes', '_', '2020-08-17 18:44:44'),
 	(52, '27999789769', 'Abdo Chequer Bou-Habib', '2020-08-03', '89551127139000060574', 23, 9, 1, 47, 26, 1, 7, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(53, '27992262456', 'Adalberto Fialho Mota Jun', '2020-08-03', '89551127639000341049', 14, 9, 1, 12, 27, 23, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(54, '27998269148', 'Adinalte João Beltrame ( ', '2020-08-03', '89551127139000814707', 23, 9, 1, 32, 28, 2, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
@@ -731,7 +742,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(317, '27999738577', 'Telejorn. (A Disp.)', '2020-08-03', 'SEM ID', 59, 12, 1, 77, 6, 17, 7, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(318, '27999571685', 'Telejorn. (A Disp.)', '2020-08-03', 'SEM ID', 59, 11, 1, 76, 81, 17, 7, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(319, '27981358266', 'Telejorn. (A Disp.)', '2020-08-03', '89551127206000174760', 44, 9, 1, 67, 15, 8, 7, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
-	(320, '27981358289', 'Telejorn. (A Disp.)', '2020-08-03', '89551127639000300292', 59, 9, 1, 64, 15, 8, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
+	(320, '27981358289', 'Telejorn. (A Disp.)', '2020-08-17', '89551127639000300292', 59, 1, 1, 64, 15, 8, 9, 1, 3, 1, 'José Lopes', NULL, '2020-08-17 17:38:54'),
 	(321, '27981372804', 'Telejorn. (A Disp.)', '2020-08-03', 'SEM ID', 59, 9, 1, 64, 15, 8, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(322, '27981380634', 'Telejornalismo Noroeste', '2020-08-03', 'SEM ID', 64, 11, 4, 78, 81, 45, 3, 1, 2, 1, 'José Lopes\r\n', NULL, NULL),
 	(323, '27981380543', 'Telejornalismo Noroeste', '2020-08-03', 'SEM ID', 64, 11, 4, 78, 81, 45, 3, 1, 2, 1, 'José Lopes\r\n', NULL, NULL),
@@ -826,7 +837,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(413, '27999446992', 'Bloqueada Gestor', '2020-08-03', 'SEM ID', 34, 7, 1, 66, 3, 35, 10, 2, 3, 1, 'José Lopes', NULL, NULL);
 /*!40000 ALTER TABLE `inventarios` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.matriculas
+-- Copiando estrutura para tabela gsinfb41_global.matriculas
 CREATE TABLE IF NOT EXISTS `matriculas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `matricula` varchar(25) NOT NULL DEFAULT '0',
@@ -837,12 +848,12 @@ CREATE TABLE IF NOT EXISTS `matriculas` (
   KEY `FK_matriculas_grupos` (`grupo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.matriculas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.matriculas: ~0 rows (aproximadamente)
 DELETE FROM `matriculas`;
 /*!40000 ALTER TABLE `matriculas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `matriculas` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.migrations
+-- Copiando estrutura para tabela gsinfb41_global.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -850,7 +861,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.migrations: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.migrations: ~3 rows (aproximadamente)
 DELETE FROM `migrations`;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -859,7 +870,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(3, '2019_08_19_000000_create_failed_jobs_table', 1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.operadoras
+-- Copiando estrutura para tabela gsinfb41_global.operadoras
 CREATE TABLE IF NOT EXISTS `operadoras` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `operadora` varchar(50) DEFAULT NULL,
@@ -868,7 +879,7 @@ CREATE TABLE IF NOT EXISTS `operadoras` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.operadoras: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.operadoras: ~4 rows (aproximadamente)
 DELETE FROM `operadoras`;
 /*!40000 ALTER TABLE `operadoras` DISABLE KEYS */;
 INSERT INTO `operadoras` (`id`, `operadora`, `tipo_operadora`, `observacao`) VALUES
@@ -878,7 +889,7 @@ INSERT INTO `operadoras` (`id`, `operadora`, `tipo_operadora`, `observacao`) VAL
 	(4, 'Vivo', 1, NULL);
 /*!40000 ALTER TABLE `operadoras` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.password_resets
+-- Copiando estrutura para tabela gsinfb41_global.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -886,12 +897,12 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.password_resets: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.password_resets: ~0 rows (aproximadamente)
 DELETE FROM `password_resets`;
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.planos
+-- Copiando estrutura para tabela gsinfb41_global.planos
 CREATE TABLE IF NOT EXISTS `planos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `plano` varchar(50) DEFAULT NULL,
@@ -899,10 +910,14 @@ CREATE TABLE IF NOT EXISTS `planos` (
   `operadora_id` int(11) unsigned DEFAULT NULL,
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `FK_PLANOS_GRUPOS` (`grupo_id`),
+  KEY `FK_PLANOS_OPERADORAS` (`operadora_id`),
+  CONSTRAINT `FK_PLANOS_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`),
+  CONSTRAINT `FK_PLANOS_OPERADORAS` FOREIGN KEY (`operadora_id`) REFERENCES `operadoras` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.planos: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.planos: ~13 rows (aproximadamente)
 DELETE FROM `planos`;
 /*!40000 ALTER TABLE `planos` DISABLE KEYS */;
 INSERT INTO `planos` (`id`, `plano`, `grupo_id`, `operadora_id`, `observacao`, `updated_at`) VALUES
@@ -921,7 +936,7 @@ INSERT INTO `planos` (`id`, `plano`, `grupo_id`, `operadora_id`, `observacao`, `
 	(13, 'Plano Base Internet PJ', 1, 4, NULL, NULL);
 /*!40000 ALTER TABLE `planos` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.setores
+-- Copiando estrutura para tabela gsinfb41_global.setores
 CREATE TABLE IF NOT EXISTS `setores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `setor` varchar(50) NOT NULL,
@@ -929,10 +944,11 @@ CREATE TABLE IF NOT EXISTS `setores` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `FK_setores_grupos` (`grupo_id`)
+  KEY `FK_setores_grupos` (`grupo_id`),
+  CONSTRAINT `FK_SETORES_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `setores` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.setores: ~85 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.setores: ~85 rows (aproximadamente)
 DELETE FROM `setores`;
 /*!40000 ALTER TABLE `setores` DISABLE KEYS */;
 INSERT INTO `setores` (`id`, `setor`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -1023,7 +1039,7 @@ INSERT INTO `setores` (`id`, `setor`, `grupo_id`, `observacao`, `updated_at`) VA
 	(85, 'Venda Avulsa', 1, NULL, NULL);
 /*!40000 ALTER TABLE `setores` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.status
+-- Copiando estrutura para tabela gsinfb41_global.status
 CREATE TABLE IF NOT EXISTS `status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `status` varchar(50) DEFAULT NULL,
@@ -1031,7 +1047,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.status: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.status: ~4 rows (aproximadamente)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`id`, `status`, `observacao`) VALUES
@@ -1041,7 +1057,7 @@ INSERT INTO `status` (`id`, `status`, `observacao`) VALUES
 	(4, 'Estoque', NULL);
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.subsetores
+-- Copiando estrutura para tabela gsinfb41_global.subsetores
 CREATE TABLE IF NOT EXISTS `subsetores` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subsetor` varchar(50) DEFAULT NULL,
@@ -1049,10 +1065,11 @@ CREATE TABLE IF NOT EXISTS `subsetores` (
   `observacao` varchar(145) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `FK_subsetores_grupos` (`grupo_id`)
+  KEY `FK_subsetores_grupos` (`grupo_id`),
+  CONSTRAINT `FK_SUBSETORES_GRUPOS` FOREIGN KEY (`grupo_id`) REFERENCES `grupos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.subsetores: ~90 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.subsetores: ~12 rows (aproximadamente)
 DELETE FROM `subsetores`;
 /*!40000 ALTER TABLE `subsetores` DISABLE KEYS */;
 INSERT INTO `subsetores` (`id`, `subsetor`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -1149,7 +1166,7 @@ INSERT INTO `subsetores` (`id`, `subsetor`, `grupo_id`, `observacao`, `updated_a
 	(91, 'SEM ID', 1, NULL, '2020-08-03 16:31:52');
 /*!40000 ALTER TABLE `subsetores` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.tipos_linhas
+-- Copiando estrutura para tabela gsinfb41_global.tipos_linhas
 CREATE TABLE IF NOT EXISTS `tipos_linhas` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tipo` varchar(15) DEFAULT NULL,
@@ -1157,7 +1174,7 @@ CREATE TABLE IF NOT EXISTS `tipos_linhas` (
   UNIQUE KEY `tipos_UNIQUE` (`tipo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.tipos_linhas: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.tipos_linhas: ~4 rows (aproximadamente)
 DELETE FROM `tipos_linhas`;
 /*!40000 ALTER TABLE `tipos_linhas` DISABLE KEYS */;
 INSERT INTO `tipos_linhas` (`id`, `tipo`) VALUES
@@ -1167,7 +1184,7 @@ INSERT INTO `tipos_linhas` (`id`, `tipo`) VALUES
 	(3, 'Voz + Dados');
 /*!40000 ALTER TABLE `tipos_linhas` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.tipos_usuarios
+-- Copiando estrutura para tabela gsinfb41_global.tipos_usuarios
 CREATE TABLE IF NOT EXISTS `tipos_usuarios` (
   `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
   `tipo_usuario` varchar(15) NOT NULL DEFAULT '0',
@@ -1176,7 +1193,7 @@ CREATE TABLE IF NOT EXISTS `tipos_usuarios` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
--- Copiando dados para a tabela app-global.tipos_usuarios: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.tipos_usuarios: ~2 rows (aproximadamente)
 DELETE FROM `tipos_usuarios`;
 /*!40000 ALTER TABLE `tipos_usuarios` DISABLE KEYS */;
 INSERT INTO `tipos_usuarios` (`id`, `tipo_usuario`, `observacao`, `updated_at`) VALUES
@@ -1184,7 +1201,7 @@ INSERT INTO `tipos_usuarios` (`id`, `tipo_usuario`, `observacao`, `updated_at`) 
 	(2, 'Usuario', NULL, NULL);
 /*!40000 ALTER TABLE `tipos_usuarios` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.ultimos_usuarios
+-- Copiando estrutura para tabela gsinfb41_global.ultimos_usuarios
 CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ultimo_usuario` varchar(50) DEFAULT NULL,
@@ -1195,7 +1212,7 @@ CREATE TABLE IF NOT EXISTS `ultimos_usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=414 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.ultimos_usuarios: ~412 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.ultimos_usuarios: ~412 rows (aproximadamente)
 DELETE FROM `ultimos_usuarios`;
 /*!40000 ALTER TABLE `ultimos_usuarios` DISABLE KEYS */;
 INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, `data_termino`, `data_alteracao`) VALUES
@@ -1518,7 +1535,7 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(317, 'Telejorn. (A Disp.)', '27999738577', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(318, 'Telejorn. (A Disp.)', '27999571685', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(319, 'Telejorn. (A Disp.)', '27981358266', '2020-08-03', NULL, '2020-08-03 16:20:46'),
-	(320, 'Telejorn. (A Disp.)', '27981358289', '2020-08-03', NULL, '2020-08-03 16:20:46'),
+	(320, 'Telejorn. (A Disp.) vitor', '27981358289', '2020-08-17', '2020-08-17', '2020-08-17 14:38:54'),
 	(321, 'Telejorn. (A Disp.)', '27981372804', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(322, 'Telejornalismo Noroeste', '27981380634', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(323, 'Telejornalismo Noroeste', '27981380543', '2020-08-03', NULL, '2020-08-03 16:20:46'),
@@ -1613,7 +1630,7 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(413, 'Bloqueada Gestor', '27999446992', '2020-08-03', NULL, '2020-08-03 16:20:46');
 /*!40000 ALTER TABLE `ultimos_usuarios` ENABLE KEYS */;
 
--- Copiando estrutura para tabela app-global.users
+-- Copiando estrutura para tabela gsinfb41_global.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1627,18 +1644,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela app-global.users: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela gsinfb41_global.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `tipo_usuario_id`, `observacao`, `created_at`, `updated_at`) VALUES
 	(1, 'Luis Eduardo', 'luis@luis.admin', '2020-08-03 15:58:28', '$2y$10$w1S/LpBzlqUqw7K8RRJF5Oltj4Q9uAf0QwMyGd03xF6Av9yo8CpRO', '7XCxyOdZpMS1YXOrRlLKk1YI4y2jmhsz33EJwJMi1iFKHli8BUAemjO3V09A', 1, NULL, '2020-07-17 15:29:55', '2020-07-23 20:03:41'),
-	(20, 'Ze Lopes', 'ze@gazeta.com', '2020-08-03 16:46:57', '$2y$10$ifqi01T0opTj5aV48LEO.OpYM1jeGDbrQsjP/Ra./MgsTvtWhSm3.', NULL, 2, NULL, '2020-08-03 19:46:57', '2020-08-03 19:46:57');
+	(21, 'VItor Pignaton', 'vitor@globalsolutions.net.br', '2020-08-17 15:43:05', '$2y$10$.az6IhXjuUCAbgYck2RL9.9RuPLtx8PnFoL6PlNUnrXE1v8EkQaS2', 'yjfp1INeX2LgBmLIeZD2zpyIKstgjDMCghHHWsJHD4G9qQrtKdkwT2LKrNj8', 1, NULL, '2020-08-17 17:31:06', '2020-08-17 17:32:11'),
+	(22, 'Lucas Freitas', 'lucas@globalsolutions.net.br', '2020-08-18 09:02:08', '$2y$10$reR0AyzghTYr54QJkZaq.eWaQgNuFPc7pGcGd5aIQFooiEIwA956.', 'P3rttDuJq6rr60JzVnRxhfeIOmOJICq5LHWhRDACYAWyNgr1Z40LFHzgLf6Z', 1, 'Usuário da Global Solutions', '2020-08-18 12:00:58', '2020-08-18 12:00:58'),
+	(24, 'José Lopes dos S. Rocha', 'jlrocha@redegazeta.com.br', '2020-08-19 09:44:21', '$2y$10$PpUIQ7jf4CwL15nDkRCDTeUEy8tbgaHuxd.0Yo6Th3JH3ShZWLUVa', NULL, 2, NULL, '2020-08-19 09:44:21', '2020-08-19 09:44:21');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- Copiando estrutura para trigger app-global.trigger_delete_ultimo_usuario
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
+-- Copiando estrutura para trigger gsinfb41_global.trigger_delete_ultimo_usuario
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `trigger_delete_ultimo_usuario` BEFORE DELETE ON `inventarios` FOR EACH ROW BEGIN
 DELETE FROM ultimos_usuarios WHERE ultimos_usuarios.linha = OLD.linha;
@@ -1646,8 +1665,8 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Copiando estrutura para trigger app-global.trigger_insert_ultimo_usuario
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+-- Copiando estrutura para trigger gsinfb41_global.trigger_insert_ultimo_usuario
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `trigger_insert_ultimo_usuario` BEFORE INSERT ON `inventarios` FOR EACH ROW BEGIN
 INSERT INTO ultimos_usuarios (linha, ultimo_usuario,data_inicio) VALUES (NEW.linha, NEW.nome_usuario,NEW.data_registro);
@@ -1655,8 +1674,8 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
--- Copiando estrutura para trigger app-global.trigger_update_ultimo_usuario
-SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+-- Copiando estrutura para trigger gsinfb41_global.trigger_update_ultimo_usuario
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='';
 DELIMITER //
 CREATE TRIGGER `trigger_update_ultimo_usuario` BEFORE UPDATE ON `inventarios` FOR EACH ROW BEGIN
 
