@@ -32,10 +32,14 @@ class SalvarLog
         $user = Auth::user();
         $user_id = Auth::id();
 
+        $user_id = $event->getUserId();
+        $tipo_acao = $event->getTipoAcao();
         $acao = $event->getAcao();
-        $acao_id = $event->getAcaoID();
-        $user_id = $event->getUserID();
-        $data = ['acao'=>$acao, 'tabela'=>$acao_id, 'user_id'=>$user_id];
+        $tabela = $event->getTabela();
+        $registro_id = $event->getRegistroId();
+        $grupo_id = $event->getGrupoId();
+        $retorno = $event->getRetorno();
+        $data = ['user_id' => $user_id,'tipo_acao' => $tipo_acao,'acao'=>$acao, 'tabela'=>$tabela, 'registro_id'=>$registro_id,'grupo_id'=>$grupo_id,'retorno'=>$retorno];
 
         DB::table('logs')->insert($data);
         

@@ -159,10 +159,10 @@ class ContasController extends Controller
         $old_contas  = $this->contas->find($id);
         $update   = $contas->update($dataForm);
 
-        if($contas->conta != $old_contas->conta)
-        {
-            event(new LogSistema("A conta a $old_contas->conta foi alterada $contas->conta.", "contas", $user_id));
-        }
+        #if($contas->conta != $old_contas->conta)
+        #{
+            #event(new LogSistema(" A conta a $old_contas->conta foi alterada $contas->conta.", "contas", $user_id));
+        #}
 
         if ($update)
             return redirect()->route('contas.index')->with('success', "A conta {$old_contas->conta} foi atualizada com sucesso!");

@@ -17,6 +17,7 @@ use App\Models\Grupos;
 use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Events\LogSistema;
 
 class InventarioController extends Controller
 {
@@ -252,9 +253,19 @@ class InventarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
+        $user_id = Auth::id();
+
         $dataForm = $request->all();
         $inventario  = $this->inventario->find($id);
+        $inventario_old  = $this->inventario->find($id);
         $update   = $inventario->update($dataForm);
+
+        if($inventario->nome_usuario != $inventario_old->nome_usuario)
+        {
+             event(new LogSistema($user_id,"Update", "O usuario $inventario_old->nome_usuario foi alterado para $inventario->nome_usuario.",
+             "inventarios",$inventario->id,$inventario->grupo_id,"1"));
+        }
 
         if ($update)
             return redirect()->route('inventario.index')->with('success', "A linha {$inventario->linha} foi atualizada com sucesso!");

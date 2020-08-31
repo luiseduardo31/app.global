@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `contas` (
   KEY `fk_contas_operadoras_idx` (`operadora_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela app-global.contas: ~13 rows (aproximadamente)
+-- Copiando dados para a tabela app-global.contas: ~12 rows (aproximadamente)
 DELETE FROM `contas`;
 /*!40000 ALTER TABLE `contas` DISABLE KEYS */;
 INSERT INTO `contas` (`id`, `conta`, `empresa_id`, `operadora_id`, `grupo_id`, `observacao`, `updated_at`) VALUES
@@ -456,7 +456,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(30, '27992994295', 'Radio Litoral FM102', '2020-08-03', 'SEM ID', 45, 2, 1, 60, 22, 53, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(31, '28998857119', 'Redação JN', '2020-08-03', 'SEM ID', 44, 10, 1, 33, 23, 42, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(32, '27998364096', 'Redação Multimídia', '2020-08-03', 'SEM ID', 59, 7, 1, 62, 9, 6, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
-	(33, '27981287692', 'Redação Multimídia', '2020-08-03', 'SEM ID', 59, 7, 1, 62, 9, 6, 10, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
+	(33, '27981287692', 'Redação Multimídia TT', '2020-08-03', 'SEM ID', 59, 1, 1, 62, 9, 6, 10, 1, 3, 1, 'José Lopes', NULL, '2020-08-31 15:54:28'),
 	(34, '27999835130', 'Samanta Nogueira', '2020-08-03', 'SEM ID', 27, 7, 1, 1, 9, 6, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(35, '27992356650', 'Samuel Rodrigues de Souza', '2020-08-03', 'SEM ID', 58, 7, 1, 31, 16, 59, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(36, '27992346150', 'Estoque', '2020-08-03', 'SEM ID', 47, 7, 1, 66, 3, 35, 10, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
@@ -629,7 +629,7 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 	(204, '27999861050', 'Litoral  (Só Rec. Sms)', '2020-08-03', 'SEM ID', 65, 2, 1, 60, 22, 53, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
 	(205, '27999463013', 'Litoral Vitoria', '2020-08-03', '89551127139000813881', 76, 2, 1, 60, 22, 53, 7, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(206, '28999861402', 'Luciana Vinco Pereira', '2020-08-03', '356160066007925', 14, 10, 1, 84, 39, 33, 10, 1, 1, 1, 'José Lopes\r\n', NULL, NULL),
-	(207, '27981358262', 'Luciano Faco', '2020-08-03', 'SEM ID', 64, 9, 1, 75, 50, 39, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
+	(207, '27981358262', 'Vitor Ventura', '2020-08-04', 'SEM ID', 64, 1, 1, 75, 50, 39, 9, 1, 3, 1, 'José Lopes', NULL, '2020-08-31 15:56:17'),
 	(208, '27999859606', 'Luiz Guilherme de Melo', '2020-08-03', 'SEM ID', 14, 7, 1, 12, 48, 23, 9, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(209, '27981358294', 'Manut. Eletrica', '2020-08-03', 'SEM ID', 31, 7, 1, 39, 64, 56, 10, 1, 3, 1, 'José Lopes\r\n', NULL, NULL),
 	(210, '27999364672', 'Manut. Tv - Accesso Litor', '2020-08-03', 'SEM ID', 48, 9, 1, 40, 11, 20, 13, 1, 2, 1, 'José Lopes\r\n', NULL, NULL),
@@ -840,20 +840,25 @@ INSERT INTO `inventarios` (`id`, `linha`, `nome_usuario`, `data_registro`, `chip
 -- Copiando estrutura para tabela app-global.logs
 CREATE TABLE IF NOT EXISTS `logs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `tipo_acao` varchar(10) DEFAULT NULL,
   `acao` varchar(100) DEFAULT NULL,
   `tabela` varchar(50) DEFAULT NULL,
-  `user_id` int(10) unsigned DEFAULT NULL,
   `registro_id` int(10) DEFAULT NULL,
+  `grupo_id` int(10) DEFAULT NULL,
+  `retorno` int(1) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela app-global.logs: ~2 rows (aproximadamente)
 DELETE FROM `logs`;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` (`id`, `acao`, `tabela`, `user_id`, `registro_id`, `updated_at`) VALUES
-	(1, 'Conta Criada aaaaa', '', 1, NULL, '2020-08-28 15:25:07'),
-	(2, 'A conta a 120604594 DC foi alterada 120604594 TT.', 'contas', 1, NULL, '2020-08-28 16:50:03');
+INSERT INTO `logs` (`id`, `user_id`, `tipo_acao`, `acao`, `tabela`, `registro_id`, `grupo_id`, `retorno`, `updated_at`) VALUES
+	(1, 1, NULL, 'Conta Criada aaaaa', '', NULL, NULL, NULL, '2020-08-28 15:25:07'),
+	(2, 1, NULL, 'A conta a 120604594 DC foi alterada 120604594 TT.', 'contas', NULL, NULL, NULL, '2020-08-28 16:50:03'),
+	(3, 1, 'Update', 'O usuario Redação Multimídia QW foi alterado para Redação Multimídia TT', 'inventarios', 33, 1, 1, '2020-08-31 15:54:28'),
+	(4, 1, 'Update', 'O usuario Luciano Faco foi alterado para Vitor Ventura.', 'inventarios', 207, 1, 1, '2020-08-31 15:56:17');
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela app-global.matriculas
@@ -1261,7 +1266,7 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(30, 'Radio Litoral FM102', '27992994295', '2020-08-03', NULL, '2020-08-03 16:20:45'),
 	(31, 'Redação JN', '28998857119', '2020-08-03', NULL, '2020-08-03 16:20:45'),
 	(32, 'Redação Multimídia', '27998364096', '2020-08-03', NULL, '2020-08-03 16:20:45'),
-	(33, 'Redação Multimídia', '27981287692', '2020-08-03', NULL, '2020-08-03 16:20:45'),
+	(33, 'Redação Multimídia QW', '27981287692', '2020-08-03', '2020-08-03', '2020-08-31 15:54:28'),
 	(34, 'Samanta Nogueira', '27999835130', '2020-08-03', NULL, '2020-08-03 16:20:45'),
 	(35, 'Samuel Rodrigues de Souza', '27992356650', '2020-08-03', NULL, '2020-08-03 16:20:45'),
 	(36, 'Estoque', '27992346150', '2020-08-03', NULL, '2020-08-03 16:20:45'),
@@ -1434,7 +1439,7 @@ INSERT INTO `ultimos_usuarios` (`id`, `ultimo_usuario`, `linha`, `data_inicio`, 
 	(204, 'Litoral  (Só Rec. Sms)', '27999861050', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(205, 'Litoral Vitoria', '27999463013', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(206, 'Luciana Vinco Pereira', '28999861402', '2020-08-03', NULL, '2020-08-03 16:20:46'),
-	(207, 'Luciano Faco', '27981358262', '2020-08-03', NULL, '2020-08-03 16:20:46'),
+	(207, 'Luciano Faco', '27981358262', '2020-08-03', '2020-08-04', '2020-08-31 15:56:17'),
 	(208, 'Luiz Guilherme de Melo', '27999859606', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(209, 'Manut. Eletrica', '27981358294', '2020-08-03', NULL, '2020-08-03 16:20:46'),
 	(210, 'Manut. Tv - Accesso Litor', '27999364672', '2020-08-03', NULL, '2020-08-03 16:20:46'),
