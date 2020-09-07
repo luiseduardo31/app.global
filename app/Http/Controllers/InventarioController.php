@@ -151,9 +151,39 @@ class InventarioController extends Controller
         $insert = $this->inventario->insert($dataForm);
 
         if ($insert)
+        {
+            $user_id = Auth::id();
+            #Obtendo o ultimo registro inserido.
+            $registro_id = DB::getPDO()->lastInsertId();
+
+            event(new LogSistema(
+                $user_id,
+                "Create",
+                "Foi cadastrada a linha $request->linha.",
+                "inventarios",
+                $registro_id,
+                $request->grupo_id,
+                "1"
+            ));
+
             return redirect()->route('inventario.index')->with('success', "A linha {$request->linha} foi cadastrada com sucesso!");
-        else
+        }
+            else
+        {
+            $user = Auth::user();
+            $user_id = Auth::id();
+
+            event(new LogSistema(
+                $user_id,
+                "Create",
+                "Houve um erro ao tentar cadastrar a linha $request->linha.",
+                "inventarios",
+                NULL,
+                $request->grupo_id,
+                "0"
+            ));
             return redirect()->route('inventario.create')->with('error', "Houve um erro ao cadastrar a linha {$request->linha}.");
+        }
     }
 
     /**
@@ -175,7 +205,6 @@ class InventarioController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user();
         $user_id = Auth::id();
 
         $contas = DB::table('contas')->orderBy('conta', 'ASC')
@@ -253,24 +282,401 @@ class InventarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Auth::user();
         $user_id = Auth::id();
 
-        $dataForm = $request->all();
+        $data = $request->all();
         $inventario  = $this->inventario->find($id);
         $inventario_old  = $this->inventario->find($id);
-        $update   = $inventario->update($dataForm);
 
-        if($inventario->nome_usuario != $inventario_old->nome_usuario)
-        {
-             event(new LogSistema($user_id,"Update", "O usuario $inventario_old->nome_usuario foi alterado para $inventario->nome_usuario.",
-             "inventarios",$inventario->id,$inventario->grupo_id,"1"));
-        }
+        # Dados antigos
+        $filiais = DB::table('filiais')->find($request->filial_id);
+        $funcoes = DB::table('funcoes')->find($request->funcao_id);
+        $contas = DB::table('contas')->find($request->conta_id);
+        $setores = DB::table('setores')->find($request->setor_id);
+        $subsetores = DB::table('subsetores')->find($request->subsetor_id);
+        $gestores = DB::table('gestores')->find($request->gestor_id);
+        $planos = DB::table('planos')->find($request->plano_id);
+        $status = DB::table('status')->find($request->status_id);
+        $tiposlinhas = DB::table('tipos_linhas')->find($request->tipo_linha_id);
+        $grupos = DB::table('grupos')->find($request->grupo_id);
+        #
 
+        $update   = $inventario->update($data);
+
+        #REGISTRO DE LOGS
         if ($update)
+        {
+            //Nome do Usuário
+            if ($inventario->nome_usuario != $inventario_old->nome_usuario) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O usuario foi alterado para $inventario->nome_usuario.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+            
+            //Numero do Chip
+            if ($inventario->chip != $inventario_old->chip) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O chip foi alterado para $inventario->chip.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+            
+            //Função
+            if ($inventario->funcao_id != $inventario_old->funcao_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "A função foi alterada para $funcoes->funcao.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Filial
+            if ($inventario->filial_id != $inventario_old->filial_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "A filial foi alterada para $filiais->filial.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Conta
+            if ($inventario->conta_id != $inventario_old->conta_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "A conta foi alterada para $contas->conta.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Setor
+            if ($inventario->setor_id != $inventario_old->setor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O setor foi alterado para $setores->setor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Subsetor
+            if ($inventario->subsetor_id != $inventario_old->subsetor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O subsetor foi alterado para $subsetores->subsetor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Gestor
+            if ($inventario->gestor_id != $inventario_old->gestor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O gestor foi alterado para $gestores->gestor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Plano
+            if ($inventario->plano_id != $inventario_old->plano_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O plano foi alterado para $planos->plano.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Status
+            if ($inventario->status_id != $inventario_old->status_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O status foi alterado para $status->status.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Status
+            if ($inventario->tipo_linha_id != $inventario_old->tipo_linha_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O tipo da linha foi alterado para $tiposlinhas->tipo.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Grupo
+            if ($inventario->grupo_id != $inventario_old->grupo_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O grupo foi alterado para $grupos->grupo.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Reponsavel Despesa
+            if ($inventario->resp_despesa != $inventario_old->resp_despesa) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "O responsável despesa foi alterado para $inventario->resp_despesa.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
+            //Observacão
+            if ($inventario->observacao != $inventario_old->observacao) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "A observação foi alterada para $inventario->observacao.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "1"
+                ));
+            }
+
             return redirect()->route('inventario.index')->with('success', "A linha {$inventario->linha} foi atualizada com sucesso!");
+        }
         else
+        {
+            //Nome do Usuário
+            if ($inventario->nome_usuario != $inventario_old->nome_usuario) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o usuario da linha.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Numero do Chip
+            if ($inventario->chip != $inventario_old->chip) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o número do chip.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Função
+            if ($inventario->funcao_id != $inventario_old->funcao_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar a função.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Filial
+            if ($inventario->filial_id != $inventario_old->filial_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar a filial.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Conta
+            if ($inventario->conta_id != $inventario_old->conta_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar a conta.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Setor
+            if ($inventario->setor_id != $inventario_old->setor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o setor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Subsetor
+            if ($inventario->subsetor_id != $inventario_old->subsetor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o subsetor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Gestor
+            if ($inventario->gestor_id != $inventario_old->gestor_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o gestor.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Plano
+            if ($inventario->plano_id != $inventario_old->plano_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o plano.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Status
+            if ($inventario->status_id != $inventario_old->status_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o status.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Status
+            if ($inventario->tipo_linha_id != $inventario_old->tipo_linha_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o tipo da linha.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Grupo
+            if ($inventario->grupo_id != $inventario_old->grupo_id) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o grupo.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Reponsavel Despesa
+            if ($inventario->resp_despesa != $inventario_old->resp_despesa) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar o responsável da despesa.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
+            //Observacão
+            if ($inventario->observacao != $inventario_old->observacao) {
+                event(new LogSistema(
+                    $user_id,
+                    "Update",
+                    "Houve um erro ao tentar atualizar a observação.",
+                    "inventarios",
+                    $inventario->id,
+                    $inventario->grupo_id,
+                    "0"
+                ));
+            }
+
             return redirect()->route('inventario.edit',  $id);
+        }
+        
     }
 
     /**
@@ -284,9 +690,23 @@ class InventarioController extends Controller
         $inventario = $this->inventario->find($id);
         $delete = $inventario->delete();
 
+        $user_id = Auth::id();
+        
         if ($delete) {
+            event(new LogSistema(
+                $user_id,
+                "Delete",
+                "Foi excluida a linha $inventario->linha.",
+                "inventarios",
+                $inventario->id,
+                $inventario->grupo_id,
+                "1"
+            ));
+            #file_put_contents(storage_path() . "/deletes.txt", $inventario);
+
             return redirect()->route('inventario.index')->with('success', "A linha {$inventario->linha} foi excluida com sucesso!");
-        } else
+        } 
+        else
             return redirect()->route('inventario.show', $id);
     }
 }

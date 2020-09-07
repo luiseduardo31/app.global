@@ -7,6 +7,8 @@ use App\Models\TiposUsuarios;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Events\LogSistema;
 
 
 class UsuariosController extends Controller
@@ -51,9 +53,6 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
-        $data['password'] = Hash::make($data['password']);
-        $insert = $this->usuarios->insert($data);
     }
 
     /**
@@ -64,7 +63,7 @@ class UsuariosController extends Controller
      */
     public function show()
     {
-        return 'ola';
+        
     }
 
 

@@ -43,8 +43,6 @@ class SalvarLog
 
         DB::table('logs')->insert($data);
         
-        file_put_contents(storage_path()."/event.txt",$data);
-
-        
+        #file_put_contents(storage_path() . "/event.txt", $data);        
     }
 }

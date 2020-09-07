@@ -104,7 +104,7 @@
                         <label for="filial">Filial</label>
                            <select class="form-control" name="filial_id">
                            @foreach ($filiais as $filial)
-                              <option value="{{$filial->filialID}}" {{ ( $filial->filialID == $inventario->matricula_id) ? 'selected' : '' }}>
+                              <option value="{{$filial->filialID}}" {{ ( $filial->filialID == $inventario->filial_id) ? 'selected' : '' }}>
                                  {{$filial->filial}}
                               </option>
                            @endforeach

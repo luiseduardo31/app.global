@@ -1,0 +1,1 @@
+{"id":429,"linha":"2755555554","nome_usuario":"aaaa1","data_registro":"2020-09-08","chip":null,"funcao_id":1,"filial_id":1,"conta_id":2,"setor_id":1,"subsetor_id":68,"gestor_id":1,"plano_id":1,"status_id":1,"tipo_linha_id":2,"grupo_id":1,"resp_despesa":null,"observacao":null,"updated_at":null}
