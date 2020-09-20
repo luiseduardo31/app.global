@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth','check.permissions']], function () {
 
     Route::resource('usuarios', 'UsuariosController');
     Route::resource('acessos', 'AcessosController');
+    Route::resource('logs', 'LogsController');
    
     Route::resource('contratos-fixo', 'ContratosFixoController');
     Route::resource('contratos-movel', 'ContratosMovelController');

@@ -370,7 +370,7 @@
                                                 </a>
                                                 <ul class="nav-main-submenu">
                                                     <li class="nav-main-item">
-                                                        <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="{{url('gestores/create')}}>
+                                                        <a class="nav-main-link{{ request()->is('gestores/create') ? ' active' : '' }}" href="{{url('gestores/create')}}">
                                                             <span class="nav-main-link-name">Cadastrar Gestor</span>
                                                         </a>
                                                     </li>

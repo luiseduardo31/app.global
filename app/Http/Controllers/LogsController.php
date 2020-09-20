@@ -4,17 +4,43 @@ namespace App\Http\Controllers;
 
 use App\models\Logs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LogsController extends Controller
 {
+
+    public function __construct(Logs $logs)
+    {
+        $this->logs = $logs;
+        $this->middleware('auth');
+        $this->middleware('check.permissions')->except([
+            'index',
+            'edit',
+            'update',
+        ]);
+    }    
+    
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Logs $logs)
     {
-        //
+        $user = Auth::user();
+        $user_id = Auth::id();
+
+        $logs = DB::table('logs')
+            ->select(array('logs.id as logsID','logs.updated_at as LogsData','logs.*', 'users.id','users.name','users.email','grupos_users.*', 'grupos.*'))
+            ->join('users', 'users.id', '=', 'logs.user_id')
+            ->join('grupos', 'grupos.id', '=', 'logs.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'logs.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        return view('logs.index', compact('logs'));
     }
 
     /**
@@ -78,8 +104,17 @@ class LogsController extends Controller
      * @param  \App\models\Logs  $logs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Logs $logs)
+    public function destroy($id)
     {
-        //
+        $logs = $this->logs->find($id);
+        $delete = $logs->delete();
+
+        $user_id = Auth::id();
+
+        if ($delete) {
+
+            return redirect()->route('logs.index')->with('success', "O registro de log {$logs->id} foi excluido com sucesso!");
+        } else
+            return redirect()->route('logs.show', $id);
     }
 }

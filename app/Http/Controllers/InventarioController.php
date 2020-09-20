@@ -311,7 +311,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O usuario foi alterado para $inventario->nome_usuario.",
+                    "O usuario foi alterado para $inventario->nome_usuario ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -324,7 +324,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O chip foi alterado para $inventario->chip.",
+                    "O chip foi alterado para $inventario->chip ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -337,7 +337,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "A função foi alterada para $funcoes->funcao.",
+                    "A função foi alterada para $funcoes->funcao ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -350,7 +350,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "A filial foi alterada para $filiais->filial.",
+                    "A filial foi alterada para $filiais->filial ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -363,7 +363,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "A conta foi alterada para $contas->conta.",
+                    "A conta foi alterada para $contas->conta ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -376,7 +376,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O setor foi alterado para $setores->setor.",
+                    "O setor foi alterado para $setores->setor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -389,7 +389,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O subsetor foi alterado para $subsetores->subsetor.",
+                    "O subsetor foi alterado para $subsetores->subsetor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -402,7 +402,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O gestor foi alterado para $gestores->gestor.",
+                    "O gestor foi alterado para $gestores->gestor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -415,7 +415,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O plano foi alterado para $planos->plano.",
+                    "O plano foi alterado para $planos->plano ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -428,7 +428,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O status foi alterado para $status->status.",
+                    "O status foi alterado para $status->status ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -441,7 +441,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O tipo da linha foi alterado para $tiposlinhas->tipo.",
+                    "O tipo da linha foi alterado para $tiposlinhas->tipo ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -454,7 +454,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O grupo foi alterado para $grupos->grupo.",
+                    "O grupo foi alterado para $grupos->grupo ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -467,7 +467,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "O responsável despesa foi alterado para $inventario->resp_despesa.",
+                    "O responsável despesa foi alterado para $inventario->resp_despesa ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -480,7 +480,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "A observação foi alterada para $inventario->observacao.",
+                    "A observação foi alterada para $inventario->observacao ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -497,7 +497,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o usuario da linha.",
+                    "Houve um erro ao tentar atualizar o usuario da linha ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -510,7 +510,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o número do chip.",
+                    "Houve um erro ao tentar atualizar o número do chip ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -523,7 +523,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar a função.",
+                    "Houve um erro ao tentar atualizar a função ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -536,7 +536,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar a filial.",
+                    "Houve um erro ao tentar atualizar a filial ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -549,7 +549,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar a conta.",
+                    "Houve um erro ao tentar atualizar a conta ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -562,7 +562,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o setor.",
+                    "Houve um erro ao tentar atualizar o setor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -575,7 +575,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o subsetor.",
+                    "Houve um erro ao tentar atualizar o subsetor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -588,7 +588,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o gestor.",
+                    "Houve um erro ao tentar atualizar o gestor ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -601,7 +601,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o plano.",
+                    "Houve um erro ao tentar atualizar o plano ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -614,7 +614,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o status.",
+                    "Houve um erro ao tentar atualizar o status ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -627,7 +627,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o tipo da linha.",
+                    "Houve um erro ao tentar atualizar o tipo da linha ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -640,7 +640,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o grupo.",
+                    "Houve um erro ao tentar atualizar o grupo ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -653,7 +653,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar o responsável da despesa.",
+                    "Houve um erro ao tentar atualizar o responsável da despesa ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
@@ -666,7 +666,7 @@ class InventarioController extends Controller
                 event(new LogSistema(
                     $user_id,
                     "Update",
-                    "Houve um erro ao tentar atualizar a observação.",
+                    "Houve um erro ao tentar atualizar a observação ($inventario->linha).",
                     "inventarios",
                     $inventario->id,
                     $inventario->grupo_id,
