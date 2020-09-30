@@ -31,8 +31,7 @@ class ContratosMovelController extends Controller
         $contratos = DB::table('contratos_moveis')
             ->select(array(
                 'contratos_moveis.observacao as obsContrato', 'contratos_moveis.id as idContrato', 'contratos_moveis.*',
-                'operadoras.*', 'empresas.*', 'grupos_users.*'
-            ))
+                'operadoras.*', 'empresas.*', 'grupos_users.*'))
             ->join('empresas', 'empresas.id', '=', 'contratos_moveis.empresa_id')
             ->join('operadoras', 'operadoras.id', '=', 'contratos_moveis.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')

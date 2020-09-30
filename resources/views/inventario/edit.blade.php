@@ -46,7 +46,7 @@
 
                      <div class="col-2">
                             <label for="grupo">Grupo Empresarial</label>
-                            <select class="form-control" name="grupo_id">
+                            <select class="form-control selectpicker" name="grupo_id">
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->grupoID}}" {{ ( $grupo->grupoID == $inventario->grupo_id) ? 'selected' : '' }}>
                                  {{$grupo->grupo}}
@@ -78,7 +78,7 @@
 
                      <div class="col-2">
                         <label for="Tipo">Tipo</label>
-                        <select class="form-control" name="tipo_linha_id">
+                        <select class="form-control selectpicker" name="tipo_linha_id">
                            @foreach ($tipos_linha as $tipos)
                               <option value="{{$tipos->id}}" {{ ( $tipos->id == $inventario->tipo_linha_id) ? 'selected' : '' }}>
                                  {{$tipos->tipo}}
@@ -102,7 +102,7 @@
 
                      <div class="col-3">
                         <label for="filial">Filial</label>
-                           <select class="form-control" name="filial_id">
+                           <select class="form-control selectpicker" name="filial_id">
                            @foreach ($filiais as $filial)
                               <option value="{{$filial->filialID}}" {{ ( $filial->filialID == $inventario->filial_id) ? 'selected' : '' }}>
                                  {{$filial->filial}}
@@ -113,7 +113,7 @@
 
                      <div class="col-4">
                         <label for="Funcao">Função</label>
-                        <select class="form-control" name="funcao_id">
+                        <select class="form-control selectpicker" name="funcao_id">
                            @foreach ($funcoes as $funcao)
                               <option value="{{$funcao->funcaoID}}" {{ ($funcao->funcaoID == $inventario->funcao_id) ? 'selected=selected' : '' }}>
                                  {{$funcao->funcao}}
@@ -128,7 +128,7 @@
 
                      <div class="col-3">
                         <label for="Gestor">Gestor</label>
-                        <select class="form-control" name="gestor_id">
+                        <select class="form-control selectpicker" name="gestor_id">
                            @foreach ($gestores as $gestor)
                               <option value="{{$gestor->gestorID}}" {{ ( $gestor->gestorID == $inventario->gestor_id) ? 'selected' : '' }}>
                                  {{$gestor->gestor}}
@@ -139,7 +139,7 @@
 
                      <div class="col-3">
                         <label for="Setor">Setor</label>
-                        <select class="form-control" name="setor_id">
+                        <select class="form-control selectpicker" name="setor_id">
                            @foreach ($setores as $setor)
                               <option value="{{$setor->setorID}}" {{ ( $setor->setorID == $inventario->setor_id) ? 'selected' : '' }}>
                                  {{$setor->setor}}
@@ -150,7 +150,7 @@
 
                      <div class="col-3">
                         <label for="SubSetor">SubSetor</label>
-                        <select class="form-control" name="subsetor_id">
+                        <select class="form-control selectpicker" name="subsetor_id">
                            @foreach ($subsetores as $subsetor)
                               <option value="{{$subsetor->subsetorID}}" {{ ( $subsetor->subsetorID == $inventario->subsetor_id) ? 'selected' : '' }}>
                                  {{$subsetor->subsetor}}
@@ -173,7 +173,7 @@
 
                      <div class="col-2">
                         <label for="Status">Status</label>
-                        <select class="form-control" name="status_id">
+                        <select class="form-control selectpicker" name="status_id">
                            @foreach ($status as $iStatus)
                               <option value="{{$iStatus->id}}" {{ ( $iStatus->id == $inventario->status_id) ? 'selected' : '' }}>
                                  {{$iStatus->status}}

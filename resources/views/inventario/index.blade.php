@@ -49,6 +49,7 @@
                                         <th>Filial</th>
                                         <th>Gestor</th>
                                         <th>Conta</th>
+                                        <th>Custo Plano</th>
                                         <th>Setor</th>
                                         <th>Subsetor</th>
                                         <th>Função</th>
@@ -81,6 +82,7 @@
                                         <td>{{$linha->filial}}</td>
                                         <td>{{$linha->gestor}}</td>
                                         <td>{{$linha->operadora}} - {{$linha->conta}}</td>
+                                        <td>{{'R$ '.number_format($linha->custo_plano, 2, ',', '.')}}</td>
                                         <td>{{$linha->setor}}</td>
                                         <td>{{$linha->subsetor}}</td>
                                         <td>{{$linha->funcao}}</td>
@@ -92,7 +94,7 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('inventario.edit', $linha->idInventario)}}">
+                                                    <a href="{{route('inventario.edit', \Crypt::encrypt($linha->idInventario))}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>

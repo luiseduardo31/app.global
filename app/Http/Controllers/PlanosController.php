@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use App\Models\Planos;
 use App\Models\Operadoras;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +104,7 @@ class PlanosController extends Controller
     {
         $user = Auth::user();
         $user_id = Auth::id();
+        $id = Crypt::decrypt($id);
         
         $planos = Planos::all(['id', 'plano', 'observacao'])->sortBy('plano');
         $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')

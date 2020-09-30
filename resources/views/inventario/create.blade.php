@@ -47,7 +47,7 @@
 
                      <div class="col-2">
                             <label for="grupo">Grupo Empresarial</label>
-                            <select class="form-control" name="grupo_id">
+                            <select class="form-control selectpicker" name="grupo_id">
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->grupoID}}">{{$grupo->grupo}}</option>
                             @endforeach
@@ -76,7 +76,7 @@
 
                      <div class="col-2">
                         <label for="Tipo">Tipo</label>
-                        <select class="form-control" name="tipo_linha_id">
+                        <select class="form-control selectpicker" name="tipo_linha_id">
                            @foreach ($tipos_linha as $tipos)
                                <option value="{{$tipos->id}}">{{$tipos->tipo}}</option>
                            @endforeach
@@ -99,7 +99,7 @@
 
                      <div class="col-3">
                         <label for="filial">Filial</label>
-                        <select class="form-control" name="filial_id">
+                        <select class="form-control selectpicker" name="filial_id">
                            @foreach ($filiais as $filial)
                               <option value="{{$filial->filialID}}">{{$filial->filial}}</option>
                            @endforeach
@@ -108,7 +108,7 @@
 
                      <div class="col-4">
                         <label for="Funcao">Função</label>
-                        <select class="form-control" name="funcao_id">
+                        <select class="form-control selectpicker" name="funcao_id">
                            @foreach ($funcoes as $funcao)
                               <option value="{{$funcao->funcaoID}}">{{$funcao->funcao}}</option>
                            @endforeach
@@ -121,7 +121,7 @@
 
                      <div class="col-3">
                         <label for="Gestor">Gestor</label>
-                        <select class="form-control" name="gestor_id">
+                        <select class="form-control selectpicker" name="gestor_id">
                            @foreach ($gestores as $gestor)
                                <option value="{{$gestor->gestorID}}">{{$gestor->gestor}}</option>
                            @endforeach
@@ -130,7 +130,7 @@
 
                      <div class="col-3">
                         <label for="Setor">Setor</label>
-                        <select class="form-control" name="setor_id">
+                        <select class="form-control selectpicker" name="setor_id">
                            @foreach ($setores as $setor)
                                <option value="{{$setor->setorID}}">{{$setor->setor}}</option>
                            @endforeach
@@ -139,7 +139,7 @@
 
                      <div class="col-3">
                         <label for="SubSetor">SubSetor</label>
-                        <select class="form-control" name="subsetor_id">
+                        <select class="form-control selectpicker" name="subsetor_id">
                            @foreach ($subsetores as $subsetor)
                               <option value="{{$subsetor->subsetorID}}">{{$subsetor->subsetor}}</option>
                            @endforeach
@@ -159,7 +159,7 @@
 
                      <div class="col-2">
                         <label for="Status">Status</label>
-                        <select class="form-control" name="status_id">
+                        <select class="form-control selectpicker" name="status_id">
                            @foreach ($status as $iStatus)
                                <option value="{{$iStatus->id}}">{{$iStatus->status}}</option>
                            @endforeach

@@ -41,20 +41,24 @@
                     <div class="form-group form-row">
                         <div class="col-3">
                             <label for="plano">Plano</label>
-                            <input type="text" name="plano" class="form-control" placeholder="plano" maxlength="50">
+                            <input type="text" name="plano" class="form-control" placeholder="Ex.: Smart Vivo 0.5GB" maxlength="50">
+                        </div>
+                        <div class="col-2">
+                            <label for="custo_plano">Custo do Plano</label>
+                            <input type="text" name="custo_plano" class="form-control money" placeholder="Ex.: R$ 44,90" maxlength="50">
                         </div>
                         <div class="col-3">
                             <label for="operadora">Operadora</label>
-                            <select class="form-control" name="operadora_id">
+                            <select class="form-control selectpicker" name="operadora_id">
                             @foreach ($operadoras as $operadora)
                                 <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
                             @endforeach
                             </select>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <label for="grupo">Grupo Empresarial</label>
-                            <select class="form-control" name="grupo_id">
+                            <select class="form-control selectpicker" name="grupo_id">
                             @foreach ($grupos as $grupo)
                                 <option value="{{$grupo->GrupoID}}">{{$grupo->grupo}}</option>
                             @endforeach

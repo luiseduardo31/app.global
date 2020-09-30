@@ -18,6 +18,7 @@ use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Events\LogSistema;
+use Illuminate\Support\Facades\Crypt;
 
 class InventarioController extends Controller
 {
@@ -206,6 +207,7 @@ class InventarioController extends Controller
     public function edit($id)
     {
         $user_id = Auth::id();
+        $id = Crypt::decrypt($id);
 
         $contas = DB::table('contas')->orderBy('conta', 'ASC')
             ->select(array('contas.id AS contaID','contas.*', 'grupos.*','grupos_users.*','operadoras.*'))

@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth','check.permissions']], function () {
    
     Route::resource('contratos-fixo', 'ContratosFixoController');
     Route::resource('contratos-movel', 'ContratosMovelController');
+
+    Route::resource('contratos', 'ContratosController');
 });
 
 Route::get('/', function () {

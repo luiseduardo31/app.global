@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Logs;
+use App\Models\Logs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +16,6 @@ class LogsController extends Controller
         $this->middleware('auth');
         $this->middleware('check.permissions')->except([
             'index',
-            'edit',
-            'update',
         ]);
     }    
     
@@ -50,7 +48,7 @@ class LogsController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -61,7 +59,7 @@ class LogsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -72,7 +70,7 @@ class LogsController extends Controller
      */
     public function show(Logs $logs)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -83,7 +81,7 @@ class LogsController extends Controller
      */
     public function edit(Logs $logs)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -95,7 +93,7 @@ class LogsController extends Controller
      */
     public function update(Request $request, Logs $logs)
     {
-        //
+        return abort(404);
     }
 
     /**

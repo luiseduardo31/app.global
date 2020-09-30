@@ -40,7 +40,14 @@
 
         <!-- Scripts -->
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
-       
+
+        <style>
+            div.dataTables_wrapper {
+                    margin-bottom: 3em;
+                }
+        </style>
+        
+        
     </head>
     <body>
         <div id="page-loader" class="show"></div>
@@ -240,6 +247,14 @@
                                 <i class="nav-main-link-icon si si-lock"></i>
                                 <span class="nav-main-link-name">Painel de Controle</span>
                             </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('logs') ? ' active' : '' }}" href="{{url('logs')}}">
+                                        <i class="nav-main-link-icon fa fa-address-card"></i>
+                                        <span class="nav-main-link-name">Logs do Sistema</span>
+                                    </a>
+                                </li>
+                            </ul>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -902,7 +917,7 @@
 
         <script src="{{URL::asset('asset/js/oneui.core.min.js')}}"></script>
         <script src="{{URL::asset('asset/js/oneui.app.min.js')}}"></script>
-        <script src="{{URL::asset('asset/js/plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
+      
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="{{URL::asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js')}}"></script>
         <script src="{{URL::asset('/js/plugins/datatables/buttons/buttons.html5.min.js')}}"></script>
@@ -913,15 +928,6 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
-        
-
-        
-
-        
-
-        <!-- Ativar datatable original 
-        <script src="{{URL::asset('assets/js/pages/be_tables_datatables.min.js')}}"></script>
-        -->
         <!-- selectpicker = adicionar subtitulo select option -->
         <script>
             $(document).ready( function() {
@@ -931,17 +937,60 @@
                 
                 $('#contact-detail').DataTable( {
                     dom: 'Bfrtip',
+                    "deferRender": true,
+                    "pageLength": 10,
+                    order: [[1, "desc"]],
                     buttons: [ {
-                        text: 'Exportar Excel',
+                        text: 'Exportar para Excel',
                         extend: 'excelHtml5',
                         autoFilter: true,
-                        sheetName: 'Inventario Movel'
+                        sheetName: 'Dados Exportados',
+                        exportOptions: {
+                            columns: [0, 1, 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] 
+                        }
+                        
                     } ],
-                } );
+                } );                
 
             } );
+        </script>
 
-            
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.date').mask('00/00/0000');
+                $('.time').mask('00:00:00');
+                $('.date_time').mask('00/00/0000 00:00:00');
+                $('.cep').mask('00000-000');
+                $('.phone').mask('0000-0000');
+                $('.phone_with_ddd').mask('(00) 0000-0000');
+                $('.phone_us').mask('(000) 000-0000');
+                $('.mixed').mask('AAA 000-S0S');
+                $('.cpf').mask('000.000.000-00', {reverse: true});
+                $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+                $('.money').mask('000.000.000.000.000.00', {reverse: true});
+                $('.money2').mask("#.##0.00", {reverse: true});
+                $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
+                    translation: {
+                        'Z': {
+                            pattern: /[0-9]/, optional: true
+                        }
+                    }
+                });
+                $('.ip_address').mask('099.099.099.099');
+                $('.percent').mask('##0,00%', {reverse: true});
+                $('.clear-if-not-match').mask("00/00/0000", {clearIfNotMatch: true});
+                $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+                $('.fallback').mask("00r00r0000", {
+                    translation: {
+                        'r': {
+                            pattern: /[\/]/,
+                            fallback: '/'
+                        },
+                        placeholder: "__/__/____"
+                    }
+                });
+                $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
+            });
         </script>
   
 
