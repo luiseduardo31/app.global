@@ -648,9 +648,9 @@
                                         </span>
                                     </a>
                                     -->
-                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('meus-dados.edit', \Crypt::encrypt(Auth::user()->id))}}">
                                         <span>Configurações</span>
-                                        <i class="si si-settings"></i>
+                                        <i class="si si-settings"></i> 
                                     </a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <h5 class="dropdown-header text-uppercase">Ações</h5>
@@ -991,6 +991,18 @@
                 });
                 $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
             });
+        </script>
+
+        <script>
+            var novaSenha = document.getElementById("novaSenha");
+            var btnEnvia = document.getElementById("btnEnvia");
+
+            var onBriefingInput = function (event) {
+            btnEnvia.disabled = !event.target.value;
+            }
+
+            novaSenha.addEventListener("input", onBriefingInput);
+            novaSenha.dispatchEvent(new Event('input'));
         </script>
   
 

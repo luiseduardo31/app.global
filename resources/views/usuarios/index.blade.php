@@ -62,7 +62,7 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('usuarios.edit', $usuario->id)}}">
+                                                    <a href="{{route('usuarios.edit', \Crypt::encrypt($usuario->id))}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>

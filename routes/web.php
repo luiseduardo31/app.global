@@ -13,6 +13,7 @@
 
 
 Route::resource('inventario','InventarioController');
+Route::resource('meus-dados', 'MeusDadosController');
 
 
 // ROTAS ADMIN

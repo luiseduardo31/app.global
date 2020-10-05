@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Events\LogSistema;
+use Illuminate\Support\Facades\Crypt;
 
 
 class UsuariosController extends Controller
@@ -53,6 +54,7 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
+        return abort(404);
     }
 
     /**
@@ -63,7 +65,7 @@ class UsuariosController extends Controller
      */
     public function show()
     {
-        
+        return abort(404);
     }
 
 
@@ -75,6 +77,7 @@ class UsuariosController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         $tipos_usuarios = TiposUsuarios::all(['id', 'tipo_usuario'])->sortBy('tipo_usuario');
 
         $usuarios = Usuarios::all(['id', 'name','email','tipo_usuario_id']);

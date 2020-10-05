@@ -89,7 +89,16 @@ class ContasController extends Controller
 
         if ($insert)
         {
-            event(new LogSistema("Conta Criada $request->conta",'', $user_id));      
+            $registro_id = DB::getPDO()->lastInsertId();
+            event(new LogSistema(
+                $user_id,
+                "Create",
+                "A conta $request->conta foi caastrada.",
+                "contas",
+                $registro_id,
+                $request->grupo_id,
+                "1"
+            ));     
             return redirect()->route('contas.index')->with('success', "A conta {$request->conta} foi cadastrada com sucesso!");
         }
 
