@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\LogsLogins;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function LogsLogins()
+    {
+        return $this->hasMany(LogsLogins::class);
+    }
+
+    public function registerAccess()
+    {
+        return $this->LogsLogins()->create([
+            
+        ]);
+    }
 }
