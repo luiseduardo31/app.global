@@ -29,6 +29,10 @@ class LogsController extends Controller
     {
         $user = Auth::user();
         $user_id = Auth::id();
+        $idGrupo = session()->get('session_grupo_id');
+
+        if ($idGrupo != "0")
+        {
 
         $logs = DB::table('logs')
             ->select(array('logs.id as logsID','logs.updated_at as LogsData','logs.*', 'users.id','users.name','users.email','grupos_users.*', 'grupos.*'))
@@ -36,7 +40,19 @@ class LogsController extends Controller
             ->join('grupos', 'grupos.id', '=', 'logs.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'logs.grupo_id')
             ->where('users_id', $user_id)
+            ->where('logs.grupo_id', $idGrupo)
             ->get();
+        } else {
+
+        $logs = DB::table('logs')
+            ->select(array('logs.id as logsID', 'logs.updated_at as LogsData', 'logs.*', 'users.id', 'users.name', 'users.email', 'grupos_users.*', 'grupos.*'))
+            ->join('users', 'users.id', '=', 'logs.user_id')
+            ->join('grupos', 'grupos.id', '=', 'logs.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'logs.grupo_id')
+            ->where('users_id', $user_id)
+            ->get();
+
+        }
 
         return view('logs.index', compact('logs'));
     }

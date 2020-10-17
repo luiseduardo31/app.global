@@ -13,7 +13,7 @@ class UserEventSubscriber
      */
     public function onUserLogin($event)
     {
-       Auth()->User()->registerAccess();
+       Auth()->User()->registerLogin();
 
     }
 
@@ -23,7 +23,7 @@ class UserEventSubscriber
      */
     public function onUserLogout($event)
     {
-
+        Auth()->User()->registerLogoff();
     }
 
 

@@ -40,12 +40,12 @@
                     <div class="form-group form-row"> 
                         <div class="col-4">
                             <label for="usuario">Nome</label>
-                            <input type="text" name="name" class="form-control" value="{{$usuarios->name}}" maxlength="25">
+                            <input type="text" name="name" class="form-control" value="{{$usuarios->name}}" maxlength="40">
                         </div>
 
                         <div class="col-4">
                             <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control" value="{{$usuarios->email}}" maxlength="25">
+                            <input type="email" name="email" class="form-control" value="{{$usuarios->email}}" maxlength="50">
                         </div>
                         
                         <div class="col-2">

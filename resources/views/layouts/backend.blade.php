@@ -229,19 +229,27 @@
                 <!-- Side Navigation -->
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
+                        @if(Auth::user()->tipo_usuario_id == 1)
+                        
                         <li class="nav-main-item">
-                        <!--
-                            <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/dashboard">
-                                <i class="nav-main-link-icon si si-cursor"></i>
-                                <span class="nav-main-link-name">Dashboard</span>
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon si si-briefcase"></i>
+                                <span class="nav-main-link-name"><b>{{session()->get('session_grupo_nome')}} </b></span>
                             </a>
-                        -->
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('escolher-grupo') ? ' active' : '' }}" href="escolher-grupo">
+                                        <i class="nav-main-link-icon si si-refresh"></i>
+                                        <span class="nav-main-link-name">Alterar Grupo</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
+
                         <li class="nav-main-heading">MENU</li>
                         
                         <!-- PAINEL DE CONTROLE -->
-                        @if(Auth::user()->tipo_usuario_id == 1)
-                              
+                                                      
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon si si-lock"></i>
@@ -251,7 +259,15 @@
                                 <li class="nav-main-item">
                                     <a class="nav-main-link{{ request()->is('logs') ? ' active' : '' }}" href="{{url('logs')}}">
                                         <i class="nav-main-link-icon fa fa-address-card"></i>
-                                        <span class="nav-main-link-name">Logs do Sistema</span>
+                                        <span class="nav-main-link-name">Logs do sistema</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('logs-acessos') ? ' active' : '' }}" href="{{url('logs-acessos')}}">
+                                        <i class="nav-main-link-icon fa fa-address-card"></i>
+                                        <span class="nav-main-link-name">Logs de acessos</span>
                                     </a>
                                 </li>
                             </ul>
@@ -939,7 +955,7 @@
                     dom: 'Bfrtip',
                     "deferRender": true,
                     "pageLength": 10,
-                    order: [[1, "desc"]],
+                    order: [[0, "asc"]],
                     buttons: [ {
                         text: 'Exportar para Excel',
                         extend: 'excelHtml5',

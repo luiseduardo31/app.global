@@ -9,15 +9,23 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+
+
+
+Route::get('/inventario/{id?}', 'InventarioController@index')->name('inventario.index');
+Route::get('/inventario/{id}/edit', 'InventarioController@edit')->name('inventario.edit');
+Route::delete('/inventario/{id}', 'InventarioController@destroy')->name('inventario.destroy');
 */
-
-
-Route::resource('inventario','InventarioController');
-Route::resource('meus-dados', 'MeusDadosController');
-
+Route::resource('meus-dados', 'MeusDadosController')->middleware(['auth','check.session.group']);
+Route::resource('inventario', 'InventarioController')->middleware(['auth','check.session.group']);
+Route::resource('escolher-grupo', 'EscolherGrupoController');
 
 // ROTAS ADMIN
-Route::group(['middleware' => ['auth','check.permissions']], function () {
+Route::group(['middleware' => ['auth','check.permissions','check.session.group']], function () {
+
+    
+    
+
     Route::resource('filiais', 'FiliaisController');
     Route::resource('funcoes', 'FuncoesController');
     Route::resource('gestores', 'GestoresController');
@@ -32,6 +40,7 @@ Route::group(['middleware' => ['auth','check.permissions']], function () {
     Route::resource('usuarios', 'UsuariosController');
     Route::resource('acessos', 'AcessosController');
     Route::resource('logs', 'LogsController');
+    Route::resource('logs-acessos', 'LogsLoginsController');
    
     Route::resource('contratos-fixo', 'ContratosFixoController');
     Route::resource('contratos-movel', 'ContratosMovelController');

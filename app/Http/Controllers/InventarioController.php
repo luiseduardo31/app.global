@@ -42,10 +42,15 @@ class InventarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Inventario $inventario)
+    public function index()
     {
         $user = Auth::user();
         $user_id = Auth::id();
+
+        $idGrupo = session()->get('session_grupo_id');
+        
+        if($idGrupo != "0")
+        {
         
         $linhas = DB::table('inventarios')->orderBy('nome_usuario','ASC')
         ->select(array('inventarios.observacao as obsInventario', 'inventarios.id as idInventario','inventarios.*','contas.*','planos.*','gestores.*',
@@ -65,8 +70,33 @@ class InventarioController extends Controller
         ->join('grupos', 'grupos.id', '=', 'inventarios.grupo_id')
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'inventarios.grupo_id')
         ->where('users_id', $user_id)
+        ->where('inventarios.grupo_id', $idGrupo)
         ->get();
-
+        
+        }
+        else {
+            $linhas = DB::table('inventarios')->orderBy('nome_usuario', 'ASC')
+                ->select(array(
+                    'inventarios.observacao as obsInventario', 'inventarios.id as idInventario', 'inventarios.*', 'contas.*', 'planos.*', 'gestores.*',
+                    'setores.*', 'subsetores.*', 'status.*', 'tipos_linhas.*', 'ultimos_usuarios.*', 'funcoes.*', 'filiais.*',
+                    'grupos_users.*', 'grupos.*', 'operadoras.*'
+                ))
+                ->join('planos', 'planos.id', '=', 'inventarios.plano_id')
+                ->join('gestores', 'gestores.id', '=', 'inventarios.gestor_id')
+                ->join('setores', 'setores.id', '=', 'inventarios.setor_id')
+                ->join('subsetores', 'subsetores.id', '=', 'inventarios.subsetor_id')
+                ->join('status', 'status.id', '=', 'inventarios.status_id')
+                ->join('tipos_linhas', 'tipos_linhas.id', '=', 'inventarios.tipo_linha_id')
+                ->join('ultimos_usuarios', 'ultimos_usuarios.linha', '=', 'inventarios.linha')
+                ->join('funcoes', 'funcoes.id', '=', 'inventarios.funcao_id')
+                ->join('filiais', 'filiais.id', '=', 'inventarios.filial_id')
+                ->join('contas', 'contas.id', '=', 'inventarios.conta_id')
+                ->join('operadoras', 'operadoras.id', '=', 'contas.operadora_id')
+                ->join('grupos', 'grupos.id', '=', 'inventarios.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'inventarios.grupo_id')
+                ->where('users_id', $user_id)
+                ->get();
+        }
 
         return view('inventario.index',compact('linhas'));
     }

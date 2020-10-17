@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\LogsLogins;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -37,16 +38,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 
     public function LogsLogins()
     {
         return $this->hasMany(LogsLogins::class);
     }
 
-    public function registerAccess()
+    public function registerLogin()
     {
+        $user_ip = request()->ip();
+
         return $this->LogsLogins()->create([
-            
+            'ip' => $user_ip,
+            'user_email' => $this->email,
+            'acao' => 'login'
         ]);
     }
+
+    public function registerLogoff()
+    {
+        $user_ip = request()->ip();
+        
+
+        return $this->LogsLogins()->create([
+            'ip' => $user_ip,
+            'user_email' => $this->email,
+            'acao' => 'logoff',
+        ]);
+    }
+    
 }
