@@ -38,21 +38,35 @@
             <div class="block-content">
                <form action="{{route('contratos-fixo.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
+                  <input type="hidden" name="tipo_contrato" value="1">
                     <div class="form-group form-row">
                         <div class="col-4">
                             <label for="contrato">Nº do Contrato</label>
-                            <input type="text" name="numero_contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
+                            <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
+                        </div>
+                        
+                        <div class="col-6">
+                            <label for="user">Razão Social | CNPJ</label>
+                            <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
+                                <option readonly>Escolha uma opção</option>
+                            @foreach ($empresas as $empresa)
+                                <option data-subtext=" | {{$empresa->cnpj}}" value="{{$empresa->EmpresaID}}">{{$empresa->razao_social}}</option>
+                            @endforeach
+                            </select>
                         </div>
                         
                         <div class="col-2">
                             <label for="operadora">Operadora</label>
-                            <select class="form-control" name="operadora_id">
+                            <select class="form-control selectpicker" name="operadora_id">
+                                <option readonly>Escolha uma opção</option>
                             @foreach ($operadoras as $operadora)
                                 <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
                             @endforeach
                             </select>
                         </div>
-                        
+                    </div>
+                    
+                    <div class="form-group form-row">    
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
                             <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
@@ -68,25 +82,14 @@
                             <input type="text" name="comprometimento_minimo" class="form-control" placeholder="Comp. Minimo" maxlength="40">
                         </div>
 
-                    </div>
-                    <div class="form-group form-row">
                         <div class="col-2">
-                            <label for="empresa">CNPJ</label>
-                            <select class="form-control" name="empresa_id">
-                            @foreach ($empresas as $empresa)
-                                <option value="{{$empresa->id}}">{{$empresa->cnpj}}</option>
-                            @endforeach
-                            </select>
+                            <label for="data_inicio">Período (Inicio)</label>
+                            <input type="date" name="data_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
                         </div>
 
                         <div class="col-2">
-                            <label for="periodo_inicio">Período (Inicio)</label>
-                            <input type="date" name="periodo_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
-                        </div>
-
-                        <div class="col-2">
-                            <label for="periodo_fim">Período (Fim)</label>
-                            <input type="date" name="periodo_fim" class="form-control" placeholder="Período (Fim)" maxlength="40">
+                            <label for="data_fim">Período (Fim)</label>
+                            <input type="date" name="data_fim" class="form-control" placeholder="Período (Fim)" maxlength="40">
                         </div>
 
                         <div class="col-1">
@@ -99,7 +102,9 @@
                             <input type="number" name="canais" class="form-control" placeholder="Canais" maxlength="3" min="1" max="120">
                         </div>
 
-                        
+                    </div>
+
+                    <div class="form-group form-row">                        
                         <div class="col-2">
                             <label for="range">Range</label>
                             <input type="text" name="range" class="form-control" placeholder="Range" maxlength="9" data-mask="0000-0000">
@@ -113,39 +118,35 @@
                                 <option value="SIP">SIP</option>
                             </select>
                         </div>
-
-                    </div>
-
-                    <div class="form-group form-row">
                         
-                        <div class="col-2">
-                            <label for="tarifa_local_fixo">Local Fixo</label>
-                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        <div class="col-1">
+                            <label for="tarifa_local_fixo">LC Fixo</label>
+                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
                         </div>
 
-                        <div class="col-2">
-                            <label for="tarifa_local_movel">Local Móvel</label>
-                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        <div class="col-1">
+                            <label for="tarifa_local_movel">LC Móvel</label>
+                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="7">
                         </div>
 
-                        <div class="col-2">
-                            <label for="tarifa_ld_fixo">Longa Distancia Fixo</label>
-                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        <div class="col-1">
+                            <label for="tarifa_ld_fixo">LD Fixo</label>
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
                         </div>
 
-                        <div class="col-2">
-                            <label for="tarifa_ld_movel">Longa Distancia Móvel</label>
-                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="8" data-mask="R$ 0,0000">
+                        <div class="col-1">
+                            <label for="tarifa_ld_movel">LD Móvel</label>
+                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="7">
                         </div>
 
                     </div>
 
-                    <div class="form-group form-row">
-                        <div class="col-12">
-                            <label for="Observacao">Observação</label> <br>
-                            <input type="text" name="observacao" class="form-control" maxlength="100">
-                        </div>
+                <div class="form-group form-row">  
+                    <div class="col-12">
+                    <label for="resp_despesa">Observação</label> <br>
+                    <textarea name="observacao" class="form-control" rows="3"></textarea>
                     </div>
+                </div>
 
                     <div class="form-group form-row">
                         <div class="col-2">

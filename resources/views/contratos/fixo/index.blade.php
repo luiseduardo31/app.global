@@ -64,11 +64,11 @@
                                 <tbody>
                                     @forelse ($contratos as $contrato)
                                     <tr>
-                                        <td>{{$contrato->numero_contrato}}</td>
+                                        <td>{{$contrato->contrato}}</td>
                                         <td style="width:300px !important">{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
-                                        <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
+                                        <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
                                         <td>R$ {{$contrato->assinatura}}</td>
                                         <td>R$ {{$contrato->comprometimento_minimo}}</td>
@@ -84,15 +84,15 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-fixo.edit', $contrato->idContrato)}}">
+                                                    <a href="{{route('contratos-fixo.edit', $contrato->ContratoID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contratos-fixo.destroy',$contrato->idContrato)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contratos-fixo.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"
-                                                onclick="return confirm('Deseja realmente excluir o contrato {{$contrato->numero_contrato}}?');">
+                                                onclick="return confirm('Deseja realmente excluir o contrato {{$contrato->contrato}}?');">
                                                         <i class="fa fa-fw fa-times"></i>
                                                     </button>
                                                 </form>
