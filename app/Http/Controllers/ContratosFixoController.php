@@ -30,16 +30,44 @@ class ContratosFixoController extends Controller
         $user = Auth::user();
         $user_id = Auth::id();
 
-        $contratos = DB::table('contratos')->orderBy('contrato', 'ASC')
-            ->select(array('contratos.*', 'contratos_fixos.*',
-            'contratos.observacao as obsContrato', 'contratos.id as ContratoID', 
-            'operadoras.*', 'empresas.*','grupos_users.*'))
+        $idGrupo = session()->get('session_grupo_id');
+
+        # $idGrupo != "0" - Lógica para exibir os dados de somente um grupo ou todos.
+        if ($idGrupo != "0") 
+        {
+
+            $contratos = DB::table('contratos')->orderBy('contrato', 'ASC')
+            ->select(array(
+                'contratos.*', 'contratos_fixos.*',
+                'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
+                'grupos.*', 'operadoras.*', 'empresas.*', 'grupos_users.*'
+            ))
             ->join('contratos_fixos', 'contratos_fixos.contrato_id', '=', 'contratos.id')
             ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
             ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
+            ->join('grupos', 'grupos.id', '=', 'contratos.grupo_id')
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+            ->where('empresas.grupo_id', $idGrupo)
+            ->get();
+        }
+        else
+        {
+            $contratos = DB::table('contratos')->orderBy('contrato', 'ASC')
+            ->select(array(
+                'contratos.*', 'contratos_fixos.*',
+                'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
+                'grupos.*', 'operadoras.*', 'empresas.*', 'grupos_users.*'
+            ))
+            ->join('contratos_fixos', 'contratos_fixos.contrato_id', '=', 'contratos.id')
+            ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
+            ->join('grupos', 'grupos.id', '=', 'contratos.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
+        }
+
 
 
         return view('contratos.fixo.index', compact('contratos'));
@@ -60,14 +88,15 @@ class ContratosFixoController extends Controller
         $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
         ->select(array('operadoras.*'))
         ->where('tipo_operadora', '2')
-            ->get();
+        ->get();
 
         $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
         ->select(array('empresas.id AS EmpresaID','empresas.*', 'grupos_users.*'))
         ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
         ->where('users_id', $user_id)
-            ->where('empresas.grupo_id', $idGrupo)
-            ->get();
+        ->where('empresas.grupo_id', $idGrupo)
+        ->get();
+        
 
         return view('contratos.fixo.create', compact('operadoras', 'empresas'));
     }
