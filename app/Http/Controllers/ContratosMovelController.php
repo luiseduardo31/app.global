@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContratosMovel;
+use App\Models\Contratos;
 use Illuminate\Http\Request;
 use App\Models\Operadoras;
 use App\Models\Empresas;
@@ -12,9 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class ContratosMovelController extends Controller
 {
 
-    public function __construct(ContratosMovel $contratosMovel)
+    public function __construct(Contratos $contratos, ContratosMovel $contratosMovel)
     {
         $this->ContratosMovel = $contratosMovel;
+        $this->ContratosGeral = $contratos;
         $this->middleware('auth');
     }
 
@@ -28,17 +30,39 @@ class ContratosMovelController extends Controller
         $user = Auth::user();
         $user_id = Auth::id();
 
-        $contratos = DB::table('contratos_moveis')
+        $idGrupo = session()->get('session_grupo_id');
+
+        # $idGrupo != "0" - Lógica para exibir os dados de somente um grupo ou todos.
+        if ($idGrupo != "0") {
+
+            $contratos = DB::table('contratos')->orderBy('contrato', 'ASC')
             ->select(array(
-                'contratos_moveis.observacao as obsContrato', 'contratos_moveis.id as idContrato', 'contratos_moveis.*',
+                'contratos.*', 'contratos_moveis.*',
+                'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
                 'operadoras.*', 'empresas.*', 'grupos_users.*'))
-            ->join('empresas', 'empresas.id', '=', 'contratos_moveis.empresa_id')
-            ->join('operadoras', 'operadoras.id', '=', 'contratos_moveis.operadora_id')
+            ->join('contratos_moveis', 'contratos_moveis.contrato_id', '=', 'contratos.id')
+            ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
+            ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
+            ->where('empresas.grupo_id', $idGrupo)
             ->get();
 
+        } else {
 
+            $contratos = DB::table('contratos')->orderBy('contrato', 'ASC')
+            ->select(array(
+                'contratos.*', 'contratos_moveis.*',
+                'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
+                'operadoras.*', 'empresas.*', 'grupos_users.*'
+            ))
+                ->join('contratos_moveis', 'contratos_moveis.contrato_id', '=', 'contratos.id')
+                ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
+                ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->get();
+        }
         return view('contratos.movel.index', compact('contratos'));
     }
 
@@ -51,14 +75,38 @@ class ContratosMovelController extends Controller
     {
         $user = Auth::user();
         $user_id = Auth::id();
+        $idGrupo = session()->get('session_grupo_id');
 
-        $operadoras = Operadoras::all();
-        $empresas = DB::table('empresas')
-            ->select(array('empresas.*', 'grupos_users.*'))
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
-            ->where('users_id', $user_id)
-            ->get();
-            return view('contratos.movel.create',compact('operadoras','empresas'));
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+        ->select(array('operadoras.*'))
+        ->where('tipo_operadora', '1')
+        ->get();
+
+        if ($idGrupo != "0") {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+                ->select(array(
+                    'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                    'grupos.id AS GrupoID', 'grupos.*'
+                ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->where('empresas.grupo_id', $idGrupo)
+                ->get();
+        }
+        else {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+                ->select(array(
+                    'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                    'grupos.id AS GrupoID', 'grupos.*'
+                ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->get();
+        }
+
+        return view('contratos.movel.create',compact('operadoras','empresas'));
     }
 
     /**

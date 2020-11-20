@@ -40,12 +40,10 @@ class ContratosFixoController extends Controller
             ->select(array(
                 'contratos.*', 'contratos_fixos.*',
                 'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
-                'grupos.*', 'operadoras.*', 'empresas.*', 'grupos_users.*'
-            ))
+                 'operadoras.*', 'empresas.*', 'grupos_users.*'))
             ->join('contratos_fixos', 'contratos_fixos.contrato_id', '=', 'contratos.id')
             ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
             ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
-            ->join('grupos', 'grupos.id', '=', 'contratos.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
             ->where('empresas.grupo_id', $idGrupo)
@@ -57,21 +55,17 @@ class ContratosFixoController extends Controller
             ->select(array(
                 'contratos.*', 'contratos_fixos.*',
                 'contratos.observacao as obsContrato', 'contratos.id as ContratoID',
-                'grupos.*', 'operadoras.*', 'empresas.*', 'grupos_users.*'
+                'operadoras.*', 'empresas.*', 'grupos_users.*'
             ))
             ->join('contratos_fixos', 'contratos_fixos.contrato_id', '=', 'contratos.id')
             ->join('empresas', 'empresas.id', '=', 'contratos.empresa_id')
             ->join('operadoras', 'operadoras.id', '=', 'contratos.operadora_id')
-            ->join('grupos', 'grupos.id', '=', 'contratos.grupo_id')
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
             ->where('users_id', $user_id)
             ->get();
         }
 
-
-
-        return view('contratos.fixo.index', compact('contratos'));
-        
+        return view('contratos.fixo.index', compact('contratos'));  
     }
 
     /**
@@ -90,14 +84,21 @@ class ContratosFixoController extends Controller
         ->where('tipo_operadora', '2')
         ->get();
 
-        $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
-        ->select(array('empresas.id AS EmpresaID','empresas.*', 'grupos_users.*'))
-        ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
-        ->where('users_id', $user_id)
-        ->where('empresas.grupo_id', $idGrupo)
-        ->get();
+        if ($idGrupo != "0") {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array('empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+                ->where('empresas.grupo_id', $idGrupo)
+                ->get();
+        } else {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array('empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*'))
+            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+            ->where('users_id', $user_id)
+                ->get();
+        }
         
-
         return view('contratos.fixo.create', compact('operadoras', 'empresas'));
     }
 

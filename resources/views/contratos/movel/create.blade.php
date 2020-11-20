@@ -38,46 +38,36 @@
             <div class="block-content">
                <form action="{{route('contratos-movel.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
-                    <div class="form-group form-row">
-                        <div class="col-3">
+                  <input type="hidden" name="tipo_contrato" value="2">
+
+                  <div class="form-group form-row">
+                        <div class="col-4">
                             <label for="contrato">Nº do Contrato</label>
-                            <input type="text" name="numero_contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
+                            <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
                         
-                        <div class="col-2">
-                            <label for="empresa">CNPJ</label>
-                            <select class="form-control" name="empresa_id">
+                        <div class="col-6">
+                            <label for="user">Razão Social | CNPJ</label>
+                            <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
+                                <option readonly>Escolha uma opção</option>
                             @foreach ($empresas as $empresa)
-                                <option value="{{$empresa->id}}">{{$empresa->cnpj}}</option>
+                                <option data-subtext=" | {{$empresa->cnpj}} | {{$empresa->grupo}}" value="{{$empresa->EmpresaID}}">{{$empresa->razao_social}}</option>
                             @endforeach
                             </select>
                         </div>
                         
                         <div class="col-2">
                             <label for="operadora">Operadora</label>
-                            <select class="form-control" name="operadora_id">
+                            <select class="form-control selectpicker" name="operadora_id">
+                                <option readonly>Escolha uma opção</option>
                             @foreach ($operadoras as $operadora)
                                 <option value="{{$operadora->id}}">{{$operadora->operadora}}</option>
                             @endforeach
                             </select>
                         </div>
-                        
-                        <div class="col-2">
-                            <label for="periodo_inicio">Período (Inicio)</label>
-                            <input type="date" name="periodo_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
-                        </div>
-
-                        <div class="col-2">
-                            <label for="periodo_fim">Período (Fim)</label>
-                            <input type="date" name="periodo_fim" class="form-control" placeholder="Período (Fim)" maxlength="40">
-                        </div>
-
-                        <div class="col-1">
-                            <label for="vigencia">Vigência</label>
-                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="48">
-                        </div>
-
                     </div>
+
+                   
                     <div class="form-group form-row">
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>

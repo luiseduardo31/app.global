@@ -6,14 +6,14 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Contratos Fixos
+                    Contratos Móveis
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                         [Contratos]
                     </small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos Fixos</li>
+                        <li class="breadcrumb-item">Contratos Móveis</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Cadastrados</a>
                         </li>
@@ -52,6 +52,12 @@
                                         <th>SMS Pacote</th>
                                         <th>Gestor Online</th>
                                         <th>Planos/Condição Comercial</th>
+                                        <th>Local para Mesma</th>
+                                        <th>Local para Fixo</th>
+                                        <th>Local para Outras</th>
+                                        <th>LD para Mesma</th>
+                                        <th>LD para Fixo</th>
+                                        <th>LD para Outras</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -59,30 +65,36 @@
                                 <tbody>
                                     @forelse ($contratos as $contrato)
                                     <tr>
-                                        <td>{{$contrato->numero_contrato}}</td>
+                                        <td>{{$contrato->contrato}}</td>
                                         <td>{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
-                                        <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->periodo_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->periodo_fim))}}</td>
+                                        <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
                                         <td>R$ {{$contrato->assinatura}}</td>
                                         <td>R$ {{$contrato->sms_unitario}}</td>
                                         <td>R$ {{$contrato->sms_pacote}}</td>
                                         <td>R$ {{$contrato->gestor_online}}</td>
-                                        <td>R$ {{$contrato->planos_contrato}}</td>                                        
+                                        <td>{{$contrato->planos_contrato}}</td>
+                                        <td>R$ {{$contrato->tarifa_local_mesma}}</td> 
+                                        <td>R$ {{$contrato->tarifa_local_fixo}}</td> 
+                                        <td>R$ {{$contrato->tarifa_local_outra}}</td>
+                                        <td>R$ {{$contrato->tarifa_ld_mesma}}</td> 
+                                        <td>R$ {{$contrato->tarifa_ld_fixo}}</td> 
+                                        <td>R$ {{$contrato->tarifa_ld_outra}}</td>                                     
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-fixo.edit', $contrato->idContrato)}}">
+                                                    <a href="{{route('contratos-fixo.edit', $contrato->ContratoID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contratos-fixo.destroy',$contrato->idContrato)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contratos-fixo.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"
-                                                onclick="return confirm('Deseja realmente excluir o contrato {{$contrato->numero_contrato}}?');">
+                                                onclick="return confirm('Deseja realmente excluir o contrato {{$contrato->contrato}}?');">
                                                         <i class="fa fa-fw fa-times"></i>
                                                     </button>
                                                 </form>
