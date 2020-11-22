@@ -258,8 +258,14 @@ class ContratosMovelController extends Controller
      * @param  \App\Models\ContratosMovel  $contratosMovel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContratosMovel $contratosMovel)
+    public function destroy($id)
     {
-        //
+        $contratos = $this->ContratosGeral->find($id);
+        $delete = $contratos->delete();
+
+        if ($delete) {
+            return redirect()->route('contratos-movel.index')->with('success', "O contrato {$contratos->contrato} foi excluido com sucesso!");
+        } else
+            return redirect()->route('contratos-movel.index')->with('error', "Houve um erro ao excluir o contrato {$contratos->contrato}.");
     }
 }
