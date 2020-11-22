@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth','check.permissions','check.session.group']
    
     Route::resource('contratos-fixo', 'ContratosFixoController');
     Route::resource('contratos-movel', 'ContratosMovelController');
+    Route::resource('contratos-dados', 'ContratosDadosController');
 
     #Route::resource('contratos', 'ContratosController');
 });
