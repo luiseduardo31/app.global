@@ -41,13 +41,13 @@
                   <input type="hidden" name="tipo_contrato" value="2">
 
                   <div class="form-group form-row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <label for="contrato">Nº do Contrato</label>
                             <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
                         
-                        <div class="col-6">
-                            <label for="user">Razão Social | CNPJ</label>
+                        <div class="col-7">
+                            <label for="user">Razão Social | CNPJ | Grupo</label>
                             <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
                                 <option readonly>Escolha uma opção</option>
                             @foreach ($empresas as $empresa)
@@ -71,24 +71,70 @@
                     <div class="form-group form-row">
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
+                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="8">
                         </div>
 
-
+                        <div class="col-1">
+                            <label for="vigencia">Vigência</label>
+                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="48">
+                        </div>
                                                 
                         <div class="col-1">
                             <label for="sms_unitario">SMS</label>
                             <input type="text" name="sms_unitario" class="form-control" placeholder="Custo" maxlength="4" data-mask="0.00">
                         </div>
 
+                        <div class="col-1">
+                            <label for="sms_pacote">Pct SMS</label>
+                            <input type="text" name="sms_pacote" class="form-control" placeholder="Custo" data-mask="000.00" maxlength="6">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="gestor_online">Gestor</label>
+                            <input type="text" name="gestor_online" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="5">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="tarifa_local_mesma">LC Mesma</label>
+                            <input type="text" name="tarifa_local_mesma" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+                        
+                        <div class="col-1">
+                            <label for="tarifa_local_fixo">LC Fixo</label>
+                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="tarifa_local_outra">LC Outra</label>
+                            <input type="text" name="tarifa_local_outra" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="tarifa_ld_mesma">LD Mesma</label>
+                            <input type="text" name="tarifa_ld_mesma" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+                        
+                        <div class="col-1">
+                            <label for="tarifa_ld_fixo">LD Fixo</label>
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+
+                        <div class="col-1">
+                            <label for="tarifa_ld_outra">LD Outra</label>
+                            <input type="text" name="tarifa_ld_outra" class="form-control" placeholder="Custo" data-mask="0.00" maxlength="4">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group form-row">
                         <div class="col-2">
-                            <label for="sms_pacote">Pacote SMS</label>
-                            <input type="text" name="sms_pacote" class="form-control" placeholder="Custo" maxlength="6">
+                            <label for="data_inicio">Período (Inicio)</label>
+                            <input type="date" name="data_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
                         </div>
 
                         <div class="col-2">
-                            <label for="gestor_online">Gestor Online</label>
-                            <input type="text" name="gestor_online" class="form-control" placeholder="Custo" maxlength="6">
+                            <label for="data_fim">Período (Fim)</label>
+                            <input type="date" name="data_fim" class="form-control" placeholder="Período (Fim)" maxlength="40">
                         </div>
                     </div>
 
@@ -97,16 +143,14 @@
                             <label for="planos_contrato">Planos e Condições Comerciais</label>
                             <textarea name="planos_contrato" class="form-control" placeholder="Exemplo: Smart Vivo 0,5GB (R$ 34,99) / Smart Vivo 2GB (R$ 49,99)" rows="3"></textarea>
                         </div>
-                    </div>
-                    
-                  
+                    </div> 
 
                     <div class="form-group form-row">
                         <div class="col-12">
-                            <label for="Observacao">Observação</label> <br>
-                            <input type="text" name="observacao" class="form-control" maxlength="100">
+                            <label for="Observacao">Observação</label>
+                            <textarea name="observacao" class="form-control" rows="3"></textarea>
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="form-group form-row">
                         <div class="col-2">

@@ -45,7 +45,7 @@
                         
                         <div class="col-2">
                             <label for="operadora">Operadora</label>
-                            <select class="form-control" name="operadora_id">
+                            <select class="form-control selectpicker" name="operadora_id">
                             @foreach ($operadoras as $operadora)
                                 <option value="{{$operadora->id}}" {{ ( $operadora->id == $contratos->operadora_id) ? 'selected' : '' }}>
                                     {{$operadora->operadora}}

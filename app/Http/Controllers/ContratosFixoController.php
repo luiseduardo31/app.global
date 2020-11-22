@@ -177,9 +177,13 @@ class ContratosFixoController extends Controller
         
         $contratos = $this->ContratosGeral->find($id);
         $detalhes_contrato = ContratosFixo::where('contrato_id', $contratos->id)->first();
+
+
+        $operadoras = DB::table('operadoras')->orderBy('operadora', 'ASC')
+        ->select(array('operadoras.*'))
+        ->where('tipo_operadora', '2')
+        ->get();
         
-        
-        $operadoras = Operadoras::all(['id', 'operadora'])->sortBy('operadora');
         $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
             ->select(array('empresas.*', 'grupos_users.*','empresas.id AS EmpresaID'))
             ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')

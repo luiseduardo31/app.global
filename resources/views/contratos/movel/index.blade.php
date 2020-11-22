@@ -51,13 +51,13 @@
                                         <th>SMS Unitário</th>
                                         <th>SMS Pacote</th>
                                         <th>Gestor Online</th>
-                                        <th>Planos/Condição Comercial</th>
                                         <th>Local para Mesma</th>
                                         <th>Local para Fixo</th>
                                         <th>Local para Outras</th>
                                         <th>LD para Mesma</th>
                                         <th>LD para Fixo</th>
                                         <th>LD para Outras</th>
+                                        <th>Planos/Condição Comercial</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -75,22 +75,22 @@
                                         <td>R$ {{$contrato->sms_unitario}}</td>
                                         <td>R$ {{$contrato->sms_pacote}}</td>
                                         <td>R$ {{$contrato->gestor_online}}</td>
-                                        <td>{{$contrato->planos_contrato}}</td>
                                         <td>R$ {{$contrato->tarifa_local_mesma}}</td> 
                                         <td>R$ {{$contrato->tarifa_local_fixo}}</td> 
                                         <td>R$ {{$contrato->tarifa_local_outra}}</td>
                                         <td>R$ {{$contrato->tarifa_ld_mesma}}</td> 
                                         <td>R$ {{$contrato->tarifa_ld_fixo}}</td> 
-                                        <td>R$ {{$contrato->tarifa_ld_outra}}</td>                                     
+                                        <td>R$ {{$contrato->tarifa_ld_outra}}</td>
+                                        <td>{{$contrato->planos_contrato}}</td>                                   
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-fixo.edit', $contrato->ContratoID)}}">
+                                                    <a href="{{route('contratos-movel.edit', $contrato->ContratoID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contratos-fixo.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contratos-movel.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"
