@@ -6,14 +6,14 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Contratos Fixos
+                    Contratos | Servicos de Dados
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
-                        [Contratos]
+                        
                     </small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos Fixos</li>
+                        <li class="breadcrumb-item">Serviços de Dados</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Cadastrados</a>
                         </li>
@@ -48,15 +48,9 @@
                                         <th>Periodo</th>
                                         <th>Vigencia</th>
                                         <th>Assinatura</th>
-                                        <th>Comp. Min.</th>
-                                        <th>Franquia</th>
-                                        <th>Range</th>
-                                        <th>Canais</th>
-                                        <th>Sinalização</th>
-                                        <th>Tarifa Local - Fixo</th>
-                                        <th>Tarifa Local - Móvel</th>
-                                        <th>Tarifa LD - Fixo</th>
-                                        <th>Tarifa LD - Móvel</th>
+                                        <th>Velocidade</th>
+                                        <th>Tecnologia</th>
+                                        <th>Meio de Entrega</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -71,24 +65,18 @@
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
                                         <td>R$ {{$contrato->assinatura}}</td>
-                                        <td>R$ {{$contrato->comprometimento_minimo}}</td>
-                                        <td>{{$contrato->franquia}}</td>
-                                        <td style="text-align: center">{{$contrato->range}}</td>
-                                        <td style="text-align: center">{{$contrato->canais}}</td>
-                                        <td style="text-align: center">{{$contrato->sinalizacao}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_local_fixo}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_local_movel}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_ld_fixo}}</td>
-                                        <td style="text-align: center">{{$contrato->tarifa_ld_movel}}</td>
+                                        <td>{{$contrato->velocidade}} MB</td>
+                                        <td>{{$contrato->tecnologia}}</td>
+                                        <td>{{$contrato->meio_entrega}}</td>
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-fixo.edit', $contrato->ContratoID)}}">
+                                                    <a href="{{route('contratos-dados.edit', $contrato->ContratoID)}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
-                                                <form action="{{route('contratos-fixo.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
+                                                <form action="{{route('contratos-dados.destroy',$contrato->ContratoID)}}" method="POST" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Excluir Registro" data-original-title="Excluir"

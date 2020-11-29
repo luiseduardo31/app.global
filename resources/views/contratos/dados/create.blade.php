@@ -7,15 +7,15 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
                   <a href="{{route('contratos-fixo.index')}}">
-                     Contratos Fixo
+                     Contratos | Servico de Dados
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
-                        [Contratos]
+                        
                     </small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos Fixo</li>
+                        <li class="breadcrumb-item">Contratos | Serviços de Dados</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Cadastrar Novo Contrato</a>
                         </li>
@@ -36,9 +36,9 @@
             </div>
             -->
             <div class="block-content">
-               <form action="{{route('contratos-fixo.store')}}" method="POST" enctype="multipart/form-data">
+               <form action="{{route('contratos-dados.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
-                  <input type="hidden" name="tipo_contrato" value="1">
+                  <input type="hidden" name="tipo_contrato" value="3">
                     <div class="form-group form-row">
                         <div class="col-4">
                             <label for="contrato">Nº do Contrato</label>
@@ -73,16 +73,6 @@
                         </div>
                         
                         <div class="col-2">
-                            <label for="franquia">Franquia</label>
-                            <input type="text" name="franquia" class="form-control" placeholder="Franquia" maxlength="40">
-                        </div>
-                        
-                        <div class="col-2">
-                            <label for="comprometimento_minimo">Comp. Minimo</label>
-                            <input type="text" name="comprometimento_minimo" class="form-control" placeholder="Comp. Minimo" maxlength="40">
-                        </div>
-
-                        <div class="col-2">
                             <label for="data_inicio">Período (Inicio)</label>
                             <input type="date" name="data_inicio" class="form-control" placeholder="Período (Inicio)" maxlength="40">
                         </div>
@@ -98,47 +88,28 @@
                         </div>
 
                         <div class="col-1">
-                            <label for="canais">Canais</label>
-                            <input type="number" name="canais" class="form-control" placeholder="Canais" maxlength="3" min="1" max="120">
-                        </div>
-
-                    </div>
-
-                    <div class="form-group form-row">                        
-                        <div class="col-2">
-                            <label for="range">Range</label>
-                            <input type="text" name="range" class="form-control" placeholder="Range" maxlength="9" data-mask="0000-0000">
+                            <label for="velocidade">Veloc. (MB)</label>
+                            <input type="number" name="velocidade" class="form-control" placeholder="MB" maxlength="4" min="1" max="48">
                         </div>
 
                         <div class="col-2">
-                            <label for="sinalizacao">Sinalização</label>
-                            <select class="form-control" name="sinalizacao">
-                                <option value="ISDN">ISDN</option>
-                                <option value="R2">R2</option>
-                                <option value="SIP">SIP</option>
+                            <label for="tecnologia">Tecnologia</label>
+                            <select class="form-control" name="tecnologia">
+                                <option value="ADSL">ADSL</option>
+                                <option value="Interconexao">Interconexão</option>
+                                <option value="Link Dedicado">Link Dedicado</option>
+                                <option value="MPLS">MPLS</option>
                             </select>
                         </div>
-                        
-                        <div class="col-1">
-                            <label for="tarifa_local_fixo">LC Fixo</label>
-                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
-                        </div>
 
-                        <div class="col-1">
-                            <label for="tarifa_local_movel">LC Móvel</label>
-                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="7">
+                        <div class="col-2">
+                            <label for="MeioEntrega">Meio de Entrega</label>
+                            <select class="form-control" name="meio_entrega">
+                                <option value="Radio">Rádio</option>
+                                <option value="Fibra Optica">Fibra Óptica</option>
+                                <option value="Par Metalico">Par Metálico</option>
+                            </select>
                         </div>
-
-                        <div class="col-1">
-                            <label for="tarifa_ld_fixo">LD Fixo</label>
-                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
-                        </div>
-
-                        <div class="col-1">
-                            <label for="tarifa_ld_movel">LD Móvel</label>
-                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="7">
-                        </div>
-
                     </div>
 
                 <div class="form-group form-row">  
