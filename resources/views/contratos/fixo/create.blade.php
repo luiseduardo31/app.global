@@ -94,12 +94,12 @@
 
                         <div class="col-1">
                             <label for="vigencia">Vigência</label>
-                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="48">
+                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="96">
                         </div>
 
                         <div class="col-1">
                             <label for="canais">Canais</label>
-                            <input type="number" name="canais" class="form-control" placeholder="Canais" maxlength="3" min="1" max="120">
+                            <input type="number" name="canais" class="form-control" placeholder="Canais" maxlength="3" min="1" max="999">
                         </div>
 
                     </div>

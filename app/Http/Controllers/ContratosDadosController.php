@@ -192,9 +192,31 @@ class ContratosDadosController extends Controller
      * @param  \App\Models\ContratosDados  $contratosDados
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContratosDados $contratosDados)
+    public function update(Request $request, $id)
     {
-        //
+        $data_contrato = $request->except(
+            '_token',
+            'tecnologia',
+            'velocidade',
+            'meio_entrega'
+        );
+
+        $contratos  = $this->ContratosGeral->find($id);
+        $update   = $contratos->update($data_contrato);
+
+        if ($update) {
+            $update_detalhes = $request->only(
+                'tecnologia',
+                'velocidade',
+                'meio_entrega',
+                'contrato_id'
+            );
+            $detalhes_contrato  = $this->ContratosDados;
+            $update = $detalhes_contrato->where('contrato_id', $id)->update($update_detalhes);
+            return redirect()->route('contratos-dados.index')->with('success', "O  contrato {$contratos->contrato} foi atualizado com sucesso!");
+        } else {
+            return redirect()->route('contratos-dados.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->contrato}.");
+        }
     }
 
     /**

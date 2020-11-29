@@ -84,17 +84,17 @@
 
                         <div class="col-1">
                             <label for="vigencia">Vigência</label>
-                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="48">
+                            <input type="number" name="vigencia" class="form-control" placeholder="Meses" maxlength="2" min="1" max="96">
                         </div>
 
                         <div class="col-1">
                             <label for="velocidade">Veloc. (MB)</label>
-                            <input type="number" name="velocidade" class="form-control" placeholder="MB" maxlength="4" min="1" max="48">
+                            <input type="number" name="velocidade" class="form-control" placeholder="MB" maxlength="4" min="1" max="9999">
                         </div>
 
                         <div class="col-2">
                             <label for="tecnologia">Tecnologia</label>
-                            <select class="form-control" name="tecnologia">
+                            <select class="form-control selectpicker" name="tecnologia">
                                 <option value="ADSL">ADSL</option>
                                 <option value="Interconexao">Interconexão</option>
                                 <option value="Link Dedicado">Link Dedicado</option>
@@ -104,7 +104,7 @@
 
                         <div class="col-2">
                             <label for="MeioEntrega">Meio de Entrega</label>
-                            <select class="form-control" name="meio_entrega">
+                            <select class="form-control selectpicker" name="meio_entrega">
                                 <option value="Radio">Rádio</option>
                                 <option value="Fibra Optica">Fibra Óptica</option>
                                 <option value="Par Metalico">Par Metálico</option>

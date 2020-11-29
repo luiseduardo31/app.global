@@ -75,7 +75,7 @@
                         
                         <div class="col-1">
                             <label for="vigencia">Vigência</label>
-                            <input type="number" name="vigencia" class="form-control" value="{{$contratos->vigencia}}" maxlength="2" min="1" max="48">
+                            <input type="number" name="vigencia" class="form-control" value="{{$contratos->vigencia}}" maxlength="2" min="1" max="96">
                         </div>
                                                 
                         <div class="col-1">
