@@ -9,6 +9,7 @@ use App\Models\Operadoras;
 use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ContratosDadosController extends Controller
 {
@@ -234,5 +235,15 @@ class ContratosDadosController extends Controller
             return redirect()->route('contratos-dados.index')->with('success', "O contrato {$contratos->contrato} foi excluido com sucesso!");
         } else
             return redirect()->route('contratos-dados.index')->with('error', "Houve um erro ao excluir o contrato {$contratos->contrato}.");
+    }
+
+    public function difDatas()
+    {
+        $dateStart = new DateTime('2020-11-28');
+        $dateNow = new DateTime(date('Y-m-d'));
+        $dateDiff = $dateStart->diff($dateNow);
+        $result = $dateDiff->days;
+        
+        return $result;
     }
 }

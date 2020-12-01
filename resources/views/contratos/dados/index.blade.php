@@ -42,11 +42,12 @@
                                 <thead>
                                     <tr>
                                         <th style="width:300px">Contrato</th>
-                                        <th style="width:300px !important">Operadora</th>
+                                        <th  style="text-align: center">Situação</th>
                                         <th wid>Razão Social</th>
                                         <th>CNPJ</th>
                                         <th>Periodo</th>
                                         <th>Vigencia</th>
+                                        <th>Operadora</th>
                                         <th>Assinatura</th>
                                         <th>Velocidade</th>
                                         <th>Tecnologia</th>
@@ -57,13 +58,34 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($contratos as $contrato)
-                                    <tr>
+
+                                    @php
+
+                                        $data_fim_contrato = date_create($contrato->data_fim);
+                                        $data_hoje = date_create(date('Y-m-d'));
+                                        $intervalo = date_diff($data_hoje, $data_fim_contrato);
+                                        $dias_venc_contrato = (int)$intervalo->format('%R%a');
+
+                                        $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
+                                        $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
+                                        #$situacao_texto = $dias_venc_contrato <=60 ? "color:blue": "";
+
+                                        #$data_fim_contrato = new DateTime($contrato->data_fim);
+                                        #$data_hoje = new DateTime(date('Y-m-d'));
+                                        #$dateDiff = date_diff($data_hoje,$data_fim_contrato);
+                                        #$data_fim_contrato->diff($data_hoje);
+                                        #$dias_a  = $dateDiff->days;
+
+                                    @endphp
+
+                                    <tr style="{{$situacao_texto}}">
                                         <td>{{$contrato->contrato}}</td>
-                                        <td style="width:300px !important">{{$contrato->operadora}}</td>
+                                        <td style="text-align: center">{{$situacao_contrato}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
+                                         <td>{{$contrato->operadora}}</td>
                                         <td>R$ {{$contrato->assinatura}}</td>
                                         <td>{{$contrato->velocidade}} MB</td>
                                         <td>{{$contrato->tecnologia}}</td>
