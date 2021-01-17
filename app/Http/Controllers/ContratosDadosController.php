@@ -10,6 +10,7 @@ use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class ContratosDadosController extends Controller
 {
@@ -165,8 +166,10 @@ class ContratosDadosController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         $user = Auth::user();
         $user_id = Auth::id();
+        $idGrupo = session()->get('session_grupo_id');
 
         $contratos = $this->ContratosGeral->find($id);
         $detalhes_contrato = ContratosDados::where('contrato_id', $contratos->id)->first();
@@ -177,12 +180,28 @@ class ContratosDadosController extends Controller
             ->where('tipo_operadora', '2')
             ->get();
 
-        $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
-            ->select(array('empresas.*', 'grupos_users.*', 'empresas.id AS EmpresaID', 'grupos.*'))
-            ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
-            ->where('users_id', $user_id)
-            ->get();
+        if ($idGrupo != "0") {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array(
+                'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                'grupos.id AS GrupoID', 'grupos.*'
+            ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->where('empresas.grupo_id', $idGrupo)
+                ->get();
+        } else {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array(
+                'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                'grupos.id AS GrupoID', 'grupos.*'
+            ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->get();
+        }
         return view('contratos.dados.edit', compact('contratos', 'detalhes_contrato', 'operadoras', 'empresas'));
     }
 
@@ -245,5 +264,19 @@ class ContratosDadosController extends Controller
         $result = $dateDiff->days;
         
         return $result;
+    }
+
+    public function getDiaDaSemana($mesAno, $qtdDay)
+    {
+
+        $mes = substr($mesAno, 0, 2);
+        $ano = substr($mesAno, 3, 4);
+        $mes = $mes + 1;
+
+        $lastDay = date('m/d/Y', mktime(0, 0, 0, $mes, 0, $ano));
+
+        $firstDay = strtotime($lastDay . ' +' . $qtdDay . ' Weekday');
+
+        return date('d/m/Y', $firstDay);
     }
 }

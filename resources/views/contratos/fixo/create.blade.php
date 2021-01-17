@@ -7,15 +7,15 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
                   <a href="{{route('contratos-fixo.index')}}">
-                     Contratos Fixo
+                     Contratos | Telefonia Fixa
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
-                        [Contratos]
+                       
                     </small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos Fixo</li>
+                        <li class="breadcrumb-item">Contratos de Telefonia Fixa</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Cadastrar Novo Contrato</a>
                         </li>
@@ -121,22 +121,22 @@
                         
                         <div class="col-1">
                             <label for="tarifa_local_fixo">LC Fixo</label>
-                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
+                            <input type="text" name="tarifa_local_fixo" class="form-control" placeholder="Tarifa" maxlength="7" data-mask="0.000">
                         </div>
 
                         <div class="col-1">
                             <label for="tarifa_local_movel">LC Móvel</label>
-                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="7">
+                            <input type="text" name="tarifa_local_movel" class="form-control" placeholder="Tarifa" maxlength="7" data-mask="0.000">
                         </div>
 
                         <div class="col-1">
                             <label for="tarifa_ld_fixo">LD Fixo</label>
-                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="7">
+                            <input type="text" name="tarifa_ld_fixo" class="form-control" placeholder="Tarifa" maxlength="7" data-mask="0.000">
                         </div>
 
                         <div class="col-1">
                             <label for="tarifa_ld_movel">LD Móvel</label>
-                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="7">
+                            <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="7" data-mask="0.000">
                         </div>
 
                     </div>

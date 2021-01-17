@@ -10,6 +10,7 @@ use App\Models\Empresas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 
 class ContratosFixoController extends Controller
@@ -172,8 +173,10 @@ class ContratosFixoController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         $user = Auth::user();
         $user_id = Auth::id();
+        $idGrupo = session()->get('session_grupo_id');
         
         $contratos = $this->ContratosGeral->find($id);
         $detalhes_contrato = ContratosFixo::where('contrato_id', $contratos->id)->first();
@@ -183,12 +186,30 @@ class ContratosFixoController extends Controller
         ->select(array('operadoras.*'))
         ->where('tipo_operadora', '2')
         ->get();
-        
-        $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
-            ->select(array('empresas.*', 'grupos_users.*','empresas.id AS EmpresaID'))
-            ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
-            ->where('users_id', $user_id)
-            ->get();
+
+        if ($idGrupo != "0") {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array(
+                'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                'grupos.id AS GrupoID', 'grupos.*'
+            ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->where('empresas.grupo_id', $idGrupo)
+                ->get();
+        } else {
+            $empresas = DB::table('empresas')->orderBy('razao_social', 'ASC')
+            ->select(array(
+                'empresas.id AS EmpresaID', 'empresas.*', 'grupos_users.*',
+                'grupos.id AS GrupoID', 'grupos.*'
+            ))
+                ->join('grupos', 'grupos.id', '=', 'empresas.grupo_id')
+                ->join('grupos_users', 'grupos_users.grupos_id', '=', 'empresas.grupo_id')
+                ->where('users_id', $user_id)
+                ->get();
+        }
+
         return view('contratos.fixo.edit', compact('contratos', 'detalhes_contrato','operadoras','empresas'));
     }
 

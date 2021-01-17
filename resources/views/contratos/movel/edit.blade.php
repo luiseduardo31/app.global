@@ -7,7 +7,7 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
                   <a href="{{route('contas.index')}}">
-                     Contratos Móveis 
+                     Contratos | Telefonia Móvel
                   </a>
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
                      
@@ -15,7 +15,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contrato Móvel</li>
+                        <li class="breadcrumb-item">Contrato de Telefonia Móvel</li>
                         <li class="breadcrumb-item" aria-current="page">
                            <a class="link-fx" href="">Editando Contrato</a>
                         </li>
@@ -157,7 +157,7 @@
                         </div>  
                         
                         <div class="col-2">
-                            <a href="{{route('contratos-fixo.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do contrato {{$contratos->numero_contrato}}?');">
+                            <a href="{{route('contratos-movel.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do contrato {{$contratos->numero_contrato}}?');">
                                 Cancelar
                             </a>
                         </div>

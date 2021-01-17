@@ -6,14 +6,14 @@
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h3 my-2">
-                    Contratos Fixos
+                    Contratos | Telefonia Fixa
                     <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
-                        [Contratos]
+                        
                     </small>
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos Fixos</li>
+                        <li class="breadcrumb-item">Contratos de Telefonia Fixa</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Cadastrados</a>
                         </li>
@@ -63,7 +63,20 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($contratos as $contrato)
-                                    <tr>
+                                    
+                                    @php
+                                    
+                                        $data_fim_contrato = date_create($contrato->data_fim);
+                                        $data_hoje = date_create(date('Y-m-d'));
+                                        $intervalo = date_diff($data_hoje, $data_fim_contrato);
+                                        $dias_venc_contrato = (int)$intervalo->format('%R%a');
+
+                                        $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
+                                        $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
+
+                                    @endphp
+
+                                    <tr style="{{$situacao_texto}}">
                                         <td>{{$contrato->contrato}}</td>
                                         <td style="width:300px !important">{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
@@ -84,7 +97,7 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-fixo.edit', $contrato->ContratoID)}}">
+                                                    <a href="{{route('contratos-fixo.edit', \Crypt::encrypt($contrato->ContratoID))}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>

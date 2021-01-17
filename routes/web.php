@@ -16,6 +16,12 @@ Route::get('/inventario/{id?}', 'InventarioController@index')->name('inventario.
 Route::get('/inventario/{id}/edit', 'InventarioController@edit')->name('inventario.edit');
 Route::delete('/inventario/{id}', 'InventarioController@destroy')->name('inventario.destroy');
 */
+#Route::resource('minha-linha', 'InvMovelUserController');
+Route::get('/minha-linha', 'InvMovelUserController@index')->name('minha-linha.index');
+Route::get('/minha-linha/{id}/line', 'InvMovelUserController@edit')->name('minha-linha.edit');
+Route::put('/minha-linha/{id}', 'InvMovelUserController@update')->name('minha-linha.update');
+
+
 Route::resource('meus-dados', 'MeusDadosController')->middleware(['auth','check.session.group']);
 Route::resource('inventario', 'InventarioController')->middleware(['auth','check.session.group']);
 Route::resource('escolher-grupo', 'EscolherGrupoController');

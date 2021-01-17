@@ -504,7 +504,7 @@
                                                     <li class="nav-main-item">
                                                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                                             <i class="nav-main-link-icon si si-note"></i>
-                                                            <span class="nav-main-link-name">Contratos Fixos</span>
+                                                            <span class="nav-main-link-name">Telefonia Fixa</span>
                                                         </a>
                                                         <ul class="nav-main-submenu">
                                                             <li class="nav-main-item">
@@ -525,7 +525,7 @@
                                                     <li class="nav-main-item">
                                                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                                             <i class="nav-main-link-icon si si-note"></i>
-                                                            <span class="nav-main-link-name">Contratos Móveis</span>
+                                                            <span class="nav-main-link-name">Telefonia Móvel</span>
                                                         </a>
                                                         <ul class="nav-main-submenu">
                                                             <li class="nav-main-item">
@@ -535,6 +535,27 @@
                                                             </li>
                                                             <li class="nav-main-item">
                                                                 <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="{{url('contratos-movel')}}">
+                                                                    <span class="nav-main-link-name">Contratos Cadastrados</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul> 
+                                                    </li>
+                                                    <!-- Fim Submenu Contratos Móveis -->
+
+                                                    <!-- Submenu Contratos Dados -->
+                                                    <li class="nav-main-item">
+                                                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                                            <i class="nav-main-link-icon si si-note"></i>
+                                                            <span class="nav-main-link-name">Serviços de Dados</span>
+                                                        </a>
+                                                        <ul class="nav-main-submenu">
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-dados/create') ? ' active' : '' }}" href="{{url('contratos-dados/create')}}">
+                                                                    <span class="nav-main-link-name">Cadastrar Contrato</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-main-item">
+                                                                <a class="nav-main-link{{ request()->is('contratos-dados') ? ' active' : '' }}" href="{{url('contratos-dados')}}">
                                                                     <span class="nav-main-link-name">Contratos Cadastrados</span>
                                                                 </a>
                                                             </li>
@@ -561,7 +582,37 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>     
+                        </li>
+                        
+                    <!-- Menu Contratos -->
+                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                                <i class="nav-main-link-icon far fa-address-book"></i>
+                                <span class="nav-main-link-name">Contratos Telecom</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('contratos-fixo') ? ' active' : '' }}" href="{{url('contratos-fixo')}}">
+                                        <span class="nav-main-link-name">Telefonia Fixa</span>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('contratos-movel') ? ' active' : '' }}" href="{{url('contratos-movel')}}">
+                                        <span class="nav-main-link-name">Telefonia Móvel</span>
+                                    </a>
+                                </li>
+                               
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link{{ request()->is('contratos-dados') ? ' active' : '' }}" href="{{url('contratos-dados')}}">
+                                        <span class="nav-main-link-name">Serviços de Dados</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                    <!-- Fim Menu Contratos -->
                          
                         
 

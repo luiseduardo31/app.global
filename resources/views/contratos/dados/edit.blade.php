@@ -15,7 +15,7 @@
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">Contratos | Serviços de Dados</li>
+                        <li class="breadcrumb-item">Contrato de Serviços de Dados</li>
                         <li class="breadcrumb-item" aria-current="page">
                            <a class="link-fx" href="">Editando Contrato</a>
                         </li>
@@ -126,7 +126,7 @@
                         </div>  
                         
                         <div class="col-2">
-                            <a href="{{route('contratos-fixo.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do contrato {{$contratos->numero_contrato}}?');">
+                            <a href="{{route('contratos-dados.index')}}" class="btn btn-danger form-control"  onclick="return confirm('Deseja realmente cancelar a edição do contrato {{$contratos->numero_contrato}}?');">
                                 Cancelar
                             </a>
                         </div>

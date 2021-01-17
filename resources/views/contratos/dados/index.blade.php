@@ -60,7 +60,7 @@
                                     @forelse ($contratos as $contrato)
 
                                     @php
-
+                                    
                                         $data_fim_contrato = date_create($contrato->data_fim);
                                         $data_hoje = date_create(date('Y-m-d'));
                                         $intervalo = date_diff($data_hoje, $data_fim_contrato);
@@ -68,13 +68,6 @@
 
                                         $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
                                         $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
-                                        #$situacao_texto = $dias_venc_contrato <=60 ? "color:blue": "";
-
-                                        #$data_fim_contrato = new DateTime($contrato->data_fim);
-                                        #$data_hoje = new DateTime(date('Y-m-d'));
-                                        #$dateDiff = date_diff($data_hoje,$data_fim_contrato);
-                                        #$data_fim_contrato->diff($data_hoje);
-                                        #$dias_a  = $dateDiff->days;
 
                                     @endphp
 
@@ -94,7 +87,7 @@
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
-                                                    <a href="{{route('contratos-dados.edit', $contrato->ContratoID)}}">
+                                                    <a href="{{route('contratos-dados.edit', \Crypt::encrypt($contrato->ContratoID))}}">
                                                         <i class="fa fa-fw fa-pencil-alt"></i>
                                                     </a>
                                                 </button>
