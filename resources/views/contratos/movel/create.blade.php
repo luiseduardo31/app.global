@@ -136,6 +136,14 @@
                             <label for="data_fim">Período (Fim)</label>
                             <input type="date" name="data_fim" class="form-control" placeholder="Período (Fim)" maxlength="40">
                         </div>
+
+                        <div class="col-2">
+                            <label for="status_contrato">Status</label>
+                            <select class="form-control selectpicker" name="status_contrato">
+                                <option value="1">Ativo</option>
+                                <option value="0">Cancelado</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group form-row">

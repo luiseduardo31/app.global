@@ -139,6 +139,14 @@
                             <input type="text" name="tarifa_ld_movel" class="form-control" placeholder="Tarifa" maxlength="7" data-mask="0.000">
                         </div>
 
+                        <div class="col-2">
+                            <label for="status_contrato">Status</label>
+                            <select class="form-control selectpicker" name="status_contrato">
+                                <option value="1">Ativo</option>
+                                <option value="0">Cancelado</option>
+                            </select>
+                        </div>
+
                     </div>
 
                 <div class="form-group form-row">  

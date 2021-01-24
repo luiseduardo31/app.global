@@ -135,6 +135,14 @@
                             <label for="data_fim">Período (Fim)</label>
                             <input type="date" name="data_fim" class="form-control" value="{{$contratos->data_fim}}">
                         </div>
+
+                        <div class="col-2">
+                            <label for="status_contrato">Status</label>
+                            <select class="form-control selectpicker" name="status_contrato">
+                                <option value="0" {{ ( $contratos->status_contrato == "0") ? 'selected' : '' }}>Cancelado</option>
+                                <option value="1" {{ ( $contratos->status_contrato == "1") ? 'selected' : '' }}>Ativo</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group form-row">

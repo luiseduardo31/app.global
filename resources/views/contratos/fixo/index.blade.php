@@ -57,6 +57,7 @@
                                         <th>Tarifa Local - Móvel</th>
                                         <th>Tarifa LD - Fixo</th>
                                         <th>Tarifa LD - Móvel</th>
+                                        <th>Status</th>
                                         <th>Observação</th>
                                         <th style="width:50px">Ações</th>
                                     </tr>
@@ -73,6 +74,7 @@
 
                                         $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
                                         $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
+                                        $status_contrato = $contrato->status_contrato == 0 ? "Cancelado":"Ativo";
 
                                     @endphp
 
@@ -93,6 +95,7 @@
                                         <td style="text-align: center">{{$contrato->tarifa_local_movel}}</td>
                                         <td style="text-align: center">{{$contrato->tarifa_ld_fixo}}</td>
                                         <td style="text-align: center">{{$contrato->tarifa_ld_movel}}</td>
+                                        <td>{{$status_contrato}}</td>
                                         <td>{{$contrato->obsContrato}}</td>
                                         <td> 
                                             <div class="btn-group">

@@ -38,12 +38,12 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group form-row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <label for="contrato">Nº do Contrato</label>
                             <input type="text" name="contrato" class="form-control" value="{{$contratos->contrato}}" maxlength="40">
                         </div>
                         
-                        <div class="col-6">
+                        <div class="col-5">
                             <label for="user">Razão Social | CNPJ | Grupo</label>
                             <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
                             @foreach ($empresas as $empresa)
@@ -53,7 +53,15 @@
                             @endforeach
                             </select>
                         </div>
-                        
+
+                        <div class="col-2">
+                            <label for="status_contrato">Status</label>
+                            <select class="form-control selectpicker" name="status_contrato">
+                                <option value="0" {{ ( $contratos->status_contrato == "0") ? 'selected' : '' }}>Cancelado</option>
+                                <option value="1" {{ ( $contratos->status_contrato == "1") ? 'selected' : '' }}>Ativo</option>
+                            </select>
+                        </div>
+
                         <div class="col-2">
                             <label for="operadora">Operadora</label>
                             <select class="form-control selectpicker" name="operadora_id">

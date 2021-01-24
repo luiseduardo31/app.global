@@ -40,18 +40,26 @@
                   @csrf
                   <input type="hidden" name="tipo_contrato" value="3">
                     <div class="form-group form-row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <label for="contrato">Nº do Contrato</label>
                             <input type="text" name="contrato" class="form-control" placeholder="Nº do Contrato" maxlength="40">
                         </div>
                         
-                        <div class="col-6">
+                        <div class="col-5">
                             <label for="user">Razão Social | CNPJ</label>
                             <select class="form-control selectpicker" data-size="5" name="empresa_id" id="empresa_id">
                                 <option readonly>Escolha uma opção</option>
                             @foreach ($empresas as $empresa)
                                 <option data-subtext=" | {{$empresa->cnpj}}" value="{{$empresa->EmpresaID}}">{{$empresa->razao_social}}</option>
                             @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="status_contrato">Status</label>
+                            <select class="form-control selectpicker" name="status_contrato">
+                                <option value="1">Ativo</option>
+                                <option value="0">Cancelado</option>
                             </select>
                         </div>
                         
@@ -112,12 +120,12 @@
                         </div>
                     </div>
 
-                <div class="form-group form-row">  
-                    <div class="col-12">
-                    <label for="resp_despesa">Observação</label> <br>
-                    <textarea name="observacao" class="form-control" rows="3"></textarea>
+                    <div class="form-group form-row">  
+                        <div class="col-12">
+                        <label for="resp_despesa">Observação</label> <br>
+                        <textarea name="observacao" class="form-control" rows="3"></textarea>
+                        </div>
                     </div>
-                </div>
 
                     <div class="form-group form-row">
                         <div class="col-2">
