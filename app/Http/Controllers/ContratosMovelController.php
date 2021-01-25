@@ -18,7 +18,11 @@ class ContratosMovelController extends Controller
     {
         $this->ContratosMovel = $contratosMovel;
         $this->ContratosGeral = $contratos;
+
         $this->middleware('auth');
+        $this->middleware('check.permissions')->except([
+            'index'
+        ]);
     }
 
     /**

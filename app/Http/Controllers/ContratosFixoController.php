@@ -19,7 +19,11 @@ class ContratosFixoController extends Controller
     {
         $this->ContratosFixo = $contratosFixo;
         $this->ContratosGeral = $contratos;
+
         $this->middleware('auth');
+        $this->middleware('check.permissions')->except([
+            'index'
+        ]);
     }
     /**
      * Display a listing of the resource.

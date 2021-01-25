@@ -42,6 +42,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width:300px">Contrato</th>
+                                        <th  style="text-align: center">Situação</th>
                                         <th style="width:300px !important">Operadora</th>
                                         <th wid>Razão Social</th>
                                         <th>CNPJ</th>
@@ -59,27 +60,37 @@
                                         <th>Tarifa LD - Móvel</th>
                                         <th>Status</th>
                                         <th>Observação</th>
-                                        <th style="width:50px">Ações</th>
+                                        @if(Auth::user()->tipo_usuario_id == 1)
+                                            <th style="width:50px">Ações</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse ($contratos as $contrato)
-                                    
-                                    @php
-                                    
-                                        $data_fim_contrato = date_create($contrato->data_fim);
-                                        $data_hoje = date_create(date('Y-m-d'));
-                                        $intervalo = date_diff($data_hoje, $data_fim_contrato);
-                                        $dias_venc_contrato = (int)$intervalo->format('%R%a');
+                                        
+                                        @if($contrato->status_contrato == 1)
+                                        
+                                        @php 
+                                            $data_fim_contrato = date_create($contrato->data_fim);
+                                            $data_hoje = date_create(date('Y-m-d'));
+                                            $intervalo = date_diff($data_hoje, $data_fim_contrato);
+                                            $dias_venc_contrato = (int)$intervalo->format('%R%a');
 
-                                        $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
-                                        $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
-                                        $status_contrato = $contrato->status_contrato == 0 ? "Cancelado":"Ativo";
-
-                                    @endphp
+                                            $situacao_contrato = $dias_venc_contrato <0 ? "Vencido (".abs($dias_venc_contrato). " dias)" : ($dias_venc_contrato <=60 ? "À Vencer ($dias_venc_contrato dias)" : "Vigente");
+                                            $situacao_texto = $dias_venc_contrato <0 ? "color:red;font-weight:bold" : ($dias_venc_contrato <=60 ? "color:blue" : "vigente");
+                                            $status_contrato = "Ativo";
+                                        @endphp
+                                        @else
+                                        @php
+                                            $situacao_texto = "color:#838383;background-color:#e9e9e9";
+                                            $situacao_contrato = "Cancelado";
+                                            $status_contrato = "Cancelado";
+                                        @endphp
+                                        @endif
 
                                     <tr style="{{$situacao_texto}}">
-                                        <td>{{$contrato->contrato}}</td>
+                                        <td style="{{$situacao_texto}}">{{$contrato->contrato}}</td>
+                                        <td style="text-align: center">{{$situacao_contrato}}</td>
                                         <td style="width:300px !important">{{$contrato->operadora}}</td>
                                         <td>{{$contrato->razao_social}}</td>
                                         <td>{{$contrato->cnpj}}</td>
@@ -97,6 +108,7 @@
                                         <td style="text-align: center">{{$contrato->tarifa_ld_movel}}</td>
                                         <td>{{$status_contrato}}</td>
                                         <td>{{$contrato->obsContrato}}</td>
+                                        @if(Auth::user()->tipo_usuario_id == 1)
                                         <td> 
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Editar Registro" data-original-title="Editar">
@@ -114,6 +126,7 @@
                                                 </form>
                                             </div>
                                         </td>
+                                        @endif
                                     </tr>                                                                     
                                     @empty
                                     @endforelse

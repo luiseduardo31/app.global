@@ -19,7 +19,11 @@ class ContratosDadosController extends Controller
     {
         $this->ContratosDados = $contratosDados;
         $this->ContratosGeral = $contratos;
+
         $this->middleware('auth');
+        $this->middleware('check.permissions')->except([
+            'index'
+        ]);
     }
     /**
      * Display a listing of the resource.

@@ -26,6 +26,12 @@ Route::resource('meus-dados', 'MeusDadosController')->middleware(['auth','check.
 Route::resource('inventario', 'InventarioController')->middleware(['auth','check.session.group']);
 Route::resource('escolher-grupo', 'EscolherGrupoController');
 
+Route::resource('contratos-fixo', 'ContratosFixoController')->middleware(['auth', 'check.session.group']);
+Route::resource('contratos-movel', 'ContratosMovelController')->middleware(['auth', 'check.session.group']);
+Route::resource('contratos-dados', 'ContratosDadosController')->middleware(['auth', 'check.session.group']);
+
+Route::resource('contratos', 'ContratosController');
+
 // ROTAS ADMIN
 Route::group(['middleware' => ['auth','check.permissions','check.session.group']], function () {
 
@@ -48,11 +54,7 @@ Route::group(['middleware' => ['auth','check.permissions','check.session.group']
     Route::resource('logs', 'LogsController');
     Route::resource('logs-acessos', 'LogsLoginsController');
    
-    Route::resource('contratos-fixo', 'ContratosFixoController');
-    Route::resource('contratos-movel', 'ContratosMovelController');
-    Route::resource('contratos-dados', 'ContratosDadosController');
 
-    #Route::resource('contratos', 'ContratosController');
 });
 
 Route::get('/', function () {
