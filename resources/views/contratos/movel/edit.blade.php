@@ -70,7 +70,7 @@
                         
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" value="{{$contratos->assinatura}}" maxlength="8">
+                            <input type="text" name="assinatura" class="form-control money" value="{{$contratos->assinatura}}" maxlength="8">
                         </div>
                         
                         <div class="col-1">
@@ -85,7 +85,7 @@
 
                         <div class="col-1">
                             <label for="sms_pacote">Pct SMS</label>
-                            <input type="text" name="sms_pacote" class="form-control" value="{{$detalhes_contrato->sms_pacote}}" data-mask="000.00" maxlength="6">
+                            <input type="text" name="sms_pacote" class="form-control money" value="{{$detalhes_contrato->sms_pacote}}" maxlength="6">
                         </div>
 
                         <div class="col-1">

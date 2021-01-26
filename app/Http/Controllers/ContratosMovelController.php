@@ -122,40 +122,50 @@ class ContratosMovelController extends Controller
      */
     public function store(Request $request)
     {
-        $data_contrato = $request->except(
-            '_token',
-            'sms_unitario',
-            'sms_pacote',
-            'gestor_online',
-            'planos_contrato',
-            'tarifa_local_mesma',
-            'tarifa_local_fixo',
-            'tarifa_local_outra',
-            'tarifa_ld_mesma',
-            'tarifa_ld_fixo',
-            'tarifa_ld_outra',
-            'contrato_id'
-        );
+        $data = $request->all();
 
-        $insert = $this->ContratosGeral->insert($data_contrato);
+        $vlr_assinatura = str_replace('.', '', $request->assinatura);
+        $vlr_assinatura = str_replace(',', '.', $vlr_assinatura);
+
+
+        $data_contrato = $this->ContratosGeral->insert([
+            'contrato' => $data['contrato'],
+            'operadora_id' => $data['operadora_id'],
+            'empresa_id' => $data['empresa_id'],
+            'assinatura' => $vlr_assinatura,
+            'vigencia' => $data['vigencia'],
+            'data_inicio' => $data['data_inicio'],
+            'data_fim' => $data['data_fim'],
+            'tipo_contrato' => '1',
+            'status_contrato' => $data['status_contrato'],
+            'observacao' => $data['observacao'],
+        ]);
 
         #Obtendo o ultimo registro inserido.
         $registro_id = DB::getPDO()->lastInsertId();
 
-        if ($insert) {
+        if ($data_contrato) {
+
+            $data_det = $request->all();
+            $contratoMovel  = $this->ContratosMovel;
+
+            $vlr_sms_pacote = str_replace('.', '', $request->sms_pacote);
+            $vlr_sms_pacote = str_replace(',', '.', $vlr_sms_pacote);
+
             $insert_detalhes = $this->ContratosMovel->insert([
-                'sms_unitario' => $request['sms_unitario'],
-                'sms_pacote' => $request['sms_pacote'],
-                'gestor_online' => $request['gestor_online'],
-                'planos_contrato' => $request['planos_contrato'],
-                'tarifa_local_mesma' => $request['tarifa_local_mesma'],
-                'tarifa_local_fixo' => $request['tarifa_local_fixo'],
-                'tarifa_local_outra' => $request['tarifa_local_outra'],
-                'tarifa_ld_mesma' => $request['tarifa_ld_mesma'],
-                'tarifa_ld_fixo' => $request['tarifa_ld_fixo'],
-                'tarifa_ld_outra' => $request['tarifa_ld_outra'],
-                'contrato_id' => $registro_id,
+                'sms_unitario' => $data_det['sms_unitario'],
+                'sms_pacote' => $vlr_sms_pacote,
+                'gestor_online' => $data_det['gestor_online'],
+                'planos_contrato' => $data_det['planos_contrato'],
+                'tarifa_local_mesma' => $data_det['tarifa_local_mesma'],
+                'tarifa_local_outra' => $data_det['tarifa_local_outra'],
+                'tarifa_local_fixo' => $data_det['tarifa_local_fixo'],
+                'tarifa_ld_mesma' => $data_det['tarifa_ld_mesma'],
+                'tarifa_ld_outra' => $data_det['tarifa_ld_outra'],
+                'tarifa_ld_fixo' => $data_det['tarifa_ld_fixo'],
+                'contrato_id' => $registro_id
             ]);
+
         } else {
             return redirect()->route('contratos-movel.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->contrato}.");
         }
@@ -235,40 +245,46 @@ class ContratosMovelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data_contrato = $request->except(
-            '_token',
-            'sms_unitario',
-            'sms_pacote',
-            'gestor_online',
-            'planos_contrato',
-            'tarifa_local_mesma',
-            'tarifa_local_outra',
-            'tarifa_local_fixo',
-            'tarifa_ld_mesma',
-            'tarifa_ld_outra',
-            'tarifa_ld_fixo',
-            'contrato_id'
-        );
+        $vlr_assinatura = str_replace('.', '', $request->assinatura);
+        $vlr_assinatura = str_replace(',', '.', $vlr_assinatura);
 
+        $data = $request->all();
         $contratos  = $this->ContratosGeral->find($id);
-        $update   = $contratos->update($data_contrato);
 
-        if ($update) {
-            $update_detalhes = $request->only(
-                'sms_unitario',
-                'sms_pacote',
-                'gestor_online',
-                'planos_contrato',
-                'tarifa_local_mesma',
-                'tarifa_local_outra',
-                'tarifa_local_fixo',
-                'tarifa_ld_mesma',
-                'tarifa_ld_outra',
-                'tarifa_ld_fixo',
-                'contrato_id'
-            );
-            $detalhes_contrato  = $this->ContratosMovel;
-            $update = $detalhes_contrato->where('contrato_id', $id)->update($update_detalhes);
+        $data_contrato = $contratos->update([
+            'contrato' => $data['contrato'],
+            'operadora_id' => $data['operadora_id'],
+            'empresa_id' => $data['empresa_id'],
+            'assinatura' => $vlr_assinatura,
+            'vigencia' => $data['vigencia'],
+            'data_inicio' => $data['data_inicio'],
+            'data_fim' => $data['data_fim'],
+            'tipo_contrato' => '1',
+            'status_contrato' => $data['status_contrato'],
+            'observacao' => $data['observacao'],
+        ]);
+
+        if ($data_contrato) {
+
+        $data_det = $request->all();
+        $contratoMovel  = $this->ContratosMovel;
+
+        $vlr_sms_pacote = str_replace('.', '', $request->sms_pacote);
+        $vlr_sms_pacote = str_replace(',', '.', $vlr_sms_pacote);
+
+        $data_contrato = $contratoMovel->where('contrato_id', $id)->update([
+                'sms_unitario' => $data_det['sms_unitario'],
+                'sms_pacote' => $vlr_sms_pacote,
+                'gestor_online'=> $data_det['gestor_online'],
+                'planos_contrato' => $data_det['planos_contrato'],
+                'tarifa_local_mesma' => $data_det['tarifa_local_mesma'],
+                'tarifa_local_outra' => $data_det['tarifa_local_outra'],
+                'tarifa_local_fixo' => $data_det['tarifa_local_fixo'],
+                'tarifa_ld_mesma' => $data_det['tarifa_ld_mesma'],
+                'tarifa_ld_outra' => $data_det['tarifa_ld_outra'],
+                'tarifa_ld_fixo' => $data_det['tarifa_ld_fixo'],
+        ]);
+
             return redirect()->route('contratos-movel.index')->with('success', "O  contrato {$contratos->contrato} foi atualizado com sucesso!");
         } else {
             return redirect()->route('contratos-movel.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->contrato}.");

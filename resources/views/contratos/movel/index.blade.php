@@ -97,16 +97,16 @@
                                         <td>{{$contrato->cnpj}}</td>
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
-                                        <td>R$ {{$contrato->assinatura}}</td>
-                                        <td>R$ {{$contrato->sms_unitario}}</td>
-                                        <td>R$ {{$contrato->sms_pacote}}</td>
-                                        <td>R$ {{$contrato->gestor_online}}</td>
-                                        <td>R$ {{$contrato->tarifa_local_mesma}}</td> 
-                                        <td>R$ {{$contrato->tarifa_local_fixo}}</td> 
-                                        <td>R$ {{$contrato->tarifa_local_outra}}</td>
-                                        <td>R$ {{$contrato->tarifa_ld_mesma}}</td> 
-                                        <td>R$ {{$contrato->tarifa_ld_fixo}}</td> 
-                                        <td>R$ {{$contrato->tarifa_ld_outra}}</td>
+                                        <td>R$ {{number_format($contrato->assinatura, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->sms_unitario, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->sms_pacote, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->gestor_online, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->tarifa_local_mesma, 2, ',', '.')}}</td> 
+                                        <td>R$ {{number_format($contrato->tarifa_local_fixo, 2, ',', '.')}}</td> 
+                                        <td>R$ {{number_format($contrato->tarifa_local_outra, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->tarifa_ld_mesma, 2, ',', '.')}}</td> 
+                                        <td>R$ {{number_format($contrato->tarifa_ld_fixo, 2, ',', '.')}}</td> 
+                                        <td>R$ {{number_format($contrato->tarifa_ld_outra, 2, ',', '.')}}</td>
                                         <td>{{$contrato->planos_contrato}}</td>  
                                         <td>{{$status_contrato}}</td>                                 
                                         <td>{{$contrato->obsContrato}}</td>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 
 class ContratosFixoController extends Controller
@@ -115,35 +116,45 @@ class ContratosFixoController extends Controller
      */
     public function store(Request $request)
     {
-        $data_contrato = $request->except(
-            '_token',
-            'franquia',
-            'comprometimento_minimo',
-            'range',
-            'canais',
-            'sinalizacao',
-            'tarifa_local_fixo',
-            'tarifa_local_movel',
-            'tarifa_ld_fixo',
-            'tarifa_ld_movel'
-        );
 
-        $insert = $this->ContratosGeral->insert($data_contrato);
+        $data = $request->all();
+
+        $vlr_assinatura = str_replace('.', '', $request->assinatura);
+        $vlr_assinatura = str_replace(',', '.', $vlr_assinatura);
+
+
+        $data_contrato = $this->ContratosGeral->insert([
+            'contrato' => $data['contrato'],
+            'operadora_id' => $data['operadora_id'],
+            'empresa_id' => $data['empresa_id'],
+            'assinatura' => $vlr_assinatura,
+            'vigencia' => $data['vigencia'],
+            'data_inicio' => $data['data_inicio'],
+            'data_fim' => $data['data_fim'],
+            'tipo_contrato' => '1',
+            'status_contrato' => $data['status_contrato'],
+            'observacao' => $data['observacao'],
+        ]);
 
         #Obtendo o ultimo registro inserido.
         $registro_id = DB::getPDO()->lastInsertId();
 
-        if($insert){
+        $data_det = $request->all();
+
+        $vlr_comp_minimo = str_replace('.', '', $request->comprometimento_minimo);
+        $vlr_comp_minimo = str_replace(',', '.', $vlr_comp_minimo);
+
+        if($data_contrato){
             $insert_detalhes = $this->ContratosFixo->insert([
-                    'franquia' => $request['franquia'],
-                    'comprometimento_minimo' => $request['comprometimento_minimo'],
-                    'range' => $request['range'],
-                    'canais' => $request['canais'],
-                    'sinalizacao' => $request['sinalizacao'],
-                    'tarifa_local_fixo' => $request['tarifa_local_fixo'],
-                    'tarifa_local_movel' => $request['tarifa_local_movel'],
-                    'tarifa_ld_fixo' => $request['tarifa_ld_fixo'],
-                    'tarifa_ld_movel' => $request['tarifa_ld_movel'],
+                    'franquia' => $data_det['franquia'],
+                    'comprometimento_minimo' => $vlr_comp_minimo,
+                    'range' => $data_det['range'],
+                    'canais' => $data_det['canais'],
+                    'sinalizacao' => $data_det['sinalizacao'],
+                    'tarifa_local_fixo' => $data_det['tarifa_local_fixo'],
+                    'tarifa_local_movel' => $data_det['tarifa_local_movel'],
+                    'tarifa_ld_fixo' => $data_det['tarifa_ld_fixo'],
+                    'tarifa_ld_movel' => $data_det['tarifa_ld_movel'],
                     'contrato_id' => $registro_id,
                 ]);
         }
@@ -225,40 +236,50 @@ class ContratosFixoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $data_contrato = $request->except(
-            '_token',
-            'franquia',
-            'comprometimento_minimo',
-            'range',
-            'canais',
-            'sinalizacao',
-            'tarifa_local_fixo',
-            'tarifa_local_movel',
-            'tarifa_ld_fixo',
-            'tarifa_ld_movel'
-        );
+    {       
+        $vlr_assinatura = str_replace('.','', $request->assinatura);
+        $vlr_assinatura = str_replace(',', '.', $vlr_assinatura);
 
+        $data = $request->all();
         $contratos  = $this->ContratosGeral->find($id);
-        $update   = $contratos->update($data_contrato);
 
-        if ($update) {
-            $update_detalhes = $request->only(
-                'franquia',
-                'comprometimento_minimo',
-                'range',
-                'canais',
-                'sinalizacao',
-                'tarifa_local_fixo',
-                'tarifa_local_movel',
-                'tarifa_ld_fixo',
-                'tarifa_ld_movel'
-            );
-            $detalhes_contrato  = $this->ContratosFixo;
-            $update = $detalhes_contrato->where('contrato_id', $id)->update($update_detalhes);
+        $data_contrato = $contratos->update([
+            'contrato' => $data['contrato'],
+            'operadora_id' => $data['operadora_id'],
+            'empresa_id' => $data['empresa_id'],
+            'assinatura' => $vlr_assinatura,
+            'vigencia' => $data['vigencia'],
+            'data_inicio' => $data['data_inicio'],
+            'data_fim' => $data['data_fim'],
+            'tipo_contrato' => '1',
+            'status_contrato' => $data['status_contrato'],
+            'observacao' => $data['observacao'],
+        ]);
+
+
+        if ($data_contrato) {
+
+            $data_det = $request->all();
+            $contratoFixo  = $this->ContratosFixo;
+
+            $vlr_comp_minimo = str_replace('.', '', $request->comprometimento_minimo);
+            $vlr_comp_minimo = str_replace(',', '.', $vlr_comp_minimo);
+
+            $data_contrato = $contratoFixo->where('contrato_id', $id)->update([
+                'franquia' => $data_det['franquia'],
+                'comprometimento_minimo' => $vlr_comp_minimo,
+                'range' => $data_det['range'],
+                'canais' => $data_det['canais'],
+                'sinalizacao' => $data_det['sinalizacao'],
+                'tarifa_local_fixo' => $data_det['tarifa_local_fixo'],
+                'tarifa_local_movel' => $data_det['tarifa_local_movel'],
+                'tarifa_ld_fixo' => $data_det['tarifa_ld_fixo'],
+                'tarifa_ld_movel' => $data_det['tarifa_ld_movel'],
+            ]);
+            
             return redirect()->route('contratos-fixo.index')->with('success', "O  contrato {$contratos->contrato} foi atualizado com sucesso!");
         } else {
-            return redirect()->route('contratos-fixo.create')->with('error', "Houve um erro ao cadastrar o contrato {$request->contrato}.");
+            return redirect()->route('contratos-fixo.index')->with('error', "Houve um erro ao editar o contrato {$request->contrato}.");
         }
     }
 

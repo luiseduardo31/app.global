@@ -77,7 +77,7 @@
                     <div class="form-group form-row">    
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
+                            <input type="text" name="assinatura" class="form-control money" placeholder="Valor da Assinatura" maxlength="40">
                         </div>
                         
                         <div class="col-2">

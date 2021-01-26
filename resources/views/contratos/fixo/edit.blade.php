@@ -71,7 +71,7 @@
 
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" value="{{$contratos->assinatura}}" maxlength="40">
+                            <input type="text" name="assinatura" class="form-control money" value="{{$contratos->assinatura}}" maxlength="40">
                         </div>
                         
                         <div class="col-2">
@@ -81,7 +81,7 @@
                         
                         <div class="col-2">
                             <label for="comprometimento_minimo">Comp. Minimo</label>
-                            <input type="text" name="comprometimento_minimo" class="form-control" value="{{$detalhes_contrato->comprometimento_minimo}}" maxlength="40">
+                            <input type="text" name="comprometimento_minimo" class="form-control money" value="{{$detalhes_contrato->comprometimento_minimo}}" maxlength="40">
                         </div>
 
                         <div class="col-2">

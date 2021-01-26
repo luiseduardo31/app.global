@@ -96,8 +96,8 @@
                                         <td>{{$contrato->cnpj}}</td>
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
-                                        <td>R$ {{$contrato->assinatura}}</td>
-                                        <td>R$ {{$contrato->comprometimento_minimo}}</td>
+                                        <td>R$ {{number_format($contrato->assinatura, 2, ',', '.')}}</td>
+                                        <td>R$ {{number_format($contrato->comprometimento_minimo, 2, ',', '.')}}</td>
                                         <td>{{$contrato->franquia}}</td>
                                         <td style="text-align: center">{{$contrato->range}}</td>
                                         <td style="text-align: center">{{$contrato->canais}}</td>

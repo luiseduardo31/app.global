@@ -47,6 +47,8 @@
                 }
         </style>
         
+        <!-- Scrpt Mascaras -->
+        <script script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
         
     </head>
     <body>
@@ -105,8 +107,8 @@
                     <div class="ml-2">
                         <a class="link-fx text-dark font-w600" href="javascript:void(0)">Adam McCoy</a>
                     </div>
+                    
                     <!-- END User Info -->
-
                     <!-- Close Side Overlay -->
                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                     <a class="ml-auto btn btn-sm btn-dual" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
@@ -1034,7 +1036,7 @@
                 $('.mixed').mask('AAA 000-S0S');
                 $('.cpf').mask('000.000.000-00', {reverse: true});
                 $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
-                $('.money').mask('000.000.000.000.000.00', {reverse: true});
+                $('.money').mask('000.000.000.000.000,00', {reverse: true});
                 $('.money2').mask("#.##0.00", {reverse: true});
                 $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
                     translation: {

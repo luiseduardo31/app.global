@@ -69,7 +69,7 @@
                     <div class="form-group form-row">    
                         <div class="col-2">
                             <label for="assinatura">Assinatura</label>
-                            <input type="text" name="assinatura" class="form-control" placeholder="Valor da Assinatura" maxlength="40">
+                            <input type="text" name="assinatura" class="form-control money" placeholder="Valor da Assinatura" maxlength="40">
                         </div>
                         
                         <div class="col-2">
@@ -79,7 +79,7 @@
                         
                         <div class="col-2">
                             <label for="comprometimento_minimo">Comp. Minimo</label>
-                            <input type="text" name="comprometimento_minimo" class="form-control" placeholder="Comp. Minimo" maxlength="40">
+                            <input type="text" name="comprometimento_minimo" class="form-control money" placeholder="Comp. Minimo" maxlength="40">
                         </div>
 
                         <div class="col-2">

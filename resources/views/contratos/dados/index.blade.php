@@ -90,7 +90,7 @@
                                         <td style="text-align: center">{{strftime("%d-%m-%Y", strtotime($contrato->data_inicio))}} à {{strftime("%d-%m-%Y", strtotime($contrato->data_fim))}}</td>
                                         <td style="text-align: center">{{$contrato->vigencia}} Meses</td>
                                          <td>{{$contrato->operadora}}</td>
-                                        <td>R$ {{$contrato->assinatura}}</td>
+                                        <td>R$ {{number_format($contrato->assinatura, 2, ',', '.')}}</td>
                                         <td>{{$contrato->velocidade}} MB</td>
                                         <td>{{$contrato->tecnologia}}</td>
                                         <td>{{$contrato->meio_entrega}}</td>
